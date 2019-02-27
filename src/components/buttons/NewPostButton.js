@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export default class TrashCanButton extends Component {
+export default class NewPostButton extends Component {
   render() {
     return (
       <div>
-        <button className='trash-can'><FontAwesomeIcon icon="faTrash" /></button>
+        <FontAwesomeIcon className="new-pin-button"icon="plus-circle"/>
       </div>
     )
   }

@@ -1,5 +1,226 @@
+/*Buttons--------------------------------------------------*/
+
+.trash-button
+{
+  color: white;
+  font-size: 50px;
+  margin-top: 10px;
+  margin-right: 5%;
+  margin-left: 3%;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+.couch-button, .car-button, .sports-button, .tv-button, .random-button
+{
+  color: white;
+  flex: 1;
+  font-size: 30px;
+  margin: 15px;
+  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+}
+
+.box{
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  flex: 1;
+  height: 80px;
+  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+}
+
+.small{
+  font-size: 20px;
+}
+
+.medium{
+  font-size: 35px;
+}
+
+.big{
+  font-size: 50px;
+}
+
+.exit-button{
+  align-content: space-between;
+  color: white;
+  font-size: 30px;
+  margin-left: auto;
+  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+}
+
+.image-button{
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-size: 50px;
+  margin-left: 10%;
+  margin-right: 10%;
+  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+}
+
 .vertical-modal{
   background-color: #2E2D31;
   height: 650px;
   width: 412px;
+}
+
+.new-pin-button{
+  background-image: linear-gradient(160deg, #FF4700, #5200E8, #00FFDE);
+  border-radius: 100px;
+  color: white;
+  filter: drop-shadow(1px 1px 7px black);
+  font-size: 5em;
+  opacity: .7;
+  padding: .05em;
+  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+}
+
+.hamburger-menu-button{
+  color: white;
+  display: block;
+  float: right;
+  font-size: 2em;
+  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+}
+
+.marker-style{
+  filter: drop-shadow(1px 1px 3px #2E2D31);
+  height: 50px;
+  margin: 0 auto;
+  width: 50px;
+}
+
+.login-btn{
+  border-color: white;
+  border-radius: 25px;
+  background-color: transparent;
+  color: white;
+  margin: 15px;
+  opacity: 0.9;
+  padding: 12px 40px;
+  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+}
+
+.edit-pencil{
+  color: white;
+  font-size: 30px;
+  margin-right: 0px;
+  padding-right: 0px;
+  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+}
+
+.view-pin-button{
+  padding: 12px 50px;
+  border: 2px solid white;
+  border-radius: 25px;
+  background-color: transparent;
+  color: white;
+  margin: 15px;
+  text-align: center;
+  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+}
+
+.delete-account-button{
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 40px;
+  color: white;
+  flex: 1;
+  font-size: 12px;
+  font-weight: bold;
+  height: 60px;
+  letter-spacing: .25em;
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: 300px;;
+  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+  width: 100%;
+}
+
+.make-post-button, .save-post-button{
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 40px;
+  color: white;
+  flex: 1;
+  font-size: 20px;
+  font-weight: bold;
+  height: 60px;
+  letter-spacing: .25em;
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: 10px;;
+  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+}
+
+.trash-button:hover
+{
+  color: red;
+}
+
+.couch-button:hover
+{
+  color: #ff4700;
+}
+
+.car-button:hover
+{
+  color: #80334f;
+}
+
+.sports-button:hover
+{
+  color: #5200e8;
+}
+
+.tv-button:hover
+{
+  color: #467290;
+}
+
+.random-button:hover
+{
+  color: #00ffde;
+}
+
+.box:hover, .exit-button:hover, .image-button:hover, .hamburger-menu-button:hover, .edit-pencil:hover{
+  color: black;
+}
+
+.new-pin-button:hover{
+  color:black;
+}
+
+.login-btn:hover{
+  background-color: white;
+  color: #2e2d31;
+}
+
+.view-pin-button:hover{
+  background-color: white;
+  color: #2E2D31;
+  border: 2px solid white;
+}
+
+.delete-account-button:hover {
+  background-color: white;
+  color: red;
+}
+
+.make-post-button:hover, .save-post-button:hover {
+  background-color: white;
+  color: limegreen;
 }
