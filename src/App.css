@@ -1,5 +1,9 @@
-.vertical-modal{
-  background-color: #2E2D31;
-  height: 650px;
-  width: 412px;
+.view-pin-container{
+  display: flex;
+  justify-content: center;
+}
+
+.view-pin-image{
+  height: 300px;
+  width: 100%;
 }
