@@ -4,37 +4,37 @@ export default class EditPinModal extends Component {
   render() {
     return (
       <div className='vertical-modal'> 
-            <div className='modalRow'>
+            <div className='modal-row'>
                 <h2>Edit Pin</h2> 
                 <h2>X</h2>
             </div>
             <LineDivider />
-            <div className='modalRow'>
+            <div className='modal-row'>
                 <button>o</button>
                 <button>o</button>
                 <button>o</button>
                 <button>o</button>
                 <button>o</button>
             </div>
-            <div className='modalRow'>
+            <div className='modal-row'>
                 <input placeholder='Pin Title'></input>
             </div>
-            <div className='modalRow'>
+            <div className='modal-row'>
                 <input placeholder='Location'></input>
             </div>
-            <div className='modalRow'>
+            <div className='modal-row'>
                 <button>o</button>
                 <button>o</button>
                 <button>o</button>
             </div>
-            <div className='modalRow'>
-                <input className='tagInput' placeholder='Tags'></input> 
+            <div className='modal-row'>
+                <input className='tag-input' placeholder='Tags'></input> 
                 <button>o</button>
             </div>
             <LineDivider />
-            <div className='modalRow'>
+            <div className='modal-row'>
                 <button>o</button>
-                <button className='saveButton'>SAVE</button>
+                <button className='save-button'>SAVE</button>
             </div>
         </div>
     )
