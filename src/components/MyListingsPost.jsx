@@ -9,7 +9,7 @@ export default class MyListingsPost extends Component {
             <li class="item-picture"> <img src="placeHolder100.jpg" alt="placeholderimage"></img></li>
             <li class="item-title-location-container">
                 <span class="title-span">My ipsum crap.</span>
-            <hr/>
+            <hr/> 
               <span class="location-span">Lorem ipsum dolor sit amet.</span>
             </li>
             <li class="item-edit-button"><i class="fas fa-pencil-alt"></i></li>
@@ -20,3 +20,5 @@ export default class MyListingsPost extends Component {
   }
 }
 
+
+// need gradient divider 
