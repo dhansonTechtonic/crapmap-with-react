@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import LineDivider from './LineDivider'
 export default class AddPinModal extends Component {
   render() {
     return (
@@ -8,6 +8,7 @@ export default class AddPinModal extends Component {
                 <h2>New Pin</h2> 
                 <h2>X</h2>
             </div>
+            <LineDivider />
             <div className='modalRow'>
                 <button>o</button>
                 <button>o</button>
@@ -27,11 +28,12 @@ export default class AddPinModal extends Component {
                 <button>o</button>
             </div>
             <div className='modalRow'>
-                <input placeholder='Tags'></input> 
+                <input placeholder='Tags' className='tagInput'></input> 
                 <button>o</button>
             </div>
+            <LineDivider />
             <div className='modalRow'>
-                <button>o</button>
+                <button className='postButton'>POST</button>
             </div>
         </div>
     )

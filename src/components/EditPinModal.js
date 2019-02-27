@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-
+import LineDivider from './LineDivider'
 export default class EditPinModal extends Component {
   render() {
     return (
@@ -8,6 +8,7 @@ export default class EditPinModal extends Component {
                 <h2>Edit Pin</h2> 
                 <h2>X</h2>
             </div>
+            <LineDivider />
             <div className='modalRow'>
                 <button>o</button>
                 <button>o</button>
@@ -27,12 +28,13 @@ export default class EditPinModal extends Component {
                 <button>o</button>
             </div>
             <div className='modalRow'>
-                <input placeholder='Tags'></input> 
+                <input className='tagInput' placeholder='Tags'></input> 
                 <button>o</button>
             </div>
+            <LineDivider />
             <div className='modalRow'>
                 <button>o</button>
-                <button>o</button>
+                <button className='saveButton'>SAVE</button>
             </div>
         </div>
     )
