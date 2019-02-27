@@ -1,33 +1,57 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.vertical-modal {
+  background-color: #2E2D31;
+  height: 650px;
+  width: 412px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.modal-row {
+  display: flex;
+  flex-direction: row;
+  height: 70px;
+  width: 85%;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  align-self: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.modal-row button {
+  height: 40px;
+}
+
+.modal-row input {
+  height: 40px;
+  background-color: transparent;
+  border: 2px solid white;
+  width: 100%;
+  color: white;
+  padding-left: 20px;
+  font-size: 1em;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.line-divider {
+  background-image: linear-gradient(260deg, #FF4700, #5200E8, #00FFDE);
+  border: none;
+  height: 2px;
+  margin-bottom: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  width: 85%;
+}
+
+.modal-row .tag-input {
+  width: 75%;
+}
+
+.modal-row .post-button {
+  width: 100%;
+}
+
+.modal-row .save-button {
+  width: 78%;
 }
