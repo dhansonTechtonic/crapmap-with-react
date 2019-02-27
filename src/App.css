@@ -17,6 +17,10 @@
   align-self: center;
 }
 
+.modal-row:first-child{
+  padding-top: 20px;
+}
+
 .modal-row button {
   height: 40px;
 }
