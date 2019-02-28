@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-
 import BackgroundComponent from './BackgroundComponent';
 import LogoComponent from './LogoComponent';
 import GoogleComponent from './GoogleComponent';
 import FaceBookComponent from './FaceBookComponent';
-
 import "./LandingPage.css";
 
 export default class LandingPage extends Component {
@@ -12,12 +10,14 @@ export default class LandingPage extends Component {
     super(props);
 
     this.state = {
-    /* just thoughts for what might need to change in state
-      isNewUser: true,
-      loggedIn: false,
-      */
+    username: '',
+    user: null
     }
   }
+
+
+
+  
 
   render() {
     return (
@@ -43,5 +43,3 @@ export default class LandingPage extends Component {
     )
   }
 }
-
-
