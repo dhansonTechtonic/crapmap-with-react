@@ -5,7 +5,7 @@ export default class LogoComponent extends Component {
   render() {
     return (
       <div>
-        <img src={CrapMapLogo} className="crapMapLogo"/>
+        <img alt='crapmap logo' src={CrapMapLogo} className="crapMapLogo"/>
       </div>
     )
   }

@@ -5,9 +5,6 @@ import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props
 import '../Facebook.css'
 
 export default class FacebookComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   responseFacebook(response) {
     console.log(response);

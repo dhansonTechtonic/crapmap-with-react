@@ -5,11 +5,6 @@ import '../Google.css'
  
  
 export default class GoogleComponent extends Component {
-  constructor(props) {
-    super(props);
-
-    
-  }
 
   responseGoogle(response) {
     console.log(response);
