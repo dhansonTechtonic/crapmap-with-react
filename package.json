@@ -14,6 +14,7 @@
     "npm": "^6.8.0",
 
     "react": "^16.8.3",
+    "react-compound-slider": "^1.1.0",
     "react-dom": "^16.8.3",
     "react-facebook-login": "^4.1.1",
     "react-google-login": "^5.0.2",
