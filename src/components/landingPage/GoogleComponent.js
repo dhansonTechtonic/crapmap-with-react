@@ -1,104 +1,76 @@
 import React, { Component } from 'react';
-import firebase, { auth, provider } from './../../firebase.js';
-import * as firebaseui from 'firebaseui'
+import firebase from './../../firebase.js';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import './Google.css'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
- 
- 
-
-let uiConfig = {
-  signInSuccessUrl: '<url-to-redirect-to-on-success>',
-  signInOptions: [
-    // Leave the lines as is for the providers you want to offer your users.
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-    firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
-  ],
-  // tosUrl and privacyPolicyUrl accept either url string or a callback
-  // function.
-  // Terms of service url/callback.
-  tosUrl: '<your-tos-url>',
-  // Privacy policy url/callback.
-  privacyPolicyUrl: function() {
-    window.location.assign('<your-privacy-policy-url>');
-  }
-};
-
-
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
-
-ui.start('#firebaseui-auth-container', uiConfig);
-
 
 export default class GoogleComponent extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
+      isSignedIn: false,
       user: null,
+      name: '',
+      email: '',
+      photoURL: '',
+      uid: 0
     }
+  }
 
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
-  }
-  responseGoogle(response) {
-    console.log(response);
-  }
+  provider = new firebase.auth.GoogleAuthProvider();
+
  
-  logout() {
-    auth.signOut()
-      .then(() => {
-        this.setState({
-          user: null
-        });
-      });
-  }
 
-  login() {
-    auth.signInWithPopup(provider).then((result) => {
-      const user = result.user;
-      this.setState({
-        user
-      });
-    });
-  }
+  uiConfig = {
+    signInSuccessUrl: '/signIn',
+    signInflow: 'popup',
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID
+    ],
+    tosUrl: '<your-tos-url>',
+    privacyPolicyUrl: function() {
+      window.location.assign('<your-privacy-policy-url>');
+    },
+    callbacks: {
+      signInSuccess: () => false,
+    }
+  };
 
+  
+  
   componentDidMount() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({
-          user
-        });
-      }
-    });
-    const itemsRef = firebase.database().ref('items');
-    itemsRef.on('value', (snapshot) => {
-      let items = snapshot.val();
-      let newState = [];
-      for (let item in items) {
-        newState.push({
-          id: item,
-          title: items[item].title,
-          user: items[item].user
-        });
-      }
-      this.setState({
-        items: newState
-      });
-    });
+    this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+        (user) =>{
+          this.setState({
+            isSignedIn: !!user,
+             user: user,
+          })
+        } 
+    );
+  }
+
+  componentWillUnmount() {
+    this.unregisterAuthObserver();
   }
 
   render() {
-  
+
+    if (!this.state.isSignedIn) {
+      return (
+        <div>
+          <p>Please sign-in:</p>
+          <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()}/>
+        </div>
+      );
+    }
     return (
-    <div id="firebaseui-auth-container">  
-      {this.state.user ?
-        <button onClick={this.logout} className="google">Log Out</button>                
-        :
-        <button onClick={this.login}>Log In</button> 
-      }
-    </div>
-    )
+      <div>
+        <h1>Welcome {firebase.auth().currentUser.displayName}! You are now signed-in!</h1>
+        <button><a onClick={() => firebase.auth().signOut()}>Sign-out</a></button>
+      </div>
+    );
+  
   }
 }
