@@ -4,6 +4,15 @@
   height: 650px;
   width: 412px;
   color: white;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 13%;
+  z-index: 10;
+  overflow: hidden;
+
 }
 
 body {
