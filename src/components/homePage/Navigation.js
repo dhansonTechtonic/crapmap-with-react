@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './crapmap-logo-horizontal-gray.png'
+import logo from '../assets/crapmap-logo-horizontal-gray.png'
 
 
 export default class Navigation extends Component {
