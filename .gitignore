@@ -30,3 +30,7 @@ yarn-error.log*
 
 yarn-error.log*
 
+
+.src/App.css
+.src/App.js
+
