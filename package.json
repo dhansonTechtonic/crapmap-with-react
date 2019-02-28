@@ -9,6 +9,7 @@
     "@material-ui/core": "^3.9.2",
     "@material-ui/lab": "^3.0.0-alpha.30",
     "firebase": "^5.8.4",
+    "firebaseui": "^3.5.2",
     "google-maps-react": "^2.0.2",
     "i": "^0.3.6",
     "npm": "^6.8.0",

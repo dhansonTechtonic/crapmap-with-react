@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { GoogleLogin } from 'react-google-login';
+import * as firebaseui from 'firebaseui'
 import firebase, { auth, provider } from './../../firebase.js';
 import './Google.css'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -30,7 +30,6 @@ export default class GoogleComponent extends Component {
   }
 
   login() {
-    const { user } = this.props
     auth.signInWithPopup(provider).then((result) => {
       const user = result.user;
       this.setState({
@@ -65,26 +64,15 @@ export default class GoogleComponent extends Component {
   }
 
   render() {
-    const {responseGoogle, } = this.props;
-    const { user } = this.state
+  
     return (
-      <div>
-       < GoogleLogin
-          clientId = "942646979397-dh35rh2acm6g4her264t59s12usmevm8.apps.googleusercontent.com"
-          icon="fa-google"
-          render={renderProps => (
-            // user ?
-              <button onClick={this.login} className="google" 
-              onClick={renderProps.onClick}> Login with Google</button>
-              ||
-              <button onClick={this.logout} className="google" 
-              onClick={renderProps.onClick}>Log Out</button>  
-            )}
-       onSuccess = {responseGoogle}
-       onFailure = {responseGoogle}
-       />
-      
-     </div>
+    <div>  
+      {this.state.user ?
+      <button onClick={this.logout} className="google">Log Out</button>                
+      :
+      <button onClick={this.login} className="google">Login w/ Google</button> 
+      }
+    </div>
     )
   }
 }
