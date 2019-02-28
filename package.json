@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-facebook-login": "^4.1.1",
+    "react-google-login": "^5.0.2",
+    "react-google-material-icons": "^1.0.4",
     "react-scripts": "2.1.5"
   },
   "scripts": {
