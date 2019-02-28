@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class MyListingsModul extends Component {
+export default class MyListingsModal extends Component {
   render() {
     return (
         <div className='vertical-modal'>  

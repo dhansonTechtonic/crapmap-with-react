@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
-export default class SettingsModul extends Component {
 
-    
 
-    
-
+export default class SettingsModal extends Component {
     render() {
     return (
         <div className="vertical-modal">
