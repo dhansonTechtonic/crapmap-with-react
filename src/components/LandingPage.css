@@ -1,0 +1,29 @@
+
+.landingPageGradient {
+  display: flex;
+  flex-direction: column;
+  background-image: linear-gradient(260deg, #FF4700, #5200E8, #00FFDE);
+  background-repeat: repeat;
+  height: 120vh;
+  /* width: 100vw; */
+  opacity: .9;
+  z-index: -2;
+}
+
+.lpBackground {
+  background-repeat: repeat;
+  height: 1200px;
+  width: 1400px;
+  opacity: 0.35;
+  position: fixed;
+  z-index: -1;
+}
+
+.landingPageLogoContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.crapMapLogo {
+  height: 12.5em;
+}
