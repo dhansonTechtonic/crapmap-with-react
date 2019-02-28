@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import LPBackground from './crapmapLandingPage.png'
+import LPBackground from './assets/crapmapLandingPage.png'
 
 export default class BackgroundComponent extends Component {
   render() {
