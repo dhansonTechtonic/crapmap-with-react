@@ -1,10 +1,39 @@
 import React, { Component } from 'react';
-import * as firebaseui from 'firebaseui'
+
+=======
+>>>>>>> 459c4dbfee79db9710d611697c33c404bec2b333
 import firebase, { auth, provider } from './../../firebase.js';
+import * as firebaseui from 'firebaseui'
 import './Google.css'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
  
  
+
+let uiConfig = {
+  signInSuccessUrl: '<url-to-redirect-to-on-success>',
+  signInOptions: [
+    // Leave the lines as is for the providers you want to offer your users.
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    firebaseui.auth.AnonymousAuthProvider.PROVIDER_ID
+  ],
+  // tosUrl and privacyPolicyUrl accept either url string or a callback
+  // function.
+  // Terms of service url/callback.
+  tosUrl: '<your-tos-url>',
+  // Privacy policy url/callback.
+  privacyPolicyUrl: function() {
+    window.location.assign('<your-privacy-policy-url>');
+  }
+};
+
+
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+ui.start('#firebaseui-auth-container', uiConfig);
+
+
 export default class GoogleComponent extends Component {
   constructor(props) {
     super(props);
@@ -66,11 +95,14 @@ export default class GoogleComponent extends Component {
   render() {
   
     return (
-    <div>  
+<<<<<<< HEAD
+
+    <div id="firebaseui-auth-container">  
       {this.state.user ?
-      <button onClick={this.logout} className="google">Log Out</button>                
-      :
-      <button onClick={this.login} className="google">Login w/ Google</button> 
+        <button onClick={this.logout} className="google">Log Out</button>                
+        :
+        <button onClick={this.login}>Log In</button> 
+>>>>>>> 459c4dbfee79db9710d611697c33c404bec2b333
       }
     </div>
     )
