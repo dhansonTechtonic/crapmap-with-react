@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
 import LineDivider from './LineDivider'
+
+import './AddEditStyle.css'
 export default class EditPinModal extends Component {
     render() {
         return (
