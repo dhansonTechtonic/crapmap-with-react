@@ -11,8 +11,11 @@
   transition-duration: 0.3s;
 }
 
-.couch-button, .car-button, .sports-button, .tv-button, .random-button
-{
+.couch-button, 
+.car-button,
+.sports-button, 
+.tv-button, 
+.random-button{
   color: white;
   flex: 1;
   font-size: 30px;
@@ -21,7 +24,7 @@
   -webkit-transition-duration: 0.4s;
 }
 
-.box{
+.box {
   background-color: transparent;
   border: none;
   color: white;

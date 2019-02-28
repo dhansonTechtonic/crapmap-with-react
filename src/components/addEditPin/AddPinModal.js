@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+
 import LineDivider from './LineDivider'
+import CategoryButtons from '../buttons/CategoryButtons'
 
 import './AddEditStyle.css'
 export default class AddPinModal extends Component {
@@ -13,11 +15,7 @@ export default class AddPinModal extends Component {
                 <LineDivider />
                     <form onSubmit={this.handleSubmit}>
                         <div className='modal-row'>
-                            <button>o</button>
-                            <button>o</button>
-                            <button>o</button>
-                            <button>o</button>
-                            <button>o</button>
+                            <CategoryButtons />
                         </div>
                         <div className='modal-row'>
                             <input name='title' placeholder='Pin Title'></input>
