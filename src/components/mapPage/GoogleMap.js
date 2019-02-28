@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import { isAbsolute } from 'path';
+import CRAP_MAP_API_KEY from '.env';
+const CRAP_MAP_API_KEY = process.env.CRAP_MAP_API_KEY;
 
 
 const mapStyles = {
@@ -30,6 +32,6 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo'
+  apiKey: CRAP_MAP_API_KEY
 })(MapContainer);
 
