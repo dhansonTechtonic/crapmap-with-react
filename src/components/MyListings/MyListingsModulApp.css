@@ -1,7 +1,7 @@
 .vertical-modal{
   background-color: #2E2D31;
   height: 650px;
-  width: 412px;
+  width: 600px;
 }
 
 * {
@@ -52,7 +52,7 @@ li hr {
   height: 98%;
   justify-content: space-around;
   list-style: none;
-  width: 100%;
+  width: 80%;
 }
 
 .item-list-details {

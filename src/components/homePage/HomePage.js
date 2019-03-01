@@ -5,8 +5,6 @@ import './HomePage.css';
 import GoogleMap from './GoogleMap';
 import Navigation from './Navigation';
 import SearchBar from './SearchBar';
-
-
 class HomePage extends Component {
 
   render() {
@@ -15,8 +13,6 @@ class HomePage extends Component {
         <Navigation /> 
         <SearchBar />
         <GoogleMap />
-
-        
       </div>
     );
   }

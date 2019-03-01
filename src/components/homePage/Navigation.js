@@ -3,6 +3,7 @@ import logo from '../assets/crapmap-logo-horizontal-gray.png'
 import {NavLink} from 'react-router-dom'
 
 import SettingsModal from '../settingsModal/SettingsModal'
+import MyListingsModal from '../MyListings/MyListingsModal'
 
 
 export default class Navigation extends Component {
@@ -11,14 +12,23 @@ export default class Navigation extends Component {
     super(props);
 
     this.state = {
-      settingsIsOpen: false
+      settingsIsOpen: false,
+      myListingsIsOpen: false
     };
   }
 
-  toggleModal = () => {
+  toggleSettings = () => {
     this.setState({
-      settingsIsOpen: !this.state.settingsIsOpen
+      settingsIsOpen: !this.state.settingsIsOpen,
+      myListingsIsOpen: false
     });
+  }
+
+  toggleListings = () => {
+    this.setState({
+      myListingsIsOpen: !this.state.myListingsIsOpen,
+      settingsIsOpen: false
+    })
   }
 
   render() {
@@ -31,15 +41,16 @@ export default class Navigation extends Component {
       <nav className="home-page-navbar">
         <ul className="main-nav-list" id="js-menu">
             <li><NavLink exact to='/home' className="nav-links">HOME</NavLink></li>
-            <li><NavLink exact to='/' className="nav-links">MY PINS</NavLink></li>
+            <li className="nav-links" onClick={this.toggleListings}>MY PINS</li>
             <li><NavLink exact to='/' className="nav-links">SEARCH</NavLink></li>
-            <li className="nav-links" onClick={this.toggleModal}>SETTINGS</li>
+            <li className="nav-links" onClick={this.toggleSettings}>SETTINGS</li>
             <li><NavLink exact to='/url' className="nav-links">LOGOUT</NavLink></li>
             {/* <li><a href="#" class="hamburger-menu"><HamburgerMenuButton /></a></li> */}
         </ul>
       </nav>
 
-      <SettingsModal show={this.state.settingsIsOpen} onClose={this.toggleModal}></SettingsModal>
+      <SettingsModal show={this.state.settingsIsOpen} onClose={this.toggleSettings}></SettingsModal>
+      <MyListingsModal show={this.state.myListingsIsOpen} onClose={this.toggleListings}></MyListingsModal>
     </div>
     )
   }

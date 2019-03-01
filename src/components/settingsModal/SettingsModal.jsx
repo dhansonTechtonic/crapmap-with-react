@@ -17,7 +17,7 @@ export default class SettingsModal extends Component {
                     <div className="title-exit-button-container">
                         <div className="title-exit-button-flex-group">
                             <h1> Settings </h1>
-                            <button onClick={this.props.onClose}>Close</button>
+                            {/* <button onClick={this.props.onClose}>Close</button> */}
                         </div>
                     </div>
                     <div className="settings-container">
