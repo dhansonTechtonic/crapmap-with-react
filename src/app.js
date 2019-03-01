@@ -23,6 +23,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 // import SearchBar from './components/mapPage/SearchBar'
 // import ViewPinModal from './components/mapPage/ViewPinModal'
 // import MyListingsModal from './components/MyListings/MyListingsModal'
+import SettingsModal from './components/settingsModal/SettingsModal'
 
 library.add(faBaseballBall)
 library.add(faCar)
@@ -50,6 +51,7 @@ export default class App extends Component {
         {/* <SearchBar /> */}
         {/* <ViewPinModal /> */}
         {/* <MyListingsModal /> */}
+        <SettingsModal />
       </div>
     )
   }
