@@ -31,6 +31,14 @@ export default class Navigation extends Component {
     })
   }
 
+  // toggleModal = (event) => {
+  //   var targetID = event.target.id
+
+  //   this.setState({
+  //     [targetID]: !this.state.targetID
+  //   })
+  // }
+
   render() {
     
     
@@ -40,10 +48,13 @@ export default class Navigation extends Component {
 
       <nav className="home-page-navbar">
         <ul className="main-nav-list" id="js-menu">
+
+            <button id='teststs' onClick={this.clickOutside}></button>
+
             <li><NavLink exact to='/home' className="nav-links">HOME</NavLink></li>
             <li className="nav-links" onClick={this.toggleListings}>MY PINS</li>
             <li><NavLink exact to='/' className="nav-links">SEARCH</NavLink></li>
-            <li className="nav-links" onClick={this.toggleSettings}>SETTINGS</li>
+            <li className="nav-links" id='settingsIsOpen' onClick={this.toggleSettings}>SETTINGS</li>
             <li><NavLink exact to='/url' className="nav-links">LOGOUT</NavLink></li>
             {/* <li><a href="#" class="hamburger-menu"><HamburgerMenuButton /></a></li> */}
         </ul>
