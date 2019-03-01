@@ -14,9 +14,11 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 // import AddPinModal from './components/addEditPin/AddPinModal'
 // import EditPinModal from './components/addEditPin/EditPinModal.js'
-import LandingPage from './components/landingPage/LandingPage.js'
+// import LandingPage from './components/landingPage/LandingPage.js'
+import HamburgerMenuModal from './components/mapPage/HamburgerMenuModal'
 
 library.add(faBaseballBall)
 library.add(faCar)
@@ -30,6 +32,7 @@ library.add(faCamera)
 library.add(faPlusCircle)
 library.add(faBars)
 library.add(faPencilAlt)
+library.add(faSearch)
 
 export default class App extends Component {
   render() {
@@ -37,7 +40,8 @@ export default class App extends Component {
       <div>
         {/* <AddPinModal /> */}
         {/* <EditPinModal /> */}
-        <LandingPage />
+        {/* <LandingPage /> */}
+        <HamburgerMenuModal />
       </div>
     )
   }

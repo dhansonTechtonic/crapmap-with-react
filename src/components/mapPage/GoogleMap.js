@@ -3,7 +3,7 @@ import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import { isAbsolute } from 'path';
 import CRAP_MAP_API_KEY from '.env';
 const CRAP_MAP_API_KEY = process.env.CRAP_MAP_API_KEY;
-import './App.css'
+import '../App.css'
 
 
 const mapStyles = {
