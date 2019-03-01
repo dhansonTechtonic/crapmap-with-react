@@ -135,7 +135,7 @@ hr{
   color: white;
   display: block;
   float: right;
-  font-size: 2em;
+  font-size: 1em;
   transition-duration: 0.3s;
   -webkit-transition-duration: 0.3s;
 }
@@ -418,6 +418,12 @@ hr{
   display: none;
 }
 
+.home-page-body{
+  margin: 0;
+  height: 100vh;
+  width:100vw;
+}
+
 .home-page-logo {
   display: flex;
   margin-left: 15px;
@@ -474,6 +480,8 @@ hr{
   margin-left: 40px;
   text-decoration: none;
   text-transform: capitalize;
+  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
 }
 
 .main-search-list {

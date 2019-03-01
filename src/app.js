@@ -18,7 +18,8 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 // import AddPinModal from './components/addEditPin/AddPinModal'
 // import EditPinModal from './components/addEditPin/EditPinModal.js'
 // import LandingPage from './components/landingPage/LandingPage.js'
-import HamburgerMenuModal from './components/mapPage/HamburgerMenuModal'
+// import HamburgerMenuModal from './components/mapPage/HamburgerMenuModal'
+import Navigation from './components/mapPage/Navigation'
 
 library.add(faBaseballBall)
 library.add(faCar)
@@ -41,7 +42,8 @@ export default class App extends Component {
         {/* <AddPinModal /> */}
         {/* <EditPinModal /> */}
         {/* <LandingPage /> */}
-        <HamburgerMenuModal />
+        {/* <HamburgerMenuModal /> */}
+        <Navigation />
       </div>
     )
   }

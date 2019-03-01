@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import logo from './crapmap-logo-horizontal-gray.png'
-import './App.css'
+import logo from '../assets/crapmap-logo-horizontal-gray.png'
+import '../App.css'
+import HamburgerMenuButton from '../buttons/HamburgerMenuButton'
 
 
 export default class Navigation extends Component {
@@ -19,7 +20,7 @@ export default class Navigation extends Component {
             <li><a href="#" className="nav-links">SEARCH</a></li>
             <li><a href="#" className="nav-links">SETTINGS</a></li>
             <li><a href="#" className="nav-links">LOGOUT</a></li>
-            {/* <li><a href="#" class="hamburger-menu"><HamburgerMenuButton /></a></li> */}
+            <li><a href="#" class="hamburger-menu"><HamburgerMenuButton /></a></li>
         </ul>
       </nav>
     </div>
