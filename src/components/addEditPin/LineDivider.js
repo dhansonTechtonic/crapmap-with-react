@@ -6,7 +6,7 @@ export default class LineDivider extends Component {
   render() {
     return (
       <div>
-        <hr className='line-divider'/>
+        <hr/>
       </div>
     )
   }
