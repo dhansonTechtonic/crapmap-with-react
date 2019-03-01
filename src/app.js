@@ -21,7 +21,8 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 // import HamburgerMenuModal from './components/mapPage/HamburgerMenuModal'
 // import Navigation from './components/mapPage/Navigation'
 // import SearchBar from './components/mapPage/SearchBar'
-import ViewPinModal from './components/mapPage/ViewPinModal'
+// import ViewPinModal from './components/mapPage/ViewPinModal'
+// import MyListingsModal from './components/MyListings/MyListingsModal'
 
 library.add(faBaseballBall)
 library.add(faCar)
@@ -47,7 +48,8 @@ export default class App extends Component {
         {/* <HamburgerMenuModal /> */}
         {/* <Navigation /> */}
         {/* <SearchBar /> */}
-        <ViewPinModal />
+        {/* <ViewPinModal /> */}
+        {/* <MyListingsModal /> */}
       </div>
     )
   }

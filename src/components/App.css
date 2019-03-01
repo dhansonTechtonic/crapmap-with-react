@@ -115,9 +115,7 @@ hr{
 }
 
 .edit-pencil{
-  font-size: 30px;
-  margin-right: 0px;
-  padding-right: 0px;
+  font-size: 20px;
   transition-duration: 0.3s;
   -webkit-transition-duration: 0.3s;
 }
@@ -615,36 +613,23 @@ button.home-page-new-pin-button{
 
 /*My Listings Styles------------------------------------------------------------------*/
 
-h1 {
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  text-align: center;
-  letter-spacing: 5px;
-}
-
 li hr {
   flex-shrink: 4;
   width: 100%;
-}
-
-.item-edit-button {
-  font-size: 30px;
-  margin-right: 0px;
-  padding-right: 0px;
 }
 
 .items-listing-container {
   align-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  margin-left: -35px;
 }
 
 .item-list-details {
   border: 2px solid white;
-  margin: 3% 0 3% 0;
-  width: 80%;
+  padding: 10px 15px;
+  width: 100%;
 }
 
 .item-list-grouping {
@@ -653,6 +638,7 @@ li hr {
   height: 98%;
   justify-content: space-around;
   list-style: none;
+  margin-left: -40px;
   width: 100%;
 }
 
@@ -662,7 +648,6 @@ li hr {
 }
 
 .item-title-location-container {
-  align-items: flex-start;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -675,7 +660,6 @@ li hr {
 
 li.item-picture {
   height: 98%;
-  padding: 0px;
   width: 100px;
 }
 
