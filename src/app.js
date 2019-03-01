@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import './App.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import './components/App.css'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faBaseballBall } from '@fortawesome/free-solid-svg-icons'
@@ -14,6 +14,9 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+// import AddPinModal from './components/addEditPin/AddPinModal'
+// import EditPinModal from './components/addEditPin/EditPinModal.js'
+import LandingPage from './components/landingPage/LandingPage.js'
 
 library.add(faBaseballBall)
 library.add(faCar)
@@ -32,7 +35,9 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        
+        {/* <AddPinModal /> */}
+        {/* <EditPinModal /> */}
+        <LandingPage />
       </div>
     )
   }

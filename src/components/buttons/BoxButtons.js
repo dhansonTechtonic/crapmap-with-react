@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import './App.css'
+import '../App.css'
 
 export default class BoxButtons extends Component {
   render() {
     return (
-      <div>
-        <FontAwesomeIcon className="box small" icon="box" />
-        <FontAwesomeIcon className="box medium" icon="box" />
-        <FontAwesomeIcon className="box big" icon="box" />
+      <div className="boxes">
+        <FontAwesomeIcon className="small" icon="box" />
+        <FontAwesomeIcon className="medium" icon="box" />
+        <FontAwesomeIcon className="big" icon="box" />
       </div>
     )
   }

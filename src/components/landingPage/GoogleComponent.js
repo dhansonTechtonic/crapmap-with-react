@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { GoogleLogin } from 'react-google-login';
-import './App.css'
+import '../App.css'
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
  

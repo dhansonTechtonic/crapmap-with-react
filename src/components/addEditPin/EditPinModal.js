@@ -1,23 +1,25 @@
 import React, {Component} from 'react'
 import LineDivider from './LineDivider'
+import CategoryButtons from '../buttons/CategoryButtons'
+import ExitButton from '../buttons/ExitButton.js'
+import BoxButtons from '../buttons/BoxButtons.js'
+import ImageButton from '../buttons/ImageButton.js'
+import TrashCanButton from '../buttons/TrashCanButton.js'
+import SavePostButton from '../buttons/SavePostButton.js'
 
-import './App.css'
+import '../App.css'
 export default class EditPinModal extends Component {
     render() {
         return (
             <div className='vertical-modal'> 
-                <div className='modal-row'>
+                <div className='header'>
                     <h2>Edit Pin</h2> 
-                    <h2>X</h2>
+                    <ExitButton />
                 </div>
                 <LineDivider />
                     <form>
                         <div className='modal-row'>
-                            <button>o</button>
-                            <button>o</button>
-                            <button>o</button>
-                            <button>o</button>
-                            <button>o</button>
+                            <CategoryButtons />
                         </div>
                         <div className='modal-row'>
                             <input placeholder='Pin Title'></input>
@@ -25,19 +27,17 @@ export default class EditPinModal extends Component {
                         <div className='modal-row'>
                             <input placeholder='Location'></input>
                         </div>
-                        <div className='modal-row'>
-                            <button>o</button>
-                            <button>o</button>
-                            <button>o</button>
+                        <div className='boxes'>
+                            <BoxButtons />
                         </div>
                         <div className='modal-row'>
                             <input className='tag-input' placeholder='Tags'></input> 
-                            <button>o</button>
+                            <ImageButton />
                         </div>
                         <LineDivider />
-                        <div className='modal-row'>
-                            <button>o</button>
-                            <button className='save-post-button'>SAVE</button>
+                        <div className='footer'>
+                            <TrashCanButton />
+                            <SavePostButton />
                         </div>
                     </form>
             </div>
