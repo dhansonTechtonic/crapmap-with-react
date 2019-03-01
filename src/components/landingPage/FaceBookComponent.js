@@ -22,6 +22,7 @@ export default class FacebookComponent extends Component {
         render={renderProps => (
           <button className="faceBookComponentStyle" 
           onClick={renderProps.onClick}>
+          <span icon="fa-facebook"></span>
             Login with Facebook
           </button>
         )}

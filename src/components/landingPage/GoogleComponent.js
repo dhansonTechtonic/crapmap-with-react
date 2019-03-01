@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-
-=======
->>>>>>> 459c4dbfee79db9710d611697c33c404bec2b333
 import firebase, { auth, provider } from './../../firebase.js';
 import * as firebaseui from 'firebaseui'
 import './Google.css'
@@ -95,14 +92,14 @@ export default class GoogleComponent extends Component {
   render() {
   
     return (
-<<<<<<< HEAD
+
 
     <div id="firebaseui-auth-container">  
       {this.state.user ?
         <button onClick={this.logout} className="google">Log Out</button>                
         :
         <button onClick={this.login}>Log In</button> 
->>>>>>> 459c4dbfee79db9710d611697c33c404bec2b333
+
       }
     </div>
     )
