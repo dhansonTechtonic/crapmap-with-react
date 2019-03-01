@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import PinImage from './oldcouch.jpg'
+import './App.css'
 
 export default class ViewPinModal extends Component {
   render() {

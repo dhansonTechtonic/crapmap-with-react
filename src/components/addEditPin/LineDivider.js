@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import './AddEditStyle.css'
+import './App.css'
 
 export default class LineDivider extends Component {
   render() {

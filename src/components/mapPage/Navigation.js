@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from './crapmap-logo-horizontal-gray.png'
+import './App.css'
 
 
 export default class Navigation extends Component {

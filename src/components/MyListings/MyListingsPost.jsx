@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './App.css'
 
 export default class MyListingsPost extends Component {
   render() {

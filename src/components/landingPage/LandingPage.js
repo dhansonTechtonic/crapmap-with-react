@@ -5,7 +5,8 @@ import LogoComponent from './LogoComponent';
 import GoogleComponent from './GoogleComponent';
 import FaceBookComponent from './FaceBookComponent';
 
-import "./LandingPage.css";
+import './App.css'
+
 
 export default class LandingPage extends Component {
   constructor(props) {
