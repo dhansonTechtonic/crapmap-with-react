@@ -1,5 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-import Routes from './routes'
-
-export default () => (<Routes />);
+export default class App extends Component {
+  render() {
+    return (
+      <div>
+        
+      </div>
+    )
+  }
+}
