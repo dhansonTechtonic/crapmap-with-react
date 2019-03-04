@@ -15,15 +15,6 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-// import AddPinModal from './components/addEditPin/AddPinModal'
-// import EditPinModal from './components/addEditPin/EditPinModal.js'
-// import LandingPage from './components/landingPage/LandingPage.js'
-// import HamburgerMenuModal from './components/mapPage/HamburgerMenuModal'
-// import Navigation from './components/mapPage/Navigation'
-// import SearchBar from './components/mapPage/SearchBar'
-// import ViewPinModal from './components/mapPage/ViewPinModal'
-// import MyListingsModal from './components/MyListings/MyListingsModal'
-import SettingsModal from './components/settingsModal/SettingsModal'
 
 library.add(faBaseballBall)
 library.add(faCar)
@@ -43,15 +34,6 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        {/* <AddPinModal /> */}
-        {/* <EditPinModal /> */}
-        {/* <LandingPage /> */}
-        {/* <HamburgerMenuModal /> */}
-        {/* <Navigation /> */}
-        {/* <SearchBar /> */}
-        {/* <ViewPinModal /> */}
-        {/* <MyListingsModal /> */}
-        <SettingsModal />
       </div>
     )
   }
