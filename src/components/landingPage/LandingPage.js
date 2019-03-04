@@ -33,9 +33,9 @@ export default class LandingPage extends Component {
             <GoogleComponent />
           </div>
 
-          <div className="faceBookComponentStyle">
+          {/* <div className="faceBookComponentStyle">
             <FaceBookComponent />
-          </div>
+          </div> */}
 
         </div>
       </div>
