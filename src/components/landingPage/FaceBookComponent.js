@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import FacebookLogin from 'react-facebook-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 
-import './Facebook.css'
+import '../App.css'
 
 export default class FacebookComponent extends Component {
 

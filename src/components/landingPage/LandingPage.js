@@ -5,7 +5,8 @@ import LogoComponent from './LogoComponent';
 import GoogleComponent from './GoogleComponent';
 import FaceBookComponent from './FaceBookComponent';
 
-import "./LandingPage.css";
+import '../App.css'
+
 
 export default class LandingPage extends Component {
   constructor(props) {
@@ -28,15 +29,6 @@ export default class LandingPage extends Component {
           <div className="landingPageLogoContainer" > 
             <LogoComponent />
           </div>
-
-          < div className="googleComponentStyle">
-            <GoogleComponent />
-          </div>
-
-          <div className="faceBookComponentStyle">
-            <FaceBookComponent />
-          </div>
-
         </div>
       </div>
       

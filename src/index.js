@@ -7,7 +7,7 @@ import './index.css';
 // import App from './app';
 
 import * as serviceWorker from './serviceWorker';
-import App from './App.js';
+import App from './app.js';
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
