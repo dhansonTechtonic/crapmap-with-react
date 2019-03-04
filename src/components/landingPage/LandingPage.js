@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import BackgroundComponent from './BackgroundComponent';
 import LogoComponent from './LogoComponent';
-import GoogleComponent from './GoogleComponent';
-import FaceBookComponent from './FaceBookComponent';
 
 import '../App.css'
 
