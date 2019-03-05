@@ -49,8 +49,6 @@ export default class Navigation extends Component {
       <nav className="home-page-navbar">
         <ul className="main-nav-list" id="js-menu">
 
-            <button id='teststs' onClick={this.clickOutside}></button>
-
             <li><NavLink exact to='/home' className="nav-links">HOME</NavLink></li>
             <li className="nav-links" onClick={this.toggleListings}>MY PINS</li>
             <li><NavLink exact to='/' className="nav-links">SEARCH</NavLink></li>
