@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import firebase, {auth} from './../../firebase.js';
-import './Google.css'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default class GoogleComponent extends Component {
