@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import firebase, {auth} from './../../firebase.js';
+// import {FireBase} from './firebaseEmail.js';
 import BackgroundComponent from './BackgroundComponent';
 import LogoComponent from './LogoComponent';
 import LoginComponent from './LoginComponent';
 import '../App.css'
-
+import {SignUpPage} from './SignUpPage.js';
 
 export default class LandingPage extends Component {
   constructor(props) {
@@ -45,8 +46,8 @@ export default class LandingPage extends Component {
               <LogoComponent />
             </div>
               <LoginComponent sendData={this.userLogin} provider={new firebase.auth.GoogleAuthProvider()} providerName={`Google`}/>
-              <LoginComponent sendData={this.userLogin} provider={new firebase.auth.GoogleAuthProvider()} providerName={`FaceBook`}/>
-              <LoginComponent sendData={this.userLogin} provider={new firebase.auth.GoogleAuthProvider()} providerName={`Email Login`}/>                    
+              <LoginComponent sendData={this.userLogin} provider={new firebase.auth.FacebookAuthProvider()} providerName={`FaceBook`}/>
+              <SignUpPage />                 
           </div>
         </div>
       :
