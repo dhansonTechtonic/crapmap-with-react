@@ -10,6 +10,34 @@ import TagsComponent from './TagsComponent'
 
 import '../App.css'
 export default class AddPinModal extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            category:'furniture'
+        }
+        this.handleClick = this.handleClick.bind(this);
+
+    }
+    handleClick(e) {
+        switch (e.target.value) {
+            case "car":
+                this.setState({ category: 'auto-parts' }, () => { console.log(this.state.category) });
+                break;
+            case "baseball-ball":
+                this.setState({ category: "sporting" }, () => { console.log(this.state.category) });
+                break;
+            case "tv":
+                this.setState({ category: "electronics" }, () => { console.log(this.state.category) });
+                break;
+            case "question-circle":
+                this.setState({ category: "misc" }, () => { console.log(this.state.category) });
+                break;
+            default:
+                this.setState({ category: "furniture" }, () => { console.log(this.state.category) });
+        }
+
+    }
+
     render() {
         return (
             <div className='vertical-modal'> 
@@ -20,7 +48,7 @@ export default class AddPinModal extends Component {
                 <LineDivider />
                     <form onSubmit={this.handleSubmit}>
                         <div className='modal-row'>
-                            <CategoryButtons />
+                        <CategoryButtons handleClick={this.handleClick}/>
                         </div>
                         <div className='modal-row'>
                             <input name='title' placeholder='Pin Title'></input>
@@ -32,7 +60,7 @@ export default class AddPinModal extends Component {
                             <BoxButtons />
                         </div>
                         <div className='modal-row'>
-                            <TagsComponent />
+                            <TagsComponent category={this.state.category}/>
                             <ImageButton />
                         </div>
                         <LineDivider />

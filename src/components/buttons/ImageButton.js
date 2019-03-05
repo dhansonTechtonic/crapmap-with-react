@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import '../App.css'
+import IconButton from '@material-ui/core/IconButton';
 
 export default class ImageButton extends Component {
   render() {
     return (
       <div>
-        <FontAwesomeIcon className="image-button" icon="camera" />
+        <IconButton className="image-button" >
+          <FontAwesomeIcon icon="camera" />
+        </IconButton>
       </div>
     )
   }
