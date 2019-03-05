@@ -1,6 +1,5 @@
 import firebase from 'firebase'
-
-
+import 'firebase/auth';
 
 const config = {
     apiKey: "hidethisinfo!",
@@ -10,7 +9,10 @@ const config = {
     storageBucket: "crapmap-c5c7f.appspot.com",
     messagingSenderId: "164189189430"
 };
+
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
 export default firebase
+

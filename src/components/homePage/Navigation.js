@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../assets/crapmap-logo-horizontal-gray.png'
 import {NavLink} from 'react-router-dom'
-
 import SettingsModal from '../settingsModal/SettingsModal'
 import MyListingsModal from '../MyListings/MyListingsModal'
 
