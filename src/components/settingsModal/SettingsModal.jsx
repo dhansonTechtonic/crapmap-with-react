@@ -19,15 +19,15 @@ export default class SettingsModal extends Component {
             <div className="body-flex">
                 <div className="header">
                     <h2> Settings </h2>
-                    <ExitButton />
+                    <ExitButton onClick={this.props.onClose}/>
                 </div>
+                <hr />
                 <div className="settings-container">
-                        <hr/>
                 <label>Search Radius: </label>
                 <SliderComponent />
+                <hr />
                 <label>Notifications:</label>
                 <input type="checkbox"></input>
-                        <hr/>
                 </div>
                 <footer>
                     <DeleteAccountButton />

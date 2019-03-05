@@ -16,8 +16,8 @@ export default class MyListingsModal extends Component {
     return (
         <div className='vertical-modal'>  
             <div className="header">
-                <h2>My Listings</h2>
-                <ExitButton />
+                <h2 >My Listings</h2>
+            <ExitButton onClick={this.props.onClose}/>
             </div>
             <hr/>
             <div className="items-listing-container">
