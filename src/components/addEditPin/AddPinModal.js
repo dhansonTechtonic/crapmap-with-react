@@ -6,6 +6,7 @@ import ExitButton from '../buttons/ExitButton.js'
 import BoxButtons from '../buttons/BoxButtons.js'
 import ImageButton from '../buttons/ImageButton.js'
 import MakePostButton from '../buttons/MakePostButton.js'
+import TagsComponent from './TagsComponent'
 
 import '../App.css'
 export default class AddPinModal extends Component {
@@ -31,7 +32,7 @@ export default class AddPinModal extends Component {
                             <BoxButtons />
                         </div>
                         <div className='modal-row'>
-                            <input name='tags' placeholder='Tags' className='tag-input'></input> 
+                            <TagsComponent />
                             <ImageButton />
                         </div>
                         <LineDivider />

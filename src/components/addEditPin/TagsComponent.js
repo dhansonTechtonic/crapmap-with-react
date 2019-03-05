@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui'
 
 const options = [
     { key: 'angular', text: 'Angular', value: 'angular' },
@@ -22,16 +22,11 @@ const options = [
     { key: 'ui', text: 'UI Design', value: 'ui' },
     { key: 'ux', text: 'User Experience', value: 'ux' },
 ]
-
-const TagsComponent = () => (
-    <Dropdown placeholder='Skills' fluid multiple selection options={options} />
-)
-
 export default class TagsComponent extends Component {
   render() {
     return (
       <div>
-        
+        <Dropdown placeholder='Skills' fluid multiple selection options={options} />
       </div>
     )
   }

@@ -1,5 +1,6 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Routes from './routes'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faBaseballBall } from '@fortawesome/free-solid-svg-icons'
@@ -13,6 +14,7 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import AddPinModal from './components/addEditPin/AddPinModal'
 
 library.add(faBaseballBall)
 library.add(faCar)
@@ -27,6 +29,4 @@ library.add(faPlusCircle)
 library.add(faBars)
 library.add(faPencilAlt)
 
-import Routes from './routes'
-
-export default () => (<Routes />);
+export default () => (<AddPinModal />);
