@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import SearchField from '../SearchField.js'
+import SearchField from './SearchField.js'
+import '../App.css'
 
 export default class HamburgerMenuModal extends Component {
   render(props) {

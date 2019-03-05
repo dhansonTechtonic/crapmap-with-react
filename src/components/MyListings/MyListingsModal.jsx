@@ -1,18 +1,35 @@
 import React, { Component } from 'react'
+import '../App.css'
+import ExitButton from '../buttons/ExitButton'
+
+import PropTypes from 'prop-types'
+
+import MyListingsPost from './MyListingsPost'
 
 export default class MyListingsModal extends Component {
   render() {
+
+    if (!this.props.show) {
+      return null;
+    }
+
     return (
         <div className='vertical-modal'>  
-            <div className="page-header-title">
-                <h1 className="header">
-                    MY LISTINGS
-                </h1>
+            <div className="header">
+                <h2>My Listings</h2>
+                <ExitButton />
             </div>
             <hr/>
             <div className="items-listing-container">
+              <MyListingsPost />
             </div>
         </div>
     )
   }
+}
+
+MyListingsModal.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  show: PropTypes.bool,
+  children: PropTypes.node
 }

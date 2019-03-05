@@ -3,7 +3,8 @@ import firebase, {auth} from './../../firebase.js';
 import BackgroundComponent from './BackgroundComponent';
 import LogoComponent from './LogoComponent';
 import LoginComponent from './LoginComponent';
-import "./LandingPage.css";
+import '../App.css'
+
 
 export default class LandingPage extends Component {
   constructor(props) {
@@ -53,7 +54,6 @@ export default class LandingPage extends Component {
           <div className="landingPageLogoContainer" > 
             <LogoComponent />
           </div>
-            <button className='google' onClick={this.logOut}>Log Out</button> 
         </div>
       </div>
       
