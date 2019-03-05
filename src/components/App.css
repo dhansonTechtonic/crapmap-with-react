@@ -612,6 +612,31 @@ button.home-page-new-pin-button{
   z-index: -1;
 }
 
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.providerBtn {
+  border: 2px solid black;
+  border-radius: 25px;
+  background-color: white;
+  font-weight: bolder;
+  color: black;
+  margin: 15px;
+  opacity: 0.85;
+  padding: 12px 40px;
+}
+
+.providerBtn:hover {
+  opacity: .9;
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
 /*My Listings Styles------------------------------------------------------------------*/
 
 li hr {

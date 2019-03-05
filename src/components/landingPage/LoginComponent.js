@@ -53,7 +53,7 @@ export default class LoginComponent extends Component {
     return(
       <div>
         <div>
-          <button className='google' onClick={this.login}>{this.props.providerName} Login</button>              
+          <button className='providerBtn' onClick={this.login}>Login with {this.props.providerName} </button>              
         </div>
        
       </div>
