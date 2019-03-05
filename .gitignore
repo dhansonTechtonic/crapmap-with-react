@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.pnp
+/semantic
 .pnp.js
 .google-maps-react
 
