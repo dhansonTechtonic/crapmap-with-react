@@ -6,9 +6,37 @@ import BoxButtons from '../buttons/BoxButtons.js'
 import ImageButton from '../buttons/ImageButton.js'
 import TrashCanButton from '../buttons/TrashCanButton.js'
 import SavePostButton from '../buttons/SavePostButton.js'
+import TagsComponent from './TagsComponent'
 
 import '../App.css'
 export default class EditPinModal extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            category: 'Pick A Category',
+        }
+        this.handleClick = this.handleClick.bind(this);
+
+    }
+    handleClick(e) {
+        switch (e.target.value) {
+            case "car":
+                this.setState({ category: 'Auto-Parts' }, () => { console.log(this.state.category) });
+                break;
+            case "baseball-ball":
+                this.setState({ category: "Sporting" }, () => { console.log(this.state.category) });
+                break;
+            case "tv":
+                this.setState({ category: "Electronics" }, () => { console.log(this.state.category) });
+                break;
+            case "question-circle":
+                this.setState({ category: "Misc" }, () => { console.log(this.state.category) });
+                break;
+            default:
+                this.setState({ category: "Furniture" }, () => { console.log(this.state.category) });
+        }
+
+    }
     render() {
         return (
             <div className='vertical-modal'> 
@@ -18,8 +46,9 @@ export default class EditPinModal extends Component {
                 </div>
                 <LineDivider />
                     <form>
+                        <h1 className="category-header">{this.state.category}</h1>
                         <div className='modal-row'>
-                            <CategoryButtons />
+                        <CategoryButtons handleClick={this.handleClick} />
                         </div>
                         <div className='modal-row'>
                             <input placeholder='Pin Title'></input>
@@ -31,7 +60,7 @@ export default class EditPinModal extends Component {
                             <BoxButtons />
                         </div>
                         <div className='modal-row'>
-                            <input className='tag-input' placeholder='Tags'></input> 
+                        <TagsComponent category={this.state.category} />
                             <ImageButton />
                         </div>
                         <LineDivider />

@@ -1,5 +1,5 @@
 const optionsObj = {
-    'furniture': [
+    'Furniture': [
         { key: 'baruse', text: 'Barely Used', value: 'baruse' },
         { key: 'fixupp', text: 'Fixer-Upper', value: 'fixupp' },
         { key: 'refurbished', text: 'Refurbished', value: 'refurbished' },
@@ -16,7 +16,7 @@ const optionsObj = {
         { key: 'patio', text: 'Patio', value: 'patio' },
         { key: 'teeroo', text: 'Teen\'s Room', value: 'teeroo' }
     ],
-    'auto-parts': [
+    'Auto-Parts': [
         { key: 'baruse', text: 'Barely Used', value: 'baruse' },
         { key: 'fixupp', text: 'Fixer-Upper', value: 'fixupp' },
         { key: 'refurbished', text: 'Refurbished', value: 'refurbished' },
@@ -31,7 +31,7 @@ const optionsObj = {
         { key: 'tooflugar', text: 'Tools, Fluids, & Garage', value: 'tooflugar' },
         { key: 'tradri', text: 'Transmission & Drivetrain', value: 'tradri' }
     ],
-    'sporting': [
+    'Sporting': [
         { key: 'baruse', text: 'Barely Used', value: 'baruse' },
         { key: 'fixupp', text: 'Fixer-Upper', value: 'fixupp' },
         { key: 'refurbished', text: 'Refurbished', value: 'refurbished' },
@@ -61,7 +61,7 @@ const optionsObj = {
         { key: 'winspo', text: 'Winter Sports', value: 'winspo' },
         { key: 'wrestling', text: 'Wrestling', value: 'wrestling' },
     ],
-    'electronics': [
+    'Electronics': [
         { key: 'baruse', text: 'Barely Used', value: 'baruse' },
         { key: 'fixupp', text: 'Fixer-Upper', value: 'fixupp' },
         { key: 'refurbished', text: 'Refurbished', value: 'refurbished' },
@@ -74,7 +74,13 @@ const optionsObj = {
         { key: 'vidgam', text: 'Video Games', value: 'vidgam' },
         { key: 'weatec', text: 'Wearable Tech', value: 'weatec' },
     ],
-    'misc': [
+    'Misc': [
+        { key: 'baruse', text: 'Barely Used', value: 'baruse' },
+        { key: 'fixupp', text: 'Fixer-Upper', value: 'fixupp' },
+        { key: 'refurbished', text: 'Refurbished', value: 'refurbished' },
+        { key: 'used', text: 'Used', value: 'used' },
+    ],
+    'Pick A Category': [
         { key: 'baruse', text: 'Barely Used', value: 'baruse' },
         { key: 'fixupp', text: 'Fixer-Upper', value: 'fixupp' },
         { key: 'refurbished', text: 'Refurbished', value: 'refurbished' },

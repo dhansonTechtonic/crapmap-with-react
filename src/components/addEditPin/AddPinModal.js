@@ -13,7 +13,7 @@ export default class AddPinModal extends Component {
     constructor(props){
         super(props);
         this.state = {
-            category:'furniture'
+            category:'Pick A Category',
         }
         this.handleClick = this.handleClick.bind(this);
 
@@ -21,19 +21,19 @@ export default class AddPinModal extends Component {
     handleClick(e) {
         switch (e.target.value) {
             case "car":
-                this.setState({ category: 'auto-parts' }, () => { console.log(this.state.category) });
+                this.setState({ category: 'Auto-Parts' }, () => { console.log(this.state.category) });
                 break;
             case "baseball-ball":
-                this.setState({ category: "sporting" }, () => { console.log(this.state.category) });
+                this.setState({ category: "Sporting" }, () => { console.log(this.state.category) });
                 break;
             case "tv":
-                this.setState({ category: "electronics" }, () => { console.log(this.state.category) });
+                this.setState({ category: "Electronics" }, () => { console.log(this.state.category) });
                 break;
             case "question-circle":
-                this.setState({ category: "misc" }, () => { console.log(this.state.category) });
+                this.setState({ category: "Misc" }, () => { console.log(this.state.category) });
                 break;
             default:
-                this.setState({ category: "furniture" }, () => { console.log(this.state.category) });
+                this.setState({ category: "Furniture" }, () => { console.log(this.state.category) });
         }
 
     }
@@ -47,6 +47,7 @@ export default class AddPinModal extends Component {
                 </div>
                 <LineDivider />
                     <form onSubmit={this.handleSubmit}>
+                        <h1 className="category-header">{this.state.category}</h1>
                         <div className='modal-row'>
                         <CategoryButtons handleClick={this.handleClick}/>
                         </div>
@@ -55,6 +56,9 @@ export default class AddPinModal extends Component {
                         </div>
                         <div className='modal-row'>
                             <input name='location' placeholder='Location'></input>
+                        </div>
+                        <div className='modal-row'>
+                            <input name='description' placeholder='Description' type="textarea" maxLength="100"></input>
                         </div>
                         <div>
                             <BoxButtons />
