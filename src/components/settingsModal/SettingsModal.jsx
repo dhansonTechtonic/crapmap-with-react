@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import '../App.css'
+import SliderComponent from '../SliderComponent'
+import DeleteAccountButton from '../buttons/DeleteAccountButton'
+import ExitButton from '../buttons/ExitButton'
 
 import PropTypes from "prop-types"
 
@@ -12,24 +16,25 @@ export default class SettingsModal extends Component {
     }
 
     return (
-            <div className="vertical-modal">
-                <div className="body-flex">
-                    <div className="title-exit-button-container">
-                        <div className="title-exit-button-flex-group">
-                            <h1> Settings </h1>
-                            {/* <button onClick={this.props.onClose}>Close</button> */}
-                        </div>
-                    </div>
-                    <div className="settings-container">
-                            <hr/>
-
-                            <hr/>
-                    </div>
-                    <footer className="footer-flex">
-
-                    </footer>
+        <div className="vertical-modal">
+            <div className="body-flex">
+                <div className="header">
+                    <h2> Settings </h2>
+                    <ExitButton />
                 </div>
+                <div className="settings-container">
+                        <hr/>
+                <label>Search Radius: </label>
+                <SliderComponent />
+                <label>Notifications:</label>
+                <input type="checkbox"></input>
+                        <hr/>
+                </div>
+                <footer>
+                    <DeleteAccountButton />
+                </footer>
             </div>
+        </div>
     )
   }
 }

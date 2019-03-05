@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import PinImage from './oldcouch.jpg'
+import PinImage from '../assets/oldcouch.jpg'
+import '../App.css'
+import ViewPinButtons from '../buttons/ViewPinButtons'
 
 export default class ViewPinModal extends Component {
   render() {
@@ -20,8 +22,7 @@ export default class ViewPinModal extends Component {
 
                         <div className="row row-container view-pin-button-container">
                             <div className="dibs-pass-container">
-                                <button className="dibs-button" type="submit">DIBS</button>
-                                <button className="pass-button" type="submit">PASS</button>
+                                <ViewPinButtons />
                             </div>
                         </div>
                     </div>
