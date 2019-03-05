@@ -4,9 +4,17 @@ import SliderComponent from '../SliderComponent'
 import DeleteAccountButton from '../buttons/DeleteAccountButton'
 import ExitButton from '../buttons/ExitButton'
 
+import PropTypes from "prop-types"
+
+import './SettingsModal.css'
 
 export default class SettingsModal extends Component {
     render() {
+
+    if (!this.props.show) {
+        return null;
+    }
+
     return (
         <div className="vertical-modal">
             <div className="body-flex">
@@ -30,3 +38,9 @@ export default class SettingsModal extends Component {
     )
   }
 }
+
+SettingsModal.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    show: PropTypes.bool,
+    children: PropTypes.node
+};
