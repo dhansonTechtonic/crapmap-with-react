@@ -5,11 +5,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 import * as serviceWorker from './serviceWorker';
-import App from './app.js';
+import A2p from './A2p.js';
 
 
 ReactDOM.render(
-        <App />
+        <A2p />
 , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

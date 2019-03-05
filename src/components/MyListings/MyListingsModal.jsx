@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import '../App.css'
-import MyListingsPost from './MyListingsPost'
 import ExitButton from '../buttons/ExitButton'
 
 import PropTypes from 'prop-types'

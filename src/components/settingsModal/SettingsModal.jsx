@@ -6,7 +6,6 @@ import ExitButton from '../buttons/ExitButton'
 
 import PropTypes from "prop-types"
 
-import './SettingsModal.css'
 
 export default class SettingsModal extends Component {
     render() {

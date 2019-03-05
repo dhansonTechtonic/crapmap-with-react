@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import './HomePage.css';
-
 import GoogleMap from './GoogleMap';
 import Navigation from './Navigation';
 import SearchBar from './SearchBar';
