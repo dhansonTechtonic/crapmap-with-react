@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   error: null,
 };
 
-export class SignUpForm extends Component {
+class SignUpForm extends Component {
   constructor(props) {
     super(props);
 

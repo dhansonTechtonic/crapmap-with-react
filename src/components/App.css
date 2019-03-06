@@ -619,6 +619,24 @@ button.home-page-new-pin-button{
   align-items: center;
 }
 
+button {
+  border: 2px solid black;
+  border-radius: 25px;
+  background-color: white;
+  font-weight: bolder;
+  color: black;
+  margin: 15px;
+  opacity: 0.85;
+  padding: 12px 40px;
+}
+
+button:hover {
+  opacity: .9;
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
 .providerBtn {
   border: 2px solid black;
   border-radius: 25px;
