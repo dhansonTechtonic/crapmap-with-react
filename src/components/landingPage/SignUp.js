@@ -70,8 +70,9 @@ class SignUpForm extends Component {
       username === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <form classname="signUpForm" onSubmit={this.onSubmit}>
         <input
+          className="signUpFormInput"
           name="username"
           value={username}
           onChange={this.onChange}
@@ -79,6 +80,7 @@ class SignUpForm extends Component {
           placeholder="Full Name"
         />
         <input
+          className="signUpFormInput"
           name="email"
           value={email}
           onChange={this.onChange}
@@ -86,6 +88,7 @@ class SignUpForm extends Component {
           placeholder="Email Address"
         />
         <input
+          className="signUpFormInput"
           name="passwordOne"
           value={passwordOne}
           onChange={this.onChange}
@@ -93,6 +96,7 @@ class SignUpForm extends Component {
           placeholder="Password"
         />
         <input
+          className="signUpFormInput"
           name="passwordTwo"
           value={passwordTwo}
           onChange={this.onChange}

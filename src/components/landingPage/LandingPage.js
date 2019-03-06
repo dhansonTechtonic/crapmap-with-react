@@ -47,15 +47,15 @@ export default class LandingPage extends Component {
             <div className="landingPageLogoContainer" > 
               <LogoComponent />
             </div>
-            <div className="loginContainer">
-              <LoginComponent sendData={this.userLogin} provider={new firebase.auth.GoogleAuthProvider()} providerName={`Google`}/>
-              <LoginComponent sendData={this.userLogin} provider={new firebase.auth.FacebookAuthProvider()} providerName={`FaceBook`}/>
-              <NavLink exact to="/signup">
-                <button>  
-                  Sign-Up/Login with Email
-                </button>
-              </NavLink>
-            </div>
+            {/* <div className="signUpContainer"> */}
+              <div className="loginContainer">
+                <LoginComponent sendData={this.userLogin} provider={new firebase.auth.GoogleAuthProvider()} providerName={`Google`}/>
+                <LoginComponent sendData={this.userLogin} provider={new firebase.auth.FacebookAuthProvider()} providerName={`FaceBook`}/>
+                <NavLink exact to="/signup">
+                  <button>Sign-Up/Login with Email</button>
+                </NavLink>
+              </div>
+            {/* </div> */}
           </div>
         </div>
       :
