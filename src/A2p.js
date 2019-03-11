@@ -1,5 +1,6 @@
 import React from 'react'
 import Routes from './routes'
+import store from './store'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -28,6 +29,5 @@ library.add(faCamera)
 library.add(faPlusCircle)
 library.add(faBars)
 library.add(faPencilAlt)
-
 
 export default () => (<Routes />);

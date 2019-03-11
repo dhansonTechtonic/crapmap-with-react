@@ -5,6 +5,7 @@ import ExitButton from '../buttons/ExitButton'
 import PropTypes from 'prop-types'
 
 import MyListingsPost from './MyListingsPost'
+import { IconButton } from '@material-ui/core';
 
 export default class MyListingsModal extends Component {
   render() {
@@ -17,7 +18,9 @@ export default class MyListingsModal extends Component {
         <div className='vertical-modal'>  
             <div className="header">
                 <h2 >My Listings</h2>
-            <ExitButton onClick={this.props.onClose}/>
+            <IconButton onClick={this.props.onClose}>
+              <ExitButton />
+            </IconButton>
             </div>
             <hr/>
             <div className="items-listing-container">
