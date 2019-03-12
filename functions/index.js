@@ -22,6 +22,34 @@ listings.get("/myListings", (request, response) =>{
     }).catch (err => err)
 });
 
+listings.post('/addListing', (request,response) =>{
+    let posting ={
+        location: request.location,
+        tags: request.tags,
+        title: request.title,
+        user: request.user
+    }
+    let itemsRef = db.collection('listings');
+    itemsRef.add(posting)
+    .then(() => console.log('success'))
+    .catch(()=> console.log('error'))
+    return false
+    });
+
+listings.post('/editListing', (request,response) =>{
+    let posting ={
+        location: request.location,
+        tags: request.tags,
+        title: request.title,
+        user: request.user
+    }
+    let itemsRef = db.collection('listings');
+    itemsRef.set(posting, { merge: true })
+    .then(() => console.log('success'))
+    .catch(()=> console.log('error'));
+    return false
+    });
+
 const apiListings = functions.https.onRequest((request, response) => {
     if (!request.path) {
       request.url = `/${request.url}` // prepend '/' to keep query params if any
