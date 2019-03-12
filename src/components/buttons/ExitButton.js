@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import IconButton from '@material-ui/core/IconButton';
 import '../App.css'
 
 export default class ExitButton extends Component {
   render() {
     return (
       <div>
-        <FontAwesomeIcon className="exit-button" icon="times" />
+        <IconButton className="exit-button">
+         <FontAwesomeIcon icon="times" />
+        </IconButton>
       </div>
     )
   }
