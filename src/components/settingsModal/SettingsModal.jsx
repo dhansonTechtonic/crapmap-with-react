@@ -5,6 +5,7 @@ import DeleteAccountButton from '../buttons/DeleteAccountButton'
 import ExitButton from '../buttons/ExitButton'
 
 import PropTypes from "prop-types"
+import { IconButton } from '@material-ui/core';
 
 
 export default class SettingsModal extends Component {
@@ -19,15 +20,17 @@ export default class SettingsModal extends Component {
             <div className="body-flex">
                 <div className="header">
                     <h2> Settings </h2>
-                    <ExitButton />
+                        <IconButton onClick={this.props.onClose}>
+                            <ExitButton/>
+                        </IconButton>
                 </div>
+                <hr />
                 <div className="settings-container">
-                        <hr/>
                 <label>Search Radius: </label>
                 <SliderComponent />
+                <hr />
                 <label>Notifications:</label>
                 <input type="checkbox"></input>
-                        <hr/>
                 </div>
                 <footer>
                     <DeleteAccountButton />
