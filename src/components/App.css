@@ -42,6 +42,14 @@ hr{
   width: 85%;
 }
 
+.inputfile {
+	opacity: 0;
+	overflow: hidden;
+  position: absolute;
+  z-index: -99;
+  display: hidden;
+}
+
 .modal-row {
   align-items: center;
   align-self: center;
