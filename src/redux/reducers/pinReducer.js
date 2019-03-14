@@ -23,7 +23,7 @@
             }
         case UPDATE_PIN: {
                 fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/update', {
-                    method: 'UPDATE',
+                    method: 'PUT',
                     body: payload
                 })
                 .then(res => {
