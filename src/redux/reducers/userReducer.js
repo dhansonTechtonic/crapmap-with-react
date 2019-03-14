@@ -39,14 +39,14 @@ export default function userReducer(state=initUser, action){
             // return localStorage.getItem(user)
             break;
         }
-        case "REGISTER_USER": {
+        case "NEW_USER": {
             // same as login until we figure out how login/register is going to work
             // this action could end up being just taking an object from localStorage or cache
             // and putting it into the redux store
             break;
         }
         case "GET_USER": {
-            fetch('url.com/user/getUser', {
+            fetch('url.com/user/get', {
                     method: 'GET',
                     body: payload
                 })
@@ -55,7 +55,7 @@ export default function userReducer(state=initUser, action){
             break;
         }
         case "UPDATE_USER": {
-            fetch('url.com/user/updateUser', {
+            fetch('url.com/user/update', {
                     method: 'UPDATE',
                     body: payload
                 })
@@ -76,7 +76,7 @@ export default function userReducer(state=initUser, action){
             break;
         }
         case "DELETE_USER": {
-            fetch('url.com/user/deleteUser', {
+            fetch('url.com/user/delete', {
                     method: 'DELETE',
                     body: payload
                 })

@@ -1,3 +1,5 @@
+// not sure what this is for
+
 const initState = {
   authError: null
 }
