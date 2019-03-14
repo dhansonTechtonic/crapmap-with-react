@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 // import {withScriptjs, withGoogleMap, GoogleMap, Marker} from 'react-google-maps';
-import { isAbsolute } from 'path';
+// import { isAbsolute } from 'path';
 // import MarkerWrapper from './MarkerWrapper';
 // const mapStyles = require('./GoogleMapStyles.json')
 
@@ -12,11 +12,13 @@ import { isAbsolute } from 'path';
 
 // const functions = require('firebase-functions');
 
-const mapStylesDefaults = {
-  position: isAbsolute,  
-  width: '100%',
-  height: '100%',
-};
+// DEFAULT MAP STYLES
+
+// const mapStylesDefaults = {
+//   position: isAbsolute,  
+//   width: '100%',
+//   height: '100%',
+// };
 
 export class MapContainer extends Component {
 
