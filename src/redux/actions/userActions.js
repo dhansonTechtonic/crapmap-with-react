@@ -4,6 +4,7 @@ function loginUser(userObject) {
         type: "LOGIN_USER",
         payload: userObject
     }
+
 };
 
 function registerUser(userObject) {
