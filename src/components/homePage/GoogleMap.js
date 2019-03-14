@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import store from '../../redux/store';
+
+import {getPins} from '../../redux/actions/pinActions';
 // import {withScriptjs, withGoogleMap, GoogleMap, Marker} from 'react-google-maps';
 // import { isAbsolute } from 'path';
 // import MarkerWrapper from './MarkerWrapper';
@@ -61,10 +64,14 @@ export class MapContainer extends Component {
         // this.toggleViewPin();
       }
 
+componentDidMount(){
+  console.log(store.dispatch(getPins()));
 
+  
+}
 
-  render() {
-    return (
+render() {
+  return (
         <div className='map-container'>
       {/* <Map
       
