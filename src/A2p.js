@@ -1,6 +1,6 @@
 import React from 'react'
 import Routes from './routes'
-import store from './store'
+import store from './redux/store'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -30,4 +30,6 @@ library.add(faPlusCircle)
 library.add(faBars)
 library.add(faPencilAlt)
 
+
+//wrap app in provider
 export default () => (<Routes />);
