@@ -6,14 +6,14 @@ const cors = require("cors");
 const express = require('express');
 
 const PinController = require('./controllers/PinController');
-//const UserController = require('./controllers/UserController');
+const UserController = require('./controllers/UserController');
 const app = express();
 
 
 
 app.use(cors());
 app.use('/pins', PinController);
-//app.use('/user', UserController)
+app.use('/user', UserController)
 
  const api = functions.https.onRequest((request, response) => {
     if (!request.path) {
