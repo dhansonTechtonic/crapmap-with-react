@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FirebaseContext } from '../../firebase';
+// import { FirebaseContext } from '../../firebase';
 import {auth} from './../../firebase.js'
 
 const INITIAL_STATE = {
@@ -33,7 +33,7 @@ class SignUpForm extends Component {
 
 
   onSubmit = event => {
-    const { username, email, passwordOne } = this.state;
+    const { email, passwordOne } = this.state;
 
     
       this.doCreateUserWithEmailAndPassword(email, passwordOne)

@@ -1,3 +1,5 @@
+//userObject needs to contain userID and authentication
+
 // CREATES A NEW PIN
 function newPin(userObject) {
     console.log(userObject)
