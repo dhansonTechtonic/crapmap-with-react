@@ -17,6 +17,7 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 
+
 library.add(faBaseballBall)
 library.add(faCar)
 library.add(faCouch)
