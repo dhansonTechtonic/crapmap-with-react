@@ -7,9 +7,12 @@ import LoginComponent from './LoginComponent';
 import '../App.css'
 import {NavLink} from 'react-router-dom'
 
+
+import {connect} from 'react-redux';
 import SignUpPage from './SignUpPage.js';
 
-export default class LandingPage extends Component {
+
+class LandingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,6 +41,7 @@ export default class LandingPage extends Component {
   }
 
   render() {
+    console.log(this.props.user);
     return (
       <div>
       {!this.state.user ?
@@ -74,3 +78,11 @@ export default class LandingPage extends Component {
     )
   }
 }
+
+function mapStateToProps(reduxState){
+  console.log(reduxState);
+  // user: reduxState.user
+}
+  
+
+export default connect(mapStateToProps)(LandingPage);
