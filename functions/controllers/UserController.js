@@ -7,14 +7,15 @@ const express = require('express');
 const router = express.Router();
 
 router.get("/user", (request, response) =>{
-
-    let itemsRef = db.collection('users');
-    let query = usersRef.get().then(function(querySnapshot){
+    console.log(request);
+    let userID = request.id;
+    let userRef = db.collection('users').doc(userID);
+    let query = userRef.get().then(function(querySnapshot){
         if(querySnapshot){
             console.log(querySnapshot.docs);
             response.send(querySnapshot.docs);
         }else{
-            response.send("Collection does not exist");
+            response.send("User does not exist");
         }
         return false;
     }).catch (err => err)
@@ -22,44 +23,33 @@ router.get("/user", (request, response) =>{
 
 router.post('/addUser', (request,response) =>{
     let userObject ={
-        category: request.category,
-        img:request.img,
-        location: {
-            lat: request.location.lat,
-            lng: request.location.lng,
-            zip: request.location.zip
-        },
-        size: request.size,
-        tags: request.tags,
-        title: request.title,
-        userID: request.userID
+        email: request.email,
+        id: request.id,
+        password: request.password,
+        pins: request.pins,
+        settings: request.settings,
+        username: request.username
     };
     let usersRef = db.collection('users');
-    usersRef.add(posting)
+    usersRef.add(userObject)
     .then(() => console.log('success'))
     .catch(()=> console.log('error'))
     return false
-    });
+});
 
 router.post('/editUser', (request,response) =>{
-    let posting ={
-        category: request.category,
-        img:request.img,
-        location: {
-            lat: request.location.lat,
-            lng: request.location.lng,
-            zip: request.location.zip
-        },
-        size: request.size,
-        tags: request.tags,
-        title: request.title,
-        userID: request.userID
+    let userObject ={
+        email: request.email,
+        password: request.password,
+        pins: request.pins,
+        settings: request.settings,
+        username: request.username
     };
-    let itemsRef = db.collection('pins');
-    itemsRef.set(posting, { merge: true })
+    let userRef = db.collection('pins').doc(request.id);
+    userRef.set(userObject, { merge: true })
     .then(() => console.log('success'))
     .catch(()=> console.log('error'));
-    return false
-    });
+    return false0
+});
 
 module.exports = router;

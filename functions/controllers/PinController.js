@@ -6,9 +6,9 @@ let db = admin.firestore();
 const express = require('express');
 const router = express.Router();
 
-router.get("/myPins", (request, response) =>{
+router.get("/get", (request, response) =>{
     let pinsRef = db.collection('pins');
-    let query = itemsRef.get().then(function(querySnapshot){
+    let query = pinsRef.get().then(function(querySnapshot){
         if(querySnapshot){
             console.log(querySnapshot.docs);
             response.send(querySnapshot.docs);
@@ -19,7 +19,7 @@ router.get("/myPins", (request, response) =>{
     }).catch (err => err)
 });
 
-router.post('/addPin', (request,response) =>{
+router.post('/new', (request,response) =>{
     let pinObject ={
         category: request.category,
         img:request.img,
@@ -41,7 +41,7 @@ router.post('/addPin', (request,response) =>{
     return false
     });
 
-router.post('/editPin', (request,response) =>{
+router.post('/update', (request,response) =>{
     let pinObject ={
         category: request.category,
         img:request.img,
@@ -61,6 +61,28 @@ router.post('/editPin', (request,response) =>{
     .then(() => console.log('success'))
     .catch(()=> console.log('error'));
     return false
+});
+
+    router.post('/delete', (request,response) =>{
+        let pinObject ={
+            category: request.category,
+            img:request.img,
+            description: request.description,
+            location: {
+                lat: request.location.lat,
+                lng: request.location.lng,
+                zip: request.location.zip
+            },
+            size: request.size,
+            tags: request.tags,
+            title: request.title,
+            userID: request.userID
+        };
+        let pinsRef = db.collection('pins');
+        pinsRef.set(pinObject, { merge: true })
+        .then(() => console.log('success'))
+        .catch(()=> console.log('error'));
+        return false
     });
 
 module.exports = router;
