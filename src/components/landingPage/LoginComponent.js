@@ -13,7 +13,7 @@ export default class LoginComponent extends Component {
       email: '',
       uid: 0
     }
-    this.provider = new firebase.auth.GoogleAuthProvider() || new firebase.auth.FacebookAuthProvider;
+    this.provider = new firebase.auth.GoogleAuthProvider() || new firebase.auth.FacebookAuthProvider();
     this.login = this.login.bind(this); 
    
   }

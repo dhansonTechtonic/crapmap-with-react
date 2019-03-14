@@ -9,7 +9,7 @@ export default class MyListingsPost extends Component {
       <div>
         <div className="item-list-details">
           <ul className="item-list-grouping">
-            <li><img className="item-picture" src={image}></img></li>
+            <li><img alt='pin' className="item-picture" src={image}></img></li>
             <li className="item-title-location-container">
                 <span className="title-span">My ipsum crap.</span>
             <hr/> 

@@ -1,4 +1,4 @@
-import userActions from '../actions/userActions';
+// import userActions from '../actions/userActions';
 
 const initUser = {
     // STATE STRUCTURE
@@ -21,30 +21,71 @@ const initUser = {
 };
 
 export default function userReducer(state=initUser, action){
+    let payload = action.payload;
+    
     switch (action.type) {
         case "LOGIN_USER": {
-            //do shit
+            // option 1
+            // fetch('url.com/userEndpoint', {
+            //         method: 'POST',
+            //         body: payload
+            //     })
+            //     .then(res => console.log('Success:', res))
+            //     .catch(err => console.error('Error:', err))
+
+            // option 2
+            // or just store cached user after firebase login in store for access
+
+            // return localStorage.getItem(user)
             break;
         }
         case "REGISTER_USER": {
-            //do shit
+            // same as login until we figure out how login/register is going to work
+            // this action could end up being just taking an object from localStorage or cache
+            // and putting it into the redux store
             break;
         }
         case "GET_USER": {
-            //do shit
+            fetch('url.com/user/getUser', {
+                    method: 'GET',
+                    body: payload
+                })
+                .then(res => console.log('Success:', res))
+                .catch(err => console.error('Error:', err))
             break;
         }
         case "UPDATE_USER": {
-            //do shit
+            fetch('url.com/user/updateUser', {
+                    method: 'UPDATE',
+                    body: payload
+                })
+                .then(res => console.log('Success:', res))
+                .catch(err => console.error('Error:', err))
             break;
         }
         case "LOGOUT_USER": {
-            //do shit
+            fetch('url.com/user/logOut', {
+                    method: 'GET',
+                    body: payload
+                })
+                .then(res => console.log('Success:', res))
+                .catch(err => console.error('Error:', err))
+
+            // after fetch handle deleting the user variables and pins from store
+            // then return to login screen
             break;
         }
         case "DELETE_USER": {
-            //do shit
+            fetch('url.com/user/deleteUser', {
+                    method: 'DELETE',
+                    body: payload
+                })
+                .then(res => console.log('Success:', res))
+                .catch(err => console.error('Error:', err))
             break;
+
+            // after fetch handle deleting the user variables and pins from store
+            // then return to login screen
         }
         default:
             return state;
