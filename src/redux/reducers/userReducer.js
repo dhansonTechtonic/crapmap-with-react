@@ -37,7 +37,6 @@ export default function userReducer(state = initUser, action) {
                     })
                 })
                 .catch(err => console.error('Error:', err))
-
                 break;
             }
         case "NEW_USER":
@@ -106,6 +105,7 @@ export default function userReducer(state = initUser, action) {
         case "DELETE_USER":
             {
                 fetch('url.com/user/delete', {
+
                     method: 'DELETE',
                     body: payload
                 })

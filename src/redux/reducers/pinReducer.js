@@ -1,5 +1,5 @@
  import {NEW_PIN, UPDATE_PIN, GET_PINS, DELETE_PIN} from "../actions/pinActions";
-import store from "../store";
+// import store from "../store";
 
  const initPin = [];
  
@@ -45,7 +45,7 @@ import store from "../store";
                 .then(res => pinArr += res.json())
                 .catch(err => console.error("Error", err))
                 Object.assign({}, state, {
-                    pins: pinArr
+                    pinArr
                 });
                 break;
             }

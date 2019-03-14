@@ -1,11 +1,8 @@
 import {createStore} from 'redux';
-// import pinReducer from '../reducers/pinReducer.js';
-import userReducer from '../reducers/userReducer.js';
-
-
+import rootReducer from '../reducers/rootReducer.js';
 
 // creates store and assigns default value
-const store = createStore(userReducer);
+const store = createStore(rootReducer);
 
 export default store;
 
