@@ -6,7 +6,6 @@ import BoxButtons from '../buttons/BoxButtons.js'
 import ImageButton from '../buttons/ImageButton.js'
 import TrashCanButton from '../buttons/TrashCanButton.js'
 import SavePostButton from '../buttons/SavePostButton.js'
-import TagsComponent from './TagsComponent'
 
 import '../App.css'
 export default class EditPinModal extends Component {
@@ -60,7 +59,6 @@ export default class EditPinModal extends Component {
                             <BoxButtons />
                         </div>
                         <div className='modal-row'>
-                        <TagsComponent category={this.state.category} />
                             <ImageButton />
                         </div>
                         <LineDivider />
