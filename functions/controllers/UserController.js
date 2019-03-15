@@ -1,19 +1,22 @@
 const admin = require('firebase-admin');
 const functions = require("firebase-functions");
+const bodyParser = require("body-parser");
 admin.initializeApp(functions.config().firebase, "userRouter");
 
 let db = admin.firestore();
 const express = require('express');
 const router = express.Router();
+jsonParser = bodyParser.json();
 
-router.get("/get", (request, response) =>{
-    console.log(request);
-    let userID = request.body.id;
+router.get("/get/:userID", (request, response) =>{
+    console.log("request Info , ", request.body);
+    let userID = request.params.userID;
+    console.log("userID, " , userID);
     let userRef = db.collection('users').doc(userID);
-    let query = userRef.get().then(function(querySnapshot){
-        if(querySnapshot){
-            console.log(querySnapshot.docs);
-            response.send(querySnapshot.docs);
+    let query = userRef.get().then(function(doc){
+        if(doc.exists){
+            console.log('User document data:', doc.data());
+            response.send(doc.data());
         }else{
             response.send("User does not exist");
         }
@@ -21,36 +24,38 @@ router.get("/get", (request, response) =>{
     }).catch (err => err)
 });
 
-// router.post('/new', (request,response) =>{
-//     let userObject ={
-//         email: request.email,
-//         id: request.id,
-//         password: request.password,
-//         pins: request.pins,
-//         settings: request.settings,
-//         username: request.username
-//     };
-//     let usersRef = db.collection('users');
-//     usersRef.add(userObject)
-//     .then(() => console.log('success'))
-//     .catch(()=> console.log('error'))
-//     return false
-// });
+router.post('/new', (request,response) =>{
+    let userObject ={
+        email: request.body.email,
+        password: request.body.password,
+        pins: request.body.pins,
+        settings: request.body.settings,
+        username: request.body.username
+    };
+    let usersRef = db.collection('users');
+    usersRef.add(userObject)
+    .then(() => console.log('success'))
+    .catch(()=> console.log('error'))
+    return false
+});
 
-// router.post('/update', (request,response) =>{
-//     let userObject ={
-//         email: request.email,
-//         password: request.password,
-//         pins: request.pins,
-//         settings: request.settings,
-//         username: request.username
-//     };
-//     let userRef = db.collection('pins').doc(request.id);
-//     userRef.set(userObject, { merge: true })
-//     .then(() => console.log('success'))
-//     .catch(()=> console.log('error'));
-//     return false0
-// });
+router.patch('/update/:userID', jsonParser, (request,response) =>{
+    let userID = request.params.userID;
+    console.log(JSON.stringify(request.body));
+    let userObject ={
+        email: request.body.email,
+        password: request.body.password,
+        pins: request.body.pins,
+        settings: request.body.settings,
+        username: request.body.username
+    };
+    console.log(userObject);
+    let userRef = db.collection('users').doc(userID);
+    userRef.set(userObject, { merge: true })
+    .then(() => console.log('success'))
+    .catch(()=> console.log('error'));
+    return false
+});
 
 //login
 

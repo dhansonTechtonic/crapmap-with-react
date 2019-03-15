@@ -10,7 +10,6 @@ router.get("/get", (request, response) =>{
     let pinsRef = db.collection('pins');
     let query = pinsRef.get().then(function(querySnapshot){
         if(querySnapshot){
-            console.log(querySnapshot.docs);
             response.send(querySnapshot.docs);
         }else{
             response.send("Collection does not exist");
