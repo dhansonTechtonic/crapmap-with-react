@@ -3,9 +3,13 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import PinImage from '../assets/oldcouch.jpg'
 import '../App.css'
 import ViewPinButtons from '../buttons/ViewPinButtons'
+import PropTypes from 'prop-types'
 
 export default class ViewPinModal extends Component {
   render() {
+    if (!this.props.show) {
+        return null;
+    }
     return (
         <div className="view-pin-container">
             <div className="view-pin-row">
@@ -32,3 +36,9 @@ export default class ViewPinModal extends Component {
     )
   }
 }
+
+ViewPinModal.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    show: PropTypes.bool,
+    children: PropTypes.node
+};
