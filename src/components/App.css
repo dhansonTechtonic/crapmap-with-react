@@ -485,6 +485,10 @@ hr{
   text-decoration: none;
 }
 
+.nav-categories {
+  margin: 0px auto;
+}
+
 .nav-links {
   color: white;
   letter-spacing: .25em;
