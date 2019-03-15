@@ -42,7 +42,11 @@
                     method: 'GET',
                 })
                 .then(res => res.json())
-                .then((data) => {pinArr = data})
+                .then(json => {
+                    pinArr = json.products;
+                    console.log(json.products);
+                    return json.products;
+                })
                 .catch(err => console.error("Error", err))
 
                 console.log(pinArr);
