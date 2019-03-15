@@ -1,5 +1,23 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+
+import store from '../../redux/store';
+
+import {getPins} from '../../redux/actions/pinActions';
+// import {withScriptjs, withGoogleMap, GoogleMap, Marker} from 'react-google-maps';
+// import { isAbsolute } from 'path';
+// import MarkerWrapper from './MarkerWrapper';
+// const mapStyles = require('./GoogleMapStyles.json')
+
+
+// import ViewPinModal from './ViewPinModal'
+
+
+
+// const functions = require('firebase-functions');
+
+// DEFAULT MAP STYLES
+
 import { isAbsolute } from 'path';
 import store from '../../redux/store'
 import {getPins} from '../../redux/actions/pinActions'
@@ -27,6 +45,7 @@ const pinsArray = [
     lng: -105.228359
   }
 ]
+
 
 
 export class MapContainer extends Component {
@@ -95,11 +114,8 @@ loopOverArray() {
 
   }
 
- render() {
-
-  // store.dispatch(getPins({}));
-
-    return (
+render() {
+  return (
         <div className='map-container'>
 
 <Map google={this.props.google}
