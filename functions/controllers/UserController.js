@@ -24,7 +24,7 @@ router.get("/get/:userID", (request, response) =>{
     }).catch (err => err)
 });
 
-router.post('/new', (request,response) =>{
+router.post('/new', jsonParser, (request,response) =>{
     let userObject ={
         email: request.body.email,
         password: request.body.password,
@@ -41,7 +41,6 @@ router.post('/new', (request,response) =>{
 
 router.patch('/update/:userID', jsonParser, (request,response) =>{
     let userID = request.params.userID;
-    console.log(JSON.stringify(request.body));
     let userObject ={
         email: request.body.email,
         password: request.body.password,
