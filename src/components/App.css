@@ -17,13 +17,12 @@ hr{
 
 .vertical-modal {
   background-color: #2E2D31;
-  height: 650px;
-  width: 600px;
+  height: 600px;
+  width: 412px;
   position: absolute;
   left: 0;
   right: 0;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   z-index: 10;
   top: 13%;
   overflow: hidden;
@@ -182,6 +181,7 @@ hr{
   margin-left: 3%;
   margin-right: 3%;
   margin-top: 10px;
+  padding-bottom: 40px;
   text-align: center;
   transition-duration: 0.3s;
   -webkit-transition-duration: 0.3s;
@@ -189,6 +189,8 @@ hr{
 }
 
 .save-post-button{
+  padding-bottom: 30px;
+  margin-bottom: 15px;
   width: 16em;
 }
 

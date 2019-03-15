@@ -31,7 +31,6 @@ export default class AddPinModal extends Component {
                             <BoxButtons />
                         </div>
                         <div className='modal-row'>
-                            <input name='tags' placeholder='Tags' className='tag-input'></input> 
                             <ImageButton />
                         </div>
                         <LineDivider />
