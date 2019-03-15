@@ -14,8 +14,6 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
-import AddPinModal from './components/addEditPin/AddPinModal'
-import EditPinModal from './components/addEditPin/EditPinModal'
 
 library.add(faBaseballBall)
 library.add(faCar)
@@ -31,4 +29,4 @@ library.add(faBars)
 library.add(faPencilAlt)
 
 //wrap app in provider
-export default () => (<EditPinModal />);
+export default () => (<Routes />);
