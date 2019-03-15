@@ -117,7 +117,6 @@ loopOverArray() {
 
  {/* <Marker onClick={this.toggleViewPinModal}
     position={} /> */}
-
 </Map>
 
 <div className="view-pin-container">

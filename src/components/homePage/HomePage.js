@@ -4,6 +4,7 @@ import store from '../../redux/store/'
 
 import GoogleMap from './GoogleMap';
 import Navigation from './Navigation';
+import NewPinButton from '../buttons/NewPinButton'
 
 import {connect} from 'react-redux';
 class HomePage extends Component {
@@ -22,7 +23,8 @@ class HomePage extends Component {
   render() {
     return (
       <div className="App">
-        <Navigation /> 
+        <NewPinButton />
+        <Navigation />
         <GoogleMap  />
       </div>
     );
