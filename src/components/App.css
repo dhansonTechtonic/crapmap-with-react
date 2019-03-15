@@ -41,6 +41,11 @@ hr{
   width: 85%;
 }
 
+.category-header {
+  font-size: 1.2em;
+  margin-left: 2em;
+}
+
 .modal-row {
   align-items: center;
   align-self: center;
@@ -180,7 +185,8 @@ hr{
   letter-spacing: .25em;
   margin-left: 3%;
   margin-right: 3%;
-  margin-top: 10px;
+  margin-top: 5px;
+  margin-bottom: 25px !important;
   padding-bottom: 40px;
   text-align: center;
   transition-duration: 0.3s;
@@ -189,7 +195,7 @@ hr{
 }
 
 .save-post-button{
-  padding-bottom: 30px;
+  padding-bottom: 15px !important;
   margin-bottom: 15px;
   width: 16em;
 }
@@ -232,8 +238,8 @@ hr{
   color: white;
   font-size: 40px;
   margin-top: 10px;
-  margin-right: 5%;
   margin-left: 3%;
+  margin-bottom: 30px;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
@@ -253,30 +259,36 @@ hr{
 /*Button Styles Hover-----------------------------------------------------------------*/
 
 .big:hover, .edit-pencil:hover, .exit-button:hover, .hamburger-menu-button:hover, .image-button:hover, .medium:hover, .small:hover{
+  border: none !important;
   color: black;
 }
 
 .car-button:hover
 {
+  border: none !important;
   color: #80334f;
 }
 
 .couch-button:hover
 {
+  border: none !important;
   color: #ff4700;
 }
 
 .delete-account-button:hover {
+  border: none !important;
   background-color: white;
   color: red;
 }
 
 .login-btn:hover{
+  border: none !important;
   background-color: white;
   color: #2e2d31;
 }
 
 .make-post-button:hover, .save-post-button:hover {
+  border: none !important;
   background-color: white;
   color: limegreen;
 }
@@ -288,21 +300,25 @@ hr{
 
 .random-button:hover
 {
+  border: none !important;
   color: #00ffde;
 }
 
 .sports-button:hover
 {
+  border: none !important;
   color: #5200e8;
 }
 
 .trash-button:hover
 {
+  border: none !important;
   color: red;
 }
 
 .tv-button:hover
 {
+  border: none !important;
   color: #467290;
 }
 
