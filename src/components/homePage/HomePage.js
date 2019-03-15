@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import GoogleMap from './GoogleMap';
 import Navigation from './Navigation';
-import SearchBar from './SearchBar';
 
 import {connect} from 'react-redux';
 class HomePage extends Component {
@@ -18,7 +17,6 @@ class HomePage extends Component {
     return (
       <div className="App">
         <Navigation /> 
-        <SearchBar />
         <GoogleMap  />
       </div>
     );
