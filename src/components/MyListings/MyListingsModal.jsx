@@ -20,9 +20,9 @@ export default class MyListingsModal extends Component {
     })
   }
 
-  componentDidMount(){
-    this._getListings();
-  }
+  // componentDidMount(){
+  //   this._getListings();
+  // }
 
   render() {
     if (!this.props.show) {

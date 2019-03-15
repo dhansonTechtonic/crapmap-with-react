@@ -42,11 +42,14 @@
                     method: 'GET',
                     body: payload
                 })
-                .then(res => pinArr += res.json())
+                .then(res => {
+                    pinArr += res.json()
+                    Object.assign({}, state, {
+                        pinArr
+                    });
+                })
                 .catch(err => console.error("Error", err))
-                Object.assign({}, state, {
-                    pinArr
-                });
+                
                 break;
             }
         case DELETE_PIN: {

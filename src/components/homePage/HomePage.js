@@ -19,7 +19,7 @@ class HomePage extends Component {
       <div className="App">
         <Navigation /> 
         <SearchBar />
-        <GoogleMap />
+        <GoogleMap  />
       </div>
     );
   }
