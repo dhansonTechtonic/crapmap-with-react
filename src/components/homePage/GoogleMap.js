@@ -1,23 +1,5 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-
-import store from '../../redux/store';
-
-import {getPins} from '../../redux/actions/pinActions';
-// import {withScriptjs, withGoogleMap, GoogleMap, Marker} from 'react-google-maps';
-// import { isAbsolute } from 'path';
-// import MarkerWrapper from './MarkerWrapper';
-// const mapStyles = require('./GoogleMapStyles.json')
-
-
-// import ViewPinModal from './ViewPinModal'
-
-
-
-// const functions = require('firebase-functions');
-
-// DEFAULT MAP STYLES
-
 import { isAbsolute } from 'path';
 import store from '../../redux/store'
 import {getPins} from '../../redux/actions/pinActions'
@@ -45,9 +27,6 @@ const pinsArray = [
     lng: -105.228359
   }
 ]
-
-
-
 export class MapContainer extends Component {
 
   constructor(props) {
@@ -81,10 +60,10 @@ export class MapContainer extends Component {
     // console.log("inside firePlacePin", pinResponse)
     const locationObj = {
 
-      lat : pinResponse[2]._fieldsProto.location.mapValue.fields.lat.doubleValue,
-      // locationObj.lat = 40.021226
-      lng : pinResponse[2]._fieldsProto.location.mapValue.fields.lng.doubleValue
-      // locationObj.lng = -105.218359
+      // lat : pinResponse[2]._fieldsProto.location.mapValue.fields.lat.doubleValue,
+      lat : 40.021226,
+      // lng : pinResponse[2]._fieldsProto.location.mapValue.fields.lng.doubleValue
+      lng : -105.218359
     };
     console.log(locationObj)
     return locationObj;
@@ -114,8 +93,11 @@ loopOverArray() {
 
   }
 
-render() {
-  return (
+ render() {
+
+  // store.dispatch(getPins({}));
+
+    return (
         <div className='map-container'>
 
 <Map google={this.props.google}
