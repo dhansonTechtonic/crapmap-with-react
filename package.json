@@ -21,9 +21,15 @@
     "react-firebaseui": "^3.1.2",
     "react-google-login": "^5.0.2",
     "react-google-material-icons": "^1.0.4",
+    "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.8",
+<<<<<<< HEAD
     "redux": "^4.0.1"
+=======
+    "redux": "^4.0.1",
+    "redux-promise-middleware": "^6.1.0"
+>>>>>>> cac1e01fa89bcff1cc64b290e5fd7a0654397716
   },
   "scripts": {
     "start": "react-scripts start",

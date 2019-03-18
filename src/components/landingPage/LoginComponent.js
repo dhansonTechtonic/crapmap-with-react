@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import firebase, {auth} from './../../firebase.js';
+
+// import './Google.css'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export default class GoogleComponent extends Component {
+export default class LoginComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,10 +13,12 @@ export default class GoogleComponent extends Component {
       email: '',
       uid: 0
     }
-    // this.provider = new firebase.auth.GoogleAuthProvider();
+    this.provider = new firebase.auth.GoogleAuthProvider() || new firebase.auth.FacebookAuthProvider();
     this.login = this.login.bind(this); 
    
   }
+
+  
 
   login() {
     auth.signInWithPopup(this.props.provider) 
@@ -42,12 +46,16 @@ export default class GoogleComponent extends Component {
         });
       } 
     });
+
   }
 
   render() {
     return(
       <div>
-        <button className='google' onClick={this.login}>{this.props.providerName} Login</button>              
+        <div>
+          <button className='providerBtn' onClick={this.login}>Login with {this.props.providerName} </button>              
+        </div>
+       
       </div>
     )
   }

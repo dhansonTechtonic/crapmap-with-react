@@ -17,13 +17,12 @@ hr{
 
 .vertical-modal {
   background-color: #2E2D31;
-  height: 650px;
-  width: 600px;
+  height: 600px;
+  width: 412px;
   position: absolute;
   left: 0;
   right: 0;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   z-index: 10;
   top: 13%;
   overflow: hidden;
@@ -42,12 +41,18 @@ hr{
   width: 85%;
 }
 
+<<<<<<< HEAD
 .inputfile {
 	opacity: 0;
 	overflow: hidden;
   position: absolute;
   z-index: -99;
   display: hidden;
+=======
+.category-header {
+  font-size: 1.2em;
+  margin-left: 2em;
+>>>>>>> cac1e01fa89bcff1cc64b290e5fd7a0654397716
 }
 
 .modal-row {
@@ -109,6 +114,20 @@ hr{
   flex: 1;
   font-size: 30px;
   margin: 15px;
+  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+}
+
+.nav-car-button, 
+.nav-couch-button,
+.nav-random-button, 
+.nav-sports-button, 
+.nav-tv-button{
+  color: black !important;
+  flex: 1;
+  font-size: 36px !important;
+  margin: 15px;
+  opacity: 1 !important;
   transition-duration: 0.4s;
   -webkit-transition-duration: 0.4s;
 }
@@ -189,7 +208,9 @@ hr{
   letter-spacing: .25em;
   margin-left: 3%;
   margin-right: 3%;
-  margin-top: 10px;
+  margin-top: 5px;
+  margin-bottom: 25px !important;
+  padding-bottom: 40px;
   text-align: center;
   transition-duration: 0.3s;
   -webkit-transition-duration: 0.3s;
@@ -197,6 +218,8 @@ hr{
 }
 
 .save-post-button{
+  padding-bottom: 15px !important;
+  margin-bottom: 15px;
   width: 16em;
 }
 
@@ -212,15 +235,15 @@ hr{
 }
 
 .new-pin-button{
-  background-image: linear-gradient(160deg, #FF4700, #5200E8, #00FFDE);
-  border-radius: 100px;
-  color: white;
-  filter: drop-shadow(1px 1px 7px black);
-  font-size: 5em;
-  opacity: .7;
-  padding: .05em;
-  transition-duration: 0.3s;
-  -webkit-transition-duration: 0.3s;
+  background-image: linear-gradient(160deg, #FF4700, #5200E8, #00FFDE) !important;
+  border-radius: 100px !important;
+  color: white !important;
+  filter: drop-shadow(1px 1px 7px black) !important;
+  font-size: 5em !important;
+  opacity: .7 !important;
+  padding: .05em !important;
+  transition-duration: 0.3s !important;
+  -webkit-transition-duration: 0.3s !important;
 }
 
 .small{
@@ -238,8 +261,8 @@ hr{
   color: white;
   font-size: 40px;
   margin-top: 10px;
-  margin-right: 5%;
   margin-left: 3%;
+  margin-bottom: 30px;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
@@ -259,56 +282,67 @@ hr{
 /*Button Styles Hover-----------------------------------------------------------------*/
 
 .big:hover, .edit-pencil:hover, .exit-button:hover, .hamburger-menu-button:hover, .image-button:hover, .medium:hover, .small:hover{
+  border: none !important;
   color: black;
 }
 
-.car-button:hover
+.car-button:hover, .nav-car-button:hover
 {
-  color: #80334f;
+  border: none !important;
+  color: #80334f !important;
 }
 
-.couch-button:hover
+.couch-button:hover, .nav-couch-button:hover
 {
-  color: #ff4700;
+  border: none !important;
+  color: #ff4700 !important;
 }
 
 .delete-account-button:hover {
+  border: none !important;
   background-color: white;
   color: red;
 }
 
 .login-btn:hover{
+  border: none !important;
   background-color: white;
   color: #2e2d31;
 }
 
 .make-post-button:hover, .save-post-button:hover {
+  border: none !important;
   background-color: white;
   color: limegreen;
 }
 
 .new-pin-button:hover{
-  color:black;
+  border: none !important;
+  color:black !important;
 }
 
-.random-button:hover
+.random-button:hover, .nav-random-button:hover
 {
-  color: #00ffde;
+  border: none !important;
+  color: #00ffde !important;
 }
 
-.sports-button:hover
+.sports-button:hover, .nav-sports-button:hover
 {
-  color: #5200e8;
+  border: none !important;
+  color: #5200e8 !important;
 }
 
 .trash-button:hover
 {
-  color: red;
+  border: none !important;
+  color: red !important;
 }
 
-.tv-button:hover
+.tv-button:hover, .nav-tv-button:hover
 {
-  color: #467290;
+  border: none !important;
+  color: #467290 !important;
 }
 
 .view-pin-button:hover{
@@ -463,20 +497,12 @@ hr{
   z-index: 6;
 }
 
-.home-page-search-input {
-  border: none;
-  border-radius: 25px;
-  box-sizing: border-box;
-  margin: 0 auto;
-  padding: 12px 20px;
-  width: 80%;
-}
-
 .map-container {
-  height: 100vh;
+  height: calc(100vh - 70px) !important;
   width:100vw;
   margin: 0;
-  z-index: 3;
+  margin-top: 70px;
+  z-index: 1;
   top: 0;
   left: 0;
   position: absolute;
@@ -491,6 +517,11 @@ hr{
   overflow: hidden;
   position: fixed;
   text-decoration: none;
+}
+
+.nav-categories {
+  margin: 0px auto;
+  margin-top: 9em;
 }
 
 .nav-links {
@@ -513,25 +544,12 @@ hr{
   text-decoration: none;
 }
 
-.home-page-search-bar {
-  align-items: center;
-  background-color: #2E2D31;
-  display: flex;
-  display: none;
-  font-size: 14px;
-  height: 70px;
-  justify-content: center;
-  padding-bottom: 0;
-  width: 100%;
-}
-
 .new-pin-button {
-  background-image: linear-gradient(160deg, #FF4700, #5200E8, #00FFDE);
-  border-radius: 100px;
-  filter: drop-shadow(1px 1px 7px black);
-  font-size: 5em;
-  opacity: .7;
-  padding: .05em;
+  margin-left: 1.5rem !important;
+  margin-top: 38rem !important;
+  padding: .05em !important;
+  position: fixed !important;
+  z-index: 7 !important;
 }
 
 .marker-style {
@@ -629,6 +647,100 @@ button.home-page-new-pin-button{
   opacity: 0.35;
   position: fixed;
   z-index: -1;
+}
+
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color:rgb(255, 255, 255);
+  font-weight: bolder;
+  padding: 2em;
+
+}
+
+.signUpContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20em;
+  margin-right: 20em;
+  background: rgb(0, 0, 0);
+  border: 2.5px solid white;
+  border-radius: .66em;
+  padding: 2em;
+
+}
+
+button {
+  border: 2px solid black;
+  border-radius: 25px;
+  background-color: white;
+  font-weight: bolder;
+  color: black;
+  margin-top: 15px;
+  opacity: 0.85;
+  padding: 12px 40px;
+}
+
+.signUpBtn {
+  border: 2px solid whit;
+  border-radius: 25px;
+  background-color: white;
+  font-weight: bolder;
+  color: black;
+  margin: 15px;
+  opacity: 0.85;
+  padding: 12px 40px;
+}
+
+.signUpBtn:hover {
+  opacity: .9;
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.signUpFormInput {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(260deg, #FF4700, #5200E8, #00FFDE);
+  color:white;
+  font-weight: 900;
+  border: 2.5px solid white;
+
+}
+
+.signUpFormInput::placeholder {
+  color: white;
+}
+
+button:hover {
+  opacity: .9;
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.providerBtn {
+  border: 2px solid black;
+  border-radius: 25px;
+  background-color: white;
+  font-weight: bolder;
+  color: black;
+  margin: 15px;
+  opacity: 0.85;
+  padding: 12px 40px;
+}
+
+.providerBtn:hover {
+  opacity: .9;
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
 }
 
 /*My Listings Styles------------------------------------------------------------------*/

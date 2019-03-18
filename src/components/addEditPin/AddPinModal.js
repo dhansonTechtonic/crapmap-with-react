@@ -8,7 +8,10 @@ import ImageButton from '../buttons/ImageButton.js'
 import MakePostButton from '../buttons/MakePostButton.js'
 
 import '../App.css'
+
+import PropTypes from 'prop-types'
 export default class AddPinModal extends Component {
+<<<<<<< HEAD
 
 
     // _uploadImg(img){
@@ -48,16 +51,50 @@ export default class AddPinModal extends Component {
         console.log(dataurl);
 
         return false;
+=======
+    constructor(props) {
+        super(props);
+        this.state = {
+            category: 'Pick A Category',
+        }
+        this.handleClick = this.handleClick.bind(this);
+
+    }
+    handleClick(e) {
+        switch (e.target.value) {
+            case "car":
+                this.setState({ category: 'Auto-Parts' }, () => { console.log(this.state.category) });
+                break;
+            case "baseball-ball":
+                this.setState({ category: "Sporting" }, () => { console.log(this.state.category) });
+                break;
+            case "tv":
+                this.setState({ category: "Electronics" }, () => { console.log(this.state.category) });
+                break;
+            case "question-circle":
+                this.setState({ category: "Misc" }, () => { console.log(this.state.category) });
+                break;
+            default:
+                this.setState({ category: "Furniture" }, () => { console.log(this.state.category) });
+        }
+
+>>>>>>> cac1e01fa89bcff1cc64b290e5fd7a0654397716
     }
 
     render() {
+
+        if (!this.props.show) {
+            return null;
+        }
+
         return (
-            <div className='vertical-modal'> 
+            <div className='vertical-modal'>
                 <div className='header'>
-                    <h2>New Pin</h2> 
+                    <h2>New Pin</h2>
                     <ExitButton />
                 </div>
                 <LineDivider />
+<<<<<<< HEAD
                     <form onSubmit={this.handleSubmit}>
                         <div className='modal-row'>
                             <CategoryButtons />
@@ -80,7 +117,37 @@ export default class AddPinModal extends Component {
                             <MakePostButton />
                         </div>
                     </form>
+=======
+                <form onSubmit={this.handleSubmit}>
+                    <h1 className="category-header">{this.state.category}</h1>
+                    <div className='modal-row'>
+                        <CategoryButtons handleClick={this.handleClick} />
+                    </div>
+                    <div className='modal-row'>
+                        <input name='title' placeholder='Pin Title'></input>
+                    </div>
+                    <div className='modal-row'>
+                        <input name='location' placeholder='Location'></input>
+                    </div>
+                    <div>
+                        <BoxButtons />
+                    </div>
+                    <div className='modal-row'>
+                        <ImageButton />
+                    </div>
+                    <LineDivider />
+                    <div className='modal-row'>
+                        <MakePostButton />
+                    </div>
+                </form>
+>>>>>>> cac1e01fa89bcff1cc64b290e5fd7a0654397716
             </div>
-      )
+        )
     }
 }
+
+AddPinModal.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    show: PropTypes.bool,
+    children: PropTypes.node
+};

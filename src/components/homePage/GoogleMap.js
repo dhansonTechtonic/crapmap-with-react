@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
-// import {withScriptjs, withGoogleMap, GoogleMap, Marker} from 'react-google-maps';
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import { isAbsolute } from 'path';
-// import MarkerWrapper from './MarkerWrapper';
-// const mapStyles = require('./GoogleMapStyles.json')
+import store from '../../redux/store'
+import {getPins} from '../../redux/actions/pinActions'
 
-
-// import ViewPinModal from './ViewPinModal'
-
-
-
-// const functions = require('firebase-functions');
+import PropTypes from 'prop-types'
+import ViewPinModal from './ViewPinModal';
 
 const mapStylesDefaults = {
   position: isAbsolute,  
@@ -18,91 +13,129 @@ const mapStylesDefaults = {
   height: '100%',
 };
 
+const pinsArray = [
+  {
+    lat: 40.021226,
+    lng: -105.218359
+  },
+  {
+    lat: 40.221226,
+    lng: -105.228359
+  },
+  {
+    lat: 40.121226,
+    lng: -105.228359
+  }
+]
 export class MapContainer extends Component {
 
-  // constructor(props) {
-  //   super(props);
+  constructor(props) {
+    super(props);
+    this.state = {
+      viewPinModalIsOpen: false,
+    };
+    this.toggleViewPinModal = this.toggleViewPinModal.bind(this)
+  }
 
-  //   this.state = {
-  //     viewPinIsOpen: false,
-  //   };
-  // }
+//update with mapstate to props 
 
-
-  // toggleViewPin= () => {
-  //   this.setState({
-  //     viewPinIsOpen: !this.state.viewPinIsOpen,
-  //   });
-  // }
-
+  toggleViewPinModal = () => {
+    this.setState({
+      viewPinModalIsOpen: !this.state.viewPinModalIsOpen,
+    });
+  }
 
   init () {
-    //document on loadavg. reset container
-    //if logout, then reset the map 
-    //bind events 
+    console.log("this is load")
+    // console.log(store.getState())
   }
 
-   onLoad () {
-    //load static map based on user location
-      //get api key and load map. 
-    //load map markers from db w/info
+
+  // componentDidMount() {
+  //   createMarkers();
+
+  // }
+
+  firePlacePin (pinResponse) {
+    // console.log("inside firePlacePin", pinResponse)
+    const locationObj = {
+
+      // lat : pinResponse[2]._fieldsProto.location.mapValue.fields.lat.doubleValue,
+      lat : 40.021226,
+      // lng : pinResponse[2]._fieldsProto.location.mapValue.fields.lng.doubleValue
+      lng : -105.218359
+    };
+    console.log(locationObj)
+    return locationObj;
   }
 
-// getCurrentMarkers () {
-  
-  
-//   }
+// createMarkers() {
+//   const pinsArray = [
+//     {
+//       lat: 40.021226,
+//       lng: -105.218359
+//     },
+//     {
+//       lat: 40.221226,
+//       lng: -105.228359
+//     },
+//     {
+//       lat: 40.121226,
+//       lng: -105.228359
+//     }
+//   ]
+
+//   return navLinks.map((b, i) => {
+//     console.log(b.long)
+//     return new google.maps.Marker({
+//       position: new google.maps.LatLng(b.lat, b.long),
+//       map: this.map
+//     })
+//   })
 
 
-    onMarkerClick(props, marker, e) {
-        console.log('this was clicked')
-        // this.toggleViewPin();
-      }
+  // }
 
 
 
-  render() {
+ render() {
+
+  // store.dispatch(getPins({}));
+
     return (
         <div className='map-container'>
-      {/* <Map
-      
-        google={this.props.google}
-        zoom={15}
-        style={mapStylesDefaults}
-        centerAroundCurrentLocation={true}
-        draggable={true} 
-        /> */}
-
 
 <Map google={this.props.google}
-    style={{width: '100%', height: '100%', position: 'relative'}}
+    style={mapStylesDefaults}
     className={'map'}
-    zoom={14}>
+    zoom={7}  
+    centerAroundCurrentLocation={true}
+    draggable={true} 
+>
 
-  
 
-  <Marker onClick={this.onMarkerClick.bind(this)}
-    name={'SOMA'}
-    position={{lat: 37.778519, lng: -122.405640}} />
- 
-  <Marker onClick={this.onMarkerClick.bind(this)}
-    name={'Dolores park'}
-    position={{lat: 37.759703, lng: -122.428093}} />
 
+ {/* <Marker onClick={this.toggleViewPinModal}
+      position={this.props.markerLocation}  
+     
+     />  */}
+
+ {/* <Marker onClick={this.toggleViewPinModal}
+    position={} /> */}
 </Map>
 
-{/* <ViewPinModal show={this.state.settingsIsOpen} onClose={this.toggleViewPin}></ViewPinModal> */}
-
-
-
-        
+<div className="view-pin-container">
+<ViewPinModal  show={this.state.viewPinModalIsOpen} onClose={this.state.viewPinModalIsOpen} onClick={this.toggleViewPinModal}/>
 </div>
+
+</div>
+
     );
   }
 }
 
 export default GoogleApiWrapper({
-  apiKey:process.env.REACT_APP_CRAP_MAP_API_KEY
+  apiKey: 'AIzaSyDGqxNDh10YIbriH1cJpPt9cn8TJdCwbFM'
 })(MapContainer);
 
 // Map.propTypes = {
@@ -113,10 +146,5 @@ export default GoogleApiWrapper({
 
 // Map.defaultProps = {
 //   zoom: 13,
-//   // San Francisco, by default
-//   initialCenter: {
-//     lat: 37.774929,
-//     lng: -122.419416
-//   },
 //   centerAroundCurrentLocation: true
 // }

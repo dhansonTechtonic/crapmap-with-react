@@ -1,0 +1,60 @@
+ import {NEW_PIN, UPDATE_PIN, GET_PINS, DELETE_PIN, GET_PINS_FULFILLED} from "../actions/pinActions";
+
+ const initPin = [];
+ 
+ export default async function pinReducer(state=initPin, action){
+    console.log(action) 
+    let payload = action.payload;
+     switch (action.type) {
+        case NEW_PIN: {
+                let pinState = state;
+                fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/new', {
+                    method: 'POST',
+                    body: payload
+                })
+                .then(res => {
+                    console.log('Success:', res);
+                    Object.assign({}, state, {
+                        pins: pinState.push(payload)
+                    });
+                })
+                .catch(err => console.error('Error:', err))
+                break;
+            }
+        case UPDATE_PIN: {
+                fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/update', {
+                    method: 'PUT',
+                    body: payload
+                })
+                .then(res => {
+                    console.log("Success:", res);
+                    Object.assign({}, state, {
+                        // select original and update to payload
+                        // original: payload
+                    });
+                })
+                .catch(err => console.error('Error:', err))
+                break;
+            }
+        case GET_PINS_FULFILLED: {
+                console.log(payload);
+                // this.setState({pins: payload});
+                return {
+                    pins: payload
+                }
+            }
+        case DELETE_PIN: {
+                fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/delete', {
+                    method: 'DELETE',
+                    body: payload
+                })
+                .then(res => {
+                    console.log('Success:', res);
+                    //Object method to remove 
+                })
+                .catch(err => console.error('Error:', err))
+                break;
+             }
+        default: return state;
+     }
+ }
