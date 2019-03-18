@@ -4,7 +4,7 @@ admin.initializeApp(functions.config().firebase);
 
 const cors = require("cors")({origin: true});
 const express = require('express');
-const cookieParser = require('cookie-parser');
+//const cookieParser = require('cookie-parser');
 
 const PinController = require('./controllers/PinController');
 const UserController = require('./controllers/UserController');
@@ -57,7 +57,7 @@ const app = express();
 //-------end validation---//
 
 app.use(cors);
-// app.use(cookieParser);
+//app.use(cookieParser);
 // app.use(validateFirebaseIdToken);
 app.use('/pins', PinController);
 app.use('/user', UserController)
