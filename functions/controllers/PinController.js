@@ -38,7 +38,7 @@ router.post('/new',jsonParser, (request,response) =>{
     };
     let pinsRef = db.collection('pins');
     pinsRef.add(pinObject)
-    .then(() => response.send('sucdess'))
+    .then(() => response.send('success'))
     .catch(()=> console.log('error'))
     return false
     });
@@ -65,25 +65,10 @@ router.post('/update', (request,response) =>{
     return false
 });
 
-    router.post('/delete', (request,response) =>{
-        let pinObject ={
-            category: request.category,
-            img:request.img,
-            description: request.description,
-            location: {
-                lat: request.location.lat,
-                lng: request.location.lng,
-                zip: request.location.zip
-            },
-            size: request.size,
-            tags: request.tags,
-            title: request.title,
-            userID: request.userID
-        };
-        let pinsRef = db.collection('pins');
-        pinsRef.set(pinObject, { merge: true })
-        .then(() => console.log('success'))
-        .catch(()=> console.log('error'));
+    router.post('/delete/:pinID', (request,response) =>{
+        let pinID = request.params.pinID;
+        let pinsRef = db.collection('pins').doc(pinID);
+        pinsRef.delete().then(() => response.send('success')).catch(()=> console.log('error'));
         return false
     });
 
