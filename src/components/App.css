@@ -41,18 +41,9 @@ hr{
   width: 85%;
 }
 
-<<<<<<< HEAD
-.inputfile {
-	opacity: 0;
-	overflow: hidden;
-  position: absolute;
-  z-index: -99;
-  display: hidden;
-=======
 .category-header {
   font-size: 1.2em;
   margin-left: 2em;
->>>>>>> cac1e01fa89bcff1cc64b290e5fd7a0654397716
 }
 
 .modal-row {

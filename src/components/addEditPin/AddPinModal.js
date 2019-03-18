@@ -11,8 +11,6 @@ import '../App.css'
 
 import PropTypes from 'prop-types'
 export default class AddPinModal extends Component {
-<<<<<<< HEAD
-
 
     // _uploadImg(img){
     //     let formattedImg = this._imgResize(img);
@@ -48,10 +46,12 @@ export default class AddPinModal extends Component {
         ctx.drawImage(imgElement, 0, 0, max_width, max_height);
         console.log(ctx);
         let dataurl = ctx.canvas.toDataURL('image/jpeg', 0.5);
+        localStorage.setItem('imgUpload', dataurl);
         console.log(dataurl);
 
         return false;
-=======
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -77,8 +77,6 @@ export default class AddPinModal extends Component {
             default:
                 this.setState({ category: "Furniture" }, () => { console.log(this.state.category) });
         }
-
->>>>>>> cac1e01fa89bcff1cc64b290e5fd7a0654397716
     }
 
     render() {
@@ -109,7 +107,7 @@ export default class AddPinModal extends Component {
                         <BoxButtons />
                     </div>
                     <div className='modal-row'>
-                        <ImageButton />
+                        <ImageButton sendData={this._uploadImg} />
                     </div>
                     <LineDivider />
                     <div className='modal-row'>
