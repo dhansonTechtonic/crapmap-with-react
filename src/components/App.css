@@ -489,9 +489,10 @@ hr{
 }
 
 .map-container {
-  height: 100vh;
+  height: calc(100vh - 70px) !important;
   width:100vw;
   margin: 0;
+  margin-top: 70px;
   z-index: 1;
   top: 0;
   left: 0;
