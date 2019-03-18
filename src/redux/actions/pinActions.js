@@ -45,7 +45,7 @@ function fetchPins(input){
     })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            // console.log(data);
             return data;
         })
         .catch(err => console.error("Error", err))
@@ -62,7 +62,7 @@ export const newPin = (input) => ({
 
 export async function postPin(input) {
 
-    console.log(input);
+    // console.log(input);
 
     fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/new', {
             method: 'POST',
