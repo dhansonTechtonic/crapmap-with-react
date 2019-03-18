@@ -13,6 +13,20 @@ const mapStylesDefaults = {
   height: '100%',
 };
 
+const pinsArray = [
+  {
+    lat: 40.021226,
+    lng: -105.218359
+  },
+  {
+    lat: 40.221226,
+    lng: -105.228359
+  },
+  {
+    lat: 40.121226,
+    lng: -105.228359
+  }
+]
 export class MapContainer extends Component {
 
   constructor(props) {
@@ -46,10 +60,10 @@ export class MapContainer extends Component {
     // console.log("inside firePlacePin", pinResponse)
     const locationObj = {
 
-      lat : pinResponse[2]._fieldsProto.location.mapValue.fields.lat.doubleValue,
-      // locationObj.lat = 40.021226
-      lng : pinResponse[2]._fieldsProto.location.mapValue.fields.lng.doubleValue
-      // locationObj.lng = -105.218359
+      // lat : pinResponse[2]._fieldsProto.location.mapValue.fields.lat.doubleValue,
+      lat : 40.021226,
+      // lng : pinResponse[2]._fieldsProto.location.mapValue.fields.lng.doubleValue
+      lng : -105.218359
     };
     console.log(locationObj)
     return locationObj;
@@ -108,7 +122,6 @@ export class MapContainer extends Component {
 
  {/* <Marker onClick={this.toggleViewPinModal}
     position={} /> */}
-
 </Map>
 
 <div className="view-pin-container">

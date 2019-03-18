@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
+import store from '../../redux/store/'
+
 import GoogleMap from './GoogleMap';
 import Navigation from './Navigation';
-import SearchBar from './SearchBar';
+import NewPinButton from '../buttons/NewPinButton'
 
 import {connect} from 'react-redux';
 class HomePage extends Component {
@@ -14,19 +16,24 @@ class HomePage extends Component {
     };
   }
 
+  componentDidMount(){
+    setTimeout(console.log(store.getState()),10000)
+  }
+
   render() {
     return (
       <div className="App">
-        <Navigation /> 
-        <SearchBar />
+        <NewPinButton />
+        <Navigation />
         <GoogleMap  />
       </div>
     );
   }
 }
 
+setTimeout(function () {console.log(store.getState())}, 5000);
+
 function mapStateToProps(reduxState){
-  console.log(reduxState);
   return {
     user: reduxState.user,
     pins: reduxState.pins

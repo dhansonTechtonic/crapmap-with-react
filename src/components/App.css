@@ -17,13 +17,12 @@ hr{
 
 .vertical-modal {
   background-color: #2E2D31;
-  height: 650px;
-  width: 600px;
+  height: 600px;
+  width: 412px;
   position: absolute;
   left: 0;
   right: 0;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   z-index: 10;
   top: 13%;
   overflow: hidden;
@@ -40,6 +39,11 @@ hr{
   margin-left: auto;
   margin-right: auto;
   width: 85%;
+}
+
+.category-header {
+  font-size: 1.2em;
+  margin-left: 2em;
 }
 
 .modal-row {
@@ -181,7 +185,9 @@ hr{
   letter-spacing: .25em;
   margin-left: 3%;
   margin-right: 3%;
-  margin-top: 10px;
+  margin-top: 5px;
+  margin-bottom: 25px !important;
+  padding-bottom: 40px;
   text-align: center;
   transition-duration: 0.3s;
   -webkit-transition-duration: 0.3s;
@@ -189,6 +195,8 @@ hr{
 }
 
 .save-post-button{
+  padding-bottom: 15px !important;
+  margin-bottom: 15px;
   width: 16em;
 }
 
@@ -204,15 +212,15 @@ hr{
 }
 
 .new-pin-button{
-  background-image: linear-gradient(160deg, #FF4700, #5200E8, #00FFDE);
-  border-radius: 100px;
-  color: white;
-  filter: drop-shadow(1px 1px 7px black);
-  font-size: 5em;
-  opacity: .7;
-  padding: .05em;
-  transition-duration: 0.3s;
-  -webkit-transition-duration: 0.3s;
+  background-image: linear-gradient(160deg, #FF4700, #5200E8, #00FFDE) !important;
+  border-radius: 100px !important;
+  color: white !important;
+  filter: drop-shadow(1px 1px 7px black) !important;
+  font-size: 5em !important;
+  opacity: .7 !important;
+  padding: .05em !important;
+  transition-duration: 0.3s !important;
+  -webkit-transition-duration: 0.3s !important;
 }
 
 .small{
@@ -230,8 +238,8 @@ hr{
   color: white;
   font-size: 40px;
   margin-top: 10px;
-  margin-right: 5%;
   margin-left: 3%;
+  margin-bottom: 30px;
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
@@ -251,55 +259,66 @@ hr{
 /*Button Styles Hover-----------------------------------------------------------------*/
 
 .big:hover, .edit-pencil:hover, .exit-button:hover, .hamburger-menu-button:hover, .image-button:hover, .medium:hover, .small:hover{
+  border: none !important;
   color: black;
 }
 
 .car-button:hover
 {
+  border: none !important;
   color: #80334f;
 }
 
 .couch-button:hover
 {
+  border: none !important;
   color: #ff4700;
 }
 
 .delete-account-button:hover {
+  border: none !important;
   background-color: white;
   color: red;
 }
 
 .login-btn:hover{
+  border: none !important;
   background-color: white;
   color: #2e2d31;
 }
 
 .make-post-button:hover, .save-post-button:hover {
+  border: none !important;
   background-color: white;
   color: limegreen;
 }
 
 .new-pin-button:hover{
-  color:black;
+  border: none !important;
+  color:black !important;
 }
 
 .random-button:hover
 {
+  border: none !important;
   color: #00ffde;
 }
 
 .sports-button:hover
 {
+  border: none !important;
   color: #5200e8;
 }
 
 .trash-button:hover
 {
+  border: none !important;
   color: red;
 }
 
 .tv-button:hover
 {
+  border: none !important;
   color: #467290;
 }
 
@@ -455,20 +474,11 @@ hr{
   z-index: 6;
 }
 
-.home-page-search-input {
-  border: none;
-  border-radius: 25px;
-  box-sizing: border-box;
-  margin: 0 auto;
-  padding: 12px 20px;
-  width: 80%;
-}
-
 .map-container {
   height: 100vh;
   width:100vw;
   margin: 0;
-  z-index: 3;
+  z-index: 1;
   top: 0;
   left: 0;
   position: absolute;
@@ -483,6 +493,10 @@ hr{
   overflow: hidden;
   position: fixed;
   text-decoration: none;
+}
+
+.nav-categories {
+  margin: 0px auto;
 }
 
 .nav-links {
@@ -505,25 +519,12 @@ hr{
   text-decoration: none;
 }
 
-.home-page-search-bar {
-  align-items: center;
-  background-color: #2E2D31;
-  display: flex;
-  display: none;
-  font-size: 14px;
-  height: 70px;
-  justify-content: center;
-  padding-bottom: 0;
-  width: 100%;
-}
-
 .new-pin-button {
-  background-image: linear-gradient(160deg, #FF4700, #5200E8, #00FFDE);
-  border-radius: 100px;
-  filter: drop-shadow(1px 1px 7px black);
-  font-size: 5em;
-  opacity: .7;
-  padding: .05em;
+  margin-left: 1.5rem !important;
+  margin-top: 38rem !important;
+  padding: .05em !important;
+  position: fixed !important;
+  z-index: 7 !important;
 }
 
 .marker-style {

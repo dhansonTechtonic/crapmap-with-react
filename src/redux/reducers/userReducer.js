@@ -1,8 +1,6 @@
 // import userActions from '../actions / userActions ';
 
 const initUser = {
-    // STATE STRUCTURE
-    user: {
         // Acc Info
         userID: '',
         username: '',
@@ -17,7 +15,6 @@ const initUser = {
             lat: 57.5,
             lng: 57.5
         }
-    }
 };
 
 export default function userReducer(state = initUser, action) {
