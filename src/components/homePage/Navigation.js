@@ -15,11 +15,13 @@ export default class Navigation extends Component {
       settingsIsOpen: false,
       myListingsIsOpen: false,
       category: 'All',
-      color: '#000'
+      color: '#000',
+      active: null
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.handleClick = this.handleColor.bind(this);
+    this.handleClick = this.toggle.bind(this)
   }
 
   toggleSettings = () => {
@@ -39,42 +41,38 @@ export default class Navigation extends Component {
   handleClick = (e) => {
     switch (e.target.value) {
       case "car":
-        this.setState({ category: 'Auto-Parts', color: '#80334f' }, () => { console.log(this.state.category) });
+        this.setState({ category: 'Auto-Parts', color: '#80334f !important' }, () => { console.log(this.state.category, this.state.color) });
         break;
       case "baseball-ball":
-        this.setState({ category: "Sporting", color: '#5200e8' }, () => { console.log(this.state.category) });
+        this.setState({ category: "Sporting", color: '#5200e8 !important' }, () => { console.log(this.state.category, this.state.color) });
         break;
       case "tv":
-        this.setState({ category: "Electronics", color: '#467290' }, () => { console.log(this.state.category) });
+        this.setState({ category: "Electronics", color: '#467290 !important' }, () => { console.log(this.state.category, this.state.color) });
         break;
       case "question-circle":
-        this.setState({ category: "Misc", color: '#00ffde' }, () => { console.log(this.state.category) });
+        this.setState({ category: "Misc", color: '#00ffde !important' }, () => { console.log(this.state.category, this.state.color) });
+        break;
+      case "couch":
+        this.setState({ category: "Furniture", color: '#ff4700 !important' }, () => { console.log(this.state.category, this.state.color) });
         break;
       default:
-        this.setState({ category: "Furniture", color: '#ff4700' }, () => { console.log(this.state.category) });
+        this.setState({ category: "All", color: '#000' }, () => { console.log(this.state.category, this.state.color) });
     }
   }
 
-  handleColor(e) {
-    switch (e.target.value) {
-      case "car":
-        e.target.style.color = this.state.color
-        break;
-      case "baseball-ball":
-        e.target.style.color = this.state.color
-        break;
-      case "tv":
-        e.target.style.color = this.state.color
-        break;
-      case "question-circle":
-        e.target.style.color = this.state.color
-        break;
-      case "couch":
-        e.target.style.color = this.state.color
-        break
-      default:
-        e.target.style.color = '#000'
+  toggle (position) {
+    if (this.state.active === position){
+      this.setState({active: null})
+    } else {
+      this.setState({active: position})
     }
+  }
+
+  handleColor (position) {
+    if(this.state.active === position){
+      return this.state.color
+    }
+    return '#000'
   }
 
   // toggleModal = (event) => {
@@ -92,7 +90,7 @@ export default class Navigation extends Component {
       <img alt='crapmap logo' src={logo} className="home-page-logo"/>
       <nav className="home-page-navbar">
         <div className='nav-categories'>
-            <IconButton className="nav-couch-button" onClick={this.handleClick} value="couch">
+            <IconButton className="nav-couch-button" onClick={this.handleClick} value="couch" style={{color: this.handleColor(0)}}>
               <FontAwesomeIcon icon="couch" />
             </IconButton>
 
