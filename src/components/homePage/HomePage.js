@@ -8,7 +8,7 @@ import NewPinButton from '../buttons/NewPinButton'
 
 import {connect} from 'react-redux';
 
-import {getPins, newPin} from '../../redux/actions/pinActions'
+import {getPins} from '../../redux/actions/pinActions'
 class HomePage extends Component {
   constructor(props) {
     super(props);

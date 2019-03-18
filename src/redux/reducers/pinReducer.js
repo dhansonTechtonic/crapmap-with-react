@@ -3,7 +3,7 @@
  const initPin = [];
  
  export default async function pinReducer(state=initPin, action){
-    console.log(action) 
+    // console.log(action) 
     let payload = action.payload;
      switch (action.type) {
         case NEW_PIN: {
