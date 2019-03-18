@@ -44,7 +44,7 @@ class HomePage extends Component {
   }
 
   render() {
-    console.log(this.state.pins)
+    // console.log(this.state.pins)
     return (
       <div className="App">
         <NewPinButton />

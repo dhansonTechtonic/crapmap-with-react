@@ -13,6 +13,7 @@ const mapStylesDefaults = {
   height: '100%',
 };
 
+
 const pinsArray = [
   {
     lat: 40.021226,
@@ -47,60 +48,17 @@ export class MapContainer extends Component {
 
   init () {
     console.log("this is load")
-    // console.log(store.getState())
   }
 
-
-  // componentDidMount() {
-  //   createMarkers();
-
-  // }
-
-  firePlacePin (pinResponse) {
-    // console.log("inside firePlacePin", pinResponse)
-    const locationObj = {
-
-      // lat : pinResponse[2]._fieldsProto.location.mapValue.fields.lat.doubleValue,
-      lat : 40.021226,
-      // lng : pinResponse[2]._fieldsProto.location.mapValue.fields.lng.doubleValue
-      lng : -105.218359
-    };
-    console.log(locationObj)
-    return locationObj;
+  componentDidUpdate(prevProps){ //on update...
+    let response = store.getState().pins
+    response.then(pins => pins)
+    console.log(response)
   }
-
-// createMarkers() {
-//   const pinsArray = [
-//     {
-//       lat: 40.021226,
-//       lng: -105.218359
-//     },
-//     {
-//       lat: 40.221226,
-//       lng: -105.228359
-//     },
-//     {
-//       lat: 40.121226,
-//       lng: -105.228359
-//     }
-//   ]
-
-//   return navLinks.map((b, i) => {
-//     console.log(b.long)
-//     return new google.maps.Marker({
-//       position: new google.maps.LatLng(b.lat, b.long),
-//       map: this.map
-//     })
-//   })
-
-
-  // }
 
 
 
  render() {
-
-  // store.dispatch(getPins({}));
 
     return (
         <div className='map-container'>
@@ -144,7 +102,3 @@ export default GoogleApiWrapper({
 //   initialCenter: React.PropTypes.object
 // }
 
-// Map.defaultProps = {
-//   zoom: 13,
-//   centerAroundCurrentLocation: true
-// }
