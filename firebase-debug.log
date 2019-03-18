@@ -1,0 +1,37 @@
+[debug] [2019-03-15T15:40:58.640Z] ----------------------------------------------------------------------
+[debug] [2019-03-15T15:40:58.642Z] Command:       /usr/local/Cellar/node/11.6.0/bin/node /usr/local/bin/firebase serve --only functions
+[debug] [2019-03-15T15:40:58.643Z] CLI Version:   6.4.0
+[debug] [2019-03-15T15:40:58.643Z] Platform:      darwin
+[debug] [2019-03-15T15:40:58.643Z] Node Version:  v11.6.0
+[debug] [2019-03-15T15:40:58.649Z] Time:          Fri Mar 15 2019 09:40:58 GMT-0600 (Mountain Daylight Time)
+[debug] [2019-03-15T15:40:58.650Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-03-15T15:40:58.661Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-03-15T15:40:58.661Z] > authorizing via signed-in user
+[debug] [2019-03-15T15:40:58.661Z] [iam] checking project crapmap-c5c7f for permissions ["firebase.projects.get"]
+[debug] [2019-03-15T15:40:58.663Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-03-15T15:40:58.663Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-03-15T15:40:59.366Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-15T15:40:59.378Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/crapmap-c5c7f:testIamPermissions  
+
+[debug] [2019-03-15T15:40:59.718Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-15T15:40:59.720Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/crapmap-c5c7f  
+ 
+[debug] [2019-03-15T15:40:59.884Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/williamwilson/projects/crapmap-with-react'...
+[info] 
+[debug] [2019-03-15T15:41:00.790Z] Error: EACCES: permission denied, mkdir '/usr/local/lib/node_modules/firebase-tools/node_modules/@google-cloud/functions-emulator/logs'
+    at Object.mkdirSync (fs.js:775:3)
+    at Object.assertLogsPath (/usr/local/lib/node_modules/firebase-tools/node_modules/@google-cloud/functions-emulator/src/emulator/logs.js:65:10)
+    at new Controller (/usr/local/lib/node_modules/firebase-tools/node_modules/@google-cloud/functions-emulator/src/cli/controller.js:77:32)
+    at FunctionsEmulator.start (/usr/local/lib/node_modules/firebase-tools/lib/functionsEmulator.js:102:23)
+    at Object.start (/usr/local/lib/node_modules/firebase-tools/lib/serve/functions.js:7:33)
+    at /usr/local/lib/node_modules/firebase-tools/lib/serve/index.js:15:23
+    at arrayMap (/usr/local/lib/node_modules/firebase-tools/node_modules/lodash/lodash.js:639:23)
+    at Function.map (/usr/local/lib/node_modules/firebase-tools/node_modules/lodash/lodash.js:9556:14)
+    at _serve (/usr/local/lib/node_modules/firebase-tools/lib/serve/index.js:13:26)
+    at Command.module.exports.Command.description.option.option.option.option.before.action [as _action] (/usr/local/lib/node_modules/firebase-tools/lib/commands/serve.js:55:12)
+[error] 
+[error] Error: An unexpected error has occurred.
