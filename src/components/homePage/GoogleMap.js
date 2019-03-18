@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper } from 'google-maps-react';
 import { isAbsolute } from 'path';
-import store from '../../redux/store'
-import {getPins} from '../../redux/actions/pinActions'
+// import store from '../../redux/store'
+// import {getPins} from '../../redux/actions/pinActions'
 
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import ViewPinModal from './ViewPinModal';
 
 const mapStylesDefaults = {
@@ -13,20 +13,20 @@ const mapStylesDefaults = {
   height: '100%',
 };
 
-const pinsArray = [
-  {
-    lat: 40.021226,
-    lng: -105.218359
-  },
-  {
-    lat: 40.221226,
-    lng: -105.228359
-  },
-  {
-    lat: 40.121226,
-    lng: -105.228359
-  }
-]
+// const pinsArray = [
+//   {
+//     lat: 40.021226,
+//     lng: -105.218359
+//   },
+//   {
+//     lat: 40.221226,
+//     lng: -105.228359
+//   },
+//   {
+//     lat: 40.121226,
+//     lng: -105.228359
+//   }
+// ]
 export class MapContainer extends Component {
 
   constructor(props) {
