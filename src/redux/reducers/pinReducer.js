@@ -1,10 +1,10 @@
- import {NEW_PIN, UPDATE_PIN, GET_PINS, DELETE_PIN} from "../actions/pinActions";
-// import store from "../store";
+ import {NEW_PIN, UPDATE_PIN, GET_PINS, DELETE_PIN, GET_PINS_FULFILLED} from "../actions/pinActions";
 
  const initPin = [];
  
  export default async function pinReducer(state=initPin, action){
-     let payload = action.payload;
+    console.log(action) 
+    let payload = action.payload;
      switch (action.type) {
         case NEW_PIN: {
                 let pinState = state;
@@ -36,23 +36,12 @@
                 .catch(err => console.error('Error:', err))
                 break;
             }
-        case GET_PINS: {
-                let pinArr;
-                let fetchVar = await fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/get', {
-                    method: 'GET',
-                })
-                .then(res => res.json())
-                .then(json => {
-                    pinArr = json.products;
-                    console.log(json.products);
-                    return json.products;
-                })
-                .catch(err => console.error("Error", err))
-
-                console.log(pinArr);
-                state = pinArr;
-                console.log(state);
-                break;
+        case GET_PINS_FULFILLED: {
+                console.log(payload);
+                // this.setState({pins: payload});
+                return {
+                    pins: payload
+                }
             }
         case DELETE_PIN: {
                 fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/delete', {
