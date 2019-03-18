@@ -94,30 +94,6 @@ export default class AddPinModal extends Component {
                     <ExitButton />
                 </div>
                 <LineDivider />
-<<<<<<< HEAD
-                    <form onSubmit={this.handleSubmit}>
-                        <div className='modal-row'>
-                            <CategoryButtons />
-                        </div>
-                        <div className='modal-row'>
-                            <input name='title' placeholder='Pin Title'></input>
-                        </div>
-                        <div className='modal-row'>
-                            <input name='location' placeholder='Location'></input>
-                        </div>
-                        <div>
-                            <BoxButtons />
-                        </div>
-                        <div className='modal-row'>
-                            <input name='tags' placeholder='Tags' className='tag-input'></input> 
-                            <ImageButton sendData={this._uploadImg} />
-                        </div>
-                        <LineDivider />
-                        <div className='modal-row'>
-                            <MakePostButton />
-                        </div>
-                    </form>
-=======
                 <form onSubmit={this.handleSubmit}>
                     <h1 className="category-header">{this.state.category}</h1>
                     <div className='modal-row'>
@@ -140,7 +116,6 @@ export default class AddPinModal extends Component {
                         <MakePostButton />
                     </div>
                 </form>
->>>>>>> cac1e01fa89bcff1cc64b290e5fd7a0654397716
             </div>
         )
     }
