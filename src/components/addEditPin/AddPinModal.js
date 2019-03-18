@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import firebase from './../../firebase.js'
 
 import LineDivider from './LineDivider'
 import CategoryButtons from '../buttons/CategoryButtons'
@@ -10,56 +11,37 @@ import MakePostButton from '../buttons/MakePostButton.js'
 import '../App.css'
 
 import PropTypes from 'prop-types'
+
 export default class AddPinModal extends Component {
-
-    // _uploadImg(img){
-    //     let formattedImg = this._imgResize(img);
-
-    // }
-
-    _uploadImg(img){
-        console.log(img);
-        let canvas = document.createElement('canvas');
-        let max_width = 600;
-        let max_height = 400;
-        let width = 600;
-        let height = 400;
-        let imgElement = document.createElement('img');
-        imgElement.src = img;
-
-        // if (width > height) {
-        //     if(width > max_width){
-        //         height *= max_width / width;
-        //         width = max_width;
-        //     }
-        // }else {
-        //     if(height > max_height){
-        //         width *= max_height / height;
-        //         height = max_height;
-        //     }
-        // } 
-
-        canvas.width = width;
-        canvas.height = height;
-
-        let ctx = canvas.getContext("2d");
-        ctx.drawImage(imgElement, 0, 0, max_width, max_height);
-        console.log(ctx);
-        let dataurl = ctx.canvas.toDataURL('image/jpeg', 0.5);
-        localStorage.setItem('imgUpload', dataurl);
-        console.log(dataurl);
-
-        return false;
-    }
 
     constructor(props) {
         super(props);
         this.state = {
             category: 'Pick A Category',
+            dataURL: '',
+            imgName: null
+
         }
         this.handleClick = this.handleClick.bind(this);
-
     }
+
+    _handleImg(img){
+        this.setState({
+            dataURL: img,
+        })
+    }
+
+     _uploadImg(){
+        if(this.state.dataURL){
+            let storage = firebase.storage();
+            storage.ref(`pinsImages/${new Date().getTime()}`).put(this.state.dataURL).then((snapshot) =>
+            console.log(snapshot));
+        }else{
+            return false
+        }
+        return false
+     }
+
     handleClick(e) {
         switch (e.target.value) {
             case "car":
@@ -107,7 +89,7 @@ export default class AddPinModal extends Component {
                         <BoxButtons />
                     </div>
                     <div className='modal-row'>
-                        <ImageButton sendData={this._uploadImg} />
+                        <ImageButton sendData={this._handleImg.bind(this)} />
                     </div>
                     <LineDivider />
                     <div className='modal-row'>
