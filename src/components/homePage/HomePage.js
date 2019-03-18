@@ -4,7 +4,7 @@ import store from '../../redux/store/'
 
 import GoogleMap from './GoogleMap';
 import Navigation from './Navigation';
-import NewPinButton from '../buttons/NewPinButton'
+import AddPinModal from '../addEditPin/AddPinModal'
 
 import {connect} from 'react-redux';
 
@@ -47,7 +47,7 @@ class HomePage extends Component {
     // console.log(this.state.pins)
     return (
       <div className="App">
-        <NewPinButton />
+        <AddPinModal />
         <Navigation />
         <GoogleMap  />
       </div>

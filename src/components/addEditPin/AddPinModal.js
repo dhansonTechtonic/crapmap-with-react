@@ -6,38 +6,43 @@ import ExitButton from '../buttons/ExitButton.js'
 import BoxButtons from '../buttons/BoxButtons.js'
 import ImageButton from '../buttons/ImageButton.js'
 import MakePostButton from '../buttons/MakePostButton.js'
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField'
+import { withStyles } from '@material-ui/core/styles';
+import NewPinButton from '../buttons/NewPinButton'
+
 
 import '../App.css'
 
 import PropTypes from 'prop-types'
+
 export default class AddPinModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: 'Pick A Category',
+            name: '',
+            location: '',
+            open: false,
+            scroll: 'paper'
         }
-        this.handleClick = this.handleClick.bind(this);
-
     }
-    handleClick(e) {
-        switch (e.target.value) {
-            case "car":
-                this.setState({ category: 'Auto-Parts' }, () => { console.log(this.state.category) });
-                break;
-            case "baseball-ball":
-                this.setState({ category: "Sporting" }, () => { console.log(this.state.category) });
-                break;
-            case "tv":
-                this.setState({ category: "Electronics" }, () => { console.log(this.state.category) });
-                break;
-            case "question-circle":
-                this.setState({ category: "Misc" }, () => { console.log(this.state.category) });
-                break;
-            default:
-                this.setState({ category: "Furniture" }, () => { console.log(this.state.category) });
-        }
 
-    }
+    handleChange = name => event => {
+        this.setState({
+            [name]: event.target.value,
+        });
+    };
+
+    handleClickOpen = scroll => () => {
+        this.setState({ open: true, scroll });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
 
     render() {
 
@@ -46,34 +51,52 @@ export default class AddPinModal extends Component {
         }
 
         return (
-            <div className='vertical-modal'>
-                <div className='header'>
-                    <h2>New Pin</h2>
-                    <ExitButton />
-                </div>
-                <LineDivider />
-                <form onSubmit={this.handleSubmit}>
-                    <h1 className="category-header">{this.state.category}</h1>
-                    <div className='modal-row'>
-                        <CategoryButtons handleClick={this.handleClick} />
-                    </div>
-                    <div className='modal-row'>
-                        <input name='title' placeholder='Pin Title'></input>
-                    </div>
-                    <div className='modal-row'>
-                        <input name='location' placeholder='Location'></input>
-                    </div>
-                    <div>
-                        <BoxButtons />
-                    </div>
-                    <div className='modal-row'>
-                        <ImageButton />
-                    </div>
+            <div>
+                <NewPinButton onClick={this.handleClickOpen('body')}/>
+                <Dialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    scroll={this.state.scroll}
+                    aria-labelledby="scroll-dialog-title"
+                >
+                    <DialogTitle id="scroll-dialog-title">
+                        Add New Pin
+                        <ExitButton />
+                    </DialogTitle>
                     <LineDivider />
-                    <div className='modal-row'>
-                        <MakePostButton />
-                    </div>
-                </form>
+                    <DialogContent>
+                        <form>
+                            <CategoryButtons />
+                            <TextField
+                                id="outlined-name"
+                                label="Title"
+                                className="pinTitle"
+                                value={this.state.name}
+                                onChange={this.handleChange('name')}
+                                margin="normal"
+                                variant="outlined"
+                                placeholder="Name your crap"
+                            />
+                            <TextField
+                                id="outlined-name"
+                                label="Location"
+                                className="pinLocation"
+                                value={this.state.location}
+                                onChange={this.handleChange('location')}
+                                margin="normal"
+                                variant="outlined"
+                                placeholder="Where that crap at?"
+                            />
+                            <BoxButtons />
+                            <ImageButton />
+                            <LineDivider />
+                            <MakePostButton />
+                        </form>
+                    </DialogContent>
+                    <DialogActions>
+                        <MakePostButton onClick={this.handleClose} color="primary"/>
+                    </DialogActions>
+                </Dialog>
             </div>
         )
     }
@@ -81,6 +104,7 @@ export default class AddPinModal extends Component {
 
 AddPinModal.propTypes = {
     onClose: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired,
     show: PropTypes.bool,
     children: PropTypes.node
 };
