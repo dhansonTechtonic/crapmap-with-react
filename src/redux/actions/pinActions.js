@@ -1,5 +1,3 @@
-import store from '../store'
-
 export const NEW_PIN = 'NEW_PIN';
 export const UPDATE_PIN = 'UPDATE_PIN';
 export const GET_PINS = 'GET_PINS';
@@ -8,15 +6,6 @@ export const GET_PINS_FULFILLED = 'GET_PINS_FULFILLED';
 
 
 //userObject needs to contain userID and authentication
-
-// CREATES A NEW PIN
-export function newPin(userObject) {
-    console.log(userObject)
-    return {
-        type: NEW_PIN,
-        payload: userObject
-    }
-};
 
 // UPDATES/EDITS PIN
 export function updatePin(userObject) {
@@ -27,17 +16,8 @@ export function updatePin(userObject) {
     }
 };
 
-// GET PINS BASED ON USER PREFS - LOCATION VS. RADIUS - CATEGORY
-// export function getPins(userObject) {
-//     // console.log(userObject)
-//     return {
-//         type: GET_PINS,
-//         payload: userObject
-//     }
-// };
-
-
 // DELETES PIN BY SENDING OBJECT TO ENDPOINT
+
 export function deletePin(userObject) {
 
     console.log(userObject)
@@ -46,6 +26,8 @@ export function deletePin(userObject) {
         payload: userObject
     }
 }
+
+// GET PINS - (NEEDS USER OBJECT SEARCH QUERY)
 
 export const getPins = () => ({
     type: GET_PINS,
@@ -66,6 +48,30 @@ function fetchPins(input){
             console.log(data);
             return data;
         })
+        .catch(err => console.error("Error", err))
+}
+
+// CREATES NEW PIN
+
+export const newPin = (input) => ({
+    type: NEW_PIN,
+    async payload() {
+        await postPin(input);
+    }
+})
+
+export async function postPin(input) {
+
+    console.log(input);
+
+    fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/new', {
+            method: 'POST',
+            body: JSON.stringify(input),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => console.log(res))
         .catch(err => console.error("Error", err))
 }
 

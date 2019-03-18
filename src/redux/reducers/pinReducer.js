@@ -1,4 +1,4 @@
- import {NEW_PIN, UPDATE_PIN, GET_PINS, DELETE_PIN, GET_PINS_FULFILLED} from "../actions/pinActions";
+ import {NEW_PIN, UPDATE_PIN, DELETE_PIN, GET_PINS_FULFILLED} from "../actions/pinActions";
 
  const initPin = [];
  
