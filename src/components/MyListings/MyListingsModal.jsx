@@ -34,7 +34,7 @@ export default class MyListingsModal extends Component {
             <div className="header">
                 <h2 >My Listings</h2>
             <IconButton onClick={this.props.onClose}>
-              <ExitButton />
+            <ExitButton />
             </IconButton>
             </div>
             <hr/>

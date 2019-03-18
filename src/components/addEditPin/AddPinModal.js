@@ -8,6 +8,8 @@ import ImageButton from '../buttons/ImageButton.js'
 import MakePostButton from '../buttons/MakePostButton.js'
 
 import '../App.css'
+
+import PropTypes from 'prop-types'
 export default class AddPinModal extends Component {
     constructor(props) {
         super(props);
@@ -38,6 +40,11 @@ export default class AddPinModal extends Component {
     }
 
     render() {
+
+        if (!this.props.show) {
+            return null;
+        }
+
         return (
             <div className='vertical-modal'>
                 <div className='header'>
@@ -71,3 +78,9 @@ export default class AddPinModal extends Component {
         )
     }
 }
+
+AddPinModal.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    show: PropTypes.bool,
+    children: PropTypes.node
+};
