@@ -13,22 +13,6 @@ const mapStylesDefaults = {
   height: '100%',
 };
 
-const pinsArray = [
-  {
-    lat: 40.021226,
-    lng: -105.218359
-  },
-  {
-    lat: 40.221226,
-    lng: -105.228359
-  },
-  {
-    lat: 40.121226,
-    lng: -105.228359
-  }
-]
-
-
 export class MapContainer extends Component {
 
   constructor(props) {
@@ -52,11 +36,11 @@ export class MapContainer extends Component {
     // console.log(store.getState())
   }
 
-   onLoad () {
-    //load static map based on user location
-      //get api key and load map. 
-    //load map markers from db w/info
-  }
+
+  // componentDidMount() {
+  //   createMarkers();
+
+  // }
 
   firePlacePin (pinResponse) {
     // console.log("inside firePlacePin", pinResponse)
@@ -71,29 +55,34 @@ export class MapContainer extends Component {
     return locationObj;
   }
 
-loopOverArray() {
-  const pinsArray = [
-    {
-      lat: 40.021226,
-      lng: -105.218359
-    },
-    {
-      lat: 40.221226,
-      lng: -105.228359
-    },
-    {
-      lat: 40.121226,
-      lng: -105.228359
-    }
-  ]
-  const locationObj = {};
+// createMarkers() {
+//   const pinsArray = [
+//     {
+//       lat: 40.021226,
+//       lng: -105.218359
+//     },
+//     {
+//       lat: 40.221226,
+//       lng: -105.228359
+//     },
+//     {
+//       lat: 40.121226,
+//       lng: -105.228359
+//     }
+//   ]
 
-  for(let i = 0; i<pinsArray.length; i++) {
-      locationObj.lat = pinsArray[i].lat
-      locationObj.lng = pinsArray[i].lng
-    };
+//   return navLinks.map((b, i) => {
+//     console.log(b.long)
+//     return new google.maps.Marker({
+//       position: new google.maps.LatLng(b.lat, b.long),
+//       map: this.map
+//     })
+//   })
 
-  }
+
+  // }
+
+
 
  render() {
 
@@ -108,7 +97,7 @@ loopOverArray() {
     zoom={7}  
     centerAroundCurrentLocation={true}
     draggable={true} 
-    >
+>
 
 
 
