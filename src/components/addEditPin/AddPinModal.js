@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import firebase from './../../firebase.js'
 
 import LineDivider from './LineDivider'
 import CategoryButtons from '../buttons/CategoryButtons'
@@ -10,15 +11,37 @@ import MakePostButton from '../buttons/MakePostButton.js'
 import '../App.css'
 
 import PropTypes from 'prop-types'
+
 export default class AddPinModal extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
             category: 'Pick A Category',
+            dataURL: '',
+            imgName: null
+
         }
         this.handleClick = this.handleClick.bind(this);
-
     }
+
+    _handleImg(img){
+        this.setState({
+            dataURL: img,
+        })
+    }
+
+     _uploadImg(){
+        if(this.state.dataURL){
+            let storage = firebase.storage();
+            storage.ref(`pinsImages/${new Date().getTime()}`).put(this.state.dataURL).then((snapshot) =>
+            console.log(snapshot));
+        }else{
+            return false
+        }
+        return false
+     }
+
     handleClick(e) {
         switch (e.target.value) {
             case "car":
@@ -36,7 +59,6 @@ export default class AddPinModal extends Component {
             default:
                 this.setState({ category: "Furniture" }, () => { console.log(this.state.category) });
         }
-
     }
 
     render() {
@@ -67,7 +89,7 @@ export default class AddPinModal extends Component {
                         <BoxButtons />
                     </div>
                     <div className='modal-row'>
-                        <ImageButton />
+                        <ImageButton sendData={this._handleImg.bind(this)} />
                     </div>
                     <LineDivider />
                     <div className='modal-row'>
