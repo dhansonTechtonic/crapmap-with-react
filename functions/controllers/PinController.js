@@ -1,6 +1,8 @@
 const admin = require('firebase-admin');
 const functions = require("firebase-functions");
 admin.initializeApp(functions.config().firebase, "pinsRouter");
+const bodyParser = require("body-parser");
+jsonParser = bodyParser.json();
 
 let db = admin.firestore();
 const express = require('express');
@@ -18,15 +20,16 @@ router.get("/get", (request, response) =>{
     }).catch (err => err)
 });
 
-router.post('/new', (request,response) =>{
+router.post('/new',jsonParser, (request,response) =>{
+    console.log(request.body);
     let pinObject ={
         category: request.body.category,
-        img:request.img,
+        img:request.body.img,
         description: request.body.description,
         location: {
-            lat: request.body.location.lat,
-            lng: request.body.location.lng,
-            zip: request.body.location.zip
+            lat: request.body.lat,
+            lng: request.body.lng,
+            zip: request.body.zip
         },
         size: request.body.size,
         tags: request.body.tags,
@@ -35,7 +38,7 @@ router.post('/new', (request,response) =>{
     };
     let pinsRef = db.collection('pins');
     pinsRef.add(pinObject)
-    .then(() => console.log('success'))
+    .then(() => response.send('sucdess'))
     .catch(()=> console.log('error'))
     return false
     });
