@@ -109,6 +109,20 @@ hr{
   -webkit-transition-duration: 0.4s;
 }
 
+.nav-car-button, 
+.nav-couch-button,
+.nav-random-button, 
+.nav-sports-button, 
+.nav-tv-button{
+  color: black !important;
+  flex: 1;
+  font-size: 36px !important;
+  margin: 15px;
+  opacity: 1 !important;
+  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s;
+}
+
 .delete-account-button{
   background-color: transparent;
   border: 2px solid white;
@@ -263,16 +277,16 @@ hr{
   color: black;
 }
 
-.car-button:hover
+.car-button:hover, .nav-car-button:hover
 {
   border: none !important;
-  color: #80334f;
+  color: #80334f !important;
 }
 
-.couch-button:hover
+.couch-button:hover, .nav-couch-button:hover
 {
   border: none !important;
-  color: #ff4700;
+  color: #ff4700 !important;
 }
 
 .delete-account-button:hover {
@@ -298,28 +312,28 @@ hr{
   color:black !important;
 }
 
-.random-button:hover
+.random-button:hover, .nav-random-button:hover
 {
   border: none !important;
-  color: #00ffde;
+  color: #00ffde !important;
 }
 
-.sports-button:hover
+.sports-button:hover, .nav-sports-button:hover
 {
   border: none !important;
-  color: #5200e8;
+  color: #5200e8 !important;
 }
 
 .trash-button:hover
 {
   border: none !important;
-  color: red;
+  color: red !important;
 }
 
-.tv-button:hover
+.tv-button:hover, .nav-tv-button:hover
 {
   border: none !important;
-  color: #467290;
+  color: #467290 !important;
 }
 
 .view-pin-button:hover{
@@ -497,6 +511,7 @@ hr{
 
 .nav-categories {
   margin: 0px auto;
+  margin-top: 9em;
 }
 
 .nav-links {

@@ -5,8 +5,7 @@ import SettingsModal from '../settingsModal/SettingsModal'
 import MyListingsModal from '../MyListings/MyListingsModal'
 import HamburgerMenuButton from '../buttons/HamburgerMenuButton'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-
-
+import {IconButton} from '@material-ui/core'
 export default class Navigation extends Component {
 
   constructor(props) {
@@ -14,8 +13,13 @@ export default class Navigation extends Component {
 
     this.state = {
       settingsIsOpen: false,
-      myListingsIsOpen: false
+      myListingsIsOpen: false,
+      category: 'All',
+      color: '#000'
     };
+
+    this.handleClick = this.handleClick.bind(this);
+    this.handleClick = this.handleColor.bind(this);
   }
 
   toggleSettings = () => {
@@ -32,6 +36,47 @@ export default class Navigation extends Component {
     })
   }
 
+  handleClick = (e) => {
+    switch (e.target.value) {
+      case "car":
+        this.setState({ category: 'Auto-Parts', color: '#80334f' }, () => { console.log(this.state.category) });
+        break;
+      case "baseball-ball":
+        this.setState({ category: "Sporting", color: '#5200e8' }, () => { console.log(this.state.category) });
+        break;
+      case "tv":
+        this.setState({ category: "Electronics", color: '#467290' }, () => { console.log(this.state.category) });
+        break;
+      case "question-circle":
+        this.setState({ category: "Misc", color: '#00ffde' }, () => { console.log(this.state.category) });
+        break;
+      default:
+        this.setState({ category: "Furniture", color: '#ff4700' }, () => { console.log(this.state.category) });
+    }
+  }
+
+  handleColor(e) {
+    switch (e.target.value) {
+      case "car":
+        e.target.style.color = this.state.color
+        break;
+      case "baseball-ball":
+        e.target.style.color = this.state.color
+        break;
+      case "tv":
+        e.target.style.color = this.state.color
+        break;
+      case "question-circle":
+        e.target.style.color = this.state.color
+        break;
+      case "couch":
+        e.target.style.color = this.state.color
+        break
+      default:
+        e.target.style.color = '#000'
+    }
+  }
+
   // toggleModal = (event) => {
   //   var targetID = event.target.id
 
@@ -42,17 +87,31 @@ export default class Navigation extends Component {
 
   render() {
     
-    
     return (
     <div className='home-page-body' >
       <img alt='crapmap logo' src={logo} className="home-page-logo"/>
       <nav className="home-page-navbar">
         <div className='nav-categories'>
-          <FontAwesomeIcon className="couch-button" icon="couch" />
-          <FontAwesomeIcon className="car-button" icon="car" />
-          <FontAwesomeIcon className="sports-button" icon="baseball-ball" />
-          <FontAwesomeIcon className="tv-button" icon="tv" />
-          <FontAwesomeIcon className="random-button" icon="question-circle" />
+            <IconButton className="nav-couch-button" onClick={this.handleClick} value="couch">
+              <FontAwesomeIcon icon="couch" />
+            </IconButton>
+
+            <IconButton className="nav-car-button" value="car" onClick={this.handleClick}>
+              <FontAwesomeIcon icon="car" />
+            </IconButton>
+
+            <IconButton className="nav-sports-button" value="baseball-ball" onClick={this.handleClick}>
+              <FontAwesomeIcon icon="baseball-ball" />
+            </IconButton>
+
+            <IconButton className="nav-tv-button" value="tv" onClick={this.handleClick}>
+              <FontAwesomeIcon icon="tv" />
+            </IconButton>
+
+
+            <IconButton className="nav-random-button" value="question-circle" onClick={this.handleClick}>
+              <FontAwesomeIcon icon="question-circle" />
+            </IconButton>
         </div>
         <ul className="main-nav-list" id="js-menu">
             <li className="nav-links" onClick={this.toggleListings}>MY PINS</li>
