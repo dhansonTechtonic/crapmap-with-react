@@ -20,18 +20,18 @@ router.get("/get", (request, response) =>{
 
 router.post('/new', (request,response) =>{
     let pinObject ={
-        category: request.category,
+        category: request.body.category,
         img:request.img,
-        description: request.description,
+        description: request.body.description,
         location: {
-            lat: request.location.lat,
-            lng: request.location.lng,
-            zip: request.location.zip
+            lat: request.body.location.lat,
+            lng: request.body.location.lng,
+            zip: request.body.location.zip
         },
-        size: request.size,
-        tags: request.tags,
-        title: request.title,
-        userID: request.userID
+        size: request.body.size,
+        tags: request.body.tags,
+        title: request.body.title,
+        userID: request.body.userID
     };
     let pinsRef = db.collection('pins');
     pinsRef.add(pinObject)
@@ -42,18 +42,18 @@ router.post('/new', (request,response) =>{
 
 router.post('/update', (request,response) =>{
     let pinObject ={
-        category: request.category,
+        category: request.body.category,
         img:request.img,
-        description: request.description,
+        description: request.body.description,
         location: {
-            lat: request.location.lat,
-            lng: request.location.lng,
-            zip: request.location.zip
+            lat: request.body.location.lat,
+            lng: request.body.location.lng,
+            zip: request.body.location.zip
         },
-        size: request.size,
-        tags: request.tags,
-        title: request.title,
-        userID: request.userID
+        size: request.body.size,
+        tags: request.body.tags,
+        title: request.body.title,
+        userID: request.body.userID
     };
     let pinsRef = db.collection('pins');
     pinsRef.set(pinObject, { merge: true })
