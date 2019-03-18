@@ -3,7 +3,7 @@
 
  const initPin = [];
  
- export default function pinReducer(state=initPin, action){
+ export default async function pinReducer(state=initPin, action){
      let payload = action.payload;
      switch (action.type) {
         case NEW_PIN: {
@@ -37,19 +37,21 @@
                 break;
             }
         case GET_PINS: {
-                let pinArr = [];
-                fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/get', {
+                let pinArr;
+                let fetchVar = await fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/get', {
                     method: 'GET',
-                    body: payload
                 })
-                .then(res => {
-                    pinArr += res.json()
-                    Object.assign({}, state, {
-                        pinArr
-                    });
+                .then(res => res.json())
+                .then(json => {
+                    pinArr = json.products;
+                    console.log(json.products);
+                    return json.products;
                 })
                 .catch(err => console.error("Error", err))
-                
+
+                console.log(pinArr);
+                state = pinArr;
+                console.log(state);
                 break;
             }
         case DELETE_PIN: {

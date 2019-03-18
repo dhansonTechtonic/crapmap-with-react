@@ -3,6 +3,8 @@ import logo from '../assets/crapmap-logo-horizontal-gray.png'
 import {NavLink} from 'react-router-dom'
 import SettingsModal from '../settingsModal/SettingsModal'
 import MyListingsModal from '../MyListings/MyListingsModal'
+import HamburgerMenuButton from '../buttons/HamburgerMenuButton'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 
 
 export default class Navigation extends Component {
@@ -44,16 +46,19 @@ export default class Navigation extends Component {
     return (
     <div className='home-page-body' >
       <img alt='crapmap logo' src={logo} className="home-page-logo"/>
-
       <nav className="home-page-navbar">
+        <div className='nav-categories'>
+          <FontAwesomeIcon className="couch-button" icon="couch" />
+          <FontAwesomeIcon className="car-button" icon="car" />
+          <FontAwesomeIcon className="sports-button" icon="baseball-ball" />
+          <FontAwesomeIcon className="tv-button" icon="tv" />
+          <FontAwesomeIcon className="random-button" icon="question-circle" />
+        </div>
         <ul className="main-nav-list" id="js-menu">
-
-            <li><NavLink exact to='/home' className="nav-links">HOME</NavLink></li>
             <li className="nav-links" onClick={this.toggleListings}>MY PINS</li>
-            <li><NavLink exact to='/' className="nav-links">SEARCH</NavLink></li>
             <li className="nav-links" id='settingsIsOpen' onClick={this.toggleSettings}>SETTINGS</li>
             <li><NavLink exact to='/url' className="nav-links">LOGOUT</NavLink></li>
-            {/* <li><a href="#" class="hamburger-menu"><HamburgerMenuButton /></a></li> */}
+            <li><a href="#" class="hamburger-menu"><HamburgerMenuButton /></a></li>
         </ul>
       </nav>
 
