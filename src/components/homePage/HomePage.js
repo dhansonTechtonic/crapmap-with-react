@@ -6,6 +6,8 @@ import GoogleMap from './GoogleMap';
 import Navigation from './Navigation';
 
 import {connect} from 'react-redux';
+
+import {getPins} from '../../redux/actions/pinActions'
 class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -16,10 +18,18 @@ class HomePage extends Component {
   }
 
   componentDidMount(){
-    setTimeout(console.log(store.getState()),10000)
+    store.dispatch(getPins());
+  }
+
+  componentDidUpdate(prevProps){
+    if(this.props.pins !== prevProps.pins) {
+      this.props.pins.then((val) => {this.setState({pins: val.pins})})
+      
+    }
   }
 
   render() {
+    console.log(this.state.pins)
     return (
       <div className="App">
         <Navigation /> 
@@ -28,8 +38,6 @@ class HomePage extends Component {
     );
   }
 }
-
-setTimeout(function () {console.log(store.getState())}, 5000);
 
 function mapStateToProps(reduxState){
   return {
