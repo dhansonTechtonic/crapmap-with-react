@@ -8,7 +8,7 @@ import NewPinButton from '../buttons/NewPinButton'
 
 import {connect} from 'react-redux';
 
-import {getPins} from '../../redux/actions/pinActions'
+import {getPins, newPin} from '../../redux/actions/pinActions'
 class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +19,20 @@ class HomePage extends Component {
   }
 
   componentDidMount(){
+
+    // var testObject = {
+    //     "category": "couch",
+    //     "img": "image",
+    //     "description": "ok testing now",
+    //     "lat": "test",
+    //     "lng": "testing",
+    //     "zip": "lol",
+    //     "size": "2",
+    //     "tags": ['joket', 'slendermane'],
+    //     "title": "title of testing pin",
+    //     "userID": "139508829c3"
+    // }
+
     store.dispatch(getPins());
   }
 
