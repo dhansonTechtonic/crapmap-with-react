@@ -29,35 +29,29 @@ export class MapContainer extends Component {
     let response = store.getState().pins
     response.then(
       (response) => {
-     let pinsArray = response.pins
-    let viewPinsArray = [];
-    for (let i =0; i<=pinsArray.length;i++) {
+      let pinsArray = response.pins
+      let viewPinsArray = [];
+      for (let i =0; i<=pinsArray.length;i++) {
     
-    let locationObj ={
-      lat: pinsArray[i]._fieldsProto.location.mapValue.fields.lat.doubleValue, 
-      lng: pinsArray[i]._fieldsProto.location.mapValue.fields.lng.doubleValue
-    }
+      let locationObj = {
+        lat: pinsArray[i]._fieldsProto.location.mapValue.fields.lat.doubleValue, 
+        lng: pinsArray[i]._fieldsProto.location.mapValue.fields.lng.doubleValue
+      }
     // console.log(locationObj);
-    viewPinsArray.push(locationObj)
+    data.push(locationObj)
     // this.fireUpdatePinsLocation(viewPinsArray);
   }
   console.log(viewPinsArray, "array")
   console.log(viewPinsArray.length)
-
   return viewPinsArray
 
     }
     )
   }
 
-  // fireUpdatePinsLocation(data){
-  //   let ltlng = maps.LatLng(data)
-  //   console.log(ltlng)
-  // }
-
 
  render() {
-
+const data = data;
     return (
         <div className='map-container'>
 
@@ -68,27 +62,27 @@ export class MapContainer extends Component {
     centerAroundCurrentLocation={true}
     draggable={true} 
 >
+{data.map(pin => (
+  <Marker ref={this.onMarkerMounted}
+    key={pin.id}
+    position={{ lat: pin.lat, lng: pin.lng }}
+  />
+))}
 
-
-
- {/* <Marker onClick={this.toggleViewPinModal}
-      position={this.props.markerLocation}  
-     
-     />  */}
-
- {/* <Marker onClick={this.toggleViewPinModal}
-    position={} /> */}
 </Map>
 
 <div className="view-pin-container">
-<ViewPinModal  show={this.state.viewPinModalIsOpen} onClose={this.state.viewPinModalIsOpen} onClick={this.toggleViewPinModal}/>
+  <ViewPinModal  
+    show={this.state.viewPinModalIsOpen} 
+    onClose={this.state.viewPinModalIsOpen} 
+    onClick={this.toggleViewPinModal}/>
 </div>
 
 </div>
 
     );
   }
-}
+
 
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyDGqxNDh10YIbriH1cJpPt9cn8TJdCwbFM'
