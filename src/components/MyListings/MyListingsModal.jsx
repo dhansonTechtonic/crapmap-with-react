@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import '../App.css'
 import PropTypes from 'prop-types'
 import MyListingsPost from './MyListingsPost'
-import { IconButton } from '@material-ui/core';
 export default class MyListingsModal extends Component {
 
   async _getListings(){

@@ -119,7 +119,7 @@ class AddPinModal extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <div id="ap-modal" className={classes.root}>
+            <div className={classes.root}>
                 <IconButton className="new-pin-button" onClick={this.handleClickOpen('paper')}>
                     <FontAwesomeIcon icon="plus-circle" />
                 </IconButton>
