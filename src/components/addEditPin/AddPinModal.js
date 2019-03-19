@@ -20,10 +20,10 @@ export default class AddPinModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: 'Pick A Category',
+            category: '',
             dataURL: '',
+            fireBaseStorageFullUrl:'',
             imgName: null
-
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -34,15 +34,17 @@ export default class AddPinModal extends Component {
         })
     }
 
-     _uploadImg(){
+     async _uploadImg(){
         if(this.state.dataURL){
-            let storage = firebase.storage();
-            storage.ref(`pinsImages/${new Date().getTime()}`).put(this.state.dataURL).then((snapshot) =>
-            console.log(snapshot));
-        }else{
-            return false
+            return new Promise((resolve, reject) => {
+                let storage = firebase.storage();
+                let firebaseImageUrl = storage.ref(`pinsImages/${new Date().getTime()}`).put(this.state.dataURL).then((snapshot) => {
+                    this.setState({fireBaseStorageFullUrl: snapshot.metadata.fullPath });
+                    return(snapshot.metadata.fullPath);
+                })
+                firebaseImageUrl ? resolve(firebaseImageUrl) : reject (false)
+            })
         }
-        return false
      }
 
     handleClick(e) {
@@ -76,25 +78,26 @@ export default class AddPinModal extends Component {
         })
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-
-        let pin = {
-            "title": this.state.title,
-            // "description": this.state.description
-            "lat": this.state.location,
-            "lng": this.state.location,
-            "zip": this.state.location,
-            "category": this.state.category,
-            "img": this.state.dataURL,
-            "size": '2',
-            "userID": 'testID'
-        }
-
-        store.dispatch(newPin(pin));
-
+        this._uploadImg().then( () => {
+                let pin = {
+                    "title": this.state.title,
+                    // "description": this.state.description
+                    "lat": this.state.location,
+                    "lng": this.state.location,
+                    "zip": this.state.location,
+                    "category": this.state.category,
+                    "img": this.state.fireBaseStorageFullUrl,
+                    "size": '2',
+                    "userID": 'testID'
+                }
+                console.log(pin);
+            }
+        ).catch( err => console.log('there has been an error' + err));
+        //store.dispatch(newPin(pin));
     }
-
+   
     render() {
 
         if (!this.props.show) {
