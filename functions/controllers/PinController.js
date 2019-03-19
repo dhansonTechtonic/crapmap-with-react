@@ -25,14 +25,14 @@ router.post('/new',jsonParser, (request,response) =>{
     let pinObject ={
         category: request.body.category,
         img:request.body.img,
-        description: request.body.description,
+        //description: request.body.description,
         location: {
             lat: request.body.lat,
             lng: request.body.lng,
             zip: request.body.zip
         },
         size: request.body.size,
-        tags: request.body.tags,
+        //tags: request.body.tags,
         title: request.body.title,
         userID: request.body.userID
     };
