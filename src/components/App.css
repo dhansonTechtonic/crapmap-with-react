@@ -749,6 +749,7 @@ li hr {
   margin-left: auto;
   margin-right: auto;
   width: 80%;
+  overflow: scroll;
 }
 
 .item-list-details {
@@ -787,6 +788,26 @@ li.item-picture {
   height: 98%;
   width: 100px;
 }
+
+.pin-card {
+  border: 1px white solid;
+  width: 99%;
+  margin-bottom: 20px;
+}
+
+.my-pin-title {
+  margin-left: 80px;
+  font-weight: bold;
+  margin-bottom: 5px;
+
+}
+
+.my-pin-category {
+  margin-left: 80px;
+  margin-top: 0px;
+  font-size: 13px;
+}
+
 
 /*Settings Styles---------------------------------------------------------------------*/
 
