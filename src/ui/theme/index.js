@@ -122,7 +122,7 @@ const theme =
             "fontWeight": 500
         },
         "caption": {
-            "color": "rgba(0, 0, 0, 0.54)",
+            "color": "rgba(255, 255, 255, 0.87)",
             "fontFamily": "\"Nunito\", sans-serif",
             "lineHeight": "1.375em",
             "fontSize": "0.75rem",
@@ -131,7 +131,7 @@ const theme =
         "fontSize": 14,
         "fontWeightMedium": 500,
         "title": {
-            "color": "rgba(F, F, F, 0.87)",
+            "color": "rgba(255, 255, 255, 0.87)",
             "fontFamily": "\"Nunito\", sans-serif",
             "lineHeight": "1.16667em",
             "fontSize": "1.6rem",
@@ -145,7 +145,7 @@ const theme =
             "fontWeight": 400
         },
         "body1": {
-            "color": "rgba(0, 0, 0, 0.87)",
+            "color": "rgba(255, 255, 255, 0.87)",
             "fontFamily": "\"Nunito\", sans-serif",
             "lineHeight": "1.46429em",
             "fontSize": "0.875rem",

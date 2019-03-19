@@ -16,6 +16,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core';
 import store from '../../redux/store/index';
 import { newPin } from '../../redux/actions/pinActions';
+import '../App.css'
 
 const styles = theme => ({
     cssLabel: {
@@ -120,8 +121,8 @@ class EditPinModal extends Component {
         const { classes } = this.props;
         return (
             <div id="ap-modal" className={classes.root}>
-                <IconButton className="new-pin-button" onClick={this.handleClickOpen('paper')}>
-                    <FontAwesomeIcon icon="plus-circle" />
+                <IconButton style={{fontSize: 20, marginLeft: 10, marginBottom: 8}}onClick={this.handleClickOpen('paper')}>
+                    <FontAwesomeIcon icon="pencil-alt" />
                 </IconButton>
                 <Dialog
                     open={this.state.open}
@@ -171,7 +172,7 @@ class EditPinModal extends Component {
                         </form>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="error">Delete</Button>
+                        <Button onClick={this.handleClose} color="error" style={{marginRight:250}}>Delete</Button>
                         <Button onClick={this.handleClose} onClick={this.handleSubmit} color="primary">POST</Button>
                         <Button onClick={this.handleClose} color="error">CANCEL</Button>
                     </DialogActions>

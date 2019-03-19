@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import MyListingsPost from './MyListingsPost'
+import MyCrapPost from './MyCrapPost'
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -60,7 +60,7 @@ class MyCrapModal extends Component {
             </DialogTitle>
             <LineDivider />
             <DialogContent>
-              <MyListingsPost />
+              <MyCrapPost />
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="error">CLOSE</Button>
