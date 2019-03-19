@@ -19,16 +19,6 @@ const INITIAL_STATE = {
   passwordTwo: '',
   error: null,
 };
-
-const styles = theme => ({
-  cssLabel: {
-    '&$cssFocused': {
-      color: '#00FFDE',
-    },
-  },
-  cssFocused: {}
-})
-
 class SignUpForm extends Component {
   constructor(props) {
     super(props);
@@ -85,7 +75,6 @@ class SignUpForm extends Component {
   };
 
   render() {
-    const { classes } = this.props;
     const {
       username,
       email,
@@ -101,7 +90,7 @@ class SignUpForm extends Component {
       username === '';
 
     return (
-      <div className={classes.root}>
+      <div>
         <Fab color="error" style={{ width: 210, borderRadius: 4, margin: 10, opacity: 1 }} onClick={this.handleClickOpen('paper')}>Sign-Up/Login with Email</Fab>
         <Dialog
           open={this.state.open}
@@ -116,60 +105,44 @@ class SignUpForm extends Component {
           <DialogContent>
             <form onSubmit={this.onSubmit}>
               <TextField
-                classes={{
-                  root: classes.cssLabel,
-                  focused: classes.cssFocused,
-                }}
                 id="outlined-name"
                 label="Username"
                 margin="normal"
                 variant="outlined"
                 value={username}
                 onChange={this.onChange}
-                type="text"
                 placeholder="Username"
+                name="username"
               />
               <TextField
-                classes={{
-                  root: classes.cssLabel,
-                  focused: classes.cssFocused,
-                }}
                 id="outlined-name"
                 label="Email"
                 margin="normal"
                 variant="outlined"
                 value={email}
                 onChange={this.onChange}
-                type="text"
                 placeholder="Email Address"
+                name="email"
               />
               <TextField
-                classes={{
-                  root: classes.cssLabel,
-                  focused: classes.cssFocused,
-                }}
                 id="outlined-name"
                 label="Password"
                 margin="normal"
                 variant="outlined"
                 value={passwordOne}
                 onChange={this.onChange}
-                type="text"
                 placeholder="Enter Password"
+                name="passwordOne"
               />
               <TextField
-                classes={{
-                  root: classes.cssLabel,
-                  focused: classes.cssFocused,
-                }}
                 id="outlined-name"
                 label="Confirm Password"
                 margin="normal"
                 variant="outlined"
                 value={passwordTwo}
                 onChange={this.onChange}
-                type="text"
                 placeholder="Confirm Password"
+                name="passwordTwo"
               />
             </form>
           </DialogContent>
@@ -198,4 +171,4 @@ SignUpForm.propTypes = {
 
 // export default SignUpPage;
 
-export default withStyles(styles)(SignUpForm);
+export default SignUpForm;

@@ -17,15 +17,6 @@ import { withStyles } from '@material-ui/core';
 import store from '../../redux/store/index';
 import { newPin } from '../../redux/actions/pinActions';
 import '../App.css'
-
-const styles = theme => ({
-    cssLabel: {
-        '&$cssFocused': {
-            color: '#00FFDE',
-        },
-    },
-    cssFocused: {}
-})
 class EditPinModal extends Component {
     constructor(props) {
         super(props);
@@ -118,9 +109,8 @@ class EditPinModal extends Component {
     }
 
     render() {
-        const { classes } = this.props;
         return (
-            <div id="ap-modal" className={classes.root}>
+            <div>
                 <IconButton style={{fontSize: 20, marginLeft: 10, marginBottom: 8}}onClick={this.handleClickOpen('paper')}>
                     <FontAwesomeIcon icon="pencil-alt" />
                 </IconButton>
@@ -139,10 +129,6 @@ class EditPinModal extends Component {
                         <form>
                             <CategoryButtons handleClick={this.handleClick} />
                             <TextField
-                                classes={{
-                                    root: classes.cssLabel,
-                                    focused: classes.cssFocused,
-                                }}
                                 id="outlined-name"
                                 label="Title"
                                 className="pinTitle"
@@ -153,10 +139,6 @@ class EditPinModal extends Component {
                                 placeholder="Name your crap"
                             />
                             <TextField
-                                classes={{
-                                    root: classes.cssLabel,
-                                    focused: classes.cssFocused,
-                                }}
                                 id="outlined-name"
                                 label="Location"
                                 className="pinLocation"
@@ -189,4 +171,4 @@ EditPinModal.propTypes = {
     children: PropTypes.node
 };
 
-export default withStyles(styles)(EditPinModal)
+export default EditPinModal

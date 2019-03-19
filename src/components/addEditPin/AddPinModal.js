@@ -16,15 +16,6 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core';
 import store from '../../redux/store/index';
 import { newPin } from '../../redux/actions/pinActions';
-
-const styles = theme => ({
-    cssLabel: {
-        '&$cssFocused': {
-            color: '#00FFDE',
-        },
-    },
-    cssFocused: {}
-})
 class AddPinModal extends Component {
     constructor(props) {
         super(props);
@@ -117,9 +108,8 @@ class AddPinModal extends Component {
     }
 
     render() {
-        const { classes } = this.props;
         return (
-            <div className={classes.root}>
+            <div>
                 <IconButton className="new-pin-button" onClick={this.handleClickOpen('paper')}>
                     <FontAwesomeIcon icon="plus-circle" />
                 </IconButton>
@@ -138,10 +128,6 @@ class AddPinModal extends Component {
                         <form>
                             <CategoryButtons handleClick={this.handleClick}/>
                             <TextField
-                                classes={{
-                                    root: classes.cssLabel,
-                                    focused: classes.cssFocused,
-                                }}
                                 id="outlined-name"
                                 label="Title"
                                 className="pinTitle"
@@ -150,13 +136,18 @@ class AddPinModal extends Component {
                                 margin="normal"
                                 variant="outlined"
                                 placeholder="Name your crap"
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton>
+                                                
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
                             />
                             <TextField
-                                classes={{
-                                    root: classes.cssLabel,
-                                    focused: classes.cssFocused,
-                                }}
-                                id="outlined-name"
+                                id="outlined-adornment-password"
                                 label="Location"
                                 className="pinLocation"
                                 value={this.state.location}
@@ -187,4 +178,4 @@ AddPinModal.propTypes = {
     children: PropTypes.node
 };
 
-export default withStyles(styles)(AddPinModal)
+export default AddPinModal
