@@ -17,7 +17,6 @@
             }
         case GET_PINS_FULFILLED: {
                 console.log(payload);
-                // this.setState({pins: payload});
                 return {
                     pins: payload
                 }
