@@ -8,6 +8,7 @@ const express = require('express');
 
 const PinController = require('./controllers/PinController');
 const UserController = require('./controllers/UserController');
+const MapController = require('./controllers/MapController')
 const app = express();
 
 // Express middleware that validates Firebase ID Tokens passed in the Authorization HTTP header.
@@ -60,7 +61,8 @@ app.use(cors);
 //app.use(cookieParser);
 // app.use(validateFirebaseIdToken);
 app.use('/pins', PinController);
-app.use('/user', UserController)
+app.use('/user', UserController);
+app.use('/map', MapController);
 
  const api = functions.https.onRequest((request, response) => {
     if (!request.path) {

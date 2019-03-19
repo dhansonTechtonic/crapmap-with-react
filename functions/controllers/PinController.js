@@ -65,7 +65,7 @@ router.post('/update', (request,response) =>{
     return false
 });
 
-    router.post('/delete/:pinID', (request,response) =>{
+    router.delete('/delete/:pinID', (request,response) =>{
         let pinID = request.params.pinID;
         let pinsRef = db.collection('pins').doc(pinID);
         pinsRef.delete().then(() => response.send('success')).catch(()=> console.log('error'));
