@@ -19,7 +19,7 @@ const styles = {
   },
 };
 
-function MyCrapPost(props){
+function MyListingsPost(props){
   const { classes } = props;
   return (
     <Card className={classes.card}>
@@ -45,11 +45,11 @@ function MyCrapPost(props){
   )
 }
 
-MyCrapPost.propTypes = {
+MyListingsPost.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MyCrapPost);
+export default withStyles(styles)(MyListingsPost);
 
 
 // need gradient divider 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../assets/crapmap-logo-horizontal-gray.png'
 import {NavLink} from 'react-router-dom'
-import MyCrapModal from '../MyListings/MyCrapModal'
+import MyListingsModal from '../MyListings/MyListingsModal'
 import SideMenu from './SideMenu'
 export default class Navigation extends Component {
 
@@ -52,7 +52,7 @@ export default class Navigation extends Component {
       <img alt='crapmap logo' src={logo} className="home-page-logo"/>
       <nav className="home-page-navbar">
         <ul className="main-nav-list" id="js-menu">
-            <MyCrapModal />
+            <MyListingsModal />
             <li><NavLink exact to='/url' className="nav-links">LOG OUT</NavLink></li>
             <li onClick={this.toggleHamburger} class="hamburger-menu"><SideMenu /></li>
         </ul>

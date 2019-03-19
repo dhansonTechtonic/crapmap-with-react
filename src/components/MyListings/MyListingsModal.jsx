@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import MyCrapPost from './MyCrapPost'
+import MyListingsPost from './MyListingsPost'
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from '@material-ui/core/Button'
 import ListItemText from '@material-ui/core/ListItemText'
 
-class MyCrapModal extends Component {
+class MyListingsModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -60,7 +60,7 @@ class MyCrapModal extends Component {
             </DialogTitle>
             <LineDivider />
             <DialogContent>
-              <MyCrapPost />
+              <MyListingsPost />
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="error">CLOSE</Button>
@@ -71,10 +71,10 @@ class MyCrapModal extends Component {
   }
 }
 
-MyCrapModal.propTypes = {
+MyListingsModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   show: PropTypes.bool,
   children: PropTypes.node,
 }
 
-export default MyCrapModal
+export default MyListingsModal
