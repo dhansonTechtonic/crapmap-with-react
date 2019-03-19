@@ -8,6 +8,9 @@ import BoxButtons from '../buttons/BoxButtons.js'
 import ImageButton from '../buttons/ImageButton.js'
 import MakePostButton from '../buttons/MakePostButton.js'
 
+import store from '../../redux/store/index';
+import {newPin} from '../../redux/actions/pinActions';
+
 import '../App.css'
 
 import PropTypes from 'prop-types'
@@ -61,6 +64,37 @@ export default class AddPinModal extends Component {
         }
     }
 
+    handleTitleChange = (e) => {
+        this.setState({
+            title: e.target.value
+        })
+    }
+    
+    handleLocationChange = (e) =>{
+        this.setState({
+            location: e.target.value
+        })
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+
+        let pin = {
+            "title": this.state.title,
+            // "description": this.state.description
+            "lat": this.state.location,
+            "lng": this.state.location,
+            "zip": this.state.location,
+            "category": this.state.category,
+            "img": this.state.dataURL,
+            "size": '2',
+            "userID": 'testID'
+        }
+
+        store.dispatch(newPin(pin));
+
+    }
+
     render() {
 
         if (!this.props.show) {
@@ -80,10 +114,10 @@ export default class AddPinModal extends Component {
                         <CategoryButtons handleClick={this.handleClick} />
                     </div>
                     <div className='modal-row'>
-                        <input name='title' placeholder='Pin Title'></input>
+                        <input name='title' placeholder='Pin Title' onChange={this.handleTitleChange}></input>
                     </div>
                     <div className='modal-row'>
-                        <input name='location' placeholder='Location'></input>
+                        <input name='location' placeholder='Location' onChange={this.handleLocationChange}></input>
                     </div>
                     <div>
                         <BoxButtons />
@@ -93,7 +127,7 @@ export default class AddPinModal extends Component {
                     </div>
                     <LineDivider />
                     <div className='modal-row'>
-                        <MakePostButton />
+                        <button onClick={this.handleSubmit}>submit</button>
                     </div>
                 </form>
             </div>
