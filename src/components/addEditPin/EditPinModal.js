@@ -13,10 +13,10 @@ import ImageButton from '../buttons/ImageButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from '@material-ui/core/Button'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core';
 import store from '../../redux/store/index';
 import { newPin } from '../../redux/actions/pinActions';
-import '../App.css'
+import InputAdornment from '@material-ui/core/InputAdornment'
+import Arrow from '../assets/crapmap-locator.png'
 class EditPinModal extends Component {
     constructor(props) {
         super(props);
@@ -147,6 +147,15 @@ class EditPinModal extends Component {
                                 margin="normal"
                                 variant="outlined"
                                 placeholder="Where that crap at?"
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton >
+                                                <img class="marker-style" src={Arrow} style={{ width: 30, height: 30, marginRight: -10 }}></img>
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
                             />
                             <BoxButtons />
                             <ImageButton sendData={this._handleImg.bind(this)} />
@@ -154,7 +163,7 @@ class EditPinModal extends Component {
                         </form>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="error" style={{marginRight:250}}>Delete</Button>
+                        <Button onClick={this.handleClose} color="error" style={{marginRight:300}}>Delete</Button>
                         <Button onClick={this.handleClose} onClick={this.handleSubmit} color="primary">POST</Button>
                         <Button onClick={this.handleClose} color="error">CANCEL</Button>
                     </DialogActions>

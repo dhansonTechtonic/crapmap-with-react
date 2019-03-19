@@ -5,6 +5,7 @@ import store from '../../redux/store/'
 import GoogleMap from './GoogleMap';
 import Navigation from './Navigation';
 import AddPinModal from '../addEditPin/AddPinModal'
+import SortButtons from '../buttons/SortButtons'
 
 import {connect} from 'react-redux';
 
@@ -48,6 +49,7 @@ class HomePage extends Component {
     return (
       <div className="App">
         <AddPinModal />
+        <SortButtons />
         <Navigation />
         <GoogleMap  />
       </div>

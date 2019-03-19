@@ -13,9 +13,10 @@ import ImageButton from '../buttons/ImageButton'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Button from '@material-ui/core/Button'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core';
 import store from '../../redux/store/index';
 import { newPin } from '../../redux/actions/pinActions';
+import InputAdornment from '@material-ui/core/InputAdornment'
+import Arrow from '../assets/crapmap-locator.png'
 class AddPinModal extends Component {
     constructor(props) {
         super(props);
@@ -136,18 +137,9 @@ class AddPinModal extends Component {
                                 margin="normal"
                                 variant="outlined"
                                 placeholder="Name your crap"
-                                InputProps={{
-                                    endAdornment: (
-                                        <InputAdornment position="end">
-                                            <IconButton>
-                                                
-                                            </IconButton>
-                                        </InputAdornment>
-                                    ),
-                                }}
                             />
                             <TextField
-                                id="outlined-adornment-password"
+                                id="outlined-name"
                                 label="Location"
                                 className="pinLocation"
                                 value={this.state.location}
@@ -155,6 +147,15 @@ class AddPinModal extends Component {
                                 margin="normal"
                                 variant="outlined"
                                 placeholder="Where that crap at?"
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton >
+                                                <img class="marker-style" src={Arrow} style={{ width: 30, height: 30, marginRight: -10 }}></img>
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
                             />
                             <BoxButtons />
                             <ImageButton sendData={this._handleImg.bind(this)}/>

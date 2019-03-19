@@ -14,6 +14,7 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import {faInfinity} from '@fortawesome/free-solid-svg-icons'
 
 library.add(faBaseballBall)
 library.add(faCar)
@@ -27,6 +28,7 @@ library.add(faCamera)
 library.add(faPlusCircle)
 library.add(faBars)
 library.add(faPencilAlt)
+library.add(faInfinity)
 
 //wrap app in provider
 export default () => (<Routes />);
