@@ -2,24 +2,30 @@ import React, { Component } from 'react'
 
 import LineDivider from './LineDivider'
 import CategoryButtons from '../buttons/CategoryButtons'
-import ExitButton from '../buttons/ExitButton.js'
 import BoxButtons from '../buttons/BoxButtons.js'
-import ImageButton from '../buttons/ImageButton.js'
-import MakePostButton from '../buttons/MakePostButton.js'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField'
-import { withStyles } from '@material-ui/core/styles';
-import NewPinButton from '../buttons/NewPinButton'
-
+import IconButton from '@material-ui/core/IconButton'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import Button from '@material-ui/core/Button'
 
 import '../App.css'
 
 import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core';
 
-export default class AddPinModal extends Component {
+const styles = theme => ({
+    cssLabel: {
+        '&$cssFocused': {
+            color: '#00FFDE',
+        },
+    },
+    cssFocused: {}
+})
+class AddPinModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -45,29 +51,31 @@ export default class AddPinModal extends Component {
     };
 
     render() {
-
-        if (!this.props.show) {
-            return null;
-        }
-
+        const { classes } = this.props;
         return (
-            <div>
-                <NewPinButton onClick={this.handleClickOpen('body')}/>
+            <div id="ap-modal" className={classes.root}>
+                <IconButton className="new-pin-button" onClick={this.handleClickOpen('paper')}>
+                    <FontAwesomeIcon icon="plus-circle" />
+                </IconButton>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
                     scroll={this.state.scroll}
                     aria-labelledby="scroll-dialog-title"
+                    style={{'z-index': 30, 'background-color': 'primary'}}
                 >
-                    <DialogTitle id="scroll-dialog-title">
+                    <DialogTitle >
                         Add New Pin
-                        <ExitButton />
                     </DialogTitle>
                     <LineDivider />
                     <DialogContent>
                         <form>
                             <CategoryButtons />
                             <TextField
+                                classes={{
+                                    root: classes.cssLabel,
+                                    focused: classes.cssFocused,
+                                }}
                                 id="outlined-name"
                                 label="Title"
                                 className="pinTitle"
@@ -78,6 +86,10 @@ export default class AddPinModal extends Component {
                                 placeholder="Name your crap"
                             />
                             <TextField
+                                classes={{
+                                    root: classes.cssLabel,
+                                    focused: classes.cssFocused,
+                                }}
                                 id="outlined-name"
                                 label="Location"
                                 className="pinLocation"
@@ -88,13 +100,15 @@ export default class AddPinModal extends Component {
                                 placeholder="Where that crap at?"
                             />
                             <BoxButtons />
-                            <ImageButton />
+                            <IconButton>
+                                <FontAwesomeIcon icon="camera"/>
+                            </IconButton>
                             <LineDivider />
-                            <MakePostButton />
                         </form>
                     </DialogContent>
                     <DialogActions>
-                        <MakePostButton onClick={this.handleClose} color="primary"/>
+                        <Button onClick={this.handleClose} color="secondary">POST</Button>
+                        <Button onClick={this.handleClose} color="tertiary">CANCEL</Button>
                     </DialogActions>
                 </Dialog>
             </div>
@@ -108,3 +122,5 @@ AddPinModal.propTypes = {
     show: PropTypes.bool,
     children: PropTypes.node
 };
+
+export default withStyles(styles)(AddPinModal)

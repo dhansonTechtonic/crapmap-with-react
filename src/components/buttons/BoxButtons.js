@@ -31,12 +31,12 @@ class BoxButtons extends React.Component {
           value={this.state.value}
           onChange={this.handleChange}
           variant="fullWidth"
-          indicatorColor="primary"
+          indicatorColor="secondary"
           textColor="primary"
         >
-          <Tab icon={<FontAwesomeIcon icon='box' />} />
-          <Tab icon={<FontAwesomeIcon icon='box' />} />
-          <Tab icon={<FontAwesomeIcon icon='box' />} />
+          <Tab icon={<FontAwesomeIcon icon='box' />} label="SMALL"/>
+          <Tab icon={<FontAwesomeIcon icon='box' />} label="MEDIUM"/>
+          <Tab icon={<FontAwesomeIcon icon='box' />} label="LARGE"/>
         </Tabs>
       </Paper>
     );

@@ -7,6 +7,10 @@ body{
   justify-content: center;
 }
 
+button:hover {
+  border: none !important;
+}
+
 hr{
   background-image: linear-gradient(260deg, #FF4700, #5200E8, #00FFDE);
   border: none;
@@ -29,59 +33,6 @@ hr{
 }
 
 /*Add/Edit Pin Styles-----------------------------------------------------------------*/
-.boxes, .footer, .header{
-  align-items: center;
-  align-self: center;
-  display: flex;
-  flex-direction: row;
-  height: 70px;
-  justify-content: space-between;
-  margin-left: auto;
-  margin-right: auto;
-  width: 85%;
-}
-
-.category-header {
-  font-size: 1.2em;
-  margin-left: 2em;
-}
-
-.modal-row {
-  align-items: center;
-  align-self: center;
-  display: flex;
-  flex-direction: row;
-  height: 70px;
-  justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
-  width: 85%;
-}
-
-.modal-row button {
-  height: 40px;
-  margin: 0px auto;
-}
-
-.modal-row input {
-  background-color: transparent;
-  border: 2px solid white;
-  color: white;
-  font-size: 1em;
-  height: 40px;
-  padding-bottom: 0px;
-  padding-left: 20px;
-  padding-top: 0px;
-  width: 100%;
-}
-
-.modal-row:first-child {
-  padding-top: 20px;
-}
-
-.modal-row .tag-input {
-  width: 75%;
-}
 
 /*Button Styles-----------------------------------------------------------------------*/
 
