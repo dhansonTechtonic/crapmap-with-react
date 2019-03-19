@@ -34,11 +34,11 @@ class CategoryButtons extends React.Component {
           indicatorColor="primary"
           textColor="primary"
         >
-          <Tab icon={<FontAwesomeIcon icon='couch' />} label="Furniture"/>
-          <Tab icon={<FontAwesomeIcon icon='car' />} label="Auto Parts"/>
-          <Tab icon={<FontAwesomeIcon icon='baseball-ball'/>} label="Sports"/>
-          <Tab icon={<FontAwesomeIcon icon='tv' />} label="Gadgets"/>
-          <Tab icon={<FontAwesomeIcon icon='question-circle' />} label="Misc"/>
+          <Tab value="Furniture"icon={<FontAwesomeIcon icon='couch' />} label="Furniture"/>
+          <Tab value="Auto Parts"icon={<FontAwesomeIcon icon='car' />} label="Auto Parts"/>
+          <Tab value="Sports"icon={<FontAwesomeIcon icon='baseball-ball'/>} label="Sports"/>
+          <Tab value="Gadgets"icon={<FontAwesomeIcon icon='tv' />} label="Gadgets"/>
+          <Tab value="Misc"icon={<FontAwesomeIcon icon='question-circle' />} label="Misc"/>
         </Tabs>
       </Paper>
     );

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import firebase from './../../firebase'
 
 import LineDivider from './LineDivider'
 import CategoryButtons from '../buttons/CategoryButtons'
@@ -9,13 +10,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
+import ImageButton from '../buttons/ImageButton'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Button from '@material-ui/core/Button'
-
 import '../App.css'
-
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core';
+import store from '../../redux/store/index';
+import { newPin } from '../../redux/actions/pinActions';
 
 const styles = theme => ({
     cssLabel: {
@@ -29,18 +31,16 @@ class AddPinModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
+            title: '',
             location: '',
             open: false,
-            scroll: 'paper'
+            scroll: 'paper',
+            dataURL: '',
+            imgName: null,
+            category: 'All'
         }
+        this.handleClick = this.handleClick.bind(this);
     }
-
-    handleChange = name => event => {
-        this.setState({
-            [name]: event.target.value,
-        });
-    };
 
     handleClickOpen = scroll => () => {
         this.setState({ open: true, scroll });
@@ -49,6 +49,74 @@ class AddPinModal extends Component {
     handleClose = () => {
         this.setState({ open: false });
     };
+
+    handleClick(e) {
+        switch (e.target.value) {
+            case "car":
+                this.setState({ category: 'Auto Parts' }, () => { console.log(this.state.category) });
+                break;
+            case "baseball-ball":
+                this.setState({ category: "Sporting" }, () => { console.log(this.state.category) });
+                break;
+            case "tv":
+                this.setState({ category: "Electronics" }, () => { console.log(this.state.category) });
+                break;
+            case "question-circle":
+                this.setState({ category: "Misc" }, () => { console.log(this.state.category) });
+                break;
+            default:
+                this.setState({ category: "Furniture" }, () => { console.log(this.state.category) });
+        }
+    }
+
+    _handleImg(img) {
+        this.setState({
+            dataURL: img,
+        })
+    }
+
+    _uploadImg() {
+        if (this.state.dataURL) {
+            let storage = firebase.storage();
+            storage.ref(`pinsImages/${new Date().getTime()}`).put(this.state.dataURL).then((snapshot) =>
+                console.log(snapshot));
+        } else {
+            return false
+        }
+        return false
+    }
+
+
+    handleTitleChange = (e) => {
+        this.setState({
+            title: e.target.value
+        })
+    }
+
+    handleLocationChange = (e) => {
+        this.setState({
+            location: e.target.value
+        })
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+
+        let pin = {
+            "title": this.state.title,
+            // "description": this.state.description
+            "lat": this.state.location,
+            "lng": this.state.location,
+            "zip": this.state.location,
+            "category": this.state.category,
+            "img": this.state.dataURL,
+            "size": '2',
+            "userID": 'testID'
+        }
+
+        store.dispatch(newPin(pin));
+
+    }
 
     render() {
         const { classes } = this.props;
@@ -65,12 +133,12 @@ class AddPinModal extends Component {
                     style={{'z-index': 30, 'background-color': 'primary'}}
                 >
                     <DialogTitle >
-                        Add New Pin
+                        Add New Crap
                     </DialogTitle>
                     <LineDivider />
                     <DialogContent>
                         <form>
-                            <CategoryButtons />
+                            <CategoryButtons handleClick={this.handleClick}/>
                             <TextField
                                 classes={{
                                     root: classes.cssLabel,
@@ -80,7 +148,7 @@ class AddPinModal extends Component {
                                 label="Title"
                                 className="pinTitle"
                                 value={this.state.name}
-                                onChange={this.handleChange('name')}
+                                onChange={this.handleTitleChange}
                                 margin="normal"
                                 variant="outlined"
                                 placeholder="Name your crap"
@@ -94,20 +162,18 @@ class AddPinModal extends Component {
                                 label="Location"
                                 className="pinLocation"
                                 value={this.state.location}
-                                onChange={this.handleChange('location')}
+                                onChange={this.handleLocationChange}
                                 margin="normal"
                                 variant="outlined"
                                 placeholder="Where that crap at?"
                             />
                             <BoxButtons />
-                            <IconButton>
-                                <FontAwesomeIcon icon="camera"/>
-                            </IconButton>
+                            <ImageButton sendData={this._handleImg.bind(this)}/>
                             <LineDivider />
                         </form>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="secondary">POST</Button>
+                        <Button onClick={this.handleClose} onClick={this.handleSubmit} color="secondary">POST</Button>
                         <Button onClick={this.handleClose} color="tertiary">CANCEL</Button>
                     </DialogActions>
                 </Dialog>
