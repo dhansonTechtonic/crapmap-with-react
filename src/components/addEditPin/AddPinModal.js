@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import firebase from './../../firebase'
-
 import LineDivider from './LineDivider'
 import CategoryButtons from '../buttons/CategoryButtons'
 import BoxButtons from '../buttons/BoxButtons.js'
@@ -13,7 +12,6 @@ import IconButton from '@material-ui/core/IconButton'
 import ImageButton from '../buttons/ImageButton'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Button from '@material-ui/core/Button'
-import '../App.css'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core';
 import store from '../../redux/store/index';
@@ -173,8 +171,8 @@ class AddPinModal extends Component {
                         </form>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} onClick={this.handleSubmit} color="secondary">POST</Button>
-                        <Button onClick={this.handleClose} color="tertiary">CANCEL</Button>
+                        <Button onClick={this.handleClose} onClick={this.handleSubmit} color="primary">POST</Button>
+                        <Button onClick={this.handleClose} color="error">CANCEL</Button>
                     </DialogActions>
                 </Dialog>
             </div>

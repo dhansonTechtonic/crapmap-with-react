@@ -168,9 +168,9 @@ const theme =
             "black": "#000", "white": "#fff" }, 
         "background": { 
             "paper": "rgba(46, 45, 49, 1)", "default": "rgba(46, 45, 49, 1)" }, 
-        "primary": { 
-            "light": "rgba(180, 138, 255, 1)", "main": "rgba(82, 0, 232, 1)", "dark": "rgba(39, 0, 112, 1)", "contrastText": "#fff" }, 
         "secondary": { 
+            "light": "rgba(180, 138, 255, 1)", "main": "rgba(82, 0, 232, 1)", "dark": "rgba(39, 0, 112, 1)", "contrastText": "#fff" }, 
+        "primary": { 
             "light": "rgba(136, 255, 239, 1)", "main": "rgba(0, 255, 222, 1)", "dark": "rgba(0, 117, 101, 1)", "contrastText": "#fff" },
         "gradient": {
             "main": "linear-gradient(260deg, #FF4700, #5200E8, #00FFDE)"
