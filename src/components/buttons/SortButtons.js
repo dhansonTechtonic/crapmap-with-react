@@ -5,14 +5,18 @@ import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 
 const styles = {
     root: {
-        maxWidth: 550,
+        width: 545,
         zIndex: 50,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-end'
+        position: 'absolute',
+        bottom: '0px',
+        left: '50%',
+        marginLeft: '-272.5px',
+        borderRadius: 4
     },
 };
 
@@ -29,22 +33,16 @@ class SortButtons extends React.Component {
         const { classes } = this.props;
 
         return (
-            <Paper square className={classes.root}>
-                <Tabs
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                    variant="wrapper"
-                    indicatorColor="primary"
-                    textColor="primary"
-                >
-                    <Tab value="Furniture" icon={<FontAwesomeIcon icon='couch' />} label="Furniture" />
-                    <Tab value="Auto Parts" icon={<FontAwesomeIcon icon='car' />} label="Auto Parts" />
-                    <Tab value="Sports" icon={<FontAwesomeIcon icon='baseball-ball' />} label="Sports" />
-                    <Tab value="Gadgets" icon={<FontAwesomeIcon icon='tv' />} label="Gadgets" />
-                    <Tab value="Misc" icon={<FontAwesomeIcon icon='question-circle' />} label="Misc" />
-                    <Tab value="All" icon={<FontAwesomeIcon icon='infinity' />} label="All" />
-                </Tabs>
-            </Paper>
+            <div className="sort-buttons">
+                <BottomNavigation value={this.state.value} onChange={this.handleChange} className={classes.root}>
+                    <BottomNavigationAction label="Furniture" value="Furniture" style={{fontSize: '1.5em'}} icon={<FontAwesomeIcon icon='couch' />} />
+                    <BottomNavigationAction label="Auto Parts" value="Auto Parts" style={{ fontSize: '1.5em' }} icon={<FontAwesomeIcon icon='car' />}/>
+                    <BottomNavigationAction label="Sports" value="Sports" style={{ fontSize: '1.5em' }} icon={<FontAwesomeIcon icon='baseball-ball' />}/>
+                    <BottomNavigationAction label="Gadgets" value="Gadgets" style={{ fontSize: '1.5em' }} icon={<FontAwesomeIcon icon='tv' />} />
+                    <BottomNavigationAction label="Misc" value="Misc" style={{ fontSize: '1.5em' }} icon={<FontAwesomeIcon icon='question-circle' />}/>
+                    <BottomNavigationAction label="All" value="All" style={{ fontSize: '1.5em' }} icon={<FontAwesomeIcon icon='infinity' />} />
+                </BottomNavigation>
+            </div>
         );
     }
 }

@@ -178,9 +178,9 @@ hr{
 
 .new-pin-button {
   margin-left: 1.5rem !important;
-  margin-top: 38rem !important;
+  bottom: 80px !important;
   padding: .05em !important;
-  position: fixed !important;
+  position: absolute !important;
   z-index: 7 !important;
 }
 
@@ -243,14 +243,12 @@ button.home-page-new-pin-button{
   color: white;
   display: block;
   float: right;
-  font-size: 2em;
 }
 
 .nav-links {
   display: none;
 }
 }
-
 /*Landing Page Styles-----------------------------------------------------------------*/
 
 .crapMapLogo {
@@ -258,8 +256,6 @@ button.home-page-new-pin-button{
 }
 
 .landingPageGradient {
-  display: flex;
-  flex-direction: column;
   background-image: linear-gradient(260deg, #FF4700, #5200E8, #00FFDE);
   background-repeat: repeat;
   height: 180vh;
@@ -278,8 +274,20 @@ button.home-page-new-pin-button{
   height: 180vh;
   width: 100vw;
   opacity: 0.35;
-  position: fixed;
+  position: absolute;
   z-index: -1;
+  object-fit: cover;
+}
+
+.loginContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color:rgb(255, 255, 255);
+  font-weight: bolder;
+  padding: 2em;
+
 }
 
 /* Action Buttons  */
