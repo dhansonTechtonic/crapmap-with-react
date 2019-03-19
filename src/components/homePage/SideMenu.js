@@ -37,18 +37,18 @@ class SideMenu extends Component {
           <div className={classes.list}>
               <List>
                   {<ListItem >
-                    <ListItemText>
-                        My Crap
+                    <ListItemText style={{color: 'white'}}>
+                        MY CRAP
                     </ListItemText>
                   </ListItem>}
               </List>
-              <LineDivider />
               <List>
               {<ListItem >
-                      <ListItemText>
-                          Log Out
+                      <ListItemText style={{ color: 'white' }}>
+                          LOG OUT
                     </ListItemText>
                   </ListItem>}
+                  <LineDivider />            
               </List>
           </div>
       );

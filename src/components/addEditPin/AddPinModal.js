@@ -131,7 +131,7 @@ class AddPinModal extends Component {
                     style={{'z-index': 30, 'background-color': 'primary'}}
                 >
                     <DialogTitle >
-                        Add New Crap
+                        ADD NEW CRAP
                     </DialogTitle>
                     <LineDivider />
                     <DialogContent>

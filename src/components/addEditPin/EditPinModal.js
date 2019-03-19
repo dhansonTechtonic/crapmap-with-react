@@ -131,7 +131,7 @@ class EditPinModal extends Component {
                     style={{ 'z-index': 30, 'background-color': 'primary' }}
                 >
                     <DialogTitle >
-                        Edit This Crap
+                        EDIT YOUR CRAP
                     </DialogTitle>
                     <LineDivider />
                     <DialogContent>

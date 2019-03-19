@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../assets/crapmap-logo-horizontal-gray.png'
 import {NavLink} from 'react-router-dom'
-import MyListingsModal from '../MyListings/MyListingsModal'
+import MyCrapModal from '../MyListings/MyCrapModal'
 import SideMenu from './SideMenu'
 export default class Navigation extends Component {
 
@@ -9,18 +9,10 @@ export default class Navigation extends Component {
     super(props);
 
     this.state = {
-      // settingsIsOpen: false,
-      myListingsIsOpen: false,
       category: 'All',
     };
 
     this.handleClick = this.handleClick.bind(this);
-  }
-
-  toggleListings = () => {
-    this.setState({
-      myListingsIsOpen: !this.state.myListingsIsOpen,
-    })
   }
 
   handleClick = (e) => {
@@ -60,12 +52,11 @@ export default class Navigation extends Component {
       <img alt='crapmap logo' src={logo} className="home-page-logo"/>
       <nav className="home-page-navbar">
         <ul className="main-nav-list" id="js-menu">
-            <li className="nav-links" onClick={this.toggleListings}>MY PINS</li>
-            <li><NavLink exact to='/url' className="nav-links">LOGOUT</NavLink></li>
+            <MyCrapModal />
+            <li><NavLink exact to='/url' className="nav-links">LOG OUT</NavLink></li>
             <li onClick={this.toggleHamburger} class="hamburger-menu"><SideMenu /></li>
         </ul>
       </nav>
-      <MyListingsModal show={this.state.myListingsIsOpen} onClose={this.toggleListings}></MyListingsModal>
     </div>
     )
   }

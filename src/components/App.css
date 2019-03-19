@@ -19,19 +19,6 @@ hr{
   width: 100%;
 }
 
-.vertical-modal {
-  background-color: #2E2D31;
-  height: 600px;
-  width: 412px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: auto;
-  z-index: 10;
-  top: 13%;
-  overflow: hidden;
-}
-
 /*Button Styles-----------------------------------------------------------------------*/
 
 
@@ -55,15 +42,6 @@ hr{
 
 .edit-pencil{
   font-size: 20px;
-  transition-duration: 0.3s;
-  -webkit-transition-duration: 0.3s;
-}
-
-.hamburger-menu-button{
-  color: white;
-  display: block;
-  float: right;
-  font-size: 1em;
   transition-duration: 0.3s;
   -webkit-transition-duration: 0.3s;
 }
@@ -125,45 +103,6 @@ hr{
   background-color: white;
   border: 2px solid white;
   color: #2E2D31;
-}
-
-/*Hamburger Menu Modal----------------------------------------------------------------*/
-
-.hamburger-menu-modal {
-  background-color: #2e2d31;
-  height: 15em;
-  margin: 70px auto;
-  padding: 8px 8px;
-  width: 18em;
-
-}
-
-.my-pins-link:hover {
-  color: #00ffde;
-  transition-duration: 0.3s;
-  -webkit-transition-duration: 0.3s;
-}
-
-.log-out-link:hover {
-  color: #ff4700;
-  transition-duration: 0.3s;
-  -webkit-transition-duration: 0.3s;
-}
-
-.hamburger-menu-modal > div > h2 {
-  color: white;
-  font-family: 'Nunito', sans-serif;
-  font-size: 24px;
-  font-weight: bold;
-  letter-spacing: .25em;
-  margin: 0 auto;
-  padding: 6px 0px;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.hamburger-menu-modal .log-out-link > h2 {
-  border-width: 0px;
 }
 
 /*Home Page Styles--------------------------------------------------------------------*/
@@ -267,13 +206,13 @@ hr{
 }
 
 .nav-links {
-  color: white;
-  letter-spacing: .25em;
-  margin-left: 40px;
-  text-decoration: none;
-  text-transform: capitalize;
-  transition-duration: 0.3s;
-  -webkit-transition-duration: 0.3s;
+  color: white !important;
+  letter-spacing: .25em !important;
+  margin-left: 40px !important;
+  text-decoration: none !important;
+  text-transform: capitalize !important;
+  transition-duration: 0.3s !important;
+  -webkit-transition-duration: 0.3s !important;
 }
 
 .main-search-list {
@@ -329,7 +268,8 @@ button.home-page-new-pin-button{
 }
 
 .nav-links:hover {
-  color: black;
+  color: black !important;
+  cursor: pointer
 }
 
 @media only screen and (max-width: 900px) {
