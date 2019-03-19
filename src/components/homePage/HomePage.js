@@ -15,8 +15,29 @@ class HomePage extends Component {
     super(props);
     this.state = {
       user: null,
-      pins: []
+      pins: [],
+      category: 'All'
     };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    switch (e.target.value) {
+      case "car":
+        this.setState({ category: 'Auto Parts' }, () => { console.log(this.state.category) });
+        break;
+      case "baseball-ball":
+        this.setState({ category: "Sporting" }, () => { console.log(this.state.category) });
+        break;
+      case "tv":
+        this.setState({ category: "Electronics" }, () => { console.log(this.state.category) });
+        break;
+      case "question-circle":
+        this.setState({ category: "Misc" }, () => { console.log(this.state.category) });
+        break;
+      default:
+        this.setState({ category: "Furniture" }, () => { console.log(this.state.category) });
+    }
   }
 
   componentDidMount(){
@@ -49,7 +70,7 @@ class HomePage extends Component {
     return (
       <div className="App">
         <AddPinModal />
-        <SortButtons />
+        <SortButtons handleClick={this.handleClick}/>
         <Navigation />
         <GoogleMap  />
       </div>
