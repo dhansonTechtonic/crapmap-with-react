@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import { isAbsolute } from 'path';
 import store from '../../redux/store'
 import ViewPinModal from './ViewPinModal';
@@ -9,23 +9,6 @@ const mapStylesDefaults = {
   width: '100%',
   height: '100%',
 };
-
-
-
-// const pinsArray = [
-//   {
-//     lat: 40.021226,
-//     lng: -105.218359
-//   },
-//   {
-//     lat: 40.221226,
-//     lng: -105.228359
-//   },
-//   {
-//     lat: 40.121226,
-//     lng: -105.228359
-//   }
-// ]
 
 export class MapContainer extends Component {
 
@@ -47,31 +30,38 @@ export class MapContainer extends Component {
     let response = store.getState().pins
     response.then(
       (response) => {
-     let pinsArray = response.pins
-    let viewPinsArray = [];
-    for (let i =0; i<=pinsArray.length;i++) {
-    
-    let locationObj ={
-      lat: pinsArray[i]._fieldsProto.location.mapValue.fields.lat.doubleValue, 
-      lng: pinsArray[i]._fieldsProto.location.mapValue.fields.lng.doubleValue
-    }
-    // console.log(locationObj);
-    viewPinsArray.push(locationObj)
-    // this.fireUpdatePinsLocation(viewPinsArray);
-  }
-  console.log(viewPinsArray, "array")
-  console.log(viewPinsArray.length)
-
-  return viewPinsArray
-
+    let pinsArray = response.pins
+    // this.setState({viewPinsArray: pinsArray})
+     this.handlePins(pinsArray);
+    // return pinsArray
     }
     )
   }
 
-  // fireUpdatePinsLocation(data){
-  //   let ltlng = maps.LatLng(data)
-  //   console.log(ltlng)
-  // }
+  handlePins(pinsArray){
+    let viewPinsArray = [];
+    for (let i =0; i<=pinsArray.length; i++) {
+     let locationObj ={
+        lat: pinsArray[i]._fieldsProto.location.mapValue.fields.lat.doubleValue, 
+        lng: pinsArray[i]._fieldsProto.location.mapValue.fields.lng.doubleValue
+      }
+    viewPinsArray.push(locationObj)
+    }
+    console.log(viewPinsArray)
+    this.fireUpdatePinsLocation(viewPinsArray);
+
+    console.log(viewPinsArray, "array")
+    console.log(viewPinsArray.length)
+  }
+
+  fireUpdatePinsLocation(data){
+    console.log("this is data", data)
+    return <Marker 
+    location={data}
+    onClick={this.toggleViewPinModal}
+    />
+
+  }
 
 
  render() {
@@ -86,16 +76,10 @@ export class MapContainer extends Component {
     centerAroundCurrentLocation={true}
     draggable={true} 
 >
+{
 
+}
 
-
- {/* <Marker onClick={this.toggleViewPinModal}
-      position={this.props.markerLocation}  
-     
-     />  */}
-
- {/* <Marker onClick={this.toggleViewPinModal}
-    position={} /> */}
 </Map>
 
 <div className="view-pin-container">
