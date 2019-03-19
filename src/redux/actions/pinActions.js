@@ -66,16 +66,13 @@ export const deletePin = (input) => ({
 })
 
 function deletePinFetch(input) {
-    fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/delete', {
-        method: 'DELETE',
-        body: JSON.stringify(input),
-        headers: {
-            'Content-Type': 'application/json'
+    console.log('deletePinFetchj BB+OBOBOOBOBOBOOOBB!!!!!!!!!')
+    return fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/delete/' + input, {
+                method: 'DELETE'
+        })
+            .then(res => console.log(res))
+            .catch(err => console.error("Error", err))
         }
-        .then(res => console.log(res))
-        .catch(err => console.error(err))
-    })
-}
 
 
 // UPDATE/EDITS PIN - NEEDS TESTING
