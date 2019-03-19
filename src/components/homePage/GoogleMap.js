@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper } from 'google-maps-react';
 import { isAbsolute } from 'path';
-import store from '../../redux/store'
+// import store from '../../redux/store'
+// import {getPins} from '../../redux/actions/pinActions'
+
+// import PropTypes from 'prop-types'
 import ViewPinModal from './ViewPinModal';
 
 const mapStylesDefaults = {
@@ -10,6 +13,20 @@ const mapStylesDefaults = {
   height: '100%',
 };
 
+// const pinsArray = [
+//   {
+//     lat: 40.021226,
+//     lng: -105.218359
+//   },
+//   {
+//     lat: 40.221226,
+//     lng: -105.228359
+//   },
+//   {
+//     lat: 40.121226,
+//     lng: -105.228359
+//   }
+// ]
 export class MapContainer extends Component {
 
   constructor(props) {
@@ -20,51 +37,71 @@ export class MapContainer extends Component {
     this.toggleViewPinModal = this.toggleViewPinModal.bind(this)
   }
 
+//update with mapstate to props 
+
   toggleViewPinModal = () => {
     this.setState({
       viewPinModalIsOpen: !this.state.viewPinModalIsOpen,
     });
   }
 
-  componentDidUpdate(prevProps){ //on update...
-    let response = store.getState().pins
-    response.then(
-      (response) => {
-    let pinsArray = response.pins
-    // this.setState({viewPinsArray: pinsArray})
-     this.handlePins(pinsArray);
-    // return pinsArray
-    }
-    )
+  init () {
+    console.log("this is load")
+    // console.log(store.getState())
   }
 
-  handlePins(pinsArray){
-    let viewPinsArray = [];
-    for (let i =0; i<=pinsArray.length; i++) {
-     let locationObj ={
-        lat: pinsArray[i]._fieldsProto.location.mapValue.fields.lat.doubleValue, 
-        lng: pinsArray[i]._fieldsProto.location.mapValue.fields.lng.doubleValue
-      }
-    viewPinsArray.push(locationObj)
-    }
-    console.log(viewPinsArray)
-    this.fireUpdatePinsLocation(viewPinsArray);
 
-    console.log(viewPinsArray, "array")
-    console.log(viewPinsArray.length)
+  // componentDidMount() {
+  //   createMarkers();
+
+  // }
+
+  firePlacePin (pinResponse) {
+    // console.log("inside firePlacePin", pinResponse)
+    const locationObj = {
+
+      // lat : pinResponse[2]._fieldsProto.location.mapValue.fields.lat.doubleValue,
+      lat : 40.021226,
+      // lng : pinResponse[2]._fieldsProto.location.mapValue.fields.lng.doubleValue
+      lng : -105.218359
+    };
+    console.log(locationObj)
+    return locationObj;
   }
 
-  fireUpdatePinsLocation(data){
-    console.log("this is data", data)
-    return <Marker 
-    location={data}
-    onClick={this.toggleViewPinModal}
-    />
+// createMarkers() {
+//   const pinsArray = [
+//     {
+//       lat: 40.021226,
+//       lng: -105.218359
+//     },
+//     {
+//       lat: 40.221226,
+//       lng: -105.228359
+//     },
+//     {
+//       lat: 40.121226,
+//       lng: -105.228359
+//     }
+//   ]
 
-  }
+//   return navLinks.map((b, i) => {
+//     console.log(b.long)
+//     return new google.maps.Marker({
+//       position: new google.maps.LatLng(b.lat, b.long),
+//       map: this.map
+//     })
+//   })
+
+
+  // }
+
 
 
  render() {
+
+  // store.dispatch(getPins({}));
+  data = this.props.pins
 
     return (
         <div className='map-container'>
@@ -76,9 +113,14 @@ export class MapContainer extends Component {
     centerAroundCurrentLocation={true}
     draggable={true} 
 >
-{
-
-}
+{data.map(item => (
+  <Marker ref={this.onMarkerMounted}
+    key={item.id}
+    title={item.name}
+    name={item.name}
+    position={{ lat: item.lat, lng: item.lng }}
+  />
+))}
 
 </Map>
 
@@ -88,6 +130,8 @@ export class MapContainer extends Component {
 
 </div>
 
+
+
     );
   }
 }
@@ -95,6 +139,4 @@ export class MapContainer extends Component {
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyDGqxNDh10YIbriH1cJpPt9cn8TJdCwbFM'
 })(MapContainer);
-
-
 
