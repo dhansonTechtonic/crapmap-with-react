@@ -53,7 +53,9 @@ export default class Navigation extends Component {
       <nav className="home-page-navbar">
         <ul className="main-nav-list" id="js-menu">
             <MyListingsModal />
-            <li><NavLink exact to='/url' className="nav-links">LOG OUT</NavLink></li>
+            <li className="nav-links">
+              MY ACCOUNT
+            </li>
             <li onClick={this.toggleHamburger} class="hamburger-menu"><SideMenu /></li>
         </ul>
       </nav>

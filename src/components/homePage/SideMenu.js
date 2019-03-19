@@ -63,7 +63,7 @@ class SideMenu extends Component {
               <List>
               {<ListItem >
                       <ListItemText style={{ color: 'white' , cursor: 'pointer'}}>
-                          LOG OUT
+                          MY ACCOUNT
                     </ListItemText>
                   </ListItem>}
                   <LineDivider />            
@@ -72,7 +72,7 @@ class SideMenu extends Component {
       );
     return (
         <div>
-            <Button onClick={this.toggleDrawer(true)}>MENU</Button>
+            <Button onClick={this.toggleDrawer(true)} className="nav-links">MENU</Button>
             <SwipeableDrawer
                 open={this.state.right}
                 onClose={this.toggleDrawer(false)}
