@@ -3,7 +3,11 @@ import '../App.css'
 import image from '../assets/oldcouch.jpg'
 import PencilButton from '../buttons/PencilButton'
 
+
 export default class MyListingsPost extends Component {
+  constructor(props){
+    super(props)
+  }
   render() {
     return (
       <div>
