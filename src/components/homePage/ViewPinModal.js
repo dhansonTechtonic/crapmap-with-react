@@ -15,7 +15,7 @@ export default class ViewPinModal extends Component {
             <div className="view-pin-row">
                 <card className="view-pin-main drop-shadow">
                     <div className="fakeimg">
-                        <img className="view-pin-img" src={PinImage}></img>
+                        <img alt='placeholder couch' className="view-pin-img" src={PinImage}></img>
                     </div>
                     <div className="view-pin-information-bar">
                         <div className="view-pin-row-info">

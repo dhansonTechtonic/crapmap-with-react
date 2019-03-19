@@ -19,6 +19,20 @@ class HomePage extends Component {
   }
 
   componentDidMount(){
+
+    // var testObject = {
+    //     "category": "couch",
+    //     "img": "image",
+    //     "description": "ok testing now",
+    //     "lat": "test",
+    //     "lng": "testing",
+    //     "zip": "lol",
+    //     "size": "2",
+    //     "tags": ['joket', 'slendermane'],
+    //     "title": "title of testing pin",
+    //     "userID": "139508829c3"
+    // }
+
     store.dispatch(getPins());
   }
 
@@ -30,7 +44,7 @@ class HomePage extends Component {
   }
 
   render() {
-    console.log(this.state.pins)
+    // console.log(this.state.pins)
     return (
       <div className="App">
         <NewPinButton />

@@ -115,7 +115,7 @@ export default class Navigation extends Component {
             <li className="nav-links" onClick={this.toggleListings}>MY PINS</li>
             <li className="nav-links" id='settingsIsOpen' onClick={this.toggleSettings}>SETTINGS</li>
             <li><NavLink exact to='/url' className="nav-links">LOGOUT</NavLink></li>
-            <li><a href="#" class="hamburger-menu"><HamburgerMenuButton /></a></li>
+            <li><a href="/menu" class="hamburger-menu"><HamburgerMenuButton /></a></li>
         </ul>
       </nav>
 
