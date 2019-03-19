@@ -7,6 +7,11 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button'
+import MyListingsPost from '../MyListings/MyListingsPost'
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions'
 
 const styles = {
     list: {
@@ -18,14 +23,27 @@ const styles = {
 };
 
 class SideMenu extends Component {
-    state = {
+    constructor(props) {
+        super(props);
+    this.state = {
         right: false,
+        open: false,
+        scroll: 'paper',
     };
+}
 
     toggleDrawer = (open) => () => {
         this.setState({
             right: open,
         });
+    };
+
+    handleClickOpen = scroll => () => {
+        this.setState({ open: true, scroll });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
     };
 
 
@@ -37,14 +55,14 @@ class SideMenu extends Component {
           <div className={classes.list}>
               <List>
                   {<ListItem >
-                    <ListItemText style={{color: 'white'}}>
+                      <ListItemText onClick={this.handleClickOpen('paper')} style={{color: 'white', cursor: 'pointer'}}>
                         MY CRAP
                     </ListItemText>
                   </ListItem>}
               </List>
               <List>
               {<ListItem >
-                      <ListItemText style={{ color: 'white' }}>
+                      <ListItemText style={{ color: 'white' , cursor: 'pointer'}}>
                           LOG OUT
                     </ListItemText>
                   </ListItem>}
@@ -69,6 +87,24 @@ class SideMenu extends Component {
                     {sideList}
                 </div>
             </SwipeableDrawer>
+
+            <Dialog
+                open={this.state.open}
+                onClose={this.handleClose}
+                scroll={this.state.scroll}
+                aria-labelledby="scroll-dialog-title"
+                style={{ 'z-index': 30, 'background-color': 'primary' }}>
+                <DialogTitle>
+                    MY CRAP
+            </DialogTitle>
+                <LineDivider />
+                <DialogContent>
+                    <MyListingsPost />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={this.handleClose} color="error">CLOSE</Button>
+                </DialogActions>
+            </Dialog>
         </div>
     )
   }

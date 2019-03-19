@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import EditPinModal from '../addEditPin/EditPinModal'
+import Button from '@material-ui/core/Button'
 
 const styles = {
   card: {
@@ -40,6 +41,7 @@ function MyListingsPost(props){
       </CardActionArea>
       <CardActions>
       <EditPinModal />
+      <Button color="error" style={{ left: 110, display: 'block' }}>Delete</Button>
       </CardActions>
     </Card>
   )

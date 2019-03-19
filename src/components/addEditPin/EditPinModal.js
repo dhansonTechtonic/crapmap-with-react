@@ -163,7 +163,6 @@ class EditPinModal extends Component {
                         </form>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="error" style={{marginRight:300}}>Delete</Button>
                         <Button onClick={this.handleClose} onClick={this.handleSubmit} color="primary">POST</Button>
                         <Button onClick={this.handleClose} color="error">CANCEL</Button>
                     </DialogActions>
