@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import { isAbsolute } from 'path';
 import store from '../../redux/store'
+import {connect} from 'react-redux';
+
 import ViewPinModal from './ViewPinModal';
+// import { func } from 'prop-types';
 
 const mapStylesDefaults = {
   position: isAbsolute,  
@@ -12,12 +15,15 @@ const mapStylesDefaults = {
 export class MapContainer extends Component {
 
   constructor(props) {
-    super(props);
+    super();
     this.state = {
       viewPinModalIsOpen: false,
+      user: {},
+      pins: []
+      }
+      this.toggleViewPinModal = this.toggleViewPinModal.bind(this)
     };
-    this.toggleViewPinModal = this.toggleViewPinModal.bind(this)
-  }
+  
 
   toggleViewPinModal = () => {
     this.setState({
@@ -25,35 +31,21 @@ export class MapContainer extends Component {
     });
   }
 
-  componentDidUpdate(prevProps){ //on update...
-    let response = store.getState().pins
-    response.then(
-      (response) => {
-      let pinsArray = response.pins
-      let viewPinsArray = [];
-      for (let i =0; i<=pinsArray.length;i++) {
-    
-      let locationObj = {
-        lat: pinsArray[i]._fieldsProto.location.mapValue.fields.lat.doubleValue, 
-        lng: pinsArray[i]._fieldsProto.location.mapValue.fields.lng.doubleValue
-      }
-    // console.log(locationObj);
-    data.push(locationObj)
-    // this.fireUpdatePinsLocation(viewPinsArray);
-  }
-  console.log(viewPinsArray, "array")
-  console.log(viewPinsArray.length)
-  return viewPinsArray
-
+  componentDidUpdate(prevProps) { 
+    if (this.props.pins !== prevProps.pins) {
+      this.props.pins.then((val) => { this.setState({ pins: val.pins }) })
     }
-    )
   }
 
+  onClick(e){
+    console.log("this is ")
+    console.log(e.target.name)
+  }
 
  render() {
-const data = data;
+
     return (
-        <div className='map-container'>
+      <div className='map-container'>
 
 <Map google={this.props.google}
     style={mapStylesDefaults}
@@ -62,12 +54,20 @@ const data = data;
     centerAroundCurrentLocation={true}
     draggable={true} 
 >
-{data.map(pin => (
-  <Marker ref={this.onMarkerMounted}
-    key={pin.id}
-    position={{ lat: pin.lat, lng: pin.lng }}
-  />
-))}
+
+{this.state.pins.map((pin) => {
+  // console.log(pin._fieldsProto.description.stringValue)
+ return (
+   
+ <Marker
+    key={pin._fieldsProto.userID.stringValue}
+    name={ pin._fieldsProto.description}
+    position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
+                lng:pin._fieldsProto.location.mapValue.fields.lng.doubleValue }}
+    onClick={this.onClick}
+    />
+ )
+})}
 
 </Map>
 
@@ -83,8 +83,16 @@ const data = data;
     );
   }
 
+}
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyDGqxNDh10YIbriH1cJpPt9cn8TJdCwbFM'
-})(MapContainer);
+function mapStateToProps(reduxState){
+  return {
+    user: reduxState.user,
+    pins: reduxState.pins
+  }
+}
+
+export default connect(mapStateToProps)(GoogleApiWrapper({
+  apiKey : 'AIzaSyDGqxNDh10YIbriH1cJpPt9cn8TJdCwbFM'
+})(MapContainer));
 
