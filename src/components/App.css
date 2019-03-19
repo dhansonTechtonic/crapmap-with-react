@@ -808,6 +808,20 @@ li.item-picture {
   font-size: 13px;
 }
 
+.my-pin-delete {
+  background-color: transparent;
+  border: 1px solid white;
+  height: 10px;
+  width: 5px;
+  color: white;
+  position: relative;
+  right: -230px;
+  top: -90px;
+}
+
+.my-pin-delete:hover {
+  border: 2px solid red;
+}
 
 /*Settings Styles---------------------------------------------------------------------*/
 
