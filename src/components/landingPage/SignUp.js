@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 // import { FirebaseContext } from '../../firebase';
 import {auth} from './../../firebase.js'
 
+import store from '../../redux/store'
+import {registerUser} from '../../redux/actions/userActions'
+
+import {NavLink} from 'react-router-dom';
+
+
 const INITIAL_STATE = {
   username: '',
   email: '',
@@ -31,18 +37,33 @@ class SignUpForm extends Component {
   doPasswordUpdate = password =>
     auth.currentUser.updatePassword(password);
 
+  // isAuthentic() {
+  //   let status;
+  //   if(0 = 0){
+  //     status =  true;
+  //   } else {
+  //     status =  false;
+  //   }
+  //   return status
+  // }
 
   onSubmit = event => {
     const { email, passwordOne } = this.state;
-
-    
       this.doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
+        var actionObject = {
+          userID: authUser.user.uid,
+          // auth: isAuthentic()
+          auth: true
+        }
+        store.dispatch(registerUser(actionObject));
+
         this.setState({ ...INITIAL_STATE });
       })
       .catch(error => {
         this.setState({ error });
       });
+
 
     event.preventDefault();
 
@@ -53,6 +74,7 @@ class SignUpForm extends Component {
       [event.target.name]: event.target.value
     });
   };
+
 
   render() {
     const {
@@ -68,7 +90,7 @@ class SignUpForm extends Component {
       passwordOne === '' ||
       email === '' ||
       username === '';
-
+    
     return (
       <form classname="signUpForm" onSubmit={this.onSubmit}>
         <input
@@ -106,6 +128,9 @@ class SignUpForm extends Component {
         <button disabled={isInvalid} type="submit">
           Sign Up
         </button>
+
+        <NavLink exact to='/'><button>back</button></NavLink>
+
 
         {error && <p>{error.message}</p>}
       </form>

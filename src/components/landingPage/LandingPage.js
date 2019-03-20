@@ -5,8 +5,9 @@ import BackgroundComponent from './BackgroundComponent';
 import LogoComponent from './LogoComponent';
 import LoginComponent from './LoginComponent';
 import '../App.css'
-import {NavLink} from 'react-router-dom'
+import {NavLink, Redirect} from 'react-router-dom'
 
+import store from '../../redux/store'
 
 import {connect} from 'react-redux';
 
@@ -41,16 +42,19 @@ class LandingPage extends Component {
 
   render() {
     console.log(this.props.user);
+    const { user } = store.getState();
+    console.log(user);
+
+
+    if (!user.userID && !user.auth) {
     return (
       <div>
-      {!this.state.user ?
         <div className="landingPage">
           <div className="landingPageGradient">
             <BackgroundComponent />
             <div className="landingPageLogoContainer" > 
               <LogoComponent />
             </div>
-            {/* <div className="signUpContainer"> */}
               <div className="loginContainer">
                 <LoginComponent sendData={this.userLogin} provider={new firebase.auth.GoogleAuthProvider()} providerName={`Google`}/>
                 <LoginComponent sendData={this.userLogin} provider={new firebase.auth.FacebookAuthProvider()} providerName={`FaceBook`}/>
@@ -58,29 +62,22 @@ class LandingPage extends Component {
                   <button>Sign-Up/Login with Email</button>
                 </NavLink>
               </div>
-            {/* </div> */}
           </div>
         </div>
-      :
-      <div className="landingPage">
-        <div className="landingPageGradient">
-          <BackgroundComponent />
-          <div className="landingPageLogoContainer" > 
-            <LogoComponent />
-          </div>
-        </div>
-      </div>
-      
-      }
-      </div>
-      
-    )
+      </div> 
+      )
+    } else if (user.userID && user.auth) {
+      return <Redirect to='/home' />;
+    }
   }
 }
 
 function mapStateToProps(reduxState){
   console.log(reduxState);
-  // user: reduxState.user
+  return {
+    user: reduxState.user,
+    auth: reduxState.auth
+  }
 }
   
 

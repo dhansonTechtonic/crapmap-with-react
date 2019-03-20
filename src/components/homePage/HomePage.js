@@ -40,6 +40,8 @@ class HomePage extends Component {
     if (this.props.pins !== prevProps.pins) {
       this.props.pins.then((val) => { this.setState({ pins: val.pins }) })
     }
+
+    console.log(store.getState());
   }
 
   render() {
