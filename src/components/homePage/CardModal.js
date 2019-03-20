@@ -17,51 +17,67 @@ const styles = {
     
   },
   media: {
-    height: 140,
+    height: 240,
   }
 };
 
-
-
-
-function CardModal(props, data) {
-    // console.log("insideprops", data)
-    const { classes } = props;
-  return (
-    <Card className={classes.card}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="Contemplative Reptile"
-          className={classes.media}
-          height="250"
-          image="../assets/oldcouch.jpg"
-          title="Contemplative Reptile"
-        />
-
-        <CardContent>
-
-          <Typography gutterBottom variant="h5" component="h2">
-            {/* {data.title} */}
-          </Typography>
-
-          <Typography component="p">
-            {/* {data.location} */}
-          </Typography>
+class CardModal extends Component {
+    constructor (props){
+        super(props)
+        this.state = {
+            isOpen: false,
+        }       
+    }
     
-        </CardContent>
-  
-      </CardActionArea>
-      <CardActions>
-        <Button size="medium" color="primary">
-          Dibs
-        </Button>
-        <Button size="medium" color="primary">
-          Pass
-        </Button>
-      </CardActions>
-    </Card>
-  );
+render () {
+
+    if (!this.props.show) {
+        return null;
+    }
+    let name = this.props.data.name.stringValue
+    let img = this.props.data.img.stringValue
+    console.log(this.props.data)
+    // let location = this.props.data.location.lat
+
+    return (
+
+        <Card className={styles.card}>
+          <CardActionArea>
+            <CardMedia
+              component="img"
+              alt="Item"
+              className={styles.media}
+              height="250"
+              image={img}
+              title={name}
+            />
+    
+            <CardContent>
+    
+              <Typography gutterBottom variant="h5" component="h2">
+              {/* {location} */}
+
+              </Typography>
+    
+              <Typography component="p">
+                {name}
+              </Typography>
+        
+            </CardContent>
+      
+          </CardActionArea>
+          <CardActions>
+            <Button size="medium" color="primary">
+              Dibs
+            </Button>
+            <Button size="medium" color="primary">
+              Pass
+            </Button>
+          </CardActions>
+        </Card>
+      );
+}
+ 
 }
 
 export default connect(mapStateToProps)(withStyles(styles)(CardModal));

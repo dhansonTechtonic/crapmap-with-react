@@ -4,9 +4,8 @@ import { isAbsolute } from 'path';
 import store from '../../redux/store'
 import {connect} from 'react-redux';
 
-import ViewPinModal from './ViewPinModal';
+// import ViewPinModal from './ViewPinModal';
 import CardModal from './CardModal';
-import { Card } from '@material-ui/core';
 // import { func } from 'prop-types';
 
 const mapStylesDefaults = {
@@ -28,14 +27,15 @@ export class MapContainer extends Component {
     };
   
 
-  toggleCardModal = (e) => {
+  toggleCardModal(e) {
     let targetPin = e;
     // console.log(data)
-    console.log("open/closed", e.name, e.img, e.position);
+    // console.log("open/closed", e.name, e.img, e.position);
     this.setState({
       viewCardIsOpen: !this.state.viewCardIsOpen,
       pinData: targetPin
     });
+
 
   }
 
@@ -88,22 +88,14 @@ export class MapContainer extends Component {
 
 </Map>
 
- <div className="view-pin-container">
-   <ViewPinModal  
-    show={this.state.viewPinModalIsOpen} 
-    onClose={this.state.viewPinModalIsOpen} 
-    /></div>
-
-<div className="view-pin-container">
-  <CardModal show={this.state.viewCardIsOpen}/>
-</div>
+<div className="view-pin-container"> 
+  <CardModal show={this.state.viewCardIsOpen} data={this.state.pinData} />
+</div> 
   
 </div>
 
-
     );
   }
-
 }
 
 function mapStateToProps(reduxState){
