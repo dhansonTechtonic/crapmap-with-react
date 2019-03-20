@@ -13,6 +13,16 @@ const config = {
 
 firebase.initializeApp(config);
 
+export const deleteUser = () => {
+    let user = firebase.auth().currentUser;
+    user.delete().then(function() {
+        console.log('user deleted', user)
+    }).catch(function(error){
+        console.log('user not deleted', error)
+    })
+}
+
+
 export const auth = firebase.auth();
 export default firebase
 

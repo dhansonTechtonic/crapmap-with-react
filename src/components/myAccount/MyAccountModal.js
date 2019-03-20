@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography'
 import store from '../../redux/store'
 import {logOutUser} from '../../redux/actions/userActions';
 
+import {deleteUser} from '../../firebase.js'
+
 const styles = {
     card: {
         maxWidth: 345,
@@ -40,6 +42,8 @@ class MyAccountModal extends Component{
 
     handleDelete() {
         //delete action
+        deleteUser();
+        store.dispatch(logOutUser());
     }
 
     handleLogOut() {
