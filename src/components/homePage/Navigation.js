@@ -3,6 +3,7 @@ import logo from '../assets/crapmap-logo-horizontal-gray.png'
 import {NavLink} from 'react-router-dom'
 import MyListingsModal from '../MyListings/MyListingsModal'
 import SideMenu from './SideMenu'
+import MyAccountModal from '../myAccount/MyAccountModal';
 export default class Navigation extends Component {
 
   constructor(props) {
@@ -53,9 +54,7 @@ export default class Navigation extends Component {
       <nav className="home-page-navbar">
         <ul className="main-nav-list" id="js-menu">
             <MyListingsModal />
-            <li className="nav-links">
-              MY ACCOUNT
-            </li>
+            <MyAccountModal />
             <li onClick={this.toggleHamburger} class="hamburger-menu"><SideMenu /></li>
         </ul>
       </nav>
