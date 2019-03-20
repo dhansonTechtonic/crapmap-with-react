@@ -1,150 +1,111 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, In } from 'google-maps-react';
 import { isAbsolute } from 'path';
-// import store from '../../redux/store'
-// import {getPins} from '../../redux/actions/pinActions'
+import store from '../../redux/store'
+import {connect} from 'react-redux';
 
-// import PropTypes from 'prop-types'
-import ViewPinModal from './ViewPinModal';
+// import ViewPinModal from './ViewPinModal';
+import CardModal from './CardModal';
+// import { func } from 'prop-types';
 
 const mapStylesDefaults = {
   position: isAbsolute,  
   width: '100%',
   height: '100%',
 };
-
-// const pinsArray = [
-//   {
-//     lat: 40.021226,
-//     lng: -105.218359
-//   },
-//   {
-//     lat: 40.221226,
-//     lng: -105.228359
-//   },
-//   {
-//     lat: 40.121226,
-//     lng: -105.228359
-//   }
-// ]
 export class MapContainer extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      viewPinModalIsOpen: false,
+      viewCardIsOpen: false,
+      user: {},
+      pins: [],
+      pinData: {}
+      }
+      this.toggleCardModal = this.toggleCardModal.bind(this)
     };
-    this.toggleViewPinModal = this.toggleViewPinModal.bind(this)
-  }
+  
 
-//update with mapstate to props 
-
-  toggleViewPinModal = () => {
+  toggleCardModal(e) {
+    let targetPin = e;
+    // console.log(data)
+    // console.log("open/closed", e.name, e.img, e.position);
     this.setState({
-      viewPinModalIsOpen: !this.state.viewPinModalIsOpen,
+      viewCardIsOpen: !this.state.viewCardIsOpen,
+      pinData: targetPin
     });
+
+
   }
 
-  init () {
-    console.log("this is load")
-    // console.log(store.getState())
+  componentDidUpdate(prevProps) { 
+    if (this.props.pins !== prevProps.pins) {
+      this.props.pins.then((val) => { this.setState({ pins: val.pins }) })
+    }
   }
 
+  onClick(e){
+    // console.log("this is ", e.name.stringValue, e)
+    let tarObj = {name: e.name.stringValue, location: e.location}
+    // this.fireDisplayViewPin(e)
+    this.setState({showingInfoWindow:true})
+    // this.CardModal
 
-  // componentDidMount() {
-  //   createMarkers();
-
-  // }
-
-  firePlacePin (pinResponse) {
-    // console.log("inside firePlacePin", pinResponse)
-    const locationObj = {
-
-      // lat : pinResponse[2]._fieldsProto.location.mapValue.fields.lat.doubleValue,
-      lat : 40.021226,
-      // lng : pinResponse[2]._fieldsProto.location.mapValue.fields.lng.doubleValue
-      lng : -105.218359
-    };
-    console.log(locationObj)
-    return locationObj;
   }
-
-// createMarkers() {
-//   const pinsArray = [
-//     {
-//       lat: 40.021226,
-//       lng: -105.218359
-//     },
-//     {
-//       lat: 40.221226,
-//       lng: -105.228359
-//     },
-//     {
-//       lat: 40.121226,
-//       lng: -105.228359
-//     }
-//   ]
-
-//   return navLinks.map((b, i) => {
-//     console.log(b.long)
-//     return new google.maps.Marker({
-//       position: new google.maps.LatLng(b.lat, b.long),
-//       map: this.map
-//     })
-//   })
-
-
-  // }
 
 
 
  render() {
-
-  // store.dispatch(getPins({}));
-
+  if (!this.props.loaded) {
+    return (<div>Loading...</div>)
+  }
     return (
-        <div className='map-container'>
+      <div className='map-container'>
 
-<Map google={this.props.google}
+<Map 
+    google={this.props.google}
     style={mapStylesDefaults}
     className={'map'}
-    zoom={7}  
+    zoom={14}  
     centerAroundCurrentLocation={true}
     draggable={true} 
+    minZoom={13} 
+    maxZoom={25}
 >
 
+{this.state.pins.map((pin) => {
+ return (
+ <Marker
+    key={pin._ref._path.segments[1]}
+    name={pin._fieldsProto.description}
+    img={pin._fieldsProto.img.stringValue}
+    position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
+                lng:pin._fieldsProto.location.mapValue.fields.lng.doubleValue }}
+    onClick={this.toggleCardModal}
+    />
+ )})}
 
-
- {/* <Marker onClick={this.toggleViewPinModal}
-      position={this.props.markerLocation}  
-     
-     />  */}
-
- {/* <Marker onClick={this.toggleViewPinModal}
-    position={} /> */}
 </Map>
 
-<div className="view-pin-container">
-<ViewPinModal  show={this.state.viewPinModalIsOpen} onClose={this.state.viewPinModalIsOpen} onClick={this.toggleViewPinModal}/>
-</div>
-
+<div className="view-pin-container" > 
+  <CardModal show={this.state.viewCardIsOpen} data={this.state.pinData} />
+</div> 
+  
 </div>
 
     );
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyDGqxNDh10YIbriH1cJpPt9cn8TJdCwbFM'
-})(MapContainer);
+function mapStateToProps(reduxState){
+  return {
+    user: reduxState.user,
+    pins: reduxState.pins
+  }
+}
 
-// Map.propTypes = {
-//   google: React.PropTypes.object,
-//   zoom: React.PropTypes.number,
-//   initialCenter: React.PropTypes.object
-// }
+export default connect(mapStateToProps)(GoogleApiWrapper({
+  apiKey : 'AIzaSyDGqxNDh10YIbriH1cJpPt9cn8TJdCwbFM'
+})(MapContainer));
 
-// Map.defaultProps = {
-//   zoom: 13,
-//   centerAroundCurrentLocation: true
-// }

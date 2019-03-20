@@ -1,7 +1,7 @@
 
-import {REGISTER_USER} from "../actions/userActions"
+import {REGISTER_USER, LOGOUT_USER} from "../actions/userActions"
 
-
+import {auth} from '../../firebase'
 
 const initUser = {
         userID: '',
@@ -28,6 +28,15 @@ export default function userReducer(state = initUser, action) {
                 auth: payload.auth
             }
         }
+        case LOGOUT_USER: {
+            localStorage.removeItem('userID');
+
+            auth.signOut()
+                return {
+                    ...initUser
+                }
+                
+         }
         case "NEW_USER":
             {
                 fetch('url.com/user/new', {
@@ -71,24 +80,6 @@ export default function userReducer(state = initUser, action) {
                     })
                 })
                 .catch(err => console.error('Error:', err))
-                break;
-            }
-        case "LOGOUT_USER":
-            {
-                fetch('url.com/user/logOut', {
-                    method: 'GET',
-                    body: payload
-                })
-                .then(res => {
-                    console.log('Success:', res);
-                    Object.assign({}, state, {
-                        ...initUser
-                    })
-                })
-                .catch(err => console.error('Error:', err))
-
-                // after fetch handle deleting the user variables and pins from store
-                // then return to login screen
                 break;
             }
         case "DELETE_USER":

@@ -29,7 +29,7 @@ router.post('/new',jsonParser, (request,response) =>{
         location: {
             lat: request.body.lat,
             lng: request.body.lng,
-            zip: request.body.zip
+            address: request.body.address
         },
         size: request.body.size,
         //tags: request.body.tags,

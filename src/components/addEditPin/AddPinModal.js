@@ -22,16 +22,14 @@ class AddPinModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: '',
-            dataURL: '',
-            fireBaseStorageFullUrl:'',
-            imgName: null,
-            title: '',
-            location: '',
-            open: false,
-            scroll: 'paper',
-            dataURL: '',
-            imgName: null
+            category: "Funiture",
+            img:"pinsImages/1553121301840",
+            address:"2000 Central Ave, Boulder, CO 80301, USA",
+            lat:"40.02091167969599",
+            lng:"-105.21724804969578",
+            size:"1",
+            title:"Stinky Boulder Weed Couch",
+            userID:"M8S8oXSgSdWzOBlSKM09xnUzsRH2"
         }
         this._changeCategory = this._changeCategory.bind(this);
     }
@@ -97,6 +95,15 @@ class AddPinModal extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
+
+        let userID;
+
+        if (store.getState().user.userID){
+            userID = store.getState().user.userID;
+        } else {
+            userID = JSON.parse(localStorage.getItem('userID'));
+        }
+
         this._uploadImg().then( () => {
                 let pin = {
                     "title": this.state.title,
@@ -107,12 +114,13 @@ class AddPinModal extends Component {
                     "category": this.state.category,
                     "img": this.state.fireBaseStorageFullUrl,
                     "size": this.state.size,
-                    "userID": 'testID'
+                    "userID": userID
                 }
                 console.log(pin);
+                store.dispatch(newPin(pin));
             }
         ).catch( err => console.log('there has been an error' + err));
-        //store.dispatch(newPin(pin));
+       
     }
 
     _getCurrentLocation = async() =>{
@@ -154,7 +162,8 @@ class AddPinModal extends Component {
             size: value
         })
     }
-   
+ 
+    
     render() {
         return (
             <div>
@@ -184,12 +193,14 @@ class AddPinModal extends Component {
                                 margin="normal"
                                 variant="outlined"
                                 placeholder="Name your crap"
+                                required
                             />
                             <TextField
                                 id="outlined-name"
                                 label="Location"
                                 className="pinLocation"
                                 value={this.state.location}
+                                ref="locationInput"
                                 onChange={this.handleLocationChange}
                                 margin="normal"
                                 variant="outlined"

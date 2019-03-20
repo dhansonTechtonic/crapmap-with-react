@@ -4,8 +4,10 @@ import PinImage from '../assets/oldcouch.jpg'
 import '../App.css'
 import ViewPinButtons from '../buttons/ViewPinButtons'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux';
 
-export default class ViewPinModal extends Component {
+
+class ViewPinModal extends Component {
   render() {
     if (!this.props.show) {
         return null;
@@ -36,6 +38,15 @@ export default class ViewPinModal extends Component {
     )
   }
 }
+
+function mapStateToProps(reduxState){
+    return {
+      user: reduxState.user,
+      pins: reduxState.pins
+    }
+  }
+
+export default connect(mapStateToProps)(ViewPinModal)
 
 ViewPinModal.propTypes = {
     onClose: PropTypes.func.isRequired,
