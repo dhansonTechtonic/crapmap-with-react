@@ -30,37 +30,19 @@ const styles = {
   }
 };
 
+function CardModal (props) {
 
-
-class CardModal extends Component {
-    constructor (props){
-        super(props)
-        this.state = {
-            open: true,
-        }       
-    }
-
-    handleClose = () => {
-        this.setState({ open : false });
-      };
-    
-render () {
+    console.log(props.data, "this is props")
 
     if (!this.props.show) {
         return null;
     }
+
     let name = this.props.data.name
     let size = this.props.data.crapSize
     // let category = this.props.data.category
     
         return (
-
-            <Dialog
-            open={this.state.open}
-            onClose={this.handleClose}
-            scroll={this.state.scroll}
-            aria-labelledby="scroll-dialog-title"
-            style={{ 'z-index': 30, 'background-color': 'primary' }}>
         <Card className={styles.card}>
         
           <CardActionArea >
@@ -96,26 +78,16 @@ render () {
             <Button size="medium" color="primary">
               PASS
             </Button>
-            <Button onClick={this.handleClose} color="error">
-              CLOSE
-            </Button>
 
           </CardActions>
         </Card>
       );
 }
  
-}
 
-export default connect(mapStateToProps)(withStyles(styles)(CardModal));
+
+export default withStyles(styles)(CardModal);
 
 CardModal.propTypes = {
     classes: PropTypes.object.isRequired,
   };
-
-  function mapStateToProps(reduxState){
-    return {
-      user: reduxState.user,
-      pins: reduxState.pins
-    }
-  }

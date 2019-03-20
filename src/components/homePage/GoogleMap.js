@@ -7,6 +7,7 @@ import iconImg from '../assets/crapmap-locator.png'
 
 // import ViewPinModal from './ViewPinModal';
 import CardModal from './CardModal';
+import ViewPinModal from './ViewPinModal';
 // import { func } from 'prop-types';
 
 const mapStylesDefaults = {
@@ -92,7 +93,8 @@ export class MapContainer extends Component {
 </Map>
 
 <div className="view-pin-container" > 
-  <CardModal show={this.state.viewCardIsOpen} data={this.state.pinData} />
+      <ViewPinModal />
+  {/* <CardModal show={this.state.viewCardIsOpen} data={this.state.pinData} /> */}
 </div> 
   
 </div>
