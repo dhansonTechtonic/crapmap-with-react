@@ -13,10 +13,8 @@ const SignUpPage = () => (
         <LogoComponent />
       </div>
       <div className="signUpContainer">
-        {/* <div className="loginContainer"> */}
           <h3>Create Your Account Here</h3>
           <SignUpForm />
-        {/* </div> */}
       </div>
     </div>
   </div>

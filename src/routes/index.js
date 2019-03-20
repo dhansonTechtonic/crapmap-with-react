@@ -12,6 +12,7 @@ export default () => (
             <Route exact path='/' component={LandingPage} />
             <Route exact path='/home' component={HomePage} />
             <Route exact path='/signup' component={SignUpPage} />
+            {/* <Route exact path='/forget' component={ForgetPasswordPage} /> */}
             <Redirect />
         </Switch>
     </BrowserRouter>

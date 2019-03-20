@@ -15,7 +15,6 @@ import LineDivider from '../addEditPin/LineDivider.js';
 import store from '../../redux/store'
 import {registerUser} from '../../redux/actions/userActions'
 
-import {NavLink, Redirect } from 'react-router-dom';
 
 
 const INITIAL_STATE = {
@@ -32,7 +31,9 @@ class SignUpForm extends Component {
     this.state = {
       ...INITIAL_STATE, 
       open: false,
-      scroll: 'paper',};
+      scroll: 'paper',
+    };
+
     this.onSubmit = this.onSubmit.bind(this);
   }
 
@@ -58,23 +59,12 @@ class SignUpForm extends Component {
   doPasswordUpdate = password =>
     auth.currentUser.updatePassword(password);
 
-  // isAuthentic() {
-  //   let status;
-  //   if(0 = 0){
-  //     status =  true;
-  //   } else {
-  //     status =  false;
-  //   }
-  //   return status
-  // }
-
   onSubmit = event => {
     const { email, passwordOne } = this.state;
       this.doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         var actionObject = {
           userID: authUser.user.uid,
-          // auth: isAuthentic()
           auth: true
         }
         store.dispatch(registerUser(actionObject));
@@ -85,10 +75,7 @@ class SignUpForm extends Component {
       .catch(error => {
         this.setState({ error });
       });
-
-
     // event.preventDefault();
-
   }
 
   onChange = event => {
@@ -117,7 +104,16 @@ class SignUpForm extends Component {
 
     return (
       <div>
-        <Fab color="error" style={{ width: 210, borderRadius: 4, margin: 10, opacity: 1 }} onClick={this.handleClickOpen('paper')}>Sign-Up/Login with Email</Fab>
+        <Fab color="error" 
+          style={{ 
+            width: 210, 
+            borderRadius: 4, 
+            margin: 10, 
+            opacity: 1 
+          }} 
+          onClick={this.handleClickOpen('paper')}>
+          Sign Up with Email
+        </Fab>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
@@ -125,7 +121,7 @@ class SignUpForm extends Component {
           aria-labelledby="scroll-dialog-title"
           style={{ 'z-index': 30, 'background-color': 'primary' }}>
           <DialogTitle>
-            SIGN UP
+            SIGN UP 
           </DialogTitle>
           <LineDivider />
           <DialogContent>
@@ -170,6 +166,7 @@ class SignUpForm extends Component {
                 placeholder="Confirm Password"
                 name="passwordTwo"
               />
+              {error && <p>{error.message}</p>}
             </form>
           </DialogContent>
           <DialogActions>

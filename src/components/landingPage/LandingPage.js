@@ -9,6 +9,7 @@ import '../App.css'
 import {NavLink, Redirect} from 'react-router-dom'
 import Fab from '@material-ui/core/Fab'
 import SignUpForm from './SignUp'
+import ForgetPasswordForm from './ForgetPassword'
 
 
 import store from '../../redux/store'
@@ -54,7 +55,7 @@ class LandingPage extends Component {
     console.log(user);
 
          const auth = store.getState();
-         if (auth.user.userID) return <Redirect to = "/home" / >
+         if (auth.user.userID) return <Redirect to = "/home" />
 
     if (!user.userID && !user.auth) {
     return (
@@ -69,6 +70,7 @@ class LandingPage extends Component {
                 <LoginComponent sendData={this.userLogin} provider={new firebase.auth.GoogleAuthProvider()} providerName={`Google`}/>
                 <LoginComponent sendData={this.userLogin} provider={new firebase.auth.FacebookAuthProvider()} providerName={`FaceBook`}/>
                 <SignUpForm />
+                <ForgetPasswordForm/>
               </div>
           </div>
         </div>
