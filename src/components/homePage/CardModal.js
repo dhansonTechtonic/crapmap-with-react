@@ -10,6 +10,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import LineDivider from '../addEditPin/LineDivider'
+import { Dialog } from '@material-ui/core';
+
 
 const styles = {
   card: {
@@ -20,6 +23,8 @@ const styles = {
     height: 240,
   }
 };
+
+
 
 class CardModal extends Component {
     constructor (props){
@@ -37,16 +42,17 @@ render () {
     let name = this.props.data.name.stringValue
     let img = this.props.data.img.stringValue
     console.log(this.props.data)
-    // let location = this.props.data.location.lat
-
     return (
 
-        <Card className={styles.card}>
+
+        <Card className={styles.card} style={{ 'z-index': 30, 'background-color': 'black' }} zIndex={30}>>
+        
           <CardActionArea>
             <CardMedia
               component="img"
               alt="Item"
               className={styles.media}
+              style={{ 'z-index': 30, 'background-color': 'primary' }}
               height="250"
               image={img}
               title={name}
@@ -64,15 +70,19 @@ render () {
               </Typography>
         
             </CardContent>
-      
+            <LineDivider />
           </CardActionArea>
           <CardActions>
             <Button size="medium" color="primary">
-              Dibs
+              DIBS
             </Button>
             <Button size="medium" color="primary">
-              Pass
+              PASS
             </Button>
+            <Button onClick={this.handleClose} color="error">
+              CLOSE
+            </Button>
+
           </CardActions>
         </Card>
       );
