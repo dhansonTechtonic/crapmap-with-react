@@ -92,6 +92,14 @@ class AddPinModal extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
 
+        let userID;
+
+        if (store.getState().user.userID){
+            userID = store.getState().user.userID;
+        } else {
+            userID = JSON.parse(localStorage.getItem('userID'));
+        }
+
         let pin = {
             "title": this.state.title,
             // "description": this.state.description
@@ -101,9 +109,8 @@ class AddPinModal extends Component {
             "category": this.state.category,
             "img": this.state.dataURL,
             "size": '2',
-            "userID": 'testID'
+            "userID": userID
         }
-
         store.dispatch(newPin(pin));
     }
 
