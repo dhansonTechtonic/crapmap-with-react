@@ -20,12 +20,16 @@ export default class ImageButton extends Component {
         this.props.sendData(e.target.files[0]);
     }
 
-    render() {
-        return (
-            <div onClick={this._uploadImage}>
-                <input type="file" onChange={this._handleChange} name="postingImg" id="file" class="inputfile" accept="image/*" style={{'padding-top':20}}/>
-                <label for="file"></label>
-            </div>
-        )
-    }
+
+  render() {
+    return (
+      <div onClick={this._uploadImage}>
+        <input type="file" onChange={this._handleChange} name="postingImg" id="file" class="inputfile" accept="image/*" />
+      </div>
+    )
+  }
 }
+
+
+// article on the input label thing https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/
+

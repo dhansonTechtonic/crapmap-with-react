@@ -59,9 +59,8 @@ class HomePage extends Component {
   }
 
   componentDidUpdate(prevProps){
-    if(this.props.pins !== prevProps.pins) {
-      this.props.pins.then((val) => {this.setState({pins: val.pins})})
-      
+    if (this.props.pins !== prevProps.pins) {
+      this.props.pins.then((val) => { this.setState({ pins: val.pins }) })
     }
   }
 

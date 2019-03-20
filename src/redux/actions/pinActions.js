@@ -5,41 +5,16 @@ export const DELETE_PIN = 'DELETE_PIN';
 export const GET_PINS_FULFILLED = 'GET_PINS_FULFILLED';
 
 
-//userObject needs to contain userID and authentication
-
-// UPDATES/EDITS PIN
-export function updatePin(userObject) {
-    console.log(userObject)
-    return {
-        type: UPDATE_PIN,
-        payload: userObject
-    }
-};
-
-// DELETES PIN BY SENDING OBJECT TO ENDPOINT
-
-export function deletePin(userObject) {
-
-    console.log(userObject)
-    return {
-        type: DELETE_PIN,
-        payload: userObject
-    }
-}
-
 // GET PINS - (NEEDS USER OBJECT SEARCH QUERY)
-
 export const getPins = () => ({
     type: GET_PINS,
     async payload () {
-        const data = await fetchPins();
-
+        const data = await getPinsFetch();
         return data;
     }
 })
 
-
-function fetchPins(input){
+function getPinsFetch(input){
     return fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/get', {
             method: 'GET',
     })
@@ -51,19 +26,16 @@ function fetchPins(input){
         .catch(err => console.error("Error", err))
 }
 
-// CREATES NEW PIN
 
+// CREATES NEW PIN
 export const newPin = (input) => ({
     type: NEW_PIN,
     async payload() {
-        await postPin(input);
+        await newPinFetch(input);
     }
 })
 
-export async function postPin(input) {
-
-    // console.log(input);
-
+export async function newPinFetch(input) {
     fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/new', {
             method: 'POST',
             body: JSON.stringify(input),
@@ -75,3 +47,40 @@ export async function postPin(input) {
         .catch(err => console.error("Error", err))
 }
 
+
+// DELETE PIN - NEEDS TESTING
+export const deletePin = (input) => ({
+    type: DELETE_PIN,
+    async payload() {
+        await deletePinFetch(input);
+    }
+})
+
+function deletePinFetch(input) {
+    return fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/delete/' + input, {
+                method: 'DELETE'
+        })
+            .then(res => console.log(res))
+            .catch(err => console.error("Error", err))
+}
+
+
+// UPDATE/EDITS PIN - NEEDS TESTING
+export const updatePin = (input) => ({
+    type: UPDATE_PIN,
+    async payload() {
+        await updatePinFetch(input);
+    }
+})
+
+function updatePinFetch(input){
+    fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/update', {
+        method: 'UPDATE',
+        body: JSON.stringify(input),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+        .then(res => console.log(res))
+        .catch(err => console.error(err))
+    })
+}

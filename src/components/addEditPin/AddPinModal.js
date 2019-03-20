@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import firebase from './../../firebase'
+import firebase from './../../firebase.js'
 import LineDivider from './LineDivider'
 import CategoryButtons from '../buttons/CategoryButtons'
 import BoxButtons from '../buttons/BoxButtons.js'
@@ -17,6 +17,10 @@ import store from '../../redux/store/index';
 import { newPin } from '../../redux/actions/pinActions';
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Arrow from '../assets/crapmap-locator.png'
+import store from '../../redux/store/index';
+import {newPin} from '../../redux/actions/pinActions';
+import PropTypes from 'prop-types'
+
 class AddPinModal extends Component {
     constructor(props) {
         super(props);
@@ -40,6 +44,23 @@ class AddPinModal extends Component {
         this.setState({ open: false });
     };
 
+    _handleImg(img){
+        this.setState({
+            dataURL: img,
+        })
+    }
+
+     _uploadImg(){
+        if(this.state.dataURL){
+            let storage = firebase.storage();
+            storage.ref(`pinsImages/${new Date().getTime()}`).put(this.state.dataURL).then((snapshot) =>
+            console.log(snapshot));
+        }else{
+            return false
+        }
+        return false
+     }
+
     handleClick(e) {
         switch (e.target.value) {
             case "car":
@@ -59,31 +80,13 @@ class AddPinModal extends Component {
         }
     }
 
-    _handleImg(img) {
-        this.setState({
-            dataURL: img,
-        })
-    }
-
-    _uploadImg() {
-        if (this.state.dataURL) {
-            let storage = firebase.storage();
-            storage.ref(`pinsImages/${new Date().getTime()}`).put(this.state.dataURL).then((snapshot) =>
-                console.log(snapshot));
-        } else {
-            return false
-        }
-        return false
-    }
-
-
     handleTitleChange = (e) => {
         this.setState({
             title: e.target.value
         })
     }
-
-    handleLocationChange = (e) => {
+    
+    handleLocationChange = (e) =>{
         this.setState({
             location: e.target.value
         })
@@ -105,7 +108,6 @@ class AddPinModal extends Component {
         }
 
         store.dispatch(newPin(pin));
-
     }
 
     render() {
@@ -126,7 +128,7 @@ class AddPinModal extends Component {
                     </DialogTitle>
                     <LineDivider />
                     <DialogContent>
-                        <form>
+                        <form onSubmit={this.handleSubmit}>
                             <CategoryButtons handleClick={this.handleClick}/>
                             <TextField
                                 id="outlined-name"
@@ -167,6 +169,7 @@ class AddPinModal extends Component {
                         <Button onClick={this.handleClose} color="error">CANCEL</Button>
                     </DialogActions>
                 </Dialog>
+
             </div>
         )
     }
