@@ -12,13 +12,6 @@ import { withStyles } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab'
 import LineDivider from '../addEditPin/LineDivider.js';
 
-// const PasswordForgetPage = () => (
-//   <div>
-//     <h1>PasswordForget</h1>
-//     <PasswordForgetForm />
-//   </div>
-// );
-
 const INITIAL_STATE = {
   email: '',
   error: null,
