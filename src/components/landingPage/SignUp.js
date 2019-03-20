@@ -15,7 +15,7 @@ import LineDivider from '../addEditPin/LineDivider.js';
 import store from '../../redux/store'
 import {registerUser} from '../../redux/actions/userActions'
 
-import {NavLink} from 'react-router-dom';
+import {NavLink, Redirect } from 'react-router-dom';
 
 
 const INITIAL_STATE = {
@@ -42,6 +42,7 @@ class SignUpForm extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
+
   };
 
   doCreateUserWithEmailAndPassword = (email, password) =>
@@ -77,6 +78,7 @@ class SignUpForm extends Component {
           auth: true
         }
         store.dispatch(registerUser(actionObject));
+        this.props.sendData(authUser);
 
         this.setState({ ...INITIAL_STATE });
       })
@@ -85,7 +87,7 @@ class SignUpForm extends Component {
       });
 
 
-    event.preventDefault();
+    // event.preventDefault();
 
   }
 
@@ -111,6 +113,8 @@ class SignUpForm extends Component {
       email === '' ||
       username === '';
     
+ 
+
     return (
       <div>
         <Fab color="error" style={{ width: 210, borderRadius: 4, margin: 10, opacity: 1 }} onClick={this.handleClickOpen('paper')}>Sign-Up/Login with Email</Fab>
@@ -166,13 +170,10 @@ class SignUpForm extends Component {
                 placeholder="Confirm Password"
                 name="passwordTwo"
               />
-                  
-                          <NavLink exact to='/'><button>back</button></NavLink>
-
             </form>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} disabled={isInvalid} type="submit" color="primary">Sign-Up</Button>
+            <Button onClick={this.onSubmit} disabled={isInvalid} type="submit" color="primary">Sign-Up</Button>
             <Button onClick={this.handleClose} color="error">Cancel</Button>
           </DialogActions>
         </Dialog>
@@ -187,13 +188,5 @@ SignUpForm.propTypes = {
   show: PropTypes.bool,
   children: PropTypes.node
 };
-
-// const SignUpLink = () => (
-//   <p>
-//     Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-//   </p>
-// );
-
-// export default SignUpPage;
 
 export default SignUpForm;
