@@ -1,65 +1,77 @@
 const functions = require("firebase-functions");
-const cors = require("cors");
-const admin = require('firebase-admin');
+const admin = require("firebase-admin");
+admin.initializeApp(functions.config().firebase);
+
+const cors = require("cors")({origin: true});
 const express = require('express');
-admin.initializeApp(functions.config().firebase); //importing firebase-functions in which case you don't need to service account JSON at all
-  
+//const cookieParser = require('cookie-parser');
 
-const listings = express();
-let db = admin.firestore();
-listings.use(cors({ origin: true}));
+const PinController = require('./controllers/PinController');
+const UserController = require('./controllers/UserController');
+const MapController = require('./controllers/MapController')
+const app = express();
 
-listings.get("/myListings", (request, response) =>{
-    let itemsRef = db.collection('listings');
-    let query = itemsRef.get().then(function(querySnapshot){
-        if(querySnapshot){
-            console.log(querySnapshot.docs);
-            response.send(querySnapshot.docs.json());
-        }else{
-            response.send("Collection does not exist");
-        }
-        return false;
-    }).catch (err => err)
-});
+// Express middleware that validates Firebase ID Tokens passed in the Authorization HTTP header.
+// The Firebase ID token needs to be passed as a Bearer token in the Authorization HTTP header like this:
+// `Authorization: Bearer <Firebase ID Token>`.
+// when decoded successfully, the ID Token content will be added as `req.user`.
+//https://github.com/firebase/functions-samples/blob/master/authorized-https-endpoint/functions/index.js
 
-listings.post('/addListing', (request,response) =>{
-    let posting ={
-        location: request.location,
-        tags: request.tags,
-        title: request.title,
-        user: request.user
-    }
-    let itemsRef = db.collection('listings');
-    itemsRef.add(posting)
-    .then(() => console.log('success'))
-    .catch(()=> console.log('error'))
-    return false
-    });
+// const validateFirebaseIdToken = (req, res, next) => {
+//   console.log('Check if request is authorized with Firebase ID token');
 
-listings.post('/editListing', (request,response) =>{
-    let posting ={
-        location: request.location,
-        tags: request.tags,
-        title: request.title,
-        user: request.user
-    }
-    let itemsRef = db.collection('listings');
-    itemsRef.set(posting, { merge: true })
-    .then(() => console.log('success'))
-    .catch(()=> console.log('error'));
-    return false
-    });
+//   if ((!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) &&
+//       !(req.cookies && req.cookies.__session)) {
+//     console.error('No Firebase ID token was passed as a Bearer token in the Authorization header.',
+//         'Make sure you authorize your request by providing the following HTTP header:',
+//         'Authorization: Bearer <Firebase ID Token>',
+//         'or by passing a "__session" cookie.');
+//     res.status(403).send('Unauthorized');
+//     return;
+// }
 
-const apiListings = functions.https.onRequest((request, response) => {
+// let idToken;
+// if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
+//   console.log('Found "Authorization" header');
+//   // Read the ID Token from the Authorization header.
+//   idToken = req.headers.authorization.split('Bearer ')[1];
+// } else if(req.cookies) {
+//   console.log('Found "__session" cookie');
+//   // Read the ID Token from cookie.
+//   idToken = req.cookies.__session;
+// } else {
+//   // No cookie
+//   res.status(403).send('Unauthorized');
+//   return;
+// }
+
+// admin.auth().verifyIdToken(idToken).then((decodedIdToken) => {
+//   console.log('ID Token correctly decoded', decodedIdToken);
+//   req.user = decodedIdToken;
+//   return next();
+// }).catch((error) => {
+//   console.error('Error while verifying Firebase ID token:', error);
+//   res.status(403).send('Unauthorized');
+// });
+// };
+
+//-------end validation---//
+
+app.use(cors);
+//app.use(cookieParser);
+// app.use(validateFirebaseIdToken);
+app.use('/pins', PinController);
+app.use('/user', UserController);
+app.use('/map', MapController);
+
+ const api = functions.https.onRequest((request, response) => {
     if (!request.path) {
       request.url = `/${request.url}` // prepend '/' to keep query params if any
     }
-    return listings(request, response)
+    return app(request, response)
   })
 
-
-
-module.exports= {
-    apiListings
+  module.exports= {
+    api
 }
 
