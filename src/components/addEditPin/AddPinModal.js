@@ -114,6 +114,37 @@ class AddPinModal extends Component {
         ).catch( err => console.log('there has been an error' + err));
         //store.dispatch(newPin(pin));
     }
+
+    _getCurrentLocation = async() =>{
+        if(navigator.geolocation){
+         navigator.geolocation.getCurrentPosition((position) => {
+
+            let queryLat = position.coords.latitude;
+            let queryLng = position.coords.longitude;
+            
+
+            let coordObject = {
+                lat:  position.coords.latitude.toString(),
+                lng: position.coords.longitude.toString()
+            }
+
+            console.log(coordObject);
+            console.log(JSON.stringify(coordObject));
+
+            fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/map/reverse-geo-code',{
+                method: "POST",
+                header: {"Content-Type": "application/json"},
+                body: JSON.stringify(coordObject),
+            })
+            .then(response => response.json())
+            .then( data => console.log(data));
+
+         });
+        }else{
+            console.log('geolocation not availiable');
+        }
+         
+    }
    
     render() {
         return (
@@ -157,7 +188,7 @@ class AddPinModal extends Component {
                                 InputProps={{
                                     endAdornment: (
                                         <InputAdornment position="end">
-                                            <IconButton >
+                                            <IconButton onClick={this._getCurrentLocation} >
                                                 <img class="marker-style" src={Arrow} style={{ width: 30, height: 30, marginRight: -10 }}></img>
                                             </IconButton>
                                         </InputAdornment>
