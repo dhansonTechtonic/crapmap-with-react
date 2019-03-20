@@ -14,12 +14,9 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Button from '@material-ui/core/Button'
 import PropTypes from 'prop-types'
 import store from '../../redux/store/index';
-import { newPin } from '../../redux/actions/pinActions';
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Arrow from '../assets/crapmap-locator.png'
-import store from '../../redux/store/index';
 import {newPin} from '../../redux/actions/pinActions';
-import PropTypes from 'prop-types'
 
 class AddPinModal extends Component {
     constructor(props) {
