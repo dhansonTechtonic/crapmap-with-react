@@ -95,9 +95,13 @@ class AddPinModal extends Component {
         let userID;
 
         if (store.getState().user.userID){
+            console.group('if')
             userID = store.getState().user.userID;
+            console.log(userID)
         } else {
+            console.log('else')
             userID = JSON.parse(localStorage.getItem('userID'));
+            console.log(userID)
         }
 
         let pin = {
@@ -112,6 +116,7 @@ class AddPinModal extends Component {
             "userID": userID
         }
         store.dispatch(newPin(pin));
+        this.setState({open: false});
     }
 
     render() {
@@ -169,7 +174,7 @@ class AddPinModal extends Component {
                         </form>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} onClick={this.handleSubmit} color="primary">POST</Button>
+                        <Button onClick={this.handleSubmit} color="primary">POST</Button>
                         <Button onClick={this.handleClose} color="error">CANCEL</Button>
                     </DialogActions>
                 </Dialog>
