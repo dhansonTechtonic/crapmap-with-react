@@ -33,4 +33,27 @@ router.post("/reverse-geo-code", jsonParser, (req, res) =>{
     return false;
 });
 
+router.post("/geo-code", jsonParser, (req, res) =>{
+    
+    let reqAdd = req.body.address;   
+    let urlAdd = reqAdd.replace(/\s/,"+");
+    let apiKey = functions.config().googlemapgeokey.key  
+    let url= `https://maps.googleapis.com/maps/api/geocode/json?address=${urlAdd}&key=${apiKey}`
+
+    let options = {
+        uri: url,
+        json: true
+    }
+
+    rp(options).then((urlResp) => {
+        console.log(urlResp);
+        res.send(urlResp);
+        return true;
+    }).catch( (err) => {
+        res.send(err)
+    });
+    
+    return false;
+});
+
 module.exports = router;
