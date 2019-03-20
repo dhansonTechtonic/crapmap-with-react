@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 
 import ViewPinModal from './ViewPinModal';
 import CardModal from './CardModal';
+import { Card } from '@material-ui/core';
 // import { func } from 'prop-types';
 
 const mapStylesDefaults = {
@@ -21,16 +22,21 @@ export class MapContainer extends Component {
       viewCardIsOpen: false,
       user: {},
       pins: [],
+      pinData: {}
       }
       this.toggleCardModal = this.toggleCardModal.bind(this)
     };
   
 
-  toggleCardModal = () => {
-    console.log("open/closed")
+  toggleCardModal = (e) => {
+    let targetPin = e;
+    // console.log(data)
+    console.log("open/closed", e.name, e.img, e.position);
     this.setState({
       viewCardIsOpen: !this.state.viewCardIsOpen,
+      pinData: targetPin
     });
+
   }
 
   componentDidUpdate(prevProps) { 
@@ -73,6 +79,7 @@ export class MapContainer extends Component {
  <Marker
     key={pin._ref._path.segments[1]}
     name={pin._fieldsProto.description}
+    img={pin._fieldsProto.img.stringValue}
     position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
                 lng:pin._fieldsProto.location.mapValue.fields.lng.doubleValue }}
     onClick={this.toggleCardModal}

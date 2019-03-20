@@ -23,9 +23,9 @@ const styles = {
 
 
 
+
 function CardModal(props, data) {
     // console.log("insideprops", data)
-   
     const { classes } = props;
   return (
     <Card className={classes.card}>
@@ -42,11 +42,11 @@ function CardModal(props, data) {
         <CardContent>
 
           <Typography gutterBottom variant="h5" component="h2">
-            {data.title}
+            {/* {data.title} */}
           </Typography>
 
           <Typography component="p">
-            {data.location}
+            {/* {data.location} */}
           </Typography>
     
         </CardContent>
@@ -63,12 +63,6 @@ function CardModal(props, data) {
     </Card>
   );
 }
-
-
-
-
-
-
 
 export default connect(mapStateToProps)(withStyles(styles)(CardModal));
 
