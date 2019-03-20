@@ -7,7 +7,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions'
 import LineDivider from '../addEditPin/LineDivider'
-import IconButton from '@material-ui/core/IconButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from '@material-ui/core/Button'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -74,6 +73,8 @@ class MyListingsModal extends Component {
           </Dialog>
         </div>
       )
+  }
+}
         
 MyListingsModal.propTypes = {
   onClose: PropTypes.func.isRequired,

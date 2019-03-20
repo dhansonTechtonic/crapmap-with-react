@@ -16,9 +16,7 @@ import PropTypes from 'prop-types';
 import store from '../../redux/store/index';
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Arrow from '../assets/crapmap-locator.png';
-import store from '../../redux/store/index';
 import {newPin} from '../../redux/actions/pinActions';
-import PropTypes from 'prop-types';
 
 class AddPinModal extends Component {
     constructor(props) {
@@ -36,7 +34,7 @@ class AddPinModal extends Component {
             imgName: null,
             category: 'All'
         }
-        this.handleClick = this.handleClick.bind(this);
+        this._changeCategory = this._changeCategory.bind(this);
     }
 
     handleClickOpen = scroll => () => {
@@ -66,15 +64,15 @@ class AddPinModal extends Component {
         }
      }
 
-    handleClick(e) {
-        switch (e.target.value) {
-            case "car":
+    _changeCategory(category) {
+        switch (category) {
+            case "Auto Parts":
                 this.setState({ category: 'Auto Parts' }, () => { console.log(this.state.category) });
                 break;
-            case "baseball-ball":
+            case "Sports":
                 this.setState({ category: "Sporting" }, () => { console.log(this.state.category) });
                 break;
-            case "tv":
+            case "Gadgets":
                 this.setState({ category: "Electronics" }, () => { console.log(this.state.category) });
                 break;
             case "question-circle":
@@ -136,7 +134,7 @@ class AddPinModal extends Component {
                     <LineDivider />
                     <DialogContent>
                         <form onSubmit={this.handleSubmit}>
-                            <CategoryButtons handleClick={this.handleClick}/>
+                            <CategoryButtons  sendValue={this._changeCategory}/>
                             <TextField
                                 id="outlined-name"
                                 label="Title"
