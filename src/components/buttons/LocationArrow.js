@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Arrow from '../crapmap-locator.png'
-import './App.css'
+import Arrow from '../assets/crapmap-locator.png'
+import '../App.css'
 
 export default class LocationArrow extends Component {
   render() {

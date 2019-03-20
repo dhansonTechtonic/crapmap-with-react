@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
-import '../App.css'
-import ExitButton from '../buttons/ExitButton'
-
 import PropTypes from 'prop-types'
+
+import MyListingsPost from './MyListingsPost'
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions'
+import LineDivider from '../addEditPin/LineDivider'
+import IconButton from '@material-ui/core/IconButton'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Button from '@material-ui/core/Button'
+import ListItemText from '@material-ui/core/ListItemText'
 import {connect} from 'react-redux';
 import store from '../../redux/store';
 
@@ -11,14 +19,16 @@ import { IconButton } from '@material-ui/core';
 import {deletePin} from '../../redux/actions/pinActions'
 
 class MyListingsModal extends Component {
-  constructor(){
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      open: false,
+      scroll: 'paper',
       user: {},
       pins: []
     }
   }
-
+    
   componentDidUpdate(prevProps) { 
     // reduces pins promise to just pin array on update
     if (this.props.pins !== prevProps.pins) {
@@ -26,56 +36,51 @@ class MyListingsModal extends Component {
     }
   }
 
-  handleDeletePin(input){
-    store.dispatch(deletePin(input));
-  }
+
+  handleClickOpen = scroll => () => {
+    this.setState({ open: true, scroll });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  // componentDidMount(){
+  //   this._getListings();
+  // }
 
   render() {
-    if (!this.props.show) {
-      return null;
-    }
-
-    let posts = this.state.pins.map((pin) => {
-
-      // each post needs key (unique property)
-      // also need to ensure on the front end that no posts get submitted with a single empty field.
-
-      console.log(pin);
-
-      return <div className='pin-card'>
-        <span className='my-pin-image'></span>
-        <p className='my-pin-title'>{pin._fieldsProto.title.stringValue}</p>
-        <p className='my-pin-category'>{pin._fieldsProto.category.stringValue}</p>
-        <p className='my-pin-category'>{pin._ref._path.segments[1]}</p>
-
-        <button className='my-pin-delete' onClick={() => {
-          this.handleDeletePin(pin._ref._path.segments[1])
-        }}></button>
-      </div>
-    })
-
-
     return (
-        <div className='vertical-modal'>  
-            <div className="header">
-                <h2 >My Pins</h2>
-            <IconButton onClick={this.props.onClose}>
-            <ExitButton />
-            </IconButton>
-            </div>
-            <hr/>
-            <div className="items-listing-container">
-              {posts}
-            </div>
+      <div>
+        <li onClick={this.handleClickOpen('paper')} className="nav-links">
+            MY CRAP
+          </li>
+          <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          scroll={this.state.scroll}
+          aria-labelledby="scroll-dialog-title"
+          style={{ 'z-index': 30, 'background-color': 'primary' }}>
+            <DialogTitle>
+              MY CRAP
+            </DialogTitle>
+            <LineDivider />
+            <DialogContent>
+              <MyListingsPost />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="error">CLOSE</Button>
+            </DialogActions>
+          </Dialog>
         </div>
-)}}
-
+      )
+        
 MyListingsModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   show: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
 }
-
+        
 function mapStateToProps(reduxState) {
   return {
     user: reduxState.user,
@@ -84,3 +89,4 @@ function mapStateToProps(reduxState) {
 }
 
 export default connect(mapStateToProps)(MyListingsModal);
+

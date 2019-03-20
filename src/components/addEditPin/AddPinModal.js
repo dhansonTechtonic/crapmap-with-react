@@ -1,32 +1,48 @@
 import React, { Component } from 'react'
 import firebase from './../../firebase.js'
-
 import LineDivider from './LineDivider'
 import CategoryButtons from '../buttons/CategoryButtons'
-import ExitButton from '../buttons/ExitButton.js'
 import BoxButtons from '../buttons/BoxButtons.js'
-import ImageButton from '../buttons/ImageButton.js'
-import MakePostButton from '../buttons/MakePostButton.js'
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField'
+import IconButton from '@material-ui/core/IconButton'
+import ImageButton from '../buttons/ImageButton'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import Button from '@material-ui/core/Button'
+import PropTypes from 'prop-types'
+import store from '../../redux/store/index';
+import { newPin } from '../../redux/actions/pinActions';
+import InputAdornment from '@material-ui/core/InputAdornment'
+import Arrow from '../assets/crapmap-locator.png'
 import store from '../../redux/store/index';
 import {newPin} from '../../redux/actions/pinActions';
-
-import '../App.css'
-
 import PropTypes from 'prop-types'
 
-export default class AddPinModal extends Component {
-
+class AddPinModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: 'Pick A Category',
+            title: '',
+            location: '',
+            open: false,
+            scroll: 'paper',
             dataURL: '',
-            imgName: null
-
+            imgName: null,
+            category: 'All'
         }
         this.handleClick = this.handleClick.bind(this);
     }
+
+    handleClickOpen = scroll => () => {
+        this.setState({ open: true, scroll });
+    };
+
+    handleClose = () => {
+        this.setState({ open: false });
+    };
 
     _handleImg(img){
         this.setState({
@@ -48,7 +64,7 @@ export default class AddPinModal extends Component {
     handleClick(e) {
         switch (e.target.value) {
             case "car":
-                this.setState({ category: 'Auto-Parts' }, () => { console.log(this.state.category) });
+                this.setState({ category: 'Auto Parts' }, () => { console.log(this.state.category) });
                 break;
             case "baseball-ball":
                 this.setState({ category: "Sporting" }, () => { console.log(this.state.category) });
@@ -92,44 +108,68 @@ export default class AddPinModal extends Component {
         }
 
         store.dispatch(newPin(pin));
-
     }
 
     render() {
-
-        if (!this.props.show) {
-            return null;
-        }
-
         return (
-            <div className='vertical-modal'>
-                <div className='header'>
-                    <h2>New Pin</h2>
-                    <ExitButton />
-                </div>
-                <LineDivider />
-                <form onSubmit={this.handleSubmit}>
-                    <h1 className="category-header">{this.state.category}</h1>
-                    <div className='modal-row'>
-                        <CategoryButtons handleClick={this.handleClick} />
-                    </div>
-                    <div className='modal-row'>
-                        <input name='title' placeholder='Pin Title' onChange={this.handleTitleChange}></input>
-                    </div>
-                    <div className='modal-row'>
-                        <input name='location' placeholder='Location' onChange={this.handleLocationChange}></input>
-                    </div>
-                    <div>
-                        <BoxButtons />
-                    </div>
-                    <div className='modal-row'>
-                        <ImageButton sendData={this._handleImg.bind(this)} />
-                    </div>
+            <div>
+                <IconButton className="new-pin-button" onClick={this.handleClickOpen('paper')}>
+                    <FontAwesomeIcon icon="plus-circle" />
+                </IconButton>
+                <Dialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    scroll={this.state.scroll}
+                    aria-labelledby="scroll-dialog-title"
+                    style={{'z-index': 30, 'background-color': 'primary'}}
+                >
+                    <DialogTitle >
+                        ADD NEW CRAP
+                    </DialogTitle>
                     <LineDivider />
-                    <div className='modal-row'>
-                        <button onClick={this.handleSubmit}>submit</button>
-                    </div>
-                </form>
+                    <DialogContent>
+                        <form onSubmit={this.handleSubmit}>
+                            <CategoryButtons handleClick={this.handleClick}/>
+                            <TextField
+                                id="outlined-name"
+                                label="Title"
+                                className="pinTitle"
+                                value={this.state.name}
+                                onChange={this.handleTitleChange}
+                                margin="normal"
+                                variant="outlined"
+                                placeholder="Name your crap"
+                            />
+                            <TextField
+                                id="outlined-name"
+                                label="Location"
+                                className="pinLocation"
+                                value={this.state.location}
+                                onChange={this.handleLocationChange}
+                                margin="normal"
+                                variant="outlined"
+                                placeholder="Where that crap at?"
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton >
+                                                <img class="marker-style" src={Arrow} style={{ width: 30, height: 30, marginRight: -10 }}></img>
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                            <BoxButtons />
+                            <ImageButton sendData={this._handleImg.bind(this)}/>
+                            <LineDivider />
+                        </form>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} onClick={this.handleSubmit} color="primary">POST</Button>
+                        <Button onClick={this.handleClose} color="error">CANCEL</Button>
+                    </DialogActions>
+                </Dialog>
+
             </div>
         )
     }
@@ -137,6 +177,9 @@ export default class AddPinModal extends Component {
 
 AddPinModal.propTypes = {
     onClose: PropTypes.func.isRequired,
+    classes: PropTypes.object.isRequired,
     show: PropTypes.bool,
     children: PropTypes.node
 };
+
+export default AddPinModal
