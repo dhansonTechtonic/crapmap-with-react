@@ -9,6 +9,9 @@ import Button from '@material-ui/core/Button'
 import LineDivider from '../addEditPin/LineDivider';
 import Typography from '@material-ui/core/Typography'
 
+import store from '../../redux/store'
+import {logOutUser} from '../../redux/actions/userActions';
+
 const styles = {
     card: {
         maxWidth: 345,
@@ -35,6 +38,15 @@ class MyAccountModal extends Component{
         this.setState({ open: false });
     };
 
+    handleDelete() {
+        //delete action
+    }
+
+    handleLogOut() {
+        store.dispatch(logOutUser());
+    
+    }
+
     render(){
         return (
             <div>
@@ -49,7 +61,7 @@ class MyAccountModal extends Component{
                     style={{ 'z-index': 30, 'background-color': 'primary' }}>
                     <DialogTitle>
                         MY ACCOUNT
-                        <Button style={{marginLeft: 70}}>
+                        <Button onClick={this.handleLogOut} style={{marginLeft: 70}}>
                             Log Out
                         </Button>
                     </DialogTitle>
@@ -63,7 +75,7 @@ class MyAccountModal extends Component{
                         </Typography>
                     </DialogContent>
                     <DialogActions>
-                        <Button style={{marginRight: 140}}>
+                        <Button onClick={this.handleDelete} style={{marginRight: 140}}>
                             Delete Account
                         </Button>
                         <Button onClick={this.handleClose}>

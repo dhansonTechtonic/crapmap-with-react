@@ -8,8 +8,10 @@ import AddPinModal from '../addEditPin/AddPinModal'
 import SortButtons from '../buttons/SortButtons'
 
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 import {getPins} from '../../redux/actions/pinActions'
+import {registerUser} from '../../redux/actions/userActions'
 class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -41,20 +43,6 @@ class HomePage extends Component {
   }
 
   componentDidMount(){
-
-    // var testObject = {
-    //     "category": "couch",
-    //     "img": "image",
-    //     "description": "ok testing now",
-    //     "lat": "test",
-    //     "lng": "testing",
-    //     "zip": "lol",
-    //     "size": "2",
-    //     "tags": ['joket', 'slendermane'],
-    //     "title": "title of testing pin",
-    //     "userID": "139508829c3"
-    // }
-
     store.dispatch(getPins());
   }
 
@@ -67,7 +55,9 @@ class HomePage extends Component {
   }
 
   render() {
-    // console.log(this.state.pins)
+
+  // USER AUTH LOGIC  
+  if (localStorage.getItem('userID')){
     return (
       <div className="App">
         <AddPinModal />
@@ -76,6 +66,24 @@ class HomePage extends Component {
         <GoogleMap  />
       </div>
     );
+
+  } else if (store.getState().user.auth) {
+
+      var storeObject = store.getState().user;
+
+      localStorage.setItem('userID', JSON.stringify(storeObject.userID));
+
+      return (
+        <div className="App">
+          <AddPinModal />
+          <SortButtons handleClick={this.handleClick}/>
+          <Navigation />
+          <GoogleMap  />
+        </div>
+    ) 
+  } else {
+    return <Redirect to='/'/>
+  }
   }
 }
 

@@ -1,4 +1,5 @@
 export const REGISTER_USER = 'REGISTER_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
 
 
 
@@ -32,13 +33,12 @@ function updateUser(userObject) {
     }
 };
 
-function logOutUser(userObject) {
-    console.log(userObject)
-    return {
+export const logOutUser = () => ({
+    type: LOGOUT_USER,
+    payload: {
         type: "LOGOUT_USER",
-        payload: userObject
     }
-};
+});
 
 function deleteUser(userObject) {
     console.log(userObject)
