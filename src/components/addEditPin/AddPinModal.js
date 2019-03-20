@@ -31,8 +31,7 @@ class AddPinModal extends Component {
             open: false,
             scroll: 'paper',
             dataURL: '',
-            imgName: null,
-            category: 'All'
+            imgName: null
         }
         this._changeCategory = this._changeCategory.bind(this);
     }
@@ -43,6 +42,7 @@ class AddPinModal extends Component {
 
     handleClose = () => {
         this.setState({ open: false });
+
     };
 
     _handleImg(img){
@@ -101,12 +101,12 @@ class AddPinModal extends Component {
                 let pin = {
                     "title": this.state.title,
                     // "description": this.state.description
-                    "lat": this.state.location,
-                    "lng": this.state.location,
-                    "zip": this.state.location,
+                    "lat": this.state.lat,
+                    "lng": this.state.lng,
+                    "address": this.state.location,
                     "category": this.state.category,
                     "img": this.state.fireBaseStorageFullUrl,
-                    "size": '2',
+                    "size": this.state.size,
                     "userID": 'testID'
                 }
                 console.log(pin);
@@ -119,31 +119,40 @@ class AddPinModal extends Component {
         if(navigator.geolocation){
          navigator.geolocation.getCurrentPosition((position) => {
 
-            let queryLat = position.coords.latitude;
-            let queryLng = position.coords.longitude;
-            
-
             let coordObject = {
                 lat:  position.coords.latitude.toString(),
                 lng: position.coords.longitude.toString()
             }
 
-            console.log(coordObject);
-            console.log(JSON.stringify(coordObject));
-
             fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/map/reverse-geo-code',{
                 method: "POST",
-                header: {"Content-Type": "application/json"},
+                headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(coordObject),
             })
             .then(response => response.json())
-            .then( data => console.log(data));
+            .then( data =>{
+                console.log(data);
+                let address = data.results[0].formatted_address;
+                console.log(address);
+
+                this.setState({
+                    location: address,
+                    lat:  position.coords.latitude,
+                    lng: position.coords.longitude
+                })
+            }).catch(console.log('An Error has occured'));
 
          });
         }else{
             console.log('geolocation not availiable');
         }
          
+    }
+
+    _boxSize(value){
+        this.setState({
+            size: value
+        })
     }
    
     render() {
@@ -195,7 +204,7 @@ class AddPinModal extends Component {
                                     ),
                                 }}
                             />
-                            <BoxButtons />
+                            <BoxButtons sendValue={this._boxSize.bind(this)} />
                             <ImageButton sendData={this._handleImg.bind(this)}/>
                             <LineDivider />
                         </form>
