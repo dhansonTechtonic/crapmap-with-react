@@ -17,9 +17,15 @@ export const deleteUser = () => {
     let user = firebase.auth().currentUser;
     user.delete().then(function() {
         console.log('user deleted', user)
+        // deletePins action creator of userID
     }).catch(function(error){
         console.log('user not deleted', error)
     })
+}
+
+export const getFirebaseUser = () => {
+    let user = firebase.auth().currentUser
+    return user;
 }
 
 

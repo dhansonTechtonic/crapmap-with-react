@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography'
 import store from '../../redux/store'
 import {logOutUser} from '../../redux/actions/userActions';
 
-import {deleteUser} from '../../firebase.js'
+import {deleteUser, getFirebaseUser} from '../../firebase.js'
 
 const styles = {
     card: {
@@ -30,6 +30,11 @@ class MyAccountModal extends Component{
             open: false,
             scroll: 'paper'
         }
+    }
+
+    componentDidMount(){
+        let currentUser = getFirebaseUser();
+        console.log(currentUser)
     }
 
     handleClickOpen = scroll => () => {
