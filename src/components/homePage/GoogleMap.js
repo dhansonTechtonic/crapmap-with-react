@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker, In } from 'google-maps-react';
 import { isAbsolute } from 'path';
 import store from '../../redux/store'
 import {connect} from 'react-redux';
 
 import ViewPinModal from './ViewPinModal';
+import CardModal from './CardModal';
 // import { func } from 'prop-types';
 
 const mapStylesDefaults = {
@@ -15,19 +16,20 @@ const mapStylesDefaults = {
 export class MapContainer extends Component {
 
   constructor(props) {
-    super();
+    super(props);
     this.state = {
-      viewPinModalIsOpen: false,
+      viewCardIsOpen: false,
       user: {},
-      pins: []
+      pins: [],
       }
-      this.toggleViewPinModal = this.toggleViewPinModal.bind(this)
+      this.toggleCardModal = this.toggleCardModal.bind(this)
     };
   
 
-  toggleViewPinModal = () => {
+  toggleCardModal = () => {
+    console.log("open/closed")
     this.setState({
-      viewPinModalIsOpen: !this.state.viewPinModalIsOpen,
+      viewCardIsOpen: !this.state.viewCardIsOpen,
     });
   }
 
@@ -38,47 +40,59 @@ export class MapContainer extends Component {
   }
 
   onClick(e){
-    console.log("this is ")
-    console.log(e.target.name)
+    // console.log("this is ", e.name.stringValue, e)
+    let tarObj = {name: e.name.stringValue, location: e.location}
+    // this.fireDisplayViewPin(e)
+    this.setState({showingInfoWindow:true})
+    // this.CardModal
+
   }
 
- render() {
 
+
+ render() {
+  if (!this.props.loaded) {
+    return (<div>Loading...</div>)
+  }
     return (
       <div className='map-container'>
 
-<Map google={this.props.google}
+<Map 
+    google={this.props.google}
     style={mapStylesDefaults}
     className={'map'}
-    zoom={7}  
+    zoom={14}  
     centerAroundCurrentLocation={true}
     draggable={true} 
+    minZoom={13} 
+    maxZoom={25}
 >
 
 {this.state.pins.map((pin) => {
-  // console.log(pin._fieldsProto.description.stringValue)
  return (
-   
  <Marker
-    key={pin._fieldsProto.userID.stringValue}
-    name={ pin._fieldsProto.description}
+    key={pin._ref._path.segments[1]}
+    name={pin._fieldsProto.description}
     position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
                 lng:pin._fieldsProto.location.mapValue.fields.lng.doubleValue }}
-    onClick={this.onClick}
+    onClick={this.toggleCardModal}
     />
- )
-})}
+ )})}
 
 </Map>
 
-<div className="view-pin-container">
-  <ViewPinModal  
+ <div className="view-pin-container">
+   <ViewPinModal  
     show={this.state.viewPinModalIsOpen} 
     onClose={this.state.viewPinModalIsOpen} 
-    onClick={this.toggleViewPinModal}/>
+    /></div>
+
+<div className="view-pin-container">
+  <CardModal show={this.state.viewCardIsOpen}/>
+</div>
+  
 </div>
 
-</div>
 
     );
   }
