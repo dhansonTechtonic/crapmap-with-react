@@ -3,6 +3,7 @@ import { Map, GoogleApiWrapper, Marker, In } from 'google-maps-react';
 import { isAbsolute } from 'path';
 import store from '../../redux/store'
 import {connect} from 'react-redux';
+import iconImg from '../assets/crapmap-locator.png'
 
 // import ViewPinModal from './ViewPinModal';
 import CardModal from './CardModal';
@@ -29,8 +30,7 @@ export class MapContainer extends Component {
 
   toggleCardModal(e) {
     let targetPin = e;
-    // console.log(data)
-    // console.log("open/closed", e.name, e.img, e.position);
+    console.log(targetPin.name)
     this.setState({
       viewCardIsOpen: !this.state.viewCardIsOpen,
       pinData: targetPin
@@ -54,8 +54,6 @@ export class MapContainer extends Component {
 
   }
 
-
-
  render() {
   if (!this.props.loaded) {
     return (<div>Loading...</div>)
@@ -70,19 +68,24 @@ export class MapContainer extends Component {
     zoom={14}  
     centerAroundCurrentLocation={true}
     draggable={true} 
-    minZoom={13} 
+    // minZoom={13} 
     maxZoom={25}
 >
 
 {this.state.pins.map((pin) => {
- return (
+  return (
  <Marker
     key={pin._ref._path.segments[1]}
-    name={pin._fieldsProto.description}
+    name={pin._fieldsProto.title.stringValue}
+    // icon={iconImg}
+    category={pin._fieldsProto.category.stringValue}
     img={pin._fieldsProto.img.stringValue}
     position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
                 lng:pin._fieldsProto.location.mapValue.fields.lng.doubleValue }}
+    
     onClick={this.toggleCardModal}
+    // pin = {pin}
+    crapSize={pin._fieldsProto.size.stringValue}
     />
  )})}
 
