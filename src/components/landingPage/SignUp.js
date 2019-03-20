@@ -12,6 +12,12 @@ import { withStyles } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab'
 import LineDivider from '../addEditPin/LineDivider.js';
 
+import store from '../../redux/store'
+import {registerUser} from '../../redux/actions/userActions'
+
+import {NavLink} from 'react-router-dom';
+
+
 const INITIAL_STATE = {
   username: '',
   email: '',
@@ -51,18 +57,33 @@ class SignUpForm extends Component {
   doPasswordUpdate = password =>
     auth.currentUser.updatePassword(password);
 
+  // isAuthentic() {
+  //   let status;
+  //   if(0 = 0){
+  //     status =  true;
+  //   } else {
+  //     status =  false;
+  //   }
+  //   return status
+  // }
 
   onSubmit = event => {
     const { email, passwordOne } = this.state;
-
-    
       this.doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
+        var actionObject = {
+          userID: authUser.user.uid,
+          // auth: isAuthentic()
+          auth: true
+        }
+        store.dispatch(registerUser(actionObject));
+
         this.setState({ ...INITIAL_STATE });
       })
       .catch(error => {
         this.setState({ error });
       });
+
 
     event.preventDefault();
 
@@ -73,6 +94,7 @@ class SignUpForm extends Component {
       [event.target.name]: event.target.value
     });
   };
+
 
   render() {
     const {
@@ -88,7 +110,7 @@ class SignUpForm extends Component {
       passwordOne === '' ||
       email === '' ||
       username === '';
-
+    
     return (
       <div>
         <Fab color="error" style={{ width: 210, borderRadius: 4, margin: 10, opacity: 1 }} onClick={this.handleClickOpen('paper')}>Sign-Up/Login with Email</Fab>
@@ -144,6 +166,9 @@ class SignUpForm extends Component {
                 placeholder="Confirm Password"
                 name="passwordTwo"
               />
+                  
+                          <NavLink exact to='/'><button>back</button></NavLink>
+
             </form>
           </DialogContent>
           <DialogActions>
