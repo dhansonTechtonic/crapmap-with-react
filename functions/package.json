@@ -15,7 +15,9 @@
     "express": "^4.16.4",
     "firebase-admin": "~7.0.0",
     "firebase-functions": "^2.2.0",
-    "firebase-functions-helper": "^0.6.4"
+    "firebase-functions-helper": "^0.6.4",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
   },
   "devDependencies": {
     "eslint": "^5.12.0",

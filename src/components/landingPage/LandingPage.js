@@ -44,11 +44,17 @@ class LandingPage extends Component {
       });
   }
 
+  componentDidUpdate(){
+    return <Redirect to='/' />
+  }
+
   render() {
     console.log(this.props.user);
     const { user } = store.getState();
     console.log(user);
 
+         const auth = store.getState();
+         if (auth.user.userID) return <Redirect to = "/home" / >
 
     if (!user.userID && !user.auth) {
     return (

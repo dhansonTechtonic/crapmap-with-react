@@ -24,7 +24,7 @@ export default class ImageButton extends Component {
   render() {
     return (
       <div onClick={this._uploadImage}>
-        <input type="file" onChange={this._handleChange} name="postingImg" id="file" class="inputfile" accept="image/*" />
+        <input type="file" onChange={this._handleChange} name="postingImg" id="file" class="inputfile" accept="image/*" style={{marginTop: 20}}/>
       </div>
     )
   }
