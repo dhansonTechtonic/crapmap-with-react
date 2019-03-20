@@ -6,6 +6,8 @@ import LogoComponent from './LogoComponent';
 import LoginComponent from './LoginComponent';
 import '../App.css'
 import {NavLink} from 'react-router-dom'
+import Fab from '@material-ui/core/Fab'
+import SignUpForm from './SignUp'
 
 
 import {connect} from 'react-redux';
@@ -54,9 +56,7 @@ class LandingPage extends Component {
               <div className="loginContainer">
                 <LoginComponent sendData={this.userLogin} provider={new firebase.auth.GoogleAuthProvider()} providerName={`Google`}/>
                 <LoginComponent sendData={this.userLogin} provider={new firebase.auth.FacebookAuthProvider()} providerName={`FaceBook`}/>
-                <NavLink exact to="/signup">
-                  <button>Sign-Up/Login with Email</button>
-                </NavLink>
+                <SignUpForm />
               </div>
             {/* </div> */}
           </div>

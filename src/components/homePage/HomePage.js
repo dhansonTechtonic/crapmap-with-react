@@ -4,7 +4,8 @@ import store from '../../redux/store/'
 
 import GoogleMap from './GoogleMap';
 import Navigation from './Navigation';
-import NewPinButton from '../buttons/NewPinButton'
+import AddPinModal from '../addEditPin/AddPinModal'
+import SortButtons from '../buttons/SortButtons'
 
 import {connect} from 'react-redux';
 
@@ -14,8 +15,29 @@ class HomePage extends Component {
     super(props);
     this.state = {
       user: null,
-      pins: []
+      pins: [],
+      category: 'All'
     };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    switch (e.target.value) {
+      case "car":
+        this.setState({ category: 'Auto Parts' }, () => { console.log(this.state.category) });
+        break;
+      case "baseball-ball":
+        this.setState({ category: "Sporting" }, () => { console.log(this.state.category) });
+        break;
+      case "tv":
+        this.setState({ category: "Electronics" }, () => { console.log(this.state.category) });
+        break;
+      case "question-circle":
+        this.setState({ category: "Misc" }, () => { console.log(this.state.category) });
+        break;
+      default:
+        this.setState({ category: "Furniture" }, () => { console.log(this.state.category) });
+    }
   }
 
   componentDidMount(){
@@ -37,9 +59,8 @@ class HomePage extends Component {
   }
 
   componentDidUpdate(prevProps){
-    if(this.props.pins !== prevProps.pins) {
-      this.props.pins.then((val) => {this.setState({pins: val.pins})})
-      
+    if (this.props.pins !== prevProps.pins) {
+      this.props.pins.then((val) => { this.setState({ pins: val.pins }) })
     }
   }
 
@@ -47,7 +68,8 @@ class HomePage extends Component {
     // console.log(this.state.pins)
     return (
       <div className="App">
-        <NewPinButton />
+        <AddPinModal />
+        <SortButtons handleClick={this.handleClick}/>
         <Navigation />
         <GoogleMap  />
       </div>

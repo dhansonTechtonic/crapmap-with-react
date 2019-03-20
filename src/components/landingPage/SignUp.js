@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 // import { FirebaseContext } from '../../firebase';
 import {auth} from './../../firebase.js'
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core';
+import Fab from '@material-ui/core/Fab'
+import LineDivider from '../addEditPin/LineDivider.js';
 
 const INITIAL_STATE = {
   username: '',
@@ -9,14 +19,24 @@ const INITIAL_STATE = {
   passwordTwo: '',
   error: null,
 };
-
 class SignUpForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { ...INITIAL_STATE };
+    this.state = {
+      ...INITIAL_STATE, 
+      open: false,
+      scroll: 'paper',};
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+  handleClickOpen = scroll => () => {
+    this.setState({ open: true, scroll });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   doCreateUserWithEmailAndPassword = (email, password) =>
     auth.createUserWithEmailAndPassword(email, password);
@@ -70,48 +90,78 @@ class SignUpForm extends Component {
       username === '';
 
     return (
-      <form classname="signUpForm" onSubmit={this.onSubmit}>
-        <input
-          className="signUpFormInput"
-          name="username"
-          value={username}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Full Name"
-        />
-        <input
-          className="signUpFormInput"
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          className="signUpFormInput"
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          className="signUpFormInput"
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Sign Up
-        </button>
-
-        {error && <p>{error.message}</p>}
-      </form>
+      <div>
+        <Fab color="error" style={{ width: 210, borderRadius: 4, margin: 10, opacity: 1 }} onClick={this.handleClickOpen('paper')}>Sign-Up/Login with Email</Fab>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          scroll={this.state.scroll}
+          aria-labelledby="scroll-dialog-title"
+          style={{ 'z-index': 30, 'background-color': 'primary' }}>
+          <DialogTitle>
+            SIGN UP
+          </DialogTitle>
+          <LineDivider />
+          <DialogContent>
+            <form onSubmit={this.onSubmit}>
+              <TextField
+                id="outlined-name"
+                label="Username"
+                margin="normal"
+                variant="outlined"
+                value={username}
+                onChange={this.onChange}
+                placeholder="Username"
+                name="username"
+              />
+              <TextField
+                id="outlined-name"
+                label="Email"
+                margin="normal"
+                variant="outlined"
+                value={email}
+                onChange={this.onChange}
+                placeholder="Email Address"
+                name="email"
+              />
+              <TextField
+                id="outlined-name"
+                label="Password"
+                margin="normal"
+                variant="outlined"
+                value={passwordOne}
+                onChange={this.onChange}
+                placeholder="Enter Password"
+                name="passwordOne"
+              />
+              <TextField
+                id="outlined-name"
+                label="Confirm Password"
+                margin="normal"
+                variant="outlined"
+                value={passwordTwo}
+                onChange={this.onChange}
+                placeholder="Confirm Password"
+                name="passwordTwo"
+              />
+            </form>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} disabled={isInvalid} type="submit" color="primary">Sign-Up</Button>
+            <Button onClick={this.handleClose} color="error">Cancel</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     );
   }
 }
+
+SignUpForm.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+  show: PropTypes.bool,
+  children: PropTypes.node
+};
 
 // const SignUpLink = () => (
 //   <p>

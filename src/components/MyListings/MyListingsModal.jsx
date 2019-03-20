@@ -1,53 +1,92 @@
 import React, { Component } from 'react'
-import '../App.css'
-import ExitButton from '../buttons/ExitButton'
-
 import PropTypes from 'prop-types'
 
 import MyListingsPost from './MyListingsPost'
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions'
+import LineDivider from '../addEditPin/LineDivider'
+import IconButton from '@material-ui/core/IconButton'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Button from '@material-ui/core/Button'
+import ListItemText from '@material-ui/core/ListItemText'
+import {connect} from 'react-redux';
+import store from '../../redux/store';
+
 import { IconButton } from '@material-ui/core';
 
-export default class MyListingsModal extends Component {
+import {deletePin} from '../../redux/actions/pinActions'
 
-  async _getListings(){
-    return await fetch(`https://us-central1-crapmap-c5c7f.cloudfunctions.net/apiListings/myListings`, {
-
-    }).then((res) =>{
-      return res.json();
-    }).then((data) =>{
-      console.log(data);
-      console.log('test');
-    })
+class MyListingsModal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      scroll: 'paper',
+      user: {},
+      pins: []
+    }
   }
+    
+  componentDidUpdate(prevProps) { 
+    // reduces pins promise to just pin array on update
+    if (this.props.pins !== prevProps.pins) {
+      this.props.pins.then((val) => { this.setState({ pins: val.pins }) })
+    }
+  }
+
+
+  handleClickOpen = scroll => () => {
+    this.setState({ open: true, scroll });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
   // componentDidMount(){
   //   this._getListings();
   // }
 
   render() {
-    if (!this.props.show) {
-      return null;
-    }
-
     return (
-        <div className='vertical-modal'>  
-            <div className="header">
-                <h2 >My Listings</h2>
-            <IconButton onClick={this.props.onClose}>
-            <ExitButton />
-            </IconButton>
-            </div>
-            <hr/>
-            <div className="items-listing-container">
+      <div>
+        <li onClick={this.handleClickOpen('paper')} className="nav-links">
+            MY CRAP
+          </li>
+          <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          scroll={this.state.scroll}
+          aria-labelledby="scroll-dialog-title"
+          style={{ 'z-index': 30, 'background-color': 'primary' }}>
+            <DialogTitle>
+              MY CRAP
+            </DialogTitle>
+            <LineDivider />
+            <DialogContent>
               <MyListingsPost />
-            </div>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="error">CLOSE</Button>
+            </DialogActions>
+          </Dialog>
         </div>
-    )
-  }
-}
-
+      )
+        
 MyListingsModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   show: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
 }
+        
+function mapStateToProps(reduxState) {
+  return {
+    user: reduxState.user,
+    pins: reduxState.pins
+  }
+}
+
+export default connect(mapStateToProps)(MyListingsModal);
+

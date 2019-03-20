@@ -6,12 +6,10 @@ export const GET_PINS_FULFILLED = 'GET_PINS_FULFILLED';
 
 
 // GET PINS - (NEEDS USER OBJECT SEARCH QUERY)
-
 export const getPins = () => ({
     type: GET_PINS,
     async payload () {
         const data = await getPinsFetch();
-
         return data;
     }
 })
@@ -30,8 +28,6 @@ function getPinsFetch(input){
 
 
 // CREATES NEW PIN
-
-
 export const newPin = (input) => ({
     type: NEW_PIN,
     async payload() {
@@ -40,9 +36,6 @@ export const newPin = (input) => ({
 })
 
 export async function newPinFetch(input) {
-
-    // console.log(input);
-
     fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/new', {
             method: 'POST',
             body: JSON.stringify(input),
@@ -56,8 +49,6 @@ export async function newPinFetch(input) {
 
 
 // DELETE PIN - NEEDS TESTING
-
-
 export const deletePin = (input) => ({
     type: DELETE_PIN,
     async payload() {
@@ -66,21 +57,15 @@ export const deletePin = (input) => ({
 })
 
 function deletePinFetch(input) {
-    fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/delete', {
-        method: 'DELETE',
-        body: JSON.stringify(input),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-        .then(res => console.log(res))
-        .catch(err => console.error(err))
-    })
+    return fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/delete/' + input, {
+                method: 'DELETE'
+        })
+            .then(res => console.log(res))
+            .catch(err => console.error("Error", err))
 }
 
 
 // UPDATE/EDITS PIN - NEEDS TESTING
-
-
 export const updatePin = (input) => ({
     type: UPDATE_PIN,
     async payload() {
