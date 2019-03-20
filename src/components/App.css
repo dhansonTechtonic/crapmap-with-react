@@ -102,6 +102,28 @@ hr{
   color: rgba(190, 190, 190, 1);
 }
 
+/*Categories Styles----------*/
+
+#catFurniture.MuiTab-selected-171 {
+  color: #ff4700;
+}
+
+#catSports.MuiTab-selected-171 {
+  color: rgb(227, 68, 255)
+}
+
+#catAuto.MuiTab-selected-171 {
+  color: rgb(253, 88, 157)
+}
+
+#catGadgets.MuiTab-selected-171 {
+  color: rgb(115, 40, 255)
+}
+
+#catMisc.MuiTab-selected-171 {
+  color: rgb(71, 141, 255)
+}
+
 /*Button Styles Hover-----------------------------------------------------------------*/
 .new-pin-button:hover{
   border: none !important;
