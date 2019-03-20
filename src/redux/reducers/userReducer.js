@@ -1,20 +1,12 @@
-// import userActions from '../actions / userActions ';
+
+import {REGISTER_USER} from "../actions/userActions"
+
+
 
 const initUser = {
-        // Acc Info
         userID: '',
-        username: '',
-        email: '',
         posts: [],
-        searchRadius: 0,
-
         auth: false,
-
-        //position
-        position: {
-            lat: 57.5,
-            lng: 57.5
-        }
 };
 
 export default function userReducer(state = initUser, action) {
@@ -23,19 +15,19 @@ export default function userReducer(state = initUser, action) {
     switch (action.type) {
         case "LOGIN_USER":
             {
-                fetch('url.com/user/login', {
-                        method: 'POST',
-                        body: payload
-                })
-                .then(res => {
-                    console.log(res);
-                    Object.assign({}, state, {
-                        user: payload
-                    })
-                })
-                .catch(err => console.error('Error:', err))
+        
                 break;
             }
+
+        case REGISTER_USER:
+        {
+
+            console.log(payload);
+            return {
+                userID: payload.userID,
+                auth: payload.auth
+            }
+        }
         case "NEW_USER":
             {
                 fetch('url.com/user/new', {

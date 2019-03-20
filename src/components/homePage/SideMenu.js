@@ -12,6 +12,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions'
+import MyAccountSidebar from '../myAccount/MyAccountSidebar';
 
 const styles = {
     list: {
@@ -62,9 +63,7 @@ class SideMenu extends Component {
               </List>
               <List>
               {<ListItem >
-                      <ListItemText style={{ color: 'white' , cursor: 'pointer'}}>
-                          MY ACCOUNT
-                    </ListItemText>
+                    <MyAccountSidebar />
                   </ListItem>}
                   <LineDivider />            
               </List>

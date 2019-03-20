@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import firebase, {auth} from './../../firebase.js';
 import Fab from '@material-ui/core/Fab'
 
+import store from '../../redux/store';
+import {registerUser} from '../../redux/actions/userActions'
+
 // import './Google.css'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -31,6 +34,13 @@ export default class LoginComponent extends Component {
           email: user.email,
           uid: user.uid
         });
+
+        var actionObject = {
+          userID: user.uid,
+          auth: true
+        }
+
+        store.dispatch(registerUser(actionObject));
         this.props.sendData(user);
       }
     );

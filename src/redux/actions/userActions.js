@@ -1,3 +1,7 @@
+export const REGISTER_USER = 'REGISTER_USER';
+
+
+
 function loginUser(userObject) {
     console.log(userObject)
     return {
@@ -7,13 +11,10 @@ function loginUser(userObject) {
 
 };
 
-function registerUser(userObject) {
-    console.log(userObject)
-    return {
-        type: "REGISTER_USER",
-        payload: userObject
-    }
-};
+export const registerUser= (userObject) => ({
+    type: "REGISTER_USER",
+    payload: userObject
+});
 
 function getUser(userObject) {
     console.log(userObject)
