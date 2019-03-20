@@ -88,7 +88,7 @@ export class MapContainer extends Component {
 
 </Map>
 
-<div className="view-pin-container"> 
+<div className="view-pin-container" > 
   <CardModal show={this.state.viewCardIsOpen} data={this.state.pinData} />
 </div> 
   
