@@ -1,15 +1,50 @@
-import React, { Component } from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import '../App.css'
 
-export default class BoxButtons extends Component {
+const styles = {
+  root: {
+    flexGrow: 1,
+    maxWidth: 500,
+  },
+};
+
+class BoxButtons extends React.Component {
+  state = {
+    value: 0,
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
   render() {
+    const { classes } = this.props;
+
     return (
-      <div className="boxes">
-        <FontAwesomeIcon className="small" icon="box" />
-        <FontAwesomeIcon className="medium" icon="box" />
-        <FontAwesomeIcon className="big" icon="box" />
-      </div>
-    )
+      <Paper square className={classes.root}>
+        <Tabs
+          value={this.state.value}
+          onChange={this.handleChange}
+          variant="fullWidth"
+          indicatorColor="secondary"
+          textColor="primary"
+        >
+          <Tab icon={<FontAwesomeIcon icon='box' />} label="SMALL"/>
+          <Tab icon={<FontAwesomeIcon icon='box' />} label="MEDIUM"/>
+          <Tab icon={<FontAwesomeIcon icon='box' />} label="LARGE"/>
+        </Tabs>
+      </Paper>
+    );
   }
 }
+
+BoxButtons.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(BoxButtons);
