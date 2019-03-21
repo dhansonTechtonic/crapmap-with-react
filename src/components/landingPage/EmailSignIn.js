@@ -122,6 +122,7 @@ class EmailForm extends Component {
                 name="email"
               />
               <TextField
+                type="password"
                 id="outlined-name"
                 label="Password"
                 margin="normal"
