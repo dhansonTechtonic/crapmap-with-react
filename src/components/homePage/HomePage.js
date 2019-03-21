@@ -6,12 +6,11 @@ import GoogleMap from './GoogleMap';
 import Navigation from './Navigation';
 import AddPinModal from '../addEditPin/AddPinModal'
 import SortButtons from '../buttons/SortButtons'
-
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-
 import {getPins} from '../../redux/actions/pinActions'
-import {registerUser} from '../../redux/actions/userActions'
+// import {registerUser} from '../../redux/actions/userActions'
+
 class HomePage extends Component {
   constructor(props) {
     super(props);

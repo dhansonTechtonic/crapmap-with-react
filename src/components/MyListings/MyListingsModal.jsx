@@ -7,15 +7,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions'
 import LineDivider from '../addEditPin/LineDivider'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from '@material-ui/core/Button'
-import ListItemText from '@material-ui/core/ListItemText'
 import {connect} from 'react-redux';
-import store from '../../redux/store';
 
-import { IconButton } from '@material-ui/core';
-
-import {deletePin} from '../../redux/actions/pinActions'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { IconButton } from '@material-ui/core';
+// import store from '../../redux/store';
+// import ListItemText from '@material-ui/core/ListItemText'
+// import {deletePin} from '../../redux/actions/pinActions'
 
 class MyListingsModal extends Component {
   constructor(props) {

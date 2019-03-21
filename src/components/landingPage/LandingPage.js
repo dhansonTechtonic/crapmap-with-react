@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 import firebase, {auth} from './../../firebase.js';
-// import {FireBase} from './firebaseEmail.js';
 import BackgroundComponent from './BackgroundComponent';
 import LogoComponent from './LogoComponent';
 import LoginComponent from './LoginComponent';
 import '../App.css'
-
-import {NavLink, Redirect} from 'react-router-dom'
-import Fab from '@material-ui/core/Fab'
+import {Redirect} from 'react-router-dom'
 import SignUpForm from './SignUp'
-
-
 import store from '../../redux/store'
-
 import {connect} from 'react-redux';
 
+// import {FireBase} from './firebaseEmail.js';
+// import Fab from '@material-ui/core/Fab'
 
 class LandingPage extends Component {
   constructor(props) {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { FirebaseContext } from '../../firebase';
 import {auth} from './../../firebase.js'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,14 +7,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab'
 import LineDivider from '../addEditPin/LineDivider.js';
-
 import store from '../../redux/store'
 import {registerUser} from '../../redux/actions/userActions'
 
-import {NavLink, Redirect } from 'react-router-dom';
+// import { FirebaseContext } from '../../firebase';
+// import { withStyles } from '@material-ui/core';
+// import {NavLink, Redirect } from 'react-router-dom';
 
 
 const INITIAL_STATE = {
@@ -104,7 +103,7 @@ class SignUpForm extends Component {
       email,
       passwordOne,
       passwordTwo,
-      error,
+      // error,
     } = this.state;
 
     const isInvalid =

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import logo from '../assets/crapmap-logo-horizontal-gray.png'
-import {NavLink} from 'react-router-dom'
 import MyListingsModal from '../MyListings/MyListingsModal'
 import SideMenu from './SideMenu'
 import MyAccountModal from '../myAccount/MyAccountModal';
-export default class Navigation extends Component {
+// import {NavLink} from 'react-router-dom'
 
+export default class Navigation extends Component {
+  
   constructor(props) {
     super(props);
 

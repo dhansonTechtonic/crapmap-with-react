@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Map, GoogleApiWrapper, Marker, In } from 'google-maps-react';
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import { isAbsolute } from 'path';
-import store from '../../redux/store'
 import {connect} from 'react-redux';
-
-// import ViewPinModal from './ViewPinModal';
 import CardModal from './CardModal';
+// import ViewPinModal from './ViewPinModal';
+// import store from '../../redux/store'
 // import { func } from 'prop-types';
+
 
 const mapStylesDefaults = {
   position: isAbsolute,  
@@ -47,7 +47,7 @@ export class MapContainer extends Component {
 
   onClick(e){
     // console.log("this is ", e.name.stringValue, e)
-    let tarObj = {name: e.name.stringValue, location: e.location}
+    // let tarObj = {name: e.name.stringValue, location: e.location}
     // this.fireDisplayViewPin(e)
     this.setState({showingInfoWindow:true})
     // this.CardModal

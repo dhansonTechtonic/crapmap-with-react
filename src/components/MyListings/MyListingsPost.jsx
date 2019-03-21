@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import image from '../assets/oldcouch.jpg'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -9,7 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import EditPinModal from '../addEditPin/EditPinModal'
-import Button from '@material-ui/core/Button'
+// import Button from '@material-ui/core/Button'
 
 const styles = {
   card: {
