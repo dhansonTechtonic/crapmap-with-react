@@ -13,7 +13,8 @@ import Fab from '@material-ui/core/Fab'
 import LineDivider from '../addEditPin/LineDivider.js';
 
 import store from '../../redux/store'
-import {registerUser} from '../../redux/actions/userActions'
+import { registerUser } from '../../redux/actions/userActions'
+import { pink } from '@material-ui/core/colors';
 
 
 
@@ -48,18 +49,11 @@ class SignUpForm extends Component {
 
   doCreateUserWithEmailAndPassword = (email, password) =>
     auth.createUserWithEmailAndPassword(email, password);
-  
-  doSignInWithEmailAndPassword = (email, password) =>
-    auth.signInWithEmailAndPassword(email, password);
-
-  doSignOut = () => auth.signOut();
-
-  doPasswordReset = email => auth.sendPasswordResetEmail(email);
 
   doPasswordUpdate = password =>
     auth.currentUser.updatePassword(password);
 
-  onSubmit = event => {
+  onSubmit = () => {
     const { email, passwordOne } = this.state;
       this.doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
@@ -75,7 +69,6 @@ class SignUpForm extends Component {
       .catch(error => {
         this.setState({ error });
       });
-    // event.preventDefault();
   }
 
   onChange = event => {
@@ -104,15 +97,19 @@ class SignUpForm extends Component {
 
     return (
       <div>
-        <Fab color="error" 
+        <Fab 
+          // color="primary" 
           style={{ 
-            width: 210, 
-            borderRadius: 4, 
-            margin: 10, 
-            opacity: 1 
+            width: 250, 
+            borderRadius: 4,
+            // margin: 10, 
+            opacity: 1,
+            color: "white",
+            backgroundColor: "inherit",
+            float: "left", 
           }} 
           onClick={this.handleClickOpen('paper')}>
-          Sign Up with Email
+          New? Click here to Sign Up 
         </Fab>
         <Dialog
           open={this.state.open}
@@ -147,6 +144,7 @@ class SignUpForm extends Component {
                 name="email"
               />
               <TextField
+                type="password"
                 id="outlined-name"
                 label="Password"
                 margin="normal"
@@ -157,6 +155,7 @@ class SignUpForm extends Component {
                 name="passwordOne"
               />
               <TextField
+                type="password"
                 id="outlined-name"
                 label="Confirm Password"
                 margin="normal"
@@ -167,12 +166,12 @@ class SignUpForm extends Component {
                 name="passwordTwo"
               />
               {error && <p>{error.message}</p>}
+              <DialogActions >
+                <Button onClick={this.onSubmit} disabled={isInvalid} type="submit" color="primary">Sign-Up</Button>
+                <Button onClick={this.handleClose} color="error">Cancel</Button>
+              </DialogActions>
             </form>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={this.onSubmit} disabled={isInvalid} type="submit" color="primary">Sign-Up</Button>
-            <Button onClick={this.handleClose} color="error">Cancel</Button>
-          </DialogActions>
         </Dialog>
       </div>
     );
