@@ -3,6 +3,7 @@ import { Map, GoogleApiWrapper, Marker, In } from 'google-maps-react';
 import { isAbsolute } from 'path';
 import store from '../../redux/store'
 import {connect} from 'react-redux';
+import AddPinModal from '../addEditPin/AddPinModal'
 
 // import ViewPinModal from './ViewPinModal';
 import CardModal from './CardModal';
@@ -91,6 +92,8 @@ export class MapContainer extends Component {
 <div className="view-pin-container" > 
   <CardModal show={this.state.viewCardIsOpen} data={this.state.pinData} />
 </div> 
+
+<AddPinModal google={this.props.google} />
   
 </div>
 
@@ -106,6 +109,6 @@ function mapStateToProps(reduxState){
 }
 
 export default connect(mapStateToProps)(GoogleApiWrapper({
-  apiKey : 'AIzaSyDGqxNDh10YIbriH1cJpPt9cn8TJdCwbFM'
+  apiKey : 'AIzaSyDGqxNDh10YIbriH1cJpPt9cn8TJdCwbFM',
 })(MapContainer));
 

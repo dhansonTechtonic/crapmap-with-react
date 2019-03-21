@@ -4,7 +4,7 @@ import store from '../../redux/store/'
 
 import GoogleMap from './GoogleMap';
 import Navigation from './Navigation';
-import AddPinModal from '../addEditPin/AddPinModal'
+
 import SortButtons from '../buttons/SortButtons'
 
 import {connect} from 'react-redux';
@@ -60,7 +60,7 @@ class HomePage extends Component {
   if (localStorage.getItem('userID')){
     return (
       <div className="App">
-        <AddPinModal />
+       
         <SortButtons handleClick={this.handleClick}/>
         <Navigation />
         <GoogleMap  />
@@ -75,7 +75,6 @@ class HomePage extends Component {
 
       return (
         <div className="App">
-          <AddPinModal />
           <SortButtons handleClick={this.handleClick}/>
           <Navigation />
           <GoogleMap  />

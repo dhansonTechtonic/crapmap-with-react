@@ -18,6 +18,7 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import Arrow from '../assets/crapmap-locator.png';
 import {newPin} from '../../redux/actions/pinActions';
 
+
 class AddPinModal extends Component {
     constructor(props) {
         super(props);
@@ -32,6 +33,8 @@ class AddPinModal extends Component {
             userID:"M8S8oXSgSdWzOBlSKM09xnUzsRH2"
         }
         this._changeCategory = this._changeCategory.bind(this);
+        this.handlePlaceSelect = this.handlePlaceSelect.bind(this);
+        this.autocomplete = '';
     }
 
     handleClickOpen = scroll => () => {
@@ -162,6 +165,26 @@ class AddPinModal extends Component {
             size: value
         })
     }
+
+    handlePlaceSelect(){
+        let options = { types: ['geocode']};
+        let locationInput = document.getElementById('pinLocation');
+        this.autocomplete = new this.props.google.maps.places.Autocomplete(locationInput,options);
+        var place = this.autocomplete.getPlace();
+        console.log(place);
+
+
+    }
+
+    componentDidMount(){
+        let options = { types: ['geocode']};
+        let locationInput = document.getElementById('pinLocation');
+        this.autocomplete = new this.props.google.maps.places.Autocomplete(locationInput,options);
+
+        this.autocomplete.addListener('place_changed', this.handlePlaceSelect);
+        this.autocomplete.setFields('address_components');
+
+    }
  
     
     render() {
@@ -196,12 +219,12 @@ class AddPinModal extends Component {
                                 required
                             />
                             <TextField
-                                id="outlined-name"
+                                id="pinLocation"
                                 label="Location"
-                                className="pinLocation"
+                                className="outlined-name"
                                 value={this.state.location}
                                 ref="locationInput"
-                                onChange={this.handleLocationChange}
+                                onChange={this.handlePlaceSelect}
                                 margin="normal"
                                 variant="outlined"
                                 placeholder="Where that crap at?"
