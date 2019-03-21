@@ -46,81 +46,53 @@ hr{
 
 /*Bottom Nav Styles---------------------*/
 
-#bnFurniture.MuiBottomNavigationAction-selected-29 {
+#bnFurniture:active {
   color: #ff4700;
 }
 
-#bnFurniture.MuiBottomNavigationAction-iconOnly-30 {
-  color: rgba(190, 190, 190, 1);
-}
-
-#bnAll.MuiBottomNavigationAction-selected-29 {
+#bnAll:active {
   color: #00FFDE;
 }
 
-#bnAll.MuiBottomNavigationAction-iconOnly-30 {
-  color: rgba(190, 190, 190, 1);
-}
-
-#bnAll.MuiBottomNavigationAction-selected-29 {
+#bnAll:active {
   color: #00FFDE;
 }
 
-#bnAll.MuiBottomNavigationAction-iconOnly-30 {
-  color: rgba(190, 190, 190, 1);
-}
-
-#bnGadgets.MuiBottomNavigationAction-selected-29 {
+#bnGadgets:active {
   color: rgb(115, 40, 255)
 }
 
-#bnGadgets.MuiBottomNavigationAction-iconOnly-30 {
-  color: rgba(190, 190, 190, 1);
-}
-
-#bnMisc.MuiBottomNavigationAction-selected-29 {
+#bnMisc:active {
   color: rgb(71, 141, 255)
 }
 
-#bnMisc.MuiBottomNavigationAction-iconOnly-30 {
-  color: rgba(190, 190, 190, 1);
-}
-
-#bnSports.MuiBottomNavigationAction-selected-29 {
+#bnSports:active {
   color: rgb(227, 68, 255)
 }
 
-#bnSports.MuiBottomNavigationAction-iconOnly-30 {
-  color: rgba(190, 190, 190, 1);
-}
-
-#bnAuto.MuiBottomNavigationAction-selected-29 {
+#bnAuto:active {
   color: rgb(253, 88, 157)
-}
-
-#bnAuto.MuiBottomNavigationAction-iconOnly-30 {
-  color: rgba(190, 190, 190, 1);
 }
 
 /*Categories Styles----------*/
 
-#catFurniture.MuiTab-selected-171 {
+#catFurniture:active {
   color: #ff4700;
 }
 
-#catSports.MuiTab-selected-171 {
+#catSports:active {
   color: rgb(227, 68, 255)
 }
 
-#catAuto.MuiTab-selected-171 {
+#catAuto:active {
   color: rgb(253, 88, 157)
 }
 
-#catGadgets.MuiTab-selected-171 {
+#catGadgets:active {
   color: rgb(115, 40, 255)
 }
 
-#catMisc.MuiTab-selected-171 {
+#catMisc:active {
   color: rgb(71, 141, 255)
 }
 

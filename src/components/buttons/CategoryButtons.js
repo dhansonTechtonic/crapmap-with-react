@@ -15,10 +15,11 @@ const styles = {
 
 class CategoryButtons extends React.Component {
   state = {
-    value: 0,
+    value: 0
   };
 
   handleChange = (event, value) => {
+    console.log(value)
     this.setState({ value });
   };
 
@@ -34,11 +35,11 @@ class CategoryButtons extends React.Component {
           indicatorColor="primary"
           textColor="primary"
         >
-          <Tab id="catFurniture" value="Furniture"icon={<FontAwesomeIcon icon='couch' />} label="Furniture"/>
-          <Tab id="catAuto" value="Auto Parts"icon={<FontAwesomeIcon icon='car' />} label="Auto Parts"/>
-          <Tab id="catSports" value="Sports"icon={<FontAwesomeIcon icon='baseball-ball'/>} label="Sports"/>
-          <Tab id="catGadgets" value="Gadgets"icon={<FontAwesomeIcon icon='tv' />} label="Gadgets"/>
-          <Tab id="catMisc" value="Misc"icon={<FontAwesomeIcon icon='question-circle' />} label="Misc"/>
+          <Tab id="catFurniture" className="cat-unselected" value="Furniture"icon={<FontAwesomeIcon icon='couch' />} label="Furniture"/>
+          <Tab id="catAuto" value="Auto Parts" icon={<FontAwesomeIcon icon='car' />} label="Auto Parts" className="cat-unselected"/>
+          <Tab id="catSports" value="Sports" icon={<FontAwesomeIcon icon='baseball-ball' />} label="Sports" className="cat-unselected"/>
+          <Tab id="catGadgets" value="Gadgets" icon={<FontAwesomeIcon icon='tv' />} label="Gadgets" className="cat-unselected"/>
+          <Tab id="catMisc" value="Misc" icon={<FontAwesomeIcon icon='question-circle' />} label="Misc" className="cat-unselected"/>
         </Tabs>
       </Paper>
     );
