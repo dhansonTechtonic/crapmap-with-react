@@ -51,7 +51,7 @@ class HomePage extends Component {
       this.props.pins.then((val) => { this.setState({ pins: val.pins }) })
     }
 
-    console.log(store.getState());
+    // console.log(store.getState());
   }
 
   render() {
