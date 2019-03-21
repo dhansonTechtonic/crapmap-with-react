@@ -28,7 +28,7 @@ class AddPinModal extends Component {
             scroll: 'paper',
             dataURL: '',
             imgName: null,
-            category: 'All'
+            category: 'Furniture'
         }
         this.handleClick = this.handleClick.bind(this);
     }
