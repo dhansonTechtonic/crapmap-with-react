@@ -36,6 +36,9 @@ class MyAccountModal extends Component {
         this.setState({ open: false });
     };
 
+    doPasswordUpdate = password =>
+        auth.currentUser.updatePassword(password);
+
     render() {
         return (
             <div>
