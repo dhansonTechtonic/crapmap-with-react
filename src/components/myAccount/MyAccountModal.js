@@ -28,17 +28,23 @@ class MyAccountModal extends Component{
         super()
         this.state = {
             open: false,
-            scroll: 'paper'
+            scroll: 'paper',
+            displayName: '',
+            email: ''
         }
     }
 
-    componentDidMount(){
-        let currentUser = getFirebaseUser();
-        console.log(currentUser)
+    async componentDidMount(){
+        
     }
 
-    handleClickOpen = scroll => () => {
+    handleClickOpen = scroll => async () => {
         this.setState({ open: true, scroll });
+        let currentUser = await getFirebaseUser();
+        this.setState({
+            displayName: currentUser.displayName,
+            email: currentUser.email
+        })
     };
 
     handleClose = () => {
@@ -77,10 +83,10 @@ class MyAccountModal extends Component{
                     <LineDivider />
                     <DialogContent>
                         <Typography>
-                            Username: Delaney_hanson
+                            Username: {this.state.displayName}
                         </Typography>
                         <Typography>
-                            Email: delaney.hanson@techtonic.com
+                            Email: {this.state.email}
                         </Typography>
                     </DialogContent>
                     <DialogActions>
