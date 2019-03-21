@@ -35,7 +35,6 @@ class ViewPinModal extends Component {
     }
   }
 
-
   handleClickOpen = scroll => () => {
     this.setState({ open: true, scroll });
   };
@@ -45,6 +44,8 @@ class ViewPinModal extends Component {
   };
 
   render() {
+      const {pin} = this.props.data;
+      console.log(pin);
     if (!this.props.show) {
         return null;
     }
@@ -58,7 +59,7 @@ class ViewPinModal extends Component {
           style={{ 'z-index': 30, 'background-color': 'primary' }}>
 
             <DialogContent>
-              <CardModal />
+              <CardModal data={pin}/>
             </DialogContent>
 
           </Dialog>

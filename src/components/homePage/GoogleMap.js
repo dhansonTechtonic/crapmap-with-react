@@ -7,6 +7,8 @@ import styles from './GoogleMapsJSON.json';
 // import ViewPinModal from './ViewPinModal';
 import CardModal from './CardModal';
 import ViewPinModal from './ViewPinModal';
+import {Room} from '@material-ui/icons/Room'
+
 // import { func } from 'prop-types';
 
 const mapStylesDefaults = {
@@ -29,7 +31,7 @@ export class MapContainer extends Component {
 
   toggleViewPinModal(e) {
     let targetPin = e;
-    // console.log(targetPin.name)
+    console.log(targetPin.name)
     this.setState({
       viewCardIsOpen: !this.state.viewCardIsOpen,
       pinData: targetPin
@@ -46,28 +48,34 @@ export class MapContainer extends Component {
     let icon;
       switch (category) {
         case "Furniture":
-          return  icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#ff4700' }
+          return  icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#ff4700' }
           break;
 
         case "Auto Parts" :
-          return  icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#e344ff' }
+          return  icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#e344ff' }
           break;
 
         case "Sports": 
-          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#fd589d' }
+          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#fd589d' }
           break;
 
         case "Gadgets": 
-          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#7328ff' }
+          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#7328ff' }
           break;
 
         case "Miscellaneous":
-          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#478dff' }
+          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#478dff' }
           break;
 
         default: 
-         return icon = {path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#478dff' }
+         return icon = {path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#478dff' }
+         break;
       }
+  }
+
+  changeIcon (e) {
+    console.log(e)
+    return e.icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 6, strokeColor: '#7328ff' }
   }
 
  render() {
@@ -102,18 +110,17 @@ export class MapContainer extends Component {
     img={pin._fieldsProto.img.stringValue}
     position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
                 lng:pin._fieldsProto.location.mapValue.fields.lng.doubleValue }}
-    
-    onClick={this.toggleCardModal}
+    // onMouseover={this.changeIcon.bind(this)}
+
+    onClick={this.toggleViewPinModal}
   />
   )}
 )}
 
 </Map>
 
-
 <ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} />
 
-  
 </div> 
     );
   }
