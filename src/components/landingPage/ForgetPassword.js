@@ -29,23 +29,26 @@ export default class PasswordForgetForm extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
-  doPasswordReset = email => auth.sendPasswordResetEmail(email);
+  doPasswordReset = email => {console.log(email); return auth.sendPasswordResetEmail(email)};
 
   onSubmit = event => {
     const { email } = this.state;
 
     this.doPasswordReset(email)
       .then((authUser) => {
-      let actionObject = {
-        userID: authUser.user.uid,
-        auth: true
-      }
-      store.dispatch(resetUserPassword(actionObject));
-      this.props.sendData(authUser);
+        // console.log(authUser);
+      // let actionObject = {
+      //   userID: user.uid,
+      //   auth: true
+      // }
+      // store.dispatch(resetUserPassword(actionObject));
+      // this.props.sendData(authUser);
 
       this.setState({ ...INITIAL_STATE });
     })
     .catch(error => {
+      console.log('xxxxxx' + error);
+      
       this.setState({ error });
     });
 
@@ -134,6 +137,7 @@ export default class PasswordForgetForm extends Component {
 }
 
 PasswordForgetForm.propTypes = {
+  doPasswordReset: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
   show: PropTypes.bool,
