@@ -13,7 +13,7 @@ import Fab from '@material-ui/core/Fab'
 import LineDivider from '../addEditPin/LineDivider.js';
 
 import store from '../../redux/store'
-import { registerUser } from '../../redux/actions/userActions'
+import { loginUser } from '../../redux/actions/userActions'
 
 
 
@@ -44,28 +44,18 @@ class EmailForm extends Component {
 
   };
 
-  doCreateUserWithEmailAndPassword = (email, password) =>
-    auth.createUserWithEmailAndPassword(email, password);
-
   doSignInWithEmailAndPassword = (email, password) =>
     auth.signInWithEmailAndPassword(email, password);
 
-  doSignOut = () => auth.signOut();
-
-  doPasswordReset = email => auth.sendPasswordResetEmail(email);
-
-  doPasswordUpdate = password =>
-    auth.currentUser.updatePassword(password);
-
   onSubmit = event => {
     const { email, password } = this.state;
-    this.doCreateUserWithEmailAndPassword(email, password)
+    this.doSignInWithEmailAndPassword(email, password)
       .then(authUser => {
         var actionObject = {
           userID: authUser.user.uid,
           auth: true
         }
-        store.dispatch(registerUser(actionObject));
+        store.dispatch(loginUser(actionObject));
         this.props.sendData(authUser);
 
         this.setState({ ...INITIAL_STATE });
@@ -152,11 +142,11 @@ class EmailForm extends Component {
   }
 }
 
-// EmailLogin.propTypes = {
-//   onClose: PropTypes.func.isRequired,
-//   classes: PropTypes.object.isRequired,
-//   show: PropTypes.bool,
-//   children: PropTypes.node
-// };
+EmailForm.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+  show: PropTypes.bool,
+  children: PropTypes.node
+};
 
 export default EmailForm;

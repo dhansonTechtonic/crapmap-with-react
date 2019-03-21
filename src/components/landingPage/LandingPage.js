@@ -70,7 +70,7 @@ class LandingPage extends Component {
                 <LoginComponent sendData={this.userLogin} provider={new firebase.auth.GoogleAuthProvider()} providerName={`Google`}/>
                 <LoginComponent sendData={this.userLogin} provider={new firebase.auth.FacebookAuthProvider()} providerName={`FaceBook`}/>
                 <EmailLoginForm />
-                {/* <SignUpForm /> */}
+                <SignUpForm />
                 <ForgetPasswordForm/>
               </div>
           </div>
