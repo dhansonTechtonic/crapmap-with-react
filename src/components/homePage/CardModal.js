@@ -36,9 +36,9 @@ function CardModal (props) {
 
     console.log(props, "this is props")
 
-    // let name = this.props.data.name
-    // let size = this.props.data.crapSize
-    // let category = this.props.data.category
+    let name = this.props.data.name
+    let size = this.props.data.crapSize
+    let category = this.props.data.category
     
         return (
         <Card className={classes.card}>

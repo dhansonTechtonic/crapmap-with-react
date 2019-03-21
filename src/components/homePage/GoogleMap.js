@@ -46,29 +46,33 @@ export class MapContainer extends Component {
     let icon;
       switch (category) {
         case "Furniture":
-          return  icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#FF4700' }
+          return  icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#ff4700' }
           break;
+
         case "Auto Parts" :
-          return  icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#5200E8' }
+          return  icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#e344ff' }
           break;
-        case "Miscellaneous":
-          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#00FFDE' }
-          break;
+
         case "Sports": 
-          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#FF4700' }
+          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#fd589d' }
           break;
+
         case "Gadgets": 
-          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#FF4700' }
+          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#7328ff' }
           break;
+
+        case "Miscellaneous":
+          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#478dff' }
+          break;
+
         default: 
-          return icon = {path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#FF4700' }
-          break;
+         return icon = {path: window.google.maps.SymbolPath.CIRCLE, scale: 7, strokeColor: '#478dff' }
       }
   }
 
  render() {
   if (!this.props.loaded) {
-    return (<div>Loading...</div>)
+    return (<div><h1>Loading...</h1></div>)
   }
     return (
       <div className='map-container'>
@@ -107,7 +111,7 @@ export class MapContainer extends Component {
 </Map>
 
 
-<ViewPinModal show={!this.state.viewCardIsOpen} data={this.state.pinData} />
+<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} />
 
   
 </div> 
