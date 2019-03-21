@@ -42,7 +42,13 @@ const styles = {
 function MyListingsPost(props){
   const { classes } = props;
        
-  
+  // need endpoint for get all pins by userID
+
+  // let pinArray = store.dispatch(()) 
+  // or
+  // let pinArray = fetchMyPins();
+
+
   // function handleDeletePin(input){
   //   store.dispatch(deletePin(input));
   // }
