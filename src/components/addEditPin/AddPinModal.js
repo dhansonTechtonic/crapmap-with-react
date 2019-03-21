@@ -22,6 +22,7 @@ class AddPinModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
+
             category: "Funiture",
             img:"pinsImages/1553121301840",
             address:"",
@@ -133,7 +134,6 @@ class AddPinModal extends Component {
             } else {
                 userID = JSON.parse(localStorage.getItem('userID'));
             }
-
             this._uploadImg().then( () => {
                     let pin = {
                         "title": this.state.title,
@@ -189,7 +189,6 @@ class AddPinModal extends Component {
         }else{
             console.log('geolocation not availiable');
         }
-         
     }
 
     _boxSize(value){
@@ -280,7 +279,7 @@ class AddPinModal extends Component {
                         </form>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} onClick={this.handleSubmit} color="primary">POST</Button>
+                        <Button onClick={this.handleSubmit} color="primary">POST</Button>
                         <Button onClick={this.handleClose} color="error">CANCEL</Button>
                     </DialogActions>
                 </Dialog>
