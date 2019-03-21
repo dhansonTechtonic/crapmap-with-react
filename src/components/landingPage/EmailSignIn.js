@@ -14,7 +14,7 @@ import LineDivider from '../addEditPin/LineDivider.js';
 
 import store from '../../redux/store'
 import { loginUser } from '../../redux/actions/userActions'
-
+import SignUpForm from './SignUp'
 
 
 const INITIAL_STATE = {
@@ -39,17 +39,19 @@ class EmailForm extends Component {
     this.setState({ open: true, scroll });
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
+  handleClose = (e) => {
+    console.log(e.keyCode)
+    e.keyCode === 13 ? this.setState({ open: false }) : this.setState({ open: false })
 
   };
 
   doSignInWithEmailAndPassword = (email, password) =>
     auth.signInWithEmailAndPassword(email, password);
 
-  onSubmit = event => {
+  onSubmit = (e) => {
     const { email, password } = this.state;
-    this.doSignInWithEmailAndPassword(email, password)
+    console.log(e.keyCode)
+      this.doSignInWithEmailAndPassword(email, password)
       .then(authUser => {
         var actionObject = {
           userID: authUser.user.uid,
@@ -57,13 +59,13 @@ class EmailForm extends Component {
         }
         store.dispatch(loginUser(actionObject));
         this.props.sendData(authUser);
-
+  
         this.setState({ ...INITIAL_STATE });
       })
       .catch(error => {
         this.setState({ error });
       });
-    // event.preventDefault();
+    e.preventDefault();
   }
 
   onChange = event => {
@@ -78,7 +80,6 @@ class EmailForm extends Component {
   
       email,
       password,
-      passwordTwo,
       error,
     } = this.state;
 
@@ -98,6 +99,7 @@ class EmailForm extends Component {
           Login with Email
         </Fab>
         <Dialog
+          
           open={this.state.open}
           onClose={this.handleClose}
           scroll={this.state.scroll}
@@ -130,12 +132,14 @@ class EmailForm extends Component {
                 name="password"
               />
               {error && <p>{error.message}</p>}
+              <DialogActions >
+                <SignUpForm />
+                <Button onClick={this.onSubmit} disabled={isInvalid} type="submit" color="primary">Sign In</Button>
+                <Button onClick={this.handleClose} color="error">Cancel</Button>
+              </DialogActions>
             </form>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={this.onSubmit} disabled={isInvalid} type="submit" color="primary">Sign In</Button>
-            <Button onClick={this.handleClose} color="error">Cancel</Button>
-          </DialogActions>
+          
         </Dialog>
       </div>
     );
