@@ -49,14 +49,11 @@ class ViewPinModal extends Component {
         return null;
     }
     return (
-      <div>
-        <li onClick={this.handleClickOpen('paper')} className="nav-links">
-            MY CRAP
-          </li>
+      <div >
           <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          scroll={this.state.scroll}
+        //   open={this.state.open}
+        //   onClose={this.handleClose}
+        //   scroll={this.state.scroll}
           aria-labelledby="scroll-dialog-title"
           style={{ 'z-index': 30, 'background-color': 'primary' }}>
 
@@ -64,9 +61,6 @@ class ViewPinModal extends Component {
               <CardModal />
             </DialogContent>
 
-            <DialogActions>
-              <Button onClick={this.handleClose} color="error">CLOSE</Button>
-            </DialogActions>
           </Dialog>
         </div>
       )

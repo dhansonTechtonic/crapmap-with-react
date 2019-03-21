@@ -31,46 +31,46 @@ const styles = {
 };
 
 function CardModal (props) {
+    
+    const { classes } = props;
 
-    console.log(props.data, "this is props")
+    console.log(props, "this is props")
 
-    if (!this.props.show) {
-        return null;
-    }
-
-    let name = this.props.data.name
-    let size = this.props.data.crapSize
+    // let name = this.props.data.name
+    // let size = this.props.data.crapSize
     // let category = this.props.data.category
     
         return (
-        <Card className={styles.card}>
+        <Card className={classes.card}>
         
           <CardActionArea >
             <CardMedia
               component="img"
               alt="Item"
-              className={styles.media}
+              className={classes.media}
               style={{ 'z-index': 30, 'background-color': 'primary' }}
               height="300"
-              image={image}
-              title={name}
+            //   image={image}
+            //   title={name}
             />
     
             <CardContent>
     
               <Typography gutterBottom variant="h5" component="h1">
-              {name}
-            
+              {/* {name} */}
+                title
               </Typography>
     
               <Typography component="p">
-                {size}
-                <Tabs><Tab icon={<FontAwesomeIcon icon='box' />} label="MEDIUM"/></Tabs>
+                {/* {size} */}
+                size
+                {/* <Tabs><Tab icon={<FontAwesomeIcon icon='box' />} label="MEDIUM"/></Tabs> */}
               </Typography>
         
             </CardContent>
-            <LineDivider />
           </CardActionArea>
+          {/* <LineDivider /> */}
+
           <CardActions>
             <Button size="medium" color="primary">
               DIBS
