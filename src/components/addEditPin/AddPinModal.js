@@ -24,12 +24,19 @@ class AddPinModal extends Component {
         this.state = {
             category: "Funiture",
             img:"pinsImages/1553121301840",
-            address:"2000 Central Ave, Boulder, CO 80301, USA",
+            address:"",
             lat:"40.02091167969599",
             lng:"-105.21724804969578",
             size:"1",
-            title:"Stinky Boulder Weed Couch",
-            userID:"M8S8oXSgSdWzOBlSKM09xnUzsRH2"
+            title:"",
+            userID:"M8S8oXSgSdWzOBlSKM09xnUzsRH2",
+            locationPlaceHolder: "Where that crap at?",
+            titlePlaceHolder:"Name your crap",
+            titleLabel:"Title",
+            locationLabel:"Location:",
+            titleError: false,
+            locationError: false,
+            locationInputValid: "required"
         }
         this._changeCategory = this._changeCategory.bind(this);
     }
@@ -39,7 +46,25 @@ class AddPinModal extends Component {
     };
 
     handleClose = () => {
-        this.setState({ open: false });
+        this.setState({ 
+            open: false, 
+            category: "Funiture",
+            img:"pinsImages/1553121301840",
+            address:"",
+            lat:"40.02091167969599",
+            lng:"-105.21724804969578",
+            size:"1",
+            title:"",
+            userID:"M8S8oXSgSdWzOBlSKM09xnUzsRH2",
+            locationPlaceHolder: "Where that crap at?",
+            titlePlaceHolder:"Name your crap",
+            titleLabel:"Title",
+            locationLabel:"Location:",
+            titleError: false,
+            locationError: false,
+            locationInputValid: "required",
+            dataURL: '',
+        });
 
     };
 
@@ -57,7 +82,7 @@ class AddPinModal extends Component {
                     this.setState({fireBaseStorageFullUrl: snapshot.metadata.fullPath });
                     return(snapshot.metadata.fullPath);
                 })
-                firebaseImageUrl ? resolve(firebaseImageUrl) : reject (false)
+                firebaseImageUrl ? resolve(firebaseImageUrl) : reject(false)
             })
         }
      }
@@ -83,44 +108,50 @@ class AddPinModal extends Component {
 
     handleTitleChange = (e) => {
         this.setState({
-            title: e.target.value
+            title: e.target.value,
+            titleError: false,
+            titleLabel:"Title"
         })
     }
     
     handleLocationChange = (e) =>{
         this.setState({
-            location: e.target.value
+            location: e.target.value,
+            locationError: false,
+            locationLabel:"Location:"
         })
     }
 
     handleSubmit = async (e) => {
         e.preventDefault();
+        if(this._formValid()){
 
-        let userID;
+            let userID;
 
-        if (store.getState().user.userID){
-            userID = store.getState().user.userID;
-        } else {
-            userID = JSON.parse(localStorage.getItem('userID'));
-        }
-
-        this._uploadImg().then( () => {
-                let pin = {
-                    "title": this.state.title,
-                    // "description": this.state.description
-                    "lat": this.state.lat,
-                    "lng": this.state.lng,
-                    "address": this.state.location,
-                    "category": this.state.category,
-                    "img": this.state.fireBaseStorageFullUrl,
-                    "size": this.state.size,
-                    "userID": userID
-                }
-                console.log(pin);
-                store.dispatch(newPin(pin));
+            if (store.getState().user.userID){
+                userID = store.getState().user.userID;
+            } else {
+                userID = JSON.parse(localStorage.getItem('userID'));
             }
-        ).catch( err => console.log('there has been an error' + err));
-       
+
+            this._uploadImg().then( () => {
+                    let pin = {
+                        "title": this.state.title,
+                        "lat": this.state.lat,
+                        "lng": this.state.lng,
+                        "address": this.state.location,
+                        "category": this.state.category,
+                        "img": this.state.fireBaseStorageFullUrl,
+                        "size": this.state.size,
+                        "userID": userID
+                    }
+                    store.dispatch(newPin(pin));
+                    this.handleClose();
+                }
+            ).catch( err => console.log(err));
+        }else{
+            return false
+        }
     }
 
     _getCurrentLocation = async() =>{
@@ -140,14 +171,18 @@ class AddPinModal extends Component {
             .then(response => response.json())
             .then( data =>{
                 console.log(data);
-                let address = data.results[0].formatted_address;
-                console.log(address);
+                if(data.status === "OK"){
+                    let address = data.results[0].formatted_address;
+                    console.log(address);
 
-                this.setState({
-                    location: address,
-                    lat:  position.coords.latitude,
-                    lng: position.coords.longitude
-                })
+                    this.setState({
+                        location: address,
+                        lat:  position.coords.latitude,
+                        lng: position.coords.longitude,
+                        locationError: false,
+                        locationLabel:"Location:"
+                    })
+                }
             }).catch(console.log('An Error has occured'));
 
          });
@@ -163,6 +198,27 @@ class AddPinModal extends Component {
         })
     }
  
+    _formValid(){
+        if(!this.state.location || !this.state.title){
+            if(!this.state.location)
+            {
+                this.setState({
+                    locationLabel: "Error: Need Location",
+                   locationError: "false"
+                })
+            }
+            if(!this.state.title)
+            {
+                this.setState({
+                    titleLabel: "Error: Need Tittle",
+                   titleError: "false"
+                })
+            }
+            return false;
+        }else{
+            return true;
+        }
+    }
     
     render() {
         return (
@@ -185,26 +241,29 @@ class AddPinModal extends Component {
                         <form onSubmit={this.handleSubmit}>
                             <CategoryButtons  sendValue={this._changeCategory}/>
                             <TextField
+                                error={this.state.titleError}
                                 id="outlined-name"
-                                label="Title"
+                                label={this.state.titleLabel}
                                 className="pinTitle"
                                 value={this.state.name}
                                 onChange={this.handleTitleChange}
                                 margin="normal"
                                 variant="outlined"
-                                placeholder="Name your crap"
-                                required
+                                placeholder= {this.state.titlePlaceHolder}
                             />
                             <TextField
+                                disabled
                                 id="outlined-name"
-                                label="Location"
+                                error={this.state.locationError}
+                                label={this.state.locationLabel}
                                 className="pinLocation"
                                 value={this.state.location}
                                 ref="locationInput"
                                 onChange={this.handleLocationChange}
                                 margin="normal"
                                 variant="outlined"
-                                placeholder="Where that crap at?"
+                                placeholder={this.state.locationPlaceHolder}
+                                defaultValue="Hit Arrow 4 Location"
                                 InputProps={{
                                     endAdornment: (
                                         <InputAdornment position="end">

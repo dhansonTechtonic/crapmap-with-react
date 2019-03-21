@@ -51,7 +51,7 @@ router.post('/update', (request,response) =>{
         location: {
             lat: request.body.location.lat,
             lng: request.body.location.lng,
-            zip: request.body.location.zip
+            address: request.body.location.zip
         },
         size: request.body.size,
         tags: request.body.tags,
