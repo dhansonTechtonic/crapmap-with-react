@@ -23,7 +23,18 @@ const INITIAL_STATE = {
   scroll: 'paper'
 };
 
-export default class ChangePasswordForm extends Component {
+const style = {
+  "root": {
+    color: "white",
+    backgroundColor: "#2E2D31"
+  },
+  "root:hover": {
+    color: "red",
+    backgroundColor: "white"
+  }
+}
+
+class ChangePasswordForm extends Component {
   constructor(props) {
     super(props);
 
@@ -64,16 +75,18 @@ export default class ChangePasswordForm extends Component {
 
     const isInvalid = passwordOne !== passwordTwo || passwordOne === '';
 
+    const { classes } = this.props;
     return (
       <div>
-        <Fab color="error"
+        <Fab 
           style={{
             width: 100,
             borderRadius: 4,
-            // margin: -10,
+            margin: 10,
             opacity: 1,
-            height: 1
           }}
+          classes={{ root: classes.root }}
+          id="editPassword"
           onClick={this.handleClickOpen('paper')}>
           Edit Password
       </Fab>
@@ -143,5 +156,9 @@ ChangePasswordForm.propTypes = {
   onClose: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
   show: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
+  classes: PropTypes.object.isRequired,
+  className: PropTypes.string,
 };
+
+export default withStyles(style)(ChangePasswordForm)

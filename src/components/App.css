@@ -44,6 +44,19 @@ hr{
   -webkit-transition-duration: 0.3s;
 }
 
+#deleteAccount:hover {
+  color: red;
+  background-color: white;
+}
+
+#editPassword:hover {
+  color: red;
+  background-color: white;
+}
+#editPassword {
+  
+}
+
 /*Bottom Nav Styles---------------------*/
 
 #bnFurniture.MuiBottomNavigationAction-selected-29 {

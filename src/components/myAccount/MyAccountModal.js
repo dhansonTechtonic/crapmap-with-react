@@ -9,20 +9,27 @@ import Button from '@material-ui/core/Button'
 import LineDivider from '../addEditPin/LineDivider';
 import Typography from '@material-ui/core/Typography'
 
+import '../../.././src/components/App.css'
 import store from '../../redux/store'
 import {logOutUser} from '../../redux/actions/userActions';
 
 import {deleteUser, getFirebaseUser} from '../../firebase.js'
 import ChangePasswordForm from './../landingPage/ChangePassword'
+import { red } from '@material-ui/core/colors';
 
 const styles = {
-    card: {
-        maxWidth: 345,
-    },
-    media: {
-        height: 140,
-    },
+    card: { maxWidth: 345 },
+    media: { height: 140 },
+    root: {
+        // height: 10,
+    }
+
 };
+
+// const deleteButtonStyle = {
+//     color: "red",
+// }
+
 
 class MyAccountModal extends Component{
     constructor(){
@@ -34,6 +41,8 @@ class MyAccountModal extends Component{
             email: ''
         }
     }
+
+    
 
     async componentDidMount(){
         
@@ -63,7 +72,12 @@ class MyAccountModal extends Component{
     
     }
 
+    // InlineStyle() {
+    //     return <Button style={{deleteButtonStyle}}></Button>;
+    // }
+
     render(){
+        const { classes } = this.props;
         return (
             <div>
                 <li className="nav-links" onClick={this.handleClickOpen('paper')}>
@@ -91,8 +105,13 @@ class MyAccountModal extends Component{
                         </Typography>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleDelete} style={{marginRight: 140}}>
-                            Delete Account
+                        <Button 
+                            onClick={this.handleDelete} 
+                            style={{ marginRight: 140, }}
+                            classes={{ root: classes.root }}
+                            id="deleteAccount"
+                        >
+                            <p>Delete Account</p>
                         </Button>
                         <ChangePasswordForm />
 
@@ -108,6 +127,7 @@ class MyAccountModal extends Component{
 
 MyAccountModal.propTypes = {
     classes: PropTypes.object.isRequired,
+    className: PropTypes.string,
 };
 
 export default withStyles(styles)(MyAccountModal);
