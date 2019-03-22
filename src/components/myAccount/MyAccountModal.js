@@ -11,29 +11,20 @@ import Typography from '@material-ui/core/Typography'
 
 import '../../.././src/components/App.css'
 import store from '../../redux/store'
-import {logOutUser} from '../../redux/actions/userActions';
+import { logOutUser } from '../../redux/actions/userActions';
 
-import {deleteUser, getFirebaseUser} from '../../firebase.js'
+import { deleteUser, getFirebaseUser } from '../../firebase.js'
 import ChangePasswordForm from './../landingPage/ChangePassword'
-import { red } from '@material-ui/core/colors';
 
 const styles = {
     card: { maxWidth: 345 },
     media: { height: 140 },
-    root: {
-        // height: 10,
-    }
-
 };
 
-// const deleteButtonStyle = {
-//     color: "red",
-// }
-
-
 class MyAccountModal extends Component{
-    constructor(){
+    constructor() {
         super()
+
         this.state = {
             open: false,
             scroll: 'paper',
@@ -42,15 +33,11 @@ class MyAccountModal extends Component{
         }
     }
 
-    
-
-    async componentDidMount(){
-        
-    }
-
     handleClickOpen = scroll => async () => {
         this.setState({ open: true, scroll });
+
         let currentUser = await getFirebaseUser();
+
         this.setState({
             displayName: currentUser.displayName,
             email: currentUser.email
@@ -62,22 +49,15 @@ class MyAccountModal extends Component{
     };
 
     handleDelete() {
-        //delete action
         deleteUser();
         store.dispatch(logOutUser());
     }
 
-    handleLogOut() {
-        store.dispatch(logOutUser());
-    
-    }
-
-    // InlineStyle() {
-    //     return <Button style={{deleteButtonStyle}}></Button>;
-    // }
+    handleLogOut = () => store.dispatch(logOutUser());
 
     render(){
         const { classes } = this.props;
+
         return (
             <div>
                 <li className="nav-links" onClick={this.handleClickOpen('paper')}>
@@ -113,10 +93,7 @@ class MyAccountModal extends Component{
                         >Delete Account
                         </Button>
                         <ChangePasswordForm />
-
-                        <Button onClick={this.handleClose}>
-                            Close
-                        </Button>
+                        <Button onClick={this.handleClose}>Close</Button>
                     </DialogActions>
                 </Dialog>
             </div>
