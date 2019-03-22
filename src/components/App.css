@@ -54,7 +54,7 @@ hr{
   background-color: white;
 }
 #editPassword {
-  
+  box-shadow: none;
 }
 
 /*Bottom Nav Styles---------------------*/

@@ -91,7 +91,7 @@ class MyAccountModal extends Component{
                     style={{ 'z-index': 30, 'background-color': 'primary' }}>
                     <DialogTitle>
                         MY ACCOUNT
-                        <Button onClick={this.handleLogOut} style={{marginLeft: 70}}>
+                        <Button onClick={this.handleLogOut} style={{float: "right"}}>
                             Log Out
                         </Button>
                     </DialogTitle>
@@ -107,11 +107,10 @@ class MyAccountModal extends Component{
                     <DialogActions>
                         <Button 
                             onClick={this.handleDelete} 
-                            style={{ marginRight: 140, }}
+                            // style={{ marginRight: 140, }}
                             classes={{ root: classes.root }}
                             id="deleteAccount"
-                        >
-                            <p>Delete Account</p>
+                        >Delete Account
                         </Button>
                         <ChangePasswordForm />
 

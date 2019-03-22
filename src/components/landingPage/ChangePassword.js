@@ -80,10 +80,11 @@ class ChangePasswordForm extends Component {
       <div>
         <Fab 
           style={{
-            width: 100,
+            width: 150,
             borderRadius: 4,
             margin: 10,
             opacity: 1,
+            height: 1,
           }}
           classes={{ root: classes.root }}
           id="editPassword"
