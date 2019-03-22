@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux';
+
 import PropTypes from 'prop-types'
-import CardModal from '../homePage/CardModal'
+// import CardModal from '../homePage/CardModal'
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -8,10 +10,16 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions'
 import LineDivider from '../addEditPin/LineDivider'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Button from '@material-ui/core/Button'
-import ListItemText from '@material-ui/core/ListItemText'
-import {connect} from 'react-redux';
-import store from '../../redux/store';
+
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+// import {image} from ''
 
 import { IconButton } from '@material-ui/core';
 
@@ -29,11 +37,14 @@ class ViewPinModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
+    //   open: false,
       user: {},
       pins: [],
-      pinData: {}
+      pinData: {},
+      active: true
     }
+    this.handleClose.bind(this)
+    // this.handleChange.bind(this)
   }
     
   componentDidUpdate(prevProps) { 
@@ -43,88 +54,64 @@ class ViewPinModal extends Component {
     }
   }
 
-  handleClickOpen = scroll => () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
+  handleClose (e) {
+    e.preventDefault();
     this.setState({ open: false });
   };
 
-
-  
-CardModal (data) {
-      
-    const { classes } = props;
-  
-  
-      let name = this.props.data.name
-      let size = this.props.data.crapSize
-      let category = this.props.data.category
-      console.log(name, "this is props")
-  
-      
-          return (
-          <Card className={classes.card}>
-          
-            <CardActionArea >
-              <CardMedia
-                component="img"
-                alt="Item"
-                className={classes.media}
-                style={{ 'z-index': 30, 'background-color': 'primary' }}
-                height="300"
-              //   image={image}
-              //   title={name}
-              />
-      
-              <CardContent>
-      
-                <Typography gutterBottom variant="h5" component="h1">
-                {/* {name} */}
-                  title
-                </Typography>
-      
-                <Typography component="p">
-                  {/* {size} */}
-                  size
-                  {/* <Tabs><Tab icon={<FontAwesomeIcon icon='box' />} label="MEDIUM"/></Tabs> */}
-                </Typography>
-          
-              </CardContent>
-            </CardActionArea>
-            {/* <LineDivider /> */}
-  
-            <CardActions>
-              <Button size="medium" color="primary">
-                DIBS
-              </Button>
-              <Button size="medium" color="primary">
-                PASS
-              </Button>
-  
-            </CardActions>
-          </Card>
-        );
-  }
-
   render() {
-      const {pin} = this.props.data;
-      console.log(pin);
+      const pin = this.props.data;
+    //   console.log(pin.name)
     if (!this.props.show) {
         return null;
     }
+
     return (
       <div >
           <Dialog
         //   open={this.state.open}
         //   onClose={this.handleClose}
-        //   scroll={this.state.scroll}
           aria-labelledby="scroll-dialog-title"
           style={{ 'z-index': 30, 'background-color': 'primary' }}>
 
-            <DialogContent>
-              <CardModal data={pin}/>
+            <DialogContent>               
+        <Card className={styles.card}>
+        
+          <CardActionArea >
+            <CardMedia 
+              component="img"
+              alt="Item"
+              className={styles.media}
+              style={{ 'z-index': 30, 'background-color': 'primary' }}
+              height="300"
+            //   image={this.pinData.}
+            //   title={name}
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h1">
+              {/* {name} */}
+                title
+              </Typography>
+    
+              <Typography component="p">
+                {/* {size} */}
+                size
+                {/* <Tabs><Tab icon={<FontAwesomeIcon icon='box' />} label="MEDIUM"/></Tabs> */}
+              </Typography>
+        
+            </CardContent>
+          </CardActionArea>
+          <LineDivider />
+          <CardActions>
+            <Button size="medium" color="primary">
+              DIBS
+            </Button>
+            <Button size="medium" color="primary" onClick={this.handleClose}>
+              CLOSE
+            </Button>
+          </CardActions>
+        </Card>
+
             </DialogContent>
 
           </Dialog>
@@ -146,5 +133,7 @@ function mapStateToProps(reduxState) {
   }
 }
 
-export default connect(mapStateToProps)(ViewPinModal);
+export default connect(mapStateToProps)(withStyles(styles)(ViewPinModal));
+
+
 

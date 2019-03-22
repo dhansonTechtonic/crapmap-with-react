@@ -37,10 +37,9 @@ export class MapContainer extends Component {
     let targetPin = e;
     // console.log(targetPin.name)
     this.setState({
-      viewCardIsOpen: !this.state.viewCardIsOpen,
+      viewCardIsOpen: true,
       pinData: targetPin
     });
-    
   }
 
   componentDidUpdate(prevProps) { 
@@ -114,25 +113,18 @@ export class MapContainer extends Component {
     // pin = {pin}
     name={pin._fieldsProto.title.stringValue}
     icon={this.findColor(pin._fieldsProto.category.stringValue)}
-    
     category={pin._fieldsProto.category.stringValue}
-    
     itemSize={pin._fieldsProto.size.stringValue}
-    
     img={pin._fieldsProto.img.stringValue}
-    
     position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
                 lng:pin._fieldsProto.location.mapValue.fields.lng.doubleValue }}
-
     onClick={this.toggleViewPinModal}
   />
   )}
 )}
+<ViewPinModal show={this.state.viewCardIsOpen} />
 
 </Map>
-
-<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} dibsState={this.state.dibState} />
-
 </div> 
     );
   }

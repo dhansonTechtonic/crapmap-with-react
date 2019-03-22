@@ -30,22 +30,23 @@ const styles = {
   }
 };
 
+// let props = this.getState()
+
 function CardModal (props) {
-    
+    console.log(this.props, "this is props")
+
     const { classes } = props;
 
-
     let name = this.props.data.name
+    console.log(name)
     let size = this.props.data.crapSize
     let category = this.props.data.category
-    console.log(name, "this is props")
 
-    
         return (
         <Card className={classes.card}>
         
           <CardActionArea >
-            <CardMedia
+            <CardMedia 
               component="img"
               alt="Item"
               className={classes.media}
