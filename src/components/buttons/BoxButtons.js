@@ -15,11 +15,12 @@ const styles = {
 
 class BoxButtons extends React.Component {
   state = {
-    value: 0,
+    value: "1",
   };
 
   handleChange = (event, value) => {
     this.setState({ value });
+    this.props.sendValue(value);
   };
 
   render() {
@@ -34,9 +35,9 @@ class BoxButtons extends React.Component {
           indicatorColor="secondary"
           textColor="primary"
         >
-          <Tab icon={<FontAwesomeIcon icon='box' />} label="SMALL"/>
-          <Tab icon={<FontAwesomeIcon icon='box' />} label="MEDIUM"/>
-          <Tab icon={<FontAwesomeIcon icon='box' />} label="LARGE"/>
+          <Tab value="1" icon={<FontAwesomeIcon icon='box' />} label="SMALL"/>
+          <Tab value="2" icon={<FontAwesomeIcon icon='box' />} label="MEDIUM"/>
+          <Tab value="3" icon={<FontAwesomeIcon icon='box' />} label="LARGE"/>
         </Tabs>
       </Paper>
     );

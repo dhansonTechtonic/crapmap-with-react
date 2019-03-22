@@ -8,6 +8,20 @@ let db = admin.firestore();
 const express = require('express');
 const router = express.Router();
 
+router.get("/get/:userID", (req, res) => {
+    let pinsRef = db.collection('pins');
+    var query = pinsRef.where("userID", '==', req.params.userID).get()
+    .then(function(querySnapshot){
+      if (querySnapshot) {
+          res.send(querySnapshot.docs);
+      } else {
+          res.send("Collection does not exist");
+      }
+      return false;
+    }).catch(err => console.log(err))
+})
+
+
 router.get("/get", (request, response) =>{
     let pinsRef = db.collection('pins');
     let query = pinsRef.get().then(function(querySnapshot){
@@ -20,6 +34,7 @@ router.get("/get", (request, response) =>{
     }).catch (err => err)
 });
 
+
 router.post('/new',jsonParser, (request,response) =>{
     console.log(request.body);
     let pinObject ={
@@ -29,7 +44,7 @@ router.post('/new',jsonParser, (request,response) =>{
         location: {
             lat: request.body.lat,
             lng: request.body.lng,
-            zip: request.body.zip
+            address: request.body.address
         },
         size: request.body.size,
         //tags: request.body.tags,
@@ -51,7 +66,7 @@ router.post('/update', (request,response) =>{
         location: {
             lat: request.body.location.lat,
             lng: request.body.location.lng,
-            zip: request.body.location.zip
+            address: request.body.location.zip
         },
         size: request.body.size,
         tags: request.body.tags,

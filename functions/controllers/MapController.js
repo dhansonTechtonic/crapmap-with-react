@@ -12,6 +12,7 @@ jsonParser = bodyParser.json();
 
 router.post("/reverse-geo-code", jsonParser, (req, res) =>{
     
+    console.log(req.body);
     let latlng = `${req.body.lat},${req.body.lng}`
     let apiKey = functions.config().googlemapgeokey.key  
     let url= `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latlng}&key=${apiKey}`
@@ -34,6 +35,7 @@ router.post("/reverse-geo-code", jsonParser, (req, res) =>{
 });
 
 router.post("/geo-code", jsonParser, (req, res) =>{
+    
     
     let reqAdd = req.body.address;   
     let urlAdd = reqAdd.replace(/\s/,"+");

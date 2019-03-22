@@ -17,36 +17,55 @@ import { IconButton } from '@material-ui/core';
 
 import {deletePin} from '../../redux/actions/pinActions'
 
+async function getPinsByUser(userID) {
+  // console.log('inside Get Pins By USer');
+  // console.log(userID);
+  var userPins = await fetch(' https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/get/' + String(userID), {
+    method: 'GET',
+  })
+    .then((res) => { return res.json()})
+    .then((val) => { 
+      console.log(val);
+      return val})
+    .catch((err) => err)
+
+    return userPins;
+}
+
+
+
 class MyListingsModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
       scroll: 'paper',
-      user: {},
-      pins: []
+      userPins: []
     }
   }
-    
+
+   
+
   componentDidUpdate(prevProps) { 
     // reduces pins promise to just pin array on update
     if (this.props.pins !== prevProps.pins) {
       this.props.pins.then((val) => { this.setState({ pins: val.pins }) })
     }
+  
   }
 
-
-  handleClickOpen = scroll => () => {
+   handleClickOpen = scroll => async () => {
     this.setState({ open: true, scroll });
+
+     let userID = JSON.parse(localStorage.getItem('userID'))
+     this.setState({ userPins: await getPinsByUser(userID) })
+
+    console.log(this.state);    
   };
 
   handleClose = () => {
     this.setState({ open: false });
   };
-
-  // componentDidMount(){
-  //   this._getListings();
-  // }
 
   render() {
     return (
@@ -65,7 +84,7 @@ class MyListingsModal extends Component {
             </DialogTitle>
             <LineDivider />
             <DialogContent>
-              <MyListingsPost />
+              <MyListingsPost {...this.state}/>
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="error">CLOSE</Button>
@@ -82,12 +101,13 @@ MyListingsModal.propTypes = {
   children: PropTypes.node,
 }
         
-function mapStateToProps(reduxState) {
-  return {
-    user: reduxState.user,
-    pins: reduxState.pins
-  }
-}
+// function mapStateToProps(reduxState) {
+//   return {
+//     user: reduxState.user,
+//     pins: reduxState.pins
+//   }
+// }
 
-export default connect(mapStateToProps)(MyListingsModal);
+// export default connect(mapStateToProps)(MyListingsModal);
+export default MyListingsModal
 

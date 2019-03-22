@@ -26,14 +26,16 @@ export class MapContainer extends Component {
       user: {},
       pins: [],
       pinData: {}, 
-      centerAroundCurrentLocation: true
+      dibState: false,
+      centerAroundCurrentLocation: true,
+      
       }
       this.toggleViewPinModal = this.toggleViewPinModal.bind(this)
     };
 
   toggleViewPinModal(e) {
     let targetPin = e;
-    console.log(targetPin.name)
+    // console.log(targetPin.name)
     this.setState({
       viewCardIsOpen: !this.state.viewCardIsOpen,
       pinData: targetPin
@@ -108,16 +110,19 @@ export class MapContainer extends Component {
   return (
   <Marker
     key={pin._ref._path.segments[1]}
-    active={true}
-    pin = {pin}
+    active={this.state.dibState}
+    // pin = {pin}
     name={pin._fieldsProto.title.stringValue}
     icon={this.findColor(pin._fieldsProto.category.stringValue)}
+    
     category={pin._fieldsProto.category.stringValue}
+    
     itemSize={pin._fieldsProto.size.stringValue}
+    
     img={pin._fieldsProto.img.stringValue}
+    
     position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
                 lng:pin._fieldsProto.location.mapValue.fields.lng.doubleValue }}
-    // onMouseover={this.changeIcon.bind(this)}
 
     onClick={this.toggleViewPinModal}
   />
@@ -126,7 +131,7 @@ export class MapContainer extends Component {
 
 </Map>
 
-<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} />
+<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} dibsState={this.state.dibState} />
 
 </div> 
     );

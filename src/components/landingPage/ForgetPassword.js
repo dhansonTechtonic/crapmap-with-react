@@ -12,8 +12,8 @@ import { withStyles } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab'
 import LineDivider from '../addEditPin/LineDivider.js';
 
-import store from '../../redux/store'
-import { resetUserPassword } from '../../redux/actions/userActions'
+// import store from '../../redux/store'
+// import { resetUserPassword } from '../../redux/actions/userActions'
 
 const INITIAL_STATE = {
   email: '',
@@ -35,19 +35,8 @@ export default class PasswordForgetForm extends Component {
     const { email } = this.state;
 
     this.doPasswordReset(email)
-      .then((authUser) => {
-      let actionObject = {
-        userID: authUser.user.uid,
-        auth: true
-      }
-      store.dispatch(resetUserPassword(actionObject));
-      this.props.sendData(authUser);
-
-      this.setState({ ...INITIAL_STATE });
-    })
-    .catch(error => {
-      this.setState({ error });
-    });
+    .then(() => this.setState({ ...INITIAL_STATE }))
+    .catch(error => this.setState({ error }));
 
     event.preventDefault();
   };
@@ -134,6 +123,7 @@ export default class PasswordForgetForm extends Component {
 }
 
 PasswordForgetForm.propTypes = {
+  doPasswordReset: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
   show: PropTypes.bool,

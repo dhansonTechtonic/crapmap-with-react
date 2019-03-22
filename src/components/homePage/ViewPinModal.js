@@ -17,14 +17,22 @@ import { IconButton } from '@material-ui/core';
 
 import {deletePin} from '../../redux/actions/pinActions'
 
+const styles = {
+    card: {
+      maxWidth: 375,
+    },
+    media: {
+      height: 240,
+    }
+  };
 class ViewPinModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      scroll: 'paper',
       user: {},
-      pins: []
+      pins: [],
+      pinData: {}
     }
   }
     
@@ -36,12 +44,69 @@ class ViewPinModal extends Component {
   }
 
   handleClickOpen = scroll => () => {
-    this.setState({ open: true, scroll });
+    this.setState({ open: true });
   };
 
   handleClose = () => {
     this.setState({ open: false });
   };
+
+
+  
+CardModal (data) {
+      
+    const { classes } = props;
+  
+  
+      let name = this.props.data.name
+      let size = this.props.data.crapSize
+      let category = this.props.data.category
+      console.log(name, "this is props")
+  
+      
+          return (
+          <Card className={classes.card}>
+          
+            <CardActionArea >
+              <CardMedia
+                component="img"
+                alt="Item"
+                className={classes.media}
+                style={{ 'z-index': 30, 'background-color': 'primary' }}
+                height="300"
+              //   image={image}
+              //   title={name}
+              />
+      
+              <CardContent>
+      
+                <Typography gutterBottom variant="h5" component="h1">
+                {/* {name} */}
+                  title
+                </Typography>
+      
+                <Typography component="p">
+                  {/* {size} */}
+                  size
+                  {/* <Tabs><Tab icon={<FontAwesomeIcon icon='box' />} label="MEDIUM"/></Tabs> */}
+                </Typography>
+          
+              </CardContent>
+            </CardActionArea>
+            {/* <LineDivider /> */}
+  
+            <CardActions>
+              <Button size="medium" color="primary">
+                DIBS
+              </Button>
+              <Button size="medium" color="primary">
+                PASS
+              </Button>
+  
+            </CardActions>
+          </Card>
+        );
+  }
 
   render() {
       const {pin} = this.props.data;
