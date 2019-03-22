@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { auth } from './../../firebase.js'
+import { withStyles } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -8,19 +8,15 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab'
 import LineDivider from '../addEditPin/LineDivider.js';
-
-// import store from '../../redux/store'
-// import { resetUserPassword } from '../../redux/actions/userActions'
 
 const INITIAL_STATE = {
   passwordOne: '',
   passwordTwo: '',
   error: null,
   open: false,
-  scroll: 'paper'
+  scroll: 'paper',
 };
 
 const style = {
@@ -28,10 +24,6 @@ const style = {
     color: "white",
     backgroundColor: "#2E2D31"
   },
-  "root:hover": {
-    // color: "teal",
-    backgroundColor: "white"
-  }
 }
 
 class ChangePasswordForm extends Component {
@@ -41,41 +33,29 @@ class ChangePasswordForm extends Component {
     this.state = { ...INITIAL_STATE };
   }
 
-  doPasswordUpdate = password => auth.currentUser.updatePassword(password);
-
+  onChange = event => this.setState({ [event.target.name]: event.target.value });
+  
   onSubmit = event => {
     const { passwordOne } = this.state;
-
+    
     this.doPasswordUpdate(passwordOne)
-    .then(() => {
-      this.setState({ ...INITIAL_STATE });
-    })
-    .catch(error => {
-      this.setState({ error });
-    });
-
+    .then(() => this.setState({ ...INITIAL_STATE }))
+    .catch(error => this.setState({ error }));
+    
     event.preventDefault();
   };
+  
+  doPasswordUpdate = password => auth.currentUser.updatePassword(password);
 
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+  handleClickOpen = scroll => () => this.setState({ open: true, scroll });
 
-  handleClickOpen = scroll => () => {
-    this.setState({ open: true, scroll });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-
-  };
+  handleClose = () => this.setState({ open: false });
 
   render() {
     const { passwordOne, passwordTwo, error } = this.state;
-
     const isInvalid = passwordOne !== passwordTwo || passwordOne === '';
-
     const { classes } = this.props;
+
     return (
       <div>
         <Fab 
@@ -88,18 +68,14 @@ class ChangePasswordForm extends Component {
           }}
           classes={{ root: classes.root }}
           id="editPassword"
-          onClick={this.handleClickOpen('paper')}>
-          Edit Password
-      </Fab>
+          onClick={ this.handleClickOpen('paper') }
+          >Edit Password
+        </Fab>
         <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          scroll={this.state.scroll}
+          open={ this.state.open }
+          onClose={ this.handleClose }
+          scroll={ this.state.scroll }
           aria-labelledby="scroll-dialog-title"
-          style={{
-            'z-index': 30,
-            'background-color': 'primary',
-          }}
         >
           <DialogTitle>CHANGE YOUR PASSWORD</DialogTitle>
           <LineDivider />
@@ -128,25 +104,23 @@ class ChangePasswordForm extends Component {
                 name="passwordTwo"
               />
               {error && <p>{error.message}</p>}
+              <DialogActions>
+                <Button
+                  onClick={this.onSubmit}
+                  onSubmit={this.handleClose}
+                  disabled={isInvalid}
+                  type="submit"
+                  color="primary"
+                >CONFIRM PASSWORD CHANGE
+                </Button>
+                <Button
+                  onClick={this.handleClose}
+                  color="error"
+                >Cancel
+                </Button>
+              </DialogActions>
             </form>
           </DialogContent>
-          <DialogActions>
-            <Button
-              onClick={this.onSubmit}
-              onSubmit={this.handleClose}
-              disabled={isInvalid}
-              type="submit"
-              color="primary"
-            >
-              CONFIRM PASSWORD CHANGE
-          </Button>
-            <Button
-              onClick={this.handleClose}
-              color="error"
-            >
-              Cancel
-          </Button>
-          </DialogActions>
         </Dialog>
       </div>
     );
@@ -155,7 +129,6 @@ class ChangePasswordForm extends Component {
 
 ChangePasswordForm.propTypes = {
   onClose: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired,
   show: PropTypes.bool,
   children: PropTypes.node,
   classes: PropTypes.object.isRequired,

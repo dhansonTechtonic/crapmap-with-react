@@ -83,7 +83,8 @@ class EmailForm extends Component {
       error,
     } = this.state;
 
-    const isInvalid = password === '' || email === '';
+    const isInvalid = password === '' || email === '' ||
+      email === "[a-z0-9!#$%&' * +/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
 
 
     return (

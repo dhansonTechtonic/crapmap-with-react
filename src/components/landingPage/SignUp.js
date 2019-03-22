@@ -102,11 +102,14 @@ class SignUpForm extends Component {
       error,
     } = this.state;
 
+    const validEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b/g
+
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === '' ||
-      email === '' ||
-      username === '';
+      // email === '' ||
+      username === '' ||
+      email === validEmail.test(email);
     
     const { classes } = this.props;
 
