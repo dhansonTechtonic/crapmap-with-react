@@ -7,7 +7,7 @@ import styles from './GoogleMapsJSON.json';
 // import ViewPinModal from './ViewPinModal';
 import CardModal from './CardModal';
 import ViewPinModal from './ViewPinModal';
-import {Room} from '@material-ui/icons/Room'
+// import {Room} from '@material-ui/icons/Room'
 
 // import { func } from 'prop-types';
 
@@ -16,6 +16,7 @@ const mapStylesDefaults = {
   width: '100%',
   height: '100%',
 };
+let iconsArr;
 export class MapContainer extends Component {
 
   constructor(props) {
@@ -24,7 +25,8 @@ export class MapContainer extends Component {
       viewCardIsOpen: false,
       user: {},
       pins: [],
-      pinData: {}
+      pinData: {}, 
+      centerAroundCurrentLocation: true
       }
       this.toggleViewPinModal = this.toggleViewPinModal.bind(this)
     };
@@ -36,6 +38,7 @@ export class MapContainer extends Component {
       viewCardIsOpen: !this.state.viewCardIsOpen,
       pinData: targetPin
     });
+    
   }
 
   componentDidUpdate(prevProps) { 
@@ -72,13 +75,17 @@ export class MapContainer extends Component {
          break;
       }
   }
+  
+  findZip(zipCode) {
+    
+  }
 
   changeIcon (e) {
     console.log(e)
     return e.icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 6, strokeColor: '#7328ff' }
   }
 
- render() {
+ render() { 
   if (!this.props.loaded) {
     return (<div><h1>Loading...</h1></div>)
   }
@@ -89,7 +96,7 @@ export class MapContainer extends Component {
     google={this.props.google}
     style={mapStylesDefaults}
     className={'map'}
-    zoom={14}  
+    zoom={14}
     centerAroundCurrentLocation={true}
     draggable={true} 
     // minZoom={13} 
