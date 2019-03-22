@@ -44,55 +44,25 @@ hr{
   -webkit-transition-duration: 0.3s;
 }
 
-/*Bottom Nav Styles---------------------*/
-
-#bnFurniture:active {
-  color: #ff4700;
-}
-
-#bnAll:active {
-  color: #00FFDE;
-}
-
-#bnAll:active {
-  color: #00FFDE;
-}
-
-#bnGadgets:active {
-  color: rgb(115, 40, 255)
-}
-
-#bnMisc:active {
-  color: rgb(71, 141, 255)
-}
-
-#bnSports:active {
-  color: rgb(227, 68, 255)
-}
-
-#bnAuto:active {
-  color: rgb(253, 88, 157)
-}
-
 /*Categories Styles----------*/
 
-#catFurniture:active {
+#catFurniture{
   color: #ff4700;
 }
 
-#catSports:active {
+#catSports{
   color: rgb(227, 68, 255)
 }
 
-#catAuto:active {
+#catAuto{
   color: rgb(253, 88, 157)
 }
 
-#catGadgets:active {
+#catGadgets{
   color: rgb(115, 40, 255)
 }
 
-#catMisc:active {
+#catMisc{
   color: rgb(71, 141, 255)
 }
 
