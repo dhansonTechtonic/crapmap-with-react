@@ -58,7 +58,7 @@ router.post('/new',jsonParser, (request,response) =>{
     return false
     });
 
-router.post('/update', (request,response) =>{
+router.post('/update/pinID', (request,response) =>{
     let pinObject ={
         category: request.body.category,
         img:request.img,
@@ -73,10 +73,15 @@ router.post('/update', (request,response) =>{
         title: request.body.title,
         userID: request.body.userID
     };
-    let pinsRef = db.collection('pins');
-    pinsRef.set(pinObject, { merge: true })
-    .then(() => console.log('success'))
-    .catch(()=> console.log('error'));
+
+    let pinsRef = db.collection('pins').doc(request.param.pinID);
+    if(pinsRef.exists()){
+        pinsRef.set(pinObject, { merge: true })
+        .then(() => response.send('success'))
+        .catch(()=> console.log('error'));
+    }else{
+        res.status(404).send('Document Does Not Exist');
+    }
     return false
 });
 

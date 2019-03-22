@@ -66,7 +66,7 @@ function MyListingsPost(props){
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <EditPinModal />
+          <EditPinModal incomeVal={props} />
           {/* <Button color="error" style={{ left: 110, display: 'block' }} onClick={() => {
           this.handleDeletePin(pin._ref._path.segments[1])
         }}>Delete</Button> */}
