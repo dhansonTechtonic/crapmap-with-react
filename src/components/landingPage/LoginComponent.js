@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import firebase, {auth} from './../../firebase.js';
+import firebase, { auth } from './../../firebase.js';
 import Fab from '@material-ui/core/Fab'
 
 import store from '../../redux/store';
-import {registerUser} from '../../redux/actions/userActions'
+import { registerUser } from '../../redux/actions/userActions'
 
 export default class LoginComponent extends Component {
   constructor(props) {
@@ -67,8 +67,8 @@ export default class LoginComponent extends Component {
             margin: 10, 
             opacity: 1,
           }}
-          onClick={this.login}
-        >Login with {this.props.providerName} 
+          onClick={ this.login }
+        >Login with { this.props.providerName } 
         </Fab>              
       </div>
     )
