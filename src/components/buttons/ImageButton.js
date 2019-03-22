@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Tooltip from '@material-ui/core/Tooltip'
 
 export default class ImageButton extends Component {
     constructor(props) {
@@ -25,7 +26,9 @@ export default class ImageButton extends Component {
   render() {
     return (
       <div onClick={this._uploadImage}>
-        <input type="file" onChange={this._handleChange} name="postingImg" id="file" class="inputfile" accept="image/*" style={{marginTop: 20}}/>
+        <Tooltip title="Add An Image">
+          <input type="file" onChange={this._handleChange} name="postingImg" id="file" class="inputfile" accept="image/*" style={{ marginTop: 20 }} />
+        </Tooltip>
       </div>
     )
   }

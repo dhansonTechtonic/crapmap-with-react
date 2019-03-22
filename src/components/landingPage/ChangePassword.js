@@ -66,7 +66,7 @@ export default class ChangePasswordForm extends Component {
 
     return (
       <div>
-        <Fab color="error"
+        <Button color="error"
           style={{
             width: 100,
             borderRadius: 4,
@@ -76,7 +76,7 @@ export default class ChangePasswordForm extends Component {
           }}
           onClick={this.handleClickOpen('paper')}>
           Edit Password
-      </Fab>
+      </Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}

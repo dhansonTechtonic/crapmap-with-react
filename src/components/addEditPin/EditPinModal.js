@@ -17,6 +17,7 @@ import store from '../../redux/store/index';
 import { newPin } from '../../redux/actions/pinActions';
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Arrow from '../assets/crapmap-locator.png'
+import Tooltip from '@material-ui/core/Tooltip'
 class EditPinModal extends Component {
     constructor(props) {
         super(props);
@@ -111,9 +112,11 @@ class EditPinModal extends Component {
     render() {
         return (
             <div>
-                <IconButton style={{fontSize: 20, marginLeft: 10, marginBottom: 8}}onClick={this.handleClickOpen('paper')}>
-                    <FontAwesomeIcon icon="pencil-alt" />
-                </IconButton>
+                <Tooltip title="Edit This Crap">
+                    <IconButton style={{fontSize: 20, marginLeft: 10, marginBottom: 8}}onClick={this.handleClickOpen('paper')}>
+                        <FontAwesomeIcon icon="pencil-alt" />
+                    </IconButton>
+                </Tooltip>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -163,8 +166,12 @@ class EditPinModal extends Component {
                         </form>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} onClick={this.handleSubmit} color="primary">POST</Button>
-                        <Button onClick={this.handleClose} color="error">CANCEL</Button>
+                        <Tooltip title="Save This Crap">
+                            <Button onClick={this.handleClose} onClick={this.handleSubmit} color="primary">POST</Button>
+                        </Tooltip>
+                        <Tooltip title="Nevermind">
+                            <Button onClick={this.handleClose} color="error">CANCEL</Button>
+                        </Tooltip>
                     </DialogActions>
                 </Dialog>
             </div>

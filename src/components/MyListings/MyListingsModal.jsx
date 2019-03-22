@@ -13,7 +13,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import {connect} from 'react-redux';
 import store from '../../redux/store';
 
-import { IconButton } from '@material-ui/core';
+import { IconButton, Tooltip } from '@material-ui/core';
 
 import {deletePin} from '../../redux/actions/pinActions'
 
@@ -70,9 +70,11 @@ class MyListingsModal extends Component {
   render() {
     return (
       <div>
-        <li onClick={this.handleClickOpen('paper')} className="nav-links">
+        <Tooltip title="View My Crap">
+          <li onClick={this.handleClickOpen('paper')} className="nav-links">
             MY CRAP
           </li>
+        </Tooltip>
           <Dialog
           open={this.state.open}
           onClose={this.handleClose}
