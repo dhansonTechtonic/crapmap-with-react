@@ -134,7 +134,7 @@ class EmailForm extends Component {
               />
               {error && <p>{error.message}</p>}
               <DialogActions >
-                <SignUpForm />
+                <SignUpForm/>
                 <Button onClick={this.onSubmit} disabled={isInvalid} type="submit" color="primary">Sign In</Button>
                 <Button onClick={this.handleClose} color="error">Cancel</Button>
               </DialogActions>

@@ -62,12 +62,18 @@ export default class LoginComponent extends Component {
 
   render() {
     return(
-      <div>
         <div>
-          <Fab color="error" style={{width:210, borderRadius:4, margin: 10, opacity: 1}}onClick={this.login}>Login with {this.props.providerName} </Fab>              
+          <Fab 
+            style={{
+              width:210, 
+              borderRadius:4, 
+              margin: 10, 
+              opacity: 1,
+            }}
+            onClick={this.login}
+          >Login with {this.props.providerName} 
+          </Fab>              
         </div>
-       
-      </div>
     )
   }
 }

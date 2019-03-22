@@ -29,7 +29,7 @@ const style = {
     backgroundColor: "#2E2D31"
   },
   "root:hover": {
-    color: "red",
+    // color: "teal",
     backgroundColor: "white"
   }
 }
