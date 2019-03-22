@@ -1,26 +1,27 @@
 
-import {REGISTER_USER, LOGOUT_USER} from "../actions/userActions"
+import {REGISTER_USER, LOGOUT_USER, LOGIN_USER} from "../actions/userActions"
 
 import {auth} from '../../firebase'
 
 const initUser = {
-        userID: '',
-        posts: [],
-        auth: false,
+    userID: '',
+    posts: [],
+    auth: false,
 };
 
 export default function userReducer(state = initUser, action) {
     let payload = action.payload;
 
     switch (action.type) {
-        case "LOGIN_USER":
-            {
-        
-                break;
+        case LOGIN_USER: {
+            return {
+                userID: payload.userID,
+                auth: payload.auth
             }
+             
+        }
 
-        case REGISTER_USER:
-        {
+        case REGISTER_USER: {
 
             console.log(payload);
             return {

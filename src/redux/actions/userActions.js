@@ -1,20 +1,29 @@
 export const REGISTER_USER = 'REGISTER_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const LOGIN_USER = 'LOGIN_USER';
+export const RESET_USER_PASSWORD = 'RESET_USER_PASSWORD';
 
 
-
-function loginUser(userObject) {
-    console.log(userObject)
-    return {
-        type: "LOGIN_USER",
-        payload: userObject
-    }
-
-};
-
-export const registerUser= (userObject) => ({
-    type: "REGISTER_USER",
+export const loginUser = (userObject) => ({
+    type: LOGIN_USER,
     payload: userObject
+});
+
+export const registerUser = (userObject) => ({
+    type: REGISTER_USER,
+    payload: userObject
+});
+
+export const resetUserPassword = (userObject) => ({
+    type: RESET_USER_PASSWORD,
+    payload: userObject
+});
+
+export const logOutUser = () => ({
+    type: LOGOUT_USER,
+    payload: {
+        type: "LOGOUT_USER",
+    }
 });
 
 function getUser(userObject) {
@@ -24,21 +33,6 @@ function getUser(userObject) {
         payload: userObject
     }
 };
-
-function updateUser(userObject) {
-    console.log(userObject)
-    return {
-        type: "UPDATE_USER",
-        payload: userObject
-    }
-};
-
-export const logOutUser = () => ({
-    type: LOGOUT_USER,
-    payload: {
-        type: "LOGOUT_USER",
-    }
-});
 
 function deleteUser(userObject) {
     console.log(userObject)
@@ -52,7 +46,7 @@ export default {
     loginUser,
     registerUser,
     getUser,
-    updateUser,
+    resetUserPassword,
     logOutUser,
     deleteUser
 }

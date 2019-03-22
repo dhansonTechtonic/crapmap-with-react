@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button'
 import LineDivider from '../addEditPin/LineDivider';
 import Typography from '@material-ui/core/Typography'
 import ListItemText from '@material-ui/core/ListItemText'
+import ChangePasswordForm from '../landingPage/ChangePassword'
 
 const styles = {
     card: {

@@ -26,7 +26,6 @@ function getPinsFetch(input){
         .catch(err => console.error("Error", err))
 }
 
-
 // CREATES NEW PIN
 export const newPin = (input) => ({
     type: NEW_PIN,

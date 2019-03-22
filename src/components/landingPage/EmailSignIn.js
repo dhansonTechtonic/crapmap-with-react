@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { FirebaseContext } from '../../firebase';
-import {auth} from './../../firebase.js'
+import { auth } from './../../firebase.js'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -13,24 +13,21 @@ import Fab from '@material-ui/core/Fab'
 import LineDivider from '../addEditPin/LineDivider.js';
 
 import store from '../../redux/store'
-import { registerUser } from '../../redux/actions/userActions'
-import { pink } from '@material-ui/core/colors';
-
+import { loginUser } from '../../redux/actions/userActions'
+import SignUpForm from './SignUp'
 
 
 const INITIAL_STATE = {
-  username: '',
   email: '',
-  passwordOne: '',
-  passwordTwo: '',
+  password: '',
   error: null,
 };
-class SignUpForm extends Component {
+class EmailForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      ...INITIAL_STATE, 
+      ...INITIAL_STATE,
       open: false,
       scroll: 'paper',
     };
@@ -42,33 +39,33 @@ class SignUpForm extends Component {
     this.setState({ open: true, scroll });
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
+  handleClose = (e) => {
+    console.log(e.keyCode)
+    e.keyCode === 13 ? this.setState({ open: false }) : this.setState({ open: false })
 
   };
 
-  doCreateUserWithEmailAndPassword = (email, password) =>
-    auth.createUserWithEmailAndPassword(email, password);
+  doSignInWithEmailAndPassword = (email, password) =>
+    auth.signInWithEmailAndPassword(email, password);
 
-  doPasswordUpdate = password =>
-    auth.currentUser.updatePassword(password);
-
-  onSubmit = () => {
-    const { email, passwordOne } = this.state;
-      this.doCreateUserWithEmailAndPassword(email, passwordOne)
+  onSubmit = (e) => {
+    const { email, password } = this.state;
+    console.log(e.keyCode)
+      this.doSignInWithEmailAndPassword(email, password)
       .then(authUser => {
         var actionObject = {
           userID: authUser.user.uid,
           auth: true
         }
-        store.dispatch(registerUser(actionObject));
+        store.dispatch(loginUser(actionObject));
         this.props.sendData(authUser);
-
+  
         this.setState({ ...INITIAL_STATE });
       })
       .catch(error => {
         this.setState({ error });
       });
+    e.preventDefault();
   }
 
   onChange = event => {
@@ -80,59 +77,40 @@ class SignUpForm extends Component {
 
   render() {
     const {
-      username,
+  
       email,
-      passwordOne,
-      passwordTwo,
+      password,
       error,
     } = this.state;
 
-    const isInvalid =
-      passwordOne !== passwordTwo ||
-      passwordOne === '' ||
-      email === '' ||
-      username === '';
-    
- 
+    const isInvalid = password === '' || email === '';
+
 
     return (
       <div>
-        <Fab 
-          // color="primary" 
-          style={{ 
-            width: 250, 
+        <Fab color="error"
+          style={{
+            width: 210,
             borderRadius: 4,
-            // margin: 10, 
-            opacity: 1,
-            color: "white",
-            backgroundColor: "inherit",
-            float: "left", 
-          }} 
+            margin: 10,
+            opacity: 1
+          }}
           onClick={this.handleClickOpen('paper')}>
-          New? Click here to Sign Up 
+          Login with Email
         </Fab>
         <Dialog
+          
           open={this.state.open}
           onClose={this.handleClose}
           scroll={this.state.scroll}
           aria-labelledby="scroll-dialog-title"
           style={{ 'z-index': 30, 'background-color': 'primary' }}>
           <DialogTitle>
-            SIGN UP 
+            SIGN IN
           </DialogTitle>
           <LineDivider />
           <DialogContent>
             <form onSubmit={this.onSubmit}>
-              <TextField
-                id="outlined-name"
-                label="Username"
-                margin="normal"
-                variant="outlined"
-                value={username}
-                onChange={this.onChange}
-                placeholder="Username"
-                name="username"
-              />
               <TextField
                 id="outlined-name"
                 label="Email"
@@ -149,40 +127,31 @@ class SignUpForm extends Component {
                 label="Password"
                 margin="normal"
                 variant="outlined"
-                value={passwordOne}
+                value={password}
                 onChange={this.onChange}
                 placeholder="Enter Password"
-                name="passwordOne"
-              />
-              <TextField
-                type="password"
-                id="outlined-name"
-                label="Confirm Password"
-                margin="normal"
-                variant="outlined"
-                value={passwordTwo}
-                onChange={this.onChange}
-                placeholder="Confirm Password"
-                name="passwordTwo"
+                name="password"
               />
               {error && <p>{error.message}</p>}
               <DialogActions >
-                <Button onClick={this.onSubmit} disabled={isInvalid} type="submit" color="primary">Sign-Up</Button>
+                <SignUpForm />
+                <Button onClick={this.onSubmit} disabled={isInvalid} type="submit" color="primary">Sign In</Button>
                 <Button onClick={this.handleClose} color="error">Cancel</Button>
               </DialogActions>
             </form>
           </DialogContent>
+          
         </Dialog>
       </div>
     );
   }
 }
 
-SignUpForm.propTypes = {
+EmailForm.propTypes = {
   onClose: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
   show: PropTypes.bool,
   children: PropTypes.node
 };
 
-export default SignUpForm;
+export default EmailForm;

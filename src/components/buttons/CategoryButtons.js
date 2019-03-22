@@ -15,12 +15,13 @@ const styles = {
 
 class CategoryButtons extends React.Component {
   state = {
-    value: 0
+    value: "Furniture",
   };
 
   handleChange = (event, value) => {
     console.log(value)
     this.setState({ value });
+    this.props.sendValue(value);
   };
 
   render() {

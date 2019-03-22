@@ -12,7 +12,8 @@ import Typography from '@material-ui/core/Typography'
 import store from '../../redux/store'
 import {logOutUser} from '../../redux/actions/userActions';
 
-import {deleteUser} from '../../firebase.js'
+import {deleteUser, getFirebaseUser} from '../../firebase.js'
+import ChangePasswordForm from './../landingPage/ChangePassword'
 
 const styles = {
     card: {
@@ -28,12 +29,23 @@ class MyAccountModal extends Component{
         super()
         this.state = {
             open: false,
-            scroll: 'paper'
+            scroll: 'paper',
+            displayName: '',
+            email: ''
         }
     }
 
-    handleClickOpen = scroll => () => {
+    async componentDidMount(){
+        
+    }
+
+    handleClickOpen = scroll => async () => {
         this.setState({ open: true, scroll });
+        let currentUser = await getFirebaseUser();
+        this.setState({
+            displayName: currentUser.displayName,
+            email: currentUser.email
+        })
     };
 
     handleClose = () => {
@@ -72,16 +84,18 @@ class MyAccountModal extends Component{
                     <LineDivider />
                     <DialogContent>
                         <Typography>
-                            Username: Delaney_hanson
+                            Username: {this.state.displayName}
                         </Typography>
                         <Typography>
-                            Email: delaney.hanson@techtonic.com
+                            Email: {this.state.email}
                         </Typography>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleDelete} style={{marginRight: 140}}>
                             Delete Account
                         </Button>
+                        <ChangePasswordForm />
+
                         <Button onClick={this.handleClose}>
                             Close
                         </Button>

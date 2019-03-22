@@ -13,6 +13,7 @@ export default class ImageButton extends Component {
     _handleChange(e) {
         if (e.target.files[0]) {
             const image = e.target.files[0];
+            console.log(image);
             this.setState({
                 image
             })
