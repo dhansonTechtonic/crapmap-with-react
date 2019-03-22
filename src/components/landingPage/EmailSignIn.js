@@ -132,7 +132,7 @@ class EmailForm extends Component {
                 placeholder="Enter Password"
                 name="password"
               />
-              {error && <p>{error.message}</p>}
+                {error && <p>{error.message}</p>}
               <DialogActions >
                 <SignUpForm />
                 <Button onClick={this.onSubmit} disabled={isInvalid} type="submit" color="primary">Sign In</Button>
@@ -140,7 +140,6 @@ class EmailForm extends Component {
               </DialogActions>
             </form>
           </DialogContent>
-          
         </Dialog>
       </div>
     );

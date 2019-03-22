@@ -50,9 +50,6 @@ class SignUpForm extends Component {
   doCreateUserWithEmailAndPassword = (email, password) =>
     auth.createUserWithEmailAndPassword(email, password);
 
-  doPasswordUpdate = password =>
-    auth.currentUser.updatePassword(password);
-
   onSubmit = () => {
     const { email, passwordOne } = this.state;
       this.doCreateUserWithEmailAndPassword(email, passwordOne)
