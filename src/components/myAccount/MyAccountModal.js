@@ -15,6 +15,7 @@ import { logOutUser } from '../../redux/actions/userActions';
 
 import { deleteUser, getFirebaseUser } from '../../firebase.js'
 import ChangePasswordForm from './../landingPage/ChangePassword'
+import { Tooltip } from '@material-ui/core';
 
 const styles = {
     card: { maxWidth: 345 },
@@ -60,9 +61,11 @@ class MyAccountModal extends Component{
 
         return (
             <div>
-                <li className="nav-links" onClick={this.handleClickOpen('paper')}>
-                    MY ACCOUNT
-                </li>
+                <Tooltip title="View Your Account">
+                    <li className="nav-links" onClick={this.handleClickOpen('paper')}>
+                        MY ACCOUNT
+                    </li>
+                </Tooltip>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -71,9 +74,11 @@ class MyAccountModal extends Component{
                     style={{ 'z-index': 30, 'background-color': 'primary' }}>
                     <DialogTitle>
                         MY ACCOUNT
-                        <Button onClick={this.handleLogOut} style={{float: "right"}}>
-                            Log Out
-                        </Button>
+                        <Tooltip title="I'm Done Viewing Crap">
+                            <Button onClick={this.handleLogOut}>
+                                Log Out
+                            </Button>
+                        </Tooltip>
                     </DialogTitle>
                     <LineDivider />
                     <DialogContent>
@@ -85,13 +90,12 @@ class MyAccountModal extends Component{
                         </Typography>
                     </DialogContent>
                     <DialogActions>
-                        <Button 
-                            onClick={this.handleDelete} 
-                            // style={{ marginRight: 140, }}
-                            classes={{ root: classes.root }}
-                            id="deleteAccount"
-                        >Delete Account
-                        </Button>
+                        <Tooltip title="Flush My Crap Away">
+                        <Button onClick={this.handleDelete} style={{ marginRight: 140 }} classes={{ root: classes.root }}
+                            id="deleteAccount">
+                                Delete Account
+                            </Button>
+                        </Tooltip>
                         <ChangePasswordForm />
                         <Button onClick={this.handleClose}>Close</Button>
                     </DialogActions>

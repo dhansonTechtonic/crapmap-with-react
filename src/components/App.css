@@ -124,23 +124,23 @@ hr{
 
 /*Categories Styles----------*/
 
-#catFurniture.MuiTab-selected-171 {
+#catFurniture{
   color: #ff4700;
 }
 
-#catSports.MuiTab-selected-171 {
+#catSports{
   color: rgb(227, 68, 255)
 }
 
-#catAuto.MuiTab-selected-171 {
+#catAuto{
   color: rgb(253, 88, 157)
 }
 
-#catGadgets.MuiTab-selected-171 {
+#catGadgets{
   color: rgb(115, 40, 255)
 }
 
-#catMisc.MuiTab-selected-171 {
+#catMisc{
   color: rgb(71, 141, 255)
 }
 
