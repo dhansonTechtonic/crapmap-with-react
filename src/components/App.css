@@ -44,6 +44,84 @@ hr{
   -webkit-transition-duration: 0.3s;
 }
 
+#deleteAccount:hover {
+  color: red;
+  background-color: white;
+}
+
+#editPassword:hover {
+  color: rgb(0, 255, 187);
+  background-color: white;
+}
+
+#editPassword {
+  box-shadow: none;
+}
+
+#signUp:hover {
+  color: rgb(0, 255, 242);
+  background-color: rgb(76, 99, 94);
+  opacity: .9;
+}
+
+/*Bottom Nav Styles---------------------*/
+
+#bnFurniture.MuiBottomNavigationAction-selected-29 {
+  color: #ff4700;
+}
+
+#bnFurniture.MuiBottomNavigationAction-iconOnly-30 {
+  color: rgba(190, 190, 190, 1);
+}
+
+#bnAll.MuiBottomNavigationAction-selected-29 {
+  color: #00FFDE;
+}
+
+#bnAll.MuiBottomNavigationAction-iconOnly-30 {
+  color: rgba(190, 190, 190, 1);
+}
+
+#bnAll.MuiBottomNavigationAction-selected-29 {
+  color: #00FFDE;
+}
+
+#bnAll.MuiBottomNavigationAction-iconOnly-30 {
+  color: rgba(190, 190, 190, 1);
+}
+
+#bnGadgets.MuiBottomNavigationAction-selected-29 {
+  color: rgb(115, 40, 255)
+}
+
+#bnGadgets.MuiBottomNavigationAction-iconOnly-30 {
+  color: rgba(190, 190, 190, 1);
+}
+
+#bnMisc.MuiBottomNavigationAction-selected-29 {
+  color: rgb(71, 141, 255)
+}
+
+#bnMisc.MuiBottomNavigationAction-iconOnly-30 {
+  color: rgba(190, 190, 190, 1);
+}
+
+#bnSports.MuiBottomNavigationAction-selected-29 {
+  color: rgb(227, 68, 255)
+}
+
+#bnSports.MuiBottomNavigationAction-iconOnly-30 {
+  color: rgba(190, 190, 190, 1);
+}
+
+#bnAuto.MuiBottomNavigationAction-selected-29 {
+  color: rgb(253, 88, 157)
+}
+
+#bnAuto.MuiBottomNavigationAction-iconOnly-30 {
+  color: rgba(190, 190, 190, 1);
+}
+
 /*Categories Styles----------*/
 
 #catFurniture{

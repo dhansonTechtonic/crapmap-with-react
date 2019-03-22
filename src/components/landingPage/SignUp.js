@@ -11,7 +11,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab'
 import LineDivider from '../addEditPin/LineDivider.js';
-
+import '../App.css'
 import store from '../../redux/store'
 import { registerUser } from '../../redux/actions/userActions'
 import { pink } from '@material-ui/core/colors';
@@ -25,6 +25,21 @@ const INITIAL_STATE = {
   passwordTwo: '',
   error: null,
 };
+
+const style = {
+  "root": {
+    color: "white",
+    backgroundColor: "#2E2D31",
+    width: 250,
+    borderRadius: 4,
+    opacity: 1,
+    float: "left",
+    boxShadow: "none", 
+  },
+  "root:hover": {
+    color: "red"
+  }
+}
 class SignUpForm extends Component {
   constructor(props) {
     super(props);
@@ -84,29 +99,24 @@ class SignUpForm extends Component {
       error,
     } = this.state;
 
+    const validEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b/g
+
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === '' ||
-      email === '' ||
-      username === '';
+      // email === '' ||
+      username === '' ||
+      email === validEmail.test(email);
     
- 
+    const { classes } = this.props;
 
     return (
       <div>
-        <Fab 
-          // color="primary" 
-          style={{ 
-            width: 250, 
-            borderRadius: 4,
-            // margin: 10, 
-            opacity: 1,
-            color: "white",
-            backgroundColor: "inherit",
-            float: "left", 
-          }} 
+        <Fab  
+          classes={{ root: classes.root }}
+          id="signUp"
           onClick={this.handleClickOpen('paper')}>
-          New? Click here to Sign Up 
+          <p>New? Click here to Sign Up</p> 
         </Fab>
         <Dialog
           open={this.state.open}
@@ -179,7 +189,9 @@ SignUpForm.propTypes = {
   onClose: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
   show: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
+  className: PropTypes.string,
+
 };
 
-export default SignUpForm;
+export default withStyles(style)(SignUpForm);
