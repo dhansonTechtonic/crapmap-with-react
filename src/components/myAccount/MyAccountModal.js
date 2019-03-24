@@ -49,7 +49,7 @@ class MyAccountModal extends Component{
         this.setState({ open: false });
     };
 
-    handleDelete() {
+    handleDelete = () => {
         let deleteConfirmation = window.confirm(`click 'OK' to confirm`)
         if (deleteConfirmation) {
             deleteUser();
@@ -61,8 +61,9 @@ class MyAccountModal extends Component{
 
     handleLogOut = () => store.dispatch(logOutUser());
 
-    render(){
+    render(){        
         const { classes } = this.props;
+        const { displayName, email, open, scroll } = this.state;
 
         return (
             <div>
@@ -72,33 +73,34 @@ class MyAccountModal extends Component{
                     </li>
                 </Tooltip>
                 <Dialog
-                    open={this.state.open}
+                    open={open}
                     onClose={this.handleClose}
-                    scroll={this.state.scroll}
+                    scroll={scroll}
                     aria-labelledby="scroll-dialog-title"
                     style={{ 'z-index': 30, 'background-color': 'primary' }}>
                     <DialogTitle>
                         MY ACCOUNT
                         <Tooltip title="I'm Done Viewing Crap">
-                            <Button onClick={this.handleLogOut}>
-                                Log Out
+                            <Button 
+                                onClick={this.handleLogOut}
+                                style={{ "float": "right" }}
+                            >Log Out
                             </Button>
                         </Tooltip>
                     </DialogTitle>
                     <LineDivider />
                     <DialogContent>
                         <Typography>
-                            Username: {this.state.displayName}
+                            Username: { displayName }
                         </Typography>
                         <Typography>
-                            Email: {this.state.email}
+                            Email: { email }
                         </Typography>
                     </DialogContent>
                     <DialogActions>
                         <Tooltip title="Flush My Crap Away">
                             <Button 
                                 onClick={this.handleDelete} 
-                                style={{ marginRight: 140 }} 
                                 classes={{ root: classes.root }}
                                 id="deleteAccount"
                             >Delete Account

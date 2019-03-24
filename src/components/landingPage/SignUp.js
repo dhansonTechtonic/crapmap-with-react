@@ -97,16 +97,18 @@ class SignUpForm extends Component {
       passwordOne,
       passwordTwo,
       error,
+      open,
+      scroll,
     } = this.state;
 
-    const validEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+(?:[A-Z]{2}|com|org|net|gov|mil|biz|info|mobi|name|aero|jobs|museum)\b/g
+    const test = () => /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/
 
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === '' ||
-      // email === '' ||
+      email === '' ||
       username === '' ||
-      email === validEmail.test(email);
+      email === test();
     
     const { classes } = this.props;
 
@@ -119,14 +121,13 @@ class SignUpForm extends Component {
           <p>New? Click here to Sign Up</p> 
         </Fab>
         <Dialog
-          open={this.state.open}
+          open={open}
           onClose={this.handleClose}
-          scroll={this.state.scroll}
+          scroll={scroll}
           aria-labelledby="scroll-dialog-title"
-          style={{ 'z-index': 30, 'background-color': 'primary' }}>
-          <DialogTitle>
-            SIGN UP 
-          </DialogTitle>
+          style={{ 'z-index': 30, 'background-color': 'primary' }}
+        >
+          <DialogTitle>SIGN UP</DialogTitle>
           <LineDivider />
           <DialogContent>
             <form onSubmit={this.onSubmit}>
