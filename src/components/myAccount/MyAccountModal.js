@@ -50,8 +50,13 @@ class MyAccountModal extends Component{
     };
 
     handleDelete() {
-        deleteUser();
-        store.dispatch(logOutUser());
+        let deleteConfirmation = window.confirm(`click 'OK' to confirm`)
+        if (deleteConfirmation) {
+            deleteUser();
+            store.dispatch(logOutUser());
+        } else {
+            return false;
+        }
     }
 
     handleLogOut = () => store.dispatch(logOutUser());
@@ -91,9 +96,12 @@ class MyAccountModal extends Component{
                     </DialogContent>
                     <DialogActions>
                         <Tooltip title="Flush My Crap Away">
-                        <Button onClick={this.handleDelete} style={{ marginRight: 140 }} classes={{ root: classes.root }}
-                            id="deleteAccount">
-                                Delete Account
+                            <Button 
+                                onClick={this.handleDelete} 
+                                style={{ marginRight: 140 }} 
+                                classes={{ root: classes.root }}
+                                id="deleteAccount"
+                            >Delete Account
                             </Button>
                         </Tooltip>
                         <ChangePasswordForm />
