@@ -35,7 +35,6 @@ class ViewPinModal extends Component {
     }
   }
 
-
   handleClickOpen = scroll => () => {
     this.setState({ open: true, scroll });
   };
