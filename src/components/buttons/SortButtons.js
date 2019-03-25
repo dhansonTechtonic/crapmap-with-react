@@ -32,6 +32,7 @@ class SortButtons extends React.Component {
         return (
             <div className="sort-buttons">
                 <BottomNavigation value={this.state.value} onChange={this.handleChange} className={classes.root}>
+
                     <BottomNavigationAction onClick={() => {
                         this.props.categoryChange("Furniture")
                     }} id="bnFurniture" label="Furniture" value="Furniture" style={{ fontSize: '1.5em', color: '#ff4700'}} icon={<FontAwesomeIcon icon='couch' />}/>
@@ -50,6 +51,7 @@ class SortButtons extends React.Component {
                     <BottomNavigationAction onClick={() => {
                         this.props.categoryChange("All")
                     }} id="bnAll" label="All" value="All" style={{ fontSize: '1.5em', color: '#00FFDE'  }} icon={<FontAwesomeIcon icon='infinity' />}/>
+
                 </BottomNavigation>
             </div>
         );
