@@ -49,21 +49,31 @@ router.get("/get", (request, response) =>{
 
 
 router.post('/new',jsonParser, (request,response) =>{
-    console.log(request.body);
     let pinObject ={
         category: request.body.category,
-        img:request.body.img,
-        //description: request.body.description,
         location: {
             lat: request.body.lat,
             lng: request.body.lng,
             address: request.body.address
         },
         size: request.body.size,
-        //tags: request.body.tags,
         title: request.body.title,
         userID: request.body.userID
     };
+
+    for(key in pinObject){
+        if(!key){
+            response.send("Posting was incomplete")
+            return false;
+        }
+    }
+
+    if(request.body.img){
+        pinObject.img = request.body.img;
+    }else{
+        pinObject.img = 'assets/crapmapLogoWhite.png';
+    }
+
     let pinsRef = db.collection('pins');
     pinsRef.add(pinObject)
     .then(() => response.send('success'))
