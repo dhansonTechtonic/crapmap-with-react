@@ -28,11 +28,11 @@ class HomePage extends Component {
       case "Auto Parts":
         this.setState({ category: 'Auto Parts' }, () => { console.log(this.state.category) });
         break;
-      case "Sporting":
-        this.setState({ category: "Sporting" }, () => { console.log(this.state.category) });
+      case "Sports":
+        this.setState({ category: "Sports" }, () => { console.log(this.state.category) });
         break;
-      case "Electronics":
-        this.setState({ category: "Electronics" }, () => { console.log(this.state.category) });
+      case "Gadgets":
+        this.setState({ category: "Gadgets" }, () => { console.log(this.state.category) });
         break;
       case "Misc":
         this.setState({ category: "Misc" }, () => { console.log(this.state.category) });
