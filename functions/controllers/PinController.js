@@ -81,23 +81,25 @@ router.post('/new',jsonParser, (request,response) =>{
     return false
     });
 
+    
 router.post('/update/:pinID', (request,response) =>{
 
     let pinObject ={
         category: request.body.category,
-        //description: request.body.description,
         location: {
             lat: request.body.lat,
             lng: request.body.lng,
             address: request.body.address
         },
         size: request.body.size,
-        //tags: request.body.tags,
         title: request.body.title,
     };
 
-    if(request.body.img){
-         pinObject={img: request.body.img};
+    for(key in pinObject){
+        if(!key){
+            response.send("Posting was incomplete")
+            return false;
+        }
     }
 
     let pinsRef = db.collection('pins').doc(request.params.pinID);
