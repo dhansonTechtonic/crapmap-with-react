@@ -52,9 +52,8 @@ function MyListingsPost(props){
 
 
   return (
-    props.userPins.map((pin) => {
+   (props.userPins ? props.userPins.map((pin) => 
 
-      return (
       <Card className={classes.card}>
         <CardActionArea>
           <CardMedia
@@ -67,21 +66,19 @@ function MyListingsPost(props){
               {pin._fieldsProto.title.stringValue}
         </Typography>
             <Typography component="p">
-                {pin._fieldsProto.location.mapValue.fields.address.stringValue}
+              {pin._fieldsProto.location.mapValue.fields.address.stringValue}
         </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <EditPinModal />
-          <Button color="error" style={{ left: 110, display: 'block' }} onClick={() => {
-          store.dispatch(deletePin(pin._ref._path.segments[1]))
-        }}>Delete</Button>
+          <EditPinModal fireUpdatePins={props.fireUpdatePins} incomeVal={pin} />
+          {/* <Button color="error" style={{ left: 110, display: 'block' }} onClick={() => {
+          this.handleDeletePin(pin._ref._path.segments[1])
+        }}>Delete</Button> */}
         </CardActions>
       </Card>
-      )
+    ) : "No Pins Found" )
 
-      }
-    )
   )
 }
 

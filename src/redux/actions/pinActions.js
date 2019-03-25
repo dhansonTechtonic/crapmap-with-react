@@ -92,21 +92,24 @@ function deletePinFetch(input) {
 
 
 // UPDATE/EDITS PIN - NEEDS TESTING
-export const updatePin = (input) => ({
+export const updatePin = (input, pinID) => ({
     type: UPDATE_PIN,
     async payload() {
-        await updatePinFetch(input);
+        await updatePinFetch(input, pinID);
     }
 })
 
-function updatePinFetch(input){
-    fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/update', {
-        method: 'UPDATE',
+function updatePinFetch(input, pinID){
+    let url = `https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/update/${pinID}`
+    console.log(url);
+    fetch(url, {
+        method: 'POST',
         body: JSON.stringify(input),
         headers: {
             'Content-Type': 'application/json'
         }
-        .then(res => console.log(res))
-        .catch(err => console.error(err))
     })
+    .then(res => console.log(res))
+    .catch(err => console.error(err))
+    
 }
