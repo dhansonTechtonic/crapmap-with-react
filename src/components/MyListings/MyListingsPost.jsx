@@ -72,9 +72,9 @@ function MyListingsPost(props){
         </CardActionArea>
         <CardActions>
           <EditPinModal fireUpdatePins={props.fireUpdatePins} incomeVal={pin} />
-          {/* <Button color="error" style={{ left: 110, display: 'block' }} onClick={() => {
-          this.handleDeletePin(pin._ref._path.segments[1])
-        }}>Delete</Button> */}
+          <Button color="error" style={{ left: 150, display: 'block' }} onClick={() => {
+          store.dispatch(deletePin(pin._ref._path.segments[1]))
+        }}>Delete</Button>
         </CardActions>
       </Card>
     ) : "No Pins Found" )
