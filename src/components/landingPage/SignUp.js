@@ -11,7 +11,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab'
 import LineDivider from '../addEditPin/LineDivider.js';
-
+import '../App.css'
 import store from '../../redux/store'
 import { registerUser } from '../../redux/actions/userActions'
 import { pink } from '@material-ui/core/colors';
@@ -25,6 +25,21 @@ const INITIAL_STATE = {
   passwordTwo: '',
   error: null,
 };
+
+const style = {
+  "root": {
+    color: "white",
+    backgroundColor: "#2E2D31",
+    width: 250,
+    borderRadius: 4,
+    opacity: 1,
+    float: "left",
+    boxShadow: "none", 
+  },
+  "root:hover": {
+    color: "red"
+  }
+}
 class SignUpForm extends Component {
   constructor(props) {
     super(props);
@@ -49,9 +64,6 @@ class SignUpForm extends Component {
 
   doCreateUserWithEmailAndPassword = (email, password) =>
     auth.createUserWithEmailAndPassword(email, password);
-
-  doPasswordUpdate = password =>
-    auth.currentUser.updatePassword(password);
 
   onSubmit = () => {
     const { email, passwordOne } = this.state;
@@ -85,41 +97,37 @@ class SignUpForm extends Component {
       passwordOne,
       passwordTwo,
       error,
+      open,
+      scroll,
     } = this.state;
+
+    const test = () => /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/
 
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === '' ||
       email === '' ||
-      username === '';
+      username === '' ||
+      email === test();
     
- 
+    const { classes } = this.props;
 
     return (
       <div>
-        <Fab 
-          // color="primary" 
-          style={{ 
-            width: 250, 
-            borderRadius: 4,
-            // margin: 10, 
-            opacity: 1,
-            color: "white",
-            backgroundColor: "inherit",
-            float: "left", 
-          }} 
+        <Fab  
+          classes={{ root: classes.root }}
+          id="signUp"
           onClick={this.handleClickOpen('paper')}>
-          New? Click here to Sign Up 
+          <p>New? Click here to Sign Up</p> 
         </Fab>
         <Dialog
-          open={this.state.open}
+          open={open}
           onClose={this.handleClose}
-          scroll={this.state.scroll}
+          scroll={scroll}
           aria-labelledby="scroll-dialog-title"
-          style={{ 'z-index': 30, 'background-color': 'primary' }}>
-          <DialogTitle>
-            SIGN UP 
-          </DialogTitle>
+          style={{ 'z-index': 30, 'background-color': 'primary' }}
+        >
+          <DialogTitle>SIGN UP</DialogTitle>
           <LineDivider />
           <DialogContent>
             <form onSubmit={this.onSubmit}>
@@ -182,7 +190,9 @@ SignUpForm.propTypes = {
   onClose: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
   show: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
+  className: PropTypes.string,
+
 };
 
-export default SignUpForm;
+export default withStyles(style)(SignUpForm);

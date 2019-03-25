@@ -29,7 +29,7 @@ export class MapContainer extends Component {
 
   toggleViewPinModal(e) {
     let targetPin = e;
-    // console.log(targetPin.name)
+    console.log(targetPin.name)
     this.setState({
       viewCardIsOpen: !this.state.viewCardIsOpen,
       pinData: targetPin
@@ -99,7 +99,7 @@ export class MapContainer extends Component {
     position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
                 lng:pin._fieldsProto.location.mapValue.fields.lng.doubleValue }}
     
-    onClick={this.toggleCardModal}
+    onClick={this.toggleViewPinModal}
   />
   )}
 )}

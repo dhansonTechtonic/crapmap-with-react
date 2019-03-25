@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Tooltip } from '@material-ui/core';
 
 const styles = {
   root: {
@@ -43,9 +44,9 @@ class BoxButtons extends React.Component {
           indicatorColor="secondary"
           textColor="primary"
         >
-          <Tab value="1" icon={<FontAwesomeIcon icon='box' />} label="SMALL"/>
-          <Tab value="2" icon={<FontAwesomeIcon icon='box' />} label="MEDIUM"/>
-          <Tab value="3" icon={<FontAwesomeIcon icon='box' />} label="LARGE"/>
+            <Tab value="1" icon={<FontAwesomeIcon icon='box' />} label="SMALL"/>
+            <Tab value="2" icon={<FontAwesomeIcon icon='box' />} label="MEDIUM"/>
+            <Tab value="3" icon={<FontAwesomeIcon icon='box' />} label="LARGE"/>
         </Tabs>
       </Paper>
     );

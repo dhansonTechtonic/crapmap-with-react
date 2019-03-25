@@ -17,6 +17,7 @@ import store from '../../redux/store/index';
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Arrow from '../assets/crapmap-locator.png';
 import {newPin} from '../../redux/actions/pinActions';
+import Tooltip from '@material-ui/core/Tooltip'
 
 class AddPinModal extends Component {
     constructor(props) {
@@ -222,9 +223,11 @@ class AddPinModal extends Component {
     render() {
         return (
             <div>
+                <Tooltip title="Add New Crap">
                 <IconButton className="new-pin-button" onClick={this.handleClickOpen('paper')}>
                     <FontAwesomeIcon icon="plus-circle" />
                 </IconButton>
+                </Tooltip>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -262,7 +265,7 @@ class AddPinModal extends Component {
                                 margin="normal"
                                 variant="outlined"
                                 placeholder={this.state.locationPlaceHolder}
-                                defaultValue="Hit Arrow 4 Location"
+                                defaultValue="Click for Location >"
                                 InputProps={{
                                     endAdornment: (
                                         <InputAdornment position="end">
@@ -279,8 +282,12 @@ class AddPinModal extends Component {
                         </form>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleSubmit} color="primary">POST</Button>
-                        <Button onClick={this.handleClose} color="error">CANCEL</Button>
+                        <Tooltip title="Post That Crap">
+                            <Button onClick={this.handleSubmit} color="primary">POST</Button>
+                        </Tooltip>
+                        <Tooltip title="Nevermind">
+                            <Button onClick={this.handleClose} color="error">CANCEL</Button>
+                        </Tooltip>
                     </DialogActions>
                 </Dialog>
 
