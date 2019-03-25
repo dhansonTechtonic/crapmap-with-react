@@ -10,6 +10,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import EditPinModal from '../addEditPin/EditPinModal'
 import Button from '@material-ui/core/Button'
+import store from '../../redux/store';
+
+import {deletePin} from '../../redux/actions/pinActions'
 
 const styles = {
   card: {
@@ -46,8 +49,11 @@ function MyListingsPost(props){
   // function handleDeletePin(input){
   //   store.dispatch(deletePin(input));
   // }
+
+
   return (
    (props.userPins ? props.userPins.map((pin) => 
+
       <Card className={classes.card}>
         <CardActionArea>
           <CardMedia
@@ -72,6 +78,7 @@ function MyListingsPost(props){
         </CardActions>
       </Card>
     ) : "No Pins Found" )
+
   )
 }
 
