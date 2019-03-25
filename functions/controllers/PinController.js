@@ -8,6 +8,19 @@ let db = admin.firestore();
 const express = require('express');
 const router = express.Router();
 
+router.get("/get/category/:category", (req, res) => {
+    let pinsRef = db.collection('pins');
+    var query = pinsRef.where("category", "==", req.params.category).get()
+    .then(function(querySnapshot){
+        if (querySnapshot) {
+            res.send(querySnapshot.docs);
+        } else {
+            res.send("Collection does not exist");
+        }
+        return false;
+    }).catch(err => console.log(err));
+})
+
 router.get("/get/:userID", (req, res) => {
     let pinsRef = db.collection('pins');
     var query = pinsRef.where("userID", '==', req.params.userID).get()
