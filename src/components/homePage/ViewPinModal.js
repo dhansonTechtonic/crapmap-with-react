@@ -54,9 +54,13 @@ class ViewPinModal extends Component {
   handleClose(e) {
     e.preventDefault();
     this.setState({ 
-        open: !this.props.show 
+        open: false 
     });
   };
+
+  handleItemSize(data){
+    console.log("item", data)
+  }
 
   handleDibs(e) {
       e.preventDefault();
@@ -80,7 +84,7 @@ class ViewPinModal extends Component {
 
   render() {
     //   const pin = this.props;
-      console.log(this.props, "name props from modal")
+      console.log(this.props.data.itemSize, "name props from modal")
 
     if (!this.props.show) {
         return null;
@@ -110,15 +114,18 @@ class ViewPinModal extends Component {
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h1">
-              {/* {this.props.pinData.pin.name} */}
+              {this.props.data.name}
               </Typography>
     
               <Typography component="p">
-                {/* {size} */}
-                size
-                {/* <Tabs><Tab icon={<FontAwesomeIcon icon='box' />} label="MEDIUM"/></Tabs> */}
+                {this.props.data.category}
               </Typography>
-        
+              
+              <Typography component="p">
+                {this.props.data.itemSize}
+                {/* {this.handleItemSize(this.props.data.itemSize).bind(this)} */}
+              </Typography>
+
             </CardContent>
           </CardActionArea>
           <LineDivider />
