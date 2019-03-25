@@ -39,10 +39,6 @@ class ViewPinModal extends Component {
     super(props);
     this.state = {
       show: false,
-      user: {},
-      pins: [],
-      pinData: {},
-      active: true
     }
     this.handleClose = this.handleClose.bind(this)
     this.handleDibs = this.handleDibs.bind(this)
@@ -65,11 +61,26 @@ class ViewPinModal extends Component {
   handleDibs(e) {
       e.preventDefault();
       console.log(e.target)
+      // return (
+      //   <Marker
+      //   key={pin._ref._path.segments[1]}
+      //   active={this.setState({active: false})}
+      //   // pin = {pin}
+      //   name={pin._fieldsProto.title.stringValue}
+      //   icon={this.findColor(pin._fieldsProto.category.stringValue)}
+      //   category={pin._fieldsProto.category.stringValue}
+      //   itemSize={pin._fieldsProto.size.stringValue}
+      //   // img={pin._fieldsProto.img.stringValue}
+      //   position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
+      //               lng:pin._fieldsProto.location.mapValue.fields.lng.doubleValue }}
+      //   onClick={this.toggleViewPinModal}
+      // />
+      // )
   }
 
   render() {
-      const pin = this.props.data;
-      console.log(this.props.pinData, "props from modal")
+    //   const pin = this.props;
+      console.log(this.props, "name props from modal")
 
     if (!this.props.show) {
         return null;
@@ -86,7 +97,7 @@ class ViewPinModal extends Component {
             <DialogContent>               
             <Card className={styles.card}>
         
-          <CardActionArea >
+            <CardActionArea >
             <CardMedia 
               component="img"
               alt="Item"
@@ -99,8 +110,7 @@ class ViewPinModal extends Component {
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h1">
-              {this.props.pinData.name}
-                {/* title */}
+              {/* {this.props.pinData.pin.name} */}
               </Typography>
     
               <Typography component="p">

@@ -26,7 +26,7 @@ export class MapContainer extends Component {
       user: {},
       pins: [],
       pinData: {}, 
-      dibState: false,
+      dibState: true,
       centerAroundCurrentLocation: true,
       }
       this.toggleViewPinModal = this.toggleViewPinModal.bind(this)
@@ -34,12 +34,12 @@ export class MapContainer extends Component {
 
   toggleViewPinModal(e) {
     let targetPin = e;
-    console.log(targetPin.name)
+    console.log(targetPin)
     this.setState({
       viewCardIsOpen: true,
       pinData: targetPin
     });
-    console.log(this.state)
+    // console.log(this.state)
   }
 
   componentDidUpdate(prevProps) { 
@@ -50,6 +50,9 @@ export class MapContainer extends Component {
 
   findColor (category) {
     let icon;
+    if (!this.state.dibState) {
+      return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 6, strokeColor: '#6f6d75' }
+    }
       switch (category) {
         case "Furniture":
           return  icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#ff4700' }
@@ -82,7 +85,7 @@ export class MapContainer extends Component {
 
   changeIcon (e) {
     console.log(e)
-    return e.icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 6, strokeColor: '#7328ff' }
+    return e.icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 6, strokeColor: '#6f6d75' }
   }
 
  render() { 
@@ -109,9 +112,11 @@ export class MapContainer extends Component {
   <Marker
     key={pin._ref._path.segments[1]}
     active={this.state.dibState}
-    pin = {pin}
+    // pin = {pin}
     name={pin._fieldsProto.title.stringValue}
+
     icon={this.findColor(pin._fieldsProto.category.stringValue)}
+
     category={pin._fieldsProto.category.stringValue}
     itemSize={pin._fieldsProto.size.stringValue}
     // img={pin._fieldsProto.img.stringValue}
@@ -123,7 +128,7 @@ export class MapContainer extends Component {
 )}
 
 </Map>
-<ViewPinModal show={this.state.viewCardIsOpen} /> 
+<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} /> 
 
 </div> 
     );
