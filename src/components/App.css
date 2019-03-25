@@ -128,12 +128,12 @@ hr{
   color: #ff4700;
 }
 
-#catSports{
-  color: rgb(227, 68, 255)
-}
-
 #catAuto{
   color: rgb(253, 88, 157)
+}
+
+#catSports{
+  color: rgb(227, 68, 255)
 }
 
 #catGadgets{
@@ -142,6 +142,10 @@ hr{
 
 #catMisc{
   color: rgb(71, 141, 255)
+}
+
+#catAll{
+  color: #00FFDE;
 }
 
 /*Button Styles Hover-----------------------------------------------------------------*/
