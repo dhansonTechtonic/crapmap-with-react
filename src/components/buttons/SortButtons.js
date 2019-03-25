@@ -38,10 +38,11 @@ class SortButtons extends React.Component {
                     }} id="bnFurniture" label="Furniture" value="Furniture" style={{ fontSize: '1.5em', color: '#ff4700'}} icon={<FontAwesomeIcon icon='couch' />}/>
                     <BottomNavigationAction onClick={() => {
                         this.props.categoryChange("Auto Parts")
-                    }} id="bnAuto" label="Auto Parts" value="Auto Parts" style={{ fontSize: '1.5em', color: 'rgb(227, 68, 255)' }} icon={<FontAwesomeIcon icon='car' />}/>
+                    }} id="bnAuto" label="Auto Parts" value="Auto Parts" style={{ fontSize: '1.5em', color: 'rgb(253, 88, 157)' }} icon={<FontAwesomeIcon icon='car' />}/>
                     <BottomNavigationAction onClick={() => {
                         this.props.categoryChange("Sporting")
-                    }} id="bnSports" label="Sports" value="Sports" style={{ fontSize: '1.5em', color: 'rgb(253, 88, 157)' }} icon={<FontAwesomeIcon icon='baseball-ball' />}/>
+                        }} id="bnSports" label="Sports" value="Sports" style={{
+                            fontSize: '1.5em', color: 'rgb(227, 68, 255)' }} icon={<FontAwesomeIcon icon='baseball-ball' />}/>
                     <BottomNavigationAction onClick={() => {
                         this.props.categoryChange("Electronics")
                     }} id="bnGadgets" label="Gadgets" value="Gadgets" style={{ fontSize: '1.5em', color: 'rgb(115, 40, 255)' }} icon={<FontAwesomeIcon icon='tv' />}/>
