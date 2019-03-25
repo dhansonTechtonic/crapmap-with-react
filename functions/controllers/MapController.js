@@ -23,8 +23,6 @@ router.post("/reverse-geo-code", jsonParser, (req, res) =>{
     }
 
     rp(options).then((urlResp) => {
-        console.log('take 1');
-        console.log(urlResp);
         res.send(urlResp);
         return true;
     }).catch( (err) => {

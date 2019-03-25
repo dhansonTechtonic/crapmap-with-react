@@ -40,11 +40,11 @@ class SortButtons extends React.Component {
                         this.props.categoryChange("Auto Parts")
                     }} id="bnAuto" label="Auto Parts" value="Auto Parts" style={{ fontSize: '1.5em', color: 'rgb(253, 88, 157)' }} icon={<FontAwesomeIcon icon='car' />}/>
                     <BottomNavigationAction onClick={() => {
-                        this.props.categoryChange("Sporting")
+                        this.props.categoryChange("Sports")
                         }} id="bnSports" label="Sports" value="Sports" style={{
                             fontSize: '1.5em', color: 'rgb(227, 68, 255)' }} icon={<FontAwesomeIcon icon='baseball-ball' />}/>
                     <BottomNavigationAction onClick={() => {
-                        this.props.categoryChange("Electronics")
+                        this.props.categoryChange("Gadgets")
                     }} id="bnGadgets" label="Gadgets" value="Gadgets" style={{ fontSize: '1.5em', color: 'rgb(115, 40, 255)' }} icon={<FontAwesomeIcon icon='tv' />}/>
                     <BottomNavigationAction onClick={() => {
                         this.props.categoryChange("Misc")

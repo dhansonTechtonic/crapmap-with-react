@@ -49,10 +49,42 @@ router.get("/get", (request, response) =>{
 
 
 router.post('/new',jsonParser, (request,response) =>{
-    console.log(request.body);
     let pinObject ={
         category: request.body.category,
-        img:request.body.img,
+        location: {
+            lat: request.body.lat,
+            lng: request.body.lng,
+            address: request.body.address
+        },
+        size: request.body.size,
+        title: request.body.title,
+        userID: request.body.userID
+    };
+
+    for(key in pinObject){
+        if(!key){
+            response.send("Posting was incomplete")
+            return false;
+        }
+    }
+
+    if(request.body.img){
+        pinObject.img = request.body.img;
+    }else{
+        pinObject.img = 'assets/crapmapLogoWhite.png';
+    }
+
+    let pinsRef = db.collection('pins');
+    pinsRef.add(pinObject)
+    .then(() => response.send('success'))
+    .catch(()=> console.log('error'))
+    return false
+    });
+
+router.post('/update/:pinID', (request,response) =>{
+
+    let pinObject ={
+        category: request.body.category,
         //description: request.body.description,
         location: {
             lat: request.body.lat,
@@ -62,34 +94,25 @@ router.post('/new',jsonParser, (request,response) =>{
         size: request.body.size,
         //tags: request.body.tags,
         title: request.body.title,
-        userID: request.body.userID
     };
-    let pinsRef = db.collection('pins');
-    pinsRef.add(pinObject)
-    .then(() => response.send('success'))
-    .catch(()=> console.log('error'))
-    return false
-    });
 
-router.post('/update', (request,response) =>{
-    let pinObject ={
-        category: request.body.category,
-        img:request.img,
-        description: request.body.description,
-        location: {
-            lat: request.body.location.lat,
-            lng: request.body.location.lng,
-            address: request.body.location.zip
-        },
-        size: request.body.size,
-        tags: request.body.tags,
-        title: request.body.title,
-        userID: request.body.userID
-    };
-    let pinsRef = db.collection('pins');
-    pinsRef.set(pinObject, { merge: true })
-    .then(() => console.log('success'))
-    .catch(()=> console.log('error'));
+    if(request.body.img){
+         pinObject={img: request.body.img};
+    }
+
+    let pinsRef = db.collection('pins').doc(request.params.pinID);
+    let getRef = pinsRef.get().then( doc => {
+            if(doc.exists){
+                console.log('Document Exists');
+                pinsRef.set(pinObject, { merge: true })
+                .then(() => response.send('success'))
+                .catch(()=> console.log('error'));
+            }else{
+                res.status(404).send('Document Does Not Exist');
+            }
+            return false
+        }
+    )
     return false
 });
 
