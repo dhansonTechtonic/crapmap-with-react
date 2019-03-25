@@ -22,14 +22,14 @@ class EditPinModal extends Component {
         super(props);
         this.state = {
 
-            category: this.props.incomeVal.userPins[0]._fieldsProto.category.stringValue,
-            img: this.props.incomeVal.userPins[0]._fieldsProto.img.stringValue,
-            address: this.props.incomeVal.userPins[0]._fieldsProto.location.mapValue.fields.address.stringValue,
-            lat: this.props.incomeVal.userPins[0]._fieldsProto.location.mapValue.fields.lat.doubleValue,
-            lng: this.props.incomeVal.userPins[0]._fieldsProto.location.mapValue.fields.lng.doubleValue,
-            size: this.props.incomeVal.userPins[0]._fieldsProto.size.stringValue,
-            title: this.props.incomeVal.userPins[0]._fieldsProto.title.stringValue,
-            userID: this.props.incomeVal.userPins[0]._fieldsProto.userID.stringValue,
+            category: this.props.incomeVal._fieldsProto.category.stringValue,
+            img: this.props.incomeVal._fieldsProto.img.stringValue,
+            address: this.props.incomeVal._fieldsProto.location.mapValue.fields.address.stringValue,
+            lat: this.props.incomeVal._fieldsProto.location.mapValue.fields.lat.doubleValue,
+            lng: this.props.incomeVal._fieldsProto.location.mapValue.fields.lng.doubleValue,
+            size: this.props.incomeVal._fieldsProto.size.stringValue,
+            title: this.props.incomeVal._fieldsProto.title.stringValue,
+            userID: this.props.incomeVal._fieldsProto.userID.stringValue,
             locationPlaceHolder: "Where that crap at?",
             titlePlaceHolder:"Name your crap",
             titleLabel:"Title",
@@ -48,22 +48,6 @@ class EditPinModal extends Component {
     handleClose = () => {
         this.setState({ 
             open: false, 
-            category: "Funiture",
-            img:"pinsImages/1553121301840",
-            address:"",
-            lat:"40.02091167969599",
-            lng:"-105.21724804969578",
-            size:"1",
-            title:"",
-            userID:"M8S8oXSgSdWzOBlSKM09xnUzsRH2",
-            locationPlaceHolder: "Where that crap at?",
-            titlePlaceHolder:"Name your crap",
-            titleLabel:"Title",
-            locationLabel:"Location:",
-            titleError: false,
-            locationError: false,
-            locationInputValid: "required",
-            dataURL: '',
         });
     };
 
@@ -143,7 +127,10 @@ class EditPinModal extends Component {
                         "size": this.state.size,
                         "userID": userID
                     }
-                    store.dispatch(updatePin(pin));
+                    let pinID = this.props.incomeVal._ref._path.segments[1];
+                    console.log(pinID);
+                    store.dispatch(updatePin(pin, pinID));
+                    this.props.fireUpdatePins();
                     this.handleClose();
                 }
             ).catch( err => console.log(err));
@@ -168,11 +155,9 @@ class EditPinModal extends Component {
             })
             .then(response => response.json())
             .then( data =>{
-                console.log(data);
-                if(data.status === "OK"){
-                    let address = data.results[0].formatted_address;
-                    console.log(address);
 
+                if(data.status === "OK"){
+                    let address = data.results[0].formatted_address; 
                     this.setState({
                         location: address,
                         lat:  position.coords.latitude,
@@ -181,7 +166,7 @@ class EditPinModal extends Component {
                         locationLabel:"Location:"
                     })
                 }
-            }).catch(console.log('An Error has occured'));
+            }).catch();
 
          });
         }else{
@@ -249,7 +234,9 @@ class EditPinModal extends Component {
                                 placeholder= {this.state.titlePlaceHolder}
                             />
                             <TextField
-                                disabled
+                                InputProps={{
+                                    readOnly: true,
+                                  }}
                                 id="outlined-name"
                                 error={this.state.locationError}
                                 label={this.state.locationLabel}
@@ -282,7 +269,7 @@ class EditPinModal extends Component {
                     </DialogActions>
                 </Dialog>
 
-            </div>
+            </div> 
         )
     }
 }

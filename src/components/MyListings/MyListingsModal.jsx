@@ -18,17 +18,13 @@ import { IconButton } from '@material-ui/core';
 import {deletePin} from '../../redux/actions/pinActions'
 
 async function getPinsByUser(userID) {
-  // console.log('inside Get Pins By USer');
-  // console.log(userID);
   var userPins = await fetch(' https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/get/' + String(userID), {
     method: 'GET',
   })
     .then((res) => { return res.json()})
     .then((val) => { 
-      console.log(val);
       return val})
     .catch((err) => err)
-
     return userPins;
 }
 
@@ -84,7 +80,7 @@ class MyListingsModal extends Component {
             </DialogTitle>
             <LineDivider />
             <DialogContent>
-              <MyListingsPost {...this.state}/>
+              <MyListingsPost fireUpdatePins={this.handleClickOpen().bind(this)} {...this.state}/>
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="error">CLOSE</Button>

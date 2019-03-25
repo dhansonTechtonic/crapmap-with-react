@@ -49,7 +49,7 @@ class AddPinModal extends Component {
     handleClose = () => {
         this.setState({ 
             open: false, 
-            category: "Funiture",
+            category: "Furniture",
             img:"pinsImages/1553121301840",
             address:"",
             lat:"40.02091167969599",
