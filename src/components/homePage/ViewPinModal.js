@@ -2,14 +2,10 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 
 import PropTypes from 'prop-types'
-// import CardModal from '../homePage/CardModal'
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogActions from '@material-ui/core/DialogActions'
 import LineDivider from '../addEditPin/LineDivider'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -20,11 +16,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import image from '../assets/oldcouch.jpg'
-
-
-import { IconButton } from '@material-ui/core';
-
-import {deletePin} from '../../redux/actions/pinActions'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const styles = {
     card: {
@@ -51,51 +43,67 @@ class ViewPinModal extends Component {
     }
   }
 
+  componentDidMount(){
+    this.setState({show: this.props.show})
+    console.log(this.props)
+  }
+
 
   handleClose(e) {
     e.preventDefault();
     this.setState({ 
-        open: false 
+        show: !this.props.show 
     });
   };
 
   handleItemSize(data){
     console.log("item", data)
+    switch (data) {
+      case "1" :
+        return  (
+        <Typography component="p">
+          SIZE : SMALL <FontAwesomeIcon icon='box' />
+        </Typography>
+        )
+        break;
+      case "2" : 
+      return  (
+        <Typography component="p">
+          SIZE : MEDIUM <FontAwesomeIcon icon='box' />
+        </Typography>
+        )
+        break;
+      case "3" :
+      return  (
+        <Typography component="p">
+          SIZE : LARGE <FontAwesomeIcon icon='box' />
+        </Typography>
+        )
+        break;
+    }
+
   }
 
   handleDibs(e) {
       e.preventDefault();
       console.log(e.target)
-      // return (
-      //   <Marker
-      //   key={pin._ref._path.segments[1]}
-      //   active={this.setState({active: false})}
-      //   // pin = {pin}
-      //   name={pin._fieldsProto.title.stringValue}
-      //   icon={this.findColor(pin._fieldsProto.category.stringValue)}
-      //   category={pin._fieldsProto.category.stringValue}
-      //   itemSize={pin._fieldsProto.size.stringValue}
-      //   // img={pin._fieldsProto.img.stringValue}
-      //   position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
-      //               lng:pin._fieldsProto.location.mapValue.fields.lng.doubleValue }}
-      //   onClick={this.toggleViewPinModal}
-      // />
-      // )
+
   }
 
   render() {
     //   const pin = this.props;
-      console.log(this.props.data.itemSize, "name props from modal")
 
     if (!this.props.show) {
         return null;
     }
 
     return (
+            // console.log(this.props.data.itemSize, "name props from modal")
+
       <div >
           <Dialog
           open={this.props.show}
-          onClose={this.handleClose}
+          onClose={!this.state.show}
           aria-labelledby="scroll-dialog-title"
           style={{ 'z-index': 30, 'background-color': 'primary' }}>
 
@@ -119,13 +127,10 @@ class ViewPinModal extends Component {
               </Typography>
     
               <Typography component="p">
-                {this.props.data.category}
+                CATEGORY : {this.props.data.category}
               </Typography>
-              
-              <Typography component="p">
-                {this.props.data.itemSize}
-                {/* {this.handleItemSize(this.props.data.itemSize).bind(this)} */}
-              </Typography>
+
+              {this.handleItemSize(this.props.data.itemSize)}
 
             </CardContent>
           </CardActionArea>
@@ -134,7 +139,7 @@ class ViewPinModal extends Component {
             <Button size="medium" color="primary" onClick={this.handleDibs}>
               DIBS
             </Button>
-            <Button size="medium" color="primary" onClick={this.handleClose}>
+            <Button size="medium" color="primary" onClose={this.handleClose}>
               CLOSE
             </Button>
           </CardActions>
