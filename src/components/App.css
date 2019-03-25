@@ -25,11 +25,15 @@ hr{
   border-radius: 100px !important;
   color: white !important;
   filter: drop-shadow(1px 1px 7px black) !important;
-  font-size: 5em !important;
+  font-size: 3em !important;
   opacity: .7 !important;
-  padding: .05em !important;
   transition-duration: 0.3s !important;
   -webkit-transition-duration: 0.3s !important;
+  margin: 0 48% !important;
+  bottom: 80px !important;
+  padding: .05em !important;
+  position: fixed !important;
+  z-index: 7 !important;
 }
 
 .view-pin-button{
@@ -278,14 +282,6 @@ hr{
   list-style-type: none;
   margin-right: 50px;
   text-decoration: none;
-}
-
-.new-pin-button {
-  margin-left: 1.5rem !important;
-  bottom: 80px !important;
-  padding: .05em !important;
-  position: absolute !important;
-  z-index: 7 !important;
 }
 
 .marker-style {

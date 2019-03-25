@@ -9,7 +9,6 @@ import LineDivider from '../addEditPin/LineDivider'
 
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -43,16 +42,15 @@ class ViewPinModal extends Component {
     }
   }
 
-  componentDidMount(){
-    this.setState({show: this.props.show})
-    console.log(this.props)
-  }
-
+  // componentDidMount(){
+  //   this.setState({show: this.props.show})
+  // }
 
   handleClose(e) {
     e.preventDefault();
+    console.log("this is close")
     this.setState({ 
-        show: !this.props.show 
+        show: this.props.show 
     });
   };
 
@@ -86,32 +84,27 @@ class ViewPinModal extends Component {
 
   handleDibs(e) {
       e.preventDefault();
-      console.log(e.target)
-
+      
   }
 
   render() {
-    //   const pin = this.props;
 
     if (!this.props.show) {
         return null;
     }
 
     return (
-            // console.log(this.props.data.itemSize, "name props from modal")
 
       <div >
           <Dialog
           open={this.props.show}
-          onClose={!this.state.show}
+          onClose={!this.props.show}
           aria-labelledby="scroll-dialog-title"
           style={{ 'z-index': 30, 'background-color': 'primary' }}>
 
             <DialogContent>               
             <Card className={styles.card}>
-        
-            <CardActionArea >
-            <CardMedia 
+              <CardMedia 
               component="img"
               alt="Item"
               className={styles.media}
@@ -131,19 +124,17 @@ class ViewPinModal extends Component {
               </Typography>
 
               {this.handleItemSize(this.props.data.itemSize)}
-
             </CardContent>
-          </CardActionArea>
           <LineDivider />
           <CardActions>
             <Button size="medium" color="primary" onClick={this.handleDibs}>
               DIBS
             </Button>
-            <Button size="medium" color="primary" onClose={this.handleClose}>
+            <Button size="medium" color="primary" onClick={this.handleClose}>
               CLOSE
             </Button>
-          </CardActions>
-        </Card>
+            </CardActions>
+           </Card>
 
             </DialogContent>
 
