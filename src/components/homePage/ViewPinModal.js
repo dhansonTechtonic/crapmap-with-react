@@ -19,7 +19,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-// import {image} from ''
+import image from '../assets/oldcouch.jpg'
+
 
 import { IconButton } from '@material-ui/core';
 
@@ -37,14 +38,14 @@ class ViewPinModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    //   open: false,
+      show: false,
       user: {},
       pins: [],
       pinData: {},
       active: true
     }
-    this.handleClose.bind(this)
-    // this.handleChange.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.handleDibs = this.handleDibs.bind(this)
   }
     
   componentDidUpdate(prevProps) { 
@@ -54,14 +55,22 @@ class ViewPinModal extends Component {
     }
   }
 
-  handleClose (e) {
+  handleClose(e) {
     e.preventDefault();
-    this.setState({ open: false });
+    this.setState({ 
+        open: !this.props.show 
+    });
   };
+
+  handleDibs(e) {
+      e.preventDefault();
+      console.log(e.target)
+  }
 
   render() {
       const pin = this.props.data;
-    //   console.log(pin.name)
+      console.log(this.props.pinData, "props from modal")
+
     if (!this.props.show) {
         return null;
     }
@@ -69,13 +78,13 @@ class ViewPinModal extends Component {
     return (
       <div >
           <Dialog
-        //   open={this.state.open}
-        //   onClose={this.handleClose}
+          open={this.props.show}
+          onClose={this.handleClose}
           aria-labelledby="scroll-dialog-title"
           style={{ 'z-index': 30, 'background-color': 'primary' }}>
 
             <DialogContent>               
-        <Card className={styles.card}>
+            <Card className={styles.card}>
         
           <CardActionArea >
             <CardMedia 
@@ -84,13 +93,14 @@ class ViewPinModal extends Component {
               className={styles.media}
               style={{ 'z-index': 30, 'background-color': 'primary' }}
               height="300"
-            //   image={this.pinData.}
+              image={image}
+            //   image={this.props.pinData.image}
             //   title={name}
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h1">
-              {/* {name} */}
-                title
+              {this.props.pinData.name}
+                {/* title */}
               </Typography>
     
               <Typography component="p">
@@ -103,7 +113,7 @@ class ViewPinModal extends Component {
           </CardActionArea>
           <LineDivider />
           <CardActions>
-            <Button size="medium" color="primary">
+            <Button size="medium" color="primary" onClick={this.handleDibs}>
               DIBS
             </Button>
             <Button size="medium" color="primary" onClick={this.handleClose}>

@@ -5,7 +5,7 @@ import store from '../../redux/store'
 import {connect} from 'react-redux';
 import styles from './GoogleMapsJSON.json';
 // import ViewPinModal from './ViewPinModal';
-import CardModal from './CardModal';
+// import CardModal from './CardModal';
 import ViewPinModal from './ViewPinModal';
 // import {Room} from '@material-ui/icons/Room'
 
@@ -28,18 +28,18 @@ export class MapContainer extends Component {
       pinData: {}, 
       dibState: false,
       centerAroundCurrentLocation: true,
-      
       }
       this.toggleViewPinModal = this.toggleViewPinModal.bind(this)
     };
 
   toggleViewPinModal(e) {
     let targetPin = e;
-    // console.log(targetPin.name)
+    console.log(targetPin.name)
     this.setState({
       viewCardIsOpen: true,
       pinData: targetPin
     });
+    console.log(this.state)
   }
 
   componentDidUpdate(prevProps) { 
@@ -78,7 +78,6 @@ export class MapContainer extends Component {
   }
   
   findZip(zipCode) {
-    
   }
 
   changeIcon (e) {
@@ -110,21 +109,22 @@ export class MapContainer extends Component {
   <Marker
     key={pin._ref._path.segments[1]}
     active={this.state.dibState}
-    // pin = {pin}
+    pin = {pin}
     name={pin._fieldsProto.title.stringValue}
     icon={this.findColor(pin._fieldsProto.category.stringValue)}
     category={pin._fieldsProto.category.stringValue}
     itemSize={pin._fieldsProto.size.stringValue}
-    img={pin._fieldsProto.img.stringValue}
+    // img={pin._fieldsProto.img.stringValue}
     position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
                 lng:pin._fieldsProto.location.mapValue.fields.lng.doubleValue }}
     onClick={this.toggleViewPinModal}
   />
   )}
 )}
-<ViewPinModal show={this.state.viewCardIsOpen} />
 
 </Map>
+<ViewPinModal show={this.state.viewCardIsOpen} /> 
+
 </div> 
     );
   }
