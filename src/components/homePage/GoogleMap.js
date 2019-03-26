@@ -123,7 +123,7 @@ export class MapContainer extends Component {
 <ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} onClick={this.toggleViewPinModal} /> 
 
 </div> 
-    );
+    )
   }
 }
 
