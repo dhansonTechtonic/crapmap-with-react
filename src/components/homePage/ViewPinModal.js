@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 
 import PropTypes from 'prop-types'
+
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import LineDivider from '../addEditPin/LineDivider'
@@ -35,6 +36,7 @@ class ViewPinModal extends Component {
     }
   }
 
+
   handleItemSize(data){
     switch (data) {
       case "1" :
@@ -62,11 +64,14 @@ class ViewPinModal extends Component {
   }
 
   render() {
+
     if (!this.props.show) {
         return null;
     }
 
     return (
+            // console.log(this.props.data.itemSize, "name props from modal")
+
       <div >
           <Dialog
           open={this.props.show}

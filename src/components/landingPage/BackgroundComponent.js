@@ -6,7 +6,7 @@ export default class BackgroundComponent extends Component {
   render() {
     return (
       <div>
-        <img alt='background' src={LPBackground} className="lpBackground" />
+        <img alt='background' src={ LPBackground } className="lpBackground" />
       </div>
     )
   }

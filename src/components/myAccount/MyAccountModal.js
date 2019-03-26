@@ -29,7 +29,7 @@ class MyAccountModal extends Component{
         this.state = {
             open: false,
             scroll: 'paper',
-            displayName: '',
+            displayName: false,
             email: ''
         }
     }
@@ -39,10 +39,17 @@ class MyAccountModal extends Component{
 
         let currentUser = await getFirebaseUser();
 
-        this.setState({
-            displayName: currentUser.displayName,
-            email: currentUser.email
-        })
+            this.setState({
+                displayName: currentUser.email.match(/^([^@]*)@/)[1],
+                email: currentUser.email
+            })
+        // } else if (currentUser.displayName) {
+        //     this.setState({
+        //         displayName: currentUser.displayName,
+        //         email: currentUser.email
+        //     })
+        // }
+       
     };
 
     handleClose = () => {
@@ -77,7 +84,8 @@ class MyAccountModal extends Component{
                     onClose={this.handleClose}
                     scroll={scroll}
                     aria-labelledby="scroll-dialog-title"
-                    style={{ 'z-index': 30, 'background-color': 'primary' }}>
+                    style={{ 'z-index': 30, 'background-color': 'primary' }}
+                >
                     <DialogTitle>
                         MY ACCOUNT
                         <Tooltip title="I'm Done Viewing Crap">

@@ -120,7 +120,9 @@ export class MapContainer extends Component {
 
 </Map>
 
+
 <ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} onClick={this.toggleViewPinModal} /> 
+
 
 </div> 
     );

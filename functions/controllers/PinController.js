@@ -81,23 +81,25 @@ router.post('/new',jsonParser, (request,response) =>{
     return false
     });
 
+    
 router.post('/update/:pinID', (request,response) =>{
 
     let pinObject ={
         category: request.body.category,
-        //description: request.body.description,
         location: {
             lat: request.body.lat,
             lng: request.body.lng,
             address: request.body.address
         },
         size: request.body.size,
-        //tags: request.body.tags,
         title: request.body.title,
     };
 
-    if(request.body.img){
-         pinObject={img: request.body.img};
+    for(key in pinObject){
+        if(!key){
+            response.send("Posting was incomplete")
+            return false;
+        }
     }
 
     let pinsRef = db.collection('pins').doc(request.params.pinID);
@@ -115,6 +117,29 @@ router.post('/update/:pinID', (request,response) =>{
     )
     return false
 });
+
+    router.delete('/delete/userpins/:userID', (req, res) => {
+        let pinsRef = db.collection('pins')
+        pinsRef.where("userID", "==", req.params.userID).get()
+        .then(querySnapshot => {
+            querySnapshot.forEach((doc) => {
+                doc.ref.delete().then((res) => {
+                    console.log("Doc Deleted");
+                    res.send("Successfully Deleted")
+                    return res;
+                }).catch(function(error) {
+                    console.error('error deleting');
+                    return error
+                });
+            });
+            res.send("Finding User Data Successful")
+            return true;
+        })
+        .catch(function(error) {
+            console.log('error getting documents')
+        })
+        return false;
+    })
 
     router.delete('/delete/:pinID', (request,response) =>{
         let pinID = request.params.pinID;
