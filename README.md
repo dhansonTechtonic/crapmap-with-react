@@ -1,4 +1,4 @@
-## CrapMap - Get rid of your crap!
+<h1 style="text-align: center;">CrapMap - Get rid of your crap!</h1>
 
 Stack: React (create-react-app), Redux, Firebase, Node.js
 
