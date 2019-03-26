@@ -8,6 +8,19 @@ let db = admin.firestore();
 const express = require('express');
 const router = express.Router();
 
+router.get("/get/category/:category", (req, res) => {
+    let pinsRef = db.collection('pins');
+    var query = pinsRef.where("category", "==", req.params.category).get()
+    .then(function(querySnapshot){
+        if (querySnapshot) {
+            res.send(querySnapshot.docs);
+        } else {
+            res.send("Collection does not exist");
+        }
+        return false;
+    }).catch(err => console.log(err));
+})
+
 router.get("/get/:userID", (req, res) => {
     let pinsRef = db.collection('pins');
     var query = pinsRef.where("userID", '==', req.params.userID).get()
@@ -36,21 +49,31 @@ router.get("/get", (request, response) =>{
 
 
 router.post('/new',jsonParser, (request,response) =>{
-    console.log(request.body);
     let pinObject ={
         category: request.body.category,
-        img:request.body.img,
-        //description: request.body.description,
         location: {
             lat: request.body.lat,
             lng: request.body.lng,
             address: request.body.address
         },
         size: request.body.size,
-        //tags: request.body.tags,
         title: request.body.title,
         userID: request.body.userID
     };
+
+    for(key in pinObject){
+        if(!key){
+            response.send("Posting was incomplete")
+            return false;
+        }
+    }
+
+    if(request.body.img){
+        pinObject.img = request.body.img;
+    }else{
+        pinObject.img = 'assets/crapmapLogoWhite.png';
+    }
+
     let pinsRef = db.collection('pins');
     pinsRef.add(pinObject)
     .then(() => response.send('success'))
@@ -58,27 +81,65 @@ router.post('/new',jsonParser, (request,response) =>{
     return false
     });
 
-router.post('/update', (request,response) =>{
+    
+router.post('/update/:pinID', (request,response) =>{
+
     let pinObject ={
         category: request.body.category,
-        img:request.img,
-        description: request.body.description,
         location: {
-            lat: request.body.location.lat,
-            lng: request.body.location.lng,
-            address: request.body.location.zip
+            lat: request.body.lat,
+            lng: request.body.lng,
+            address: request.body.address
         },
         size: request.body.size,
-        tags: request.body.tags,
         title: request.body.title,
-        userID: request.body.userID
     };
-    let pinsRef = db.collection('pins');
-    pinsRef.set(pinObject, { merge: true })
-    .then(() => console.log('success'))
-    .catch(()=> console.log('error'));
+
+    for(key in pinObject){
+        if(!key){
+            response.send("Posting was incomplete")
+            return false;
+        }
+    }
+
+    let pinsRef = db.collection('pins').doc(request.params.pinID);
+    let getRef = pinsRef.get().then( doc => {
+            if(doc.exists){
+                console.log('Document Exists');
+                pinsRef.set(pinObject, { merge: true })
+                .then(() => response.send('success'))
+                .catch(()=> console.log('error'));
+            }else{
+                res.status(404).send('Document Does Not Exist');
+            }
+            return false
+        }
+    )
     return false
 });
+
+    router.delete('/delete/userpins/:userID', (req, res) => {
+        let pinsRef = db.collection('pins')
+        pinsRef.where("userID", "==", req.params.userID).get()
+        .then(querySnapshot => {
+            querySnapshot.forEach((doc) => {
+                doc.ref.delete().then((res) => {
+                    console.log("Doc Deleted");
+                    res.send("Successfully Deleted")
+                    return res;
+                }).catch(function(error) {
+                    console.error('error deleting');
+                    return error
+                });
+            });
+            res.send("Finding User Data Successful")
+            return true;
+        })
+        .catch(function(error) {
+            console.log('error getting documents')
+        })
+        return false;
+    })
 
     router.delete('/delete/:pinID', (request,response) =>{
         let pinID = request.params.pinID;

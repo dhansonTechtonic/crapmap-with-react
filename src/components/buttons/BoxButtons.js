@@ -24,6 +24,14 @@ class BoxButtons extends React.Component {
     this.props.sendValue(value);
   };
 
+  componentDidMount(){
+    if(this.props.value){
+      this.setState({
+        value: this.props.value
+      })
+    }
+  }
+
   render() {
     const { classes } = this.props;
 

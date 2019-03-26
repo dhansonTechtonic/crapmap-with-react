@@ -19,7 +19,12 @@ class LandingPage extends Component {
   constructor(props) {
     super(props);
 
+
     this.state = { user: null };
+
+  componentDidMount(){
+    document.title = "CrapMap | Log-In"
+  }
 
     this.logOut = this.logOut.bind(this);
   }

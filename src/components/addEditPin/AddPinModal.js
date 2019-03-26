@@ -50,7 +50,7 @@ class AddPinModal extends Component {
     handleClose = () => {
         this.setState({ 
             open: false, 
-            category: "Funiture",
+            category: "Furniture",
             img:"pinsImages/1553121301840",
             address:"",
             lat:"40.02091167969599",
@@ -98,11 +98,11 @@ class AddPinModal extends Component {
                 this.setState({ category: "Sporting" }, () => { console.log(this.state.category) });
                 break;
             case "Gadgets":
-                this.setState({ category: "Electronics" }, () => { console.log(this.state.category) });
+                this.setState({ category: "Gadgets" }, () => { console.log(this.state.category) });
                 break;
             case "question-circle":
                 this.setState({ category: "Misc" }, () => { console.log(this.state.category) });
-                break;
+                break; 
             default:
                 this.setState({ category: "Furniture" }, () => { console.log(this.state.category) });
         }

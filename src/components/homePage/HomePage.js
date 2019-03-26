@@ -10,8 +10,8 @@ import SortButtons from '../buttons/SortButtons'
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 
-import {getPins} from '../../redux/actions/pinActions'
-import {registerUser} from '../../redux/actions/userActions'
+import {getPins, clearPins, getByCategory} from '../../redux/actions/pinActions'
+
 class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -23,27 +23,41 @@ class HomePage extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(e) {
-    switch (e.target.value) {
-      case "car":
+  handleClick(data) {
+    switch (data) {
+      case "Auto Parts":
         this.setState({ category: 'Auto Parts' }, () => { console.log(this.state.category) });
         break;
-      case "baseball-ball":
-        this.setState({ category: "Sporting" }, () => { console.log(this.state.category) });
+      case "Sports":
+        this.setState({ category: "Sports" }, () => { console.log(this.state.category) });
         break;
-      case "tv":
-        this.setState({ category: "Electronics" }, () => { console.log(this.state.category) });
+      case "Gadgets":
+        this.setState({ category: "Gadgets" }, () => { console.log(this.state.category) });
         break;
-      case "question-circle":
+      case "Misc":
         this.setState({ category: "Misc" }, () => { console.log(this.state.category) });
         break;
-      default:
+      case "Furniture":
         this.setState({ category: "Furniture" }, () => { console.log(this.state.category) });
+        break;
+      default:
+        this.setState({ category: "All" }, () => { console.log(this.state.category) });
     }
+
+
+    if (data == "All") {
+      store.dispatch(clearPins());
+      store.dispatch(getPins());
+    } else {
+      store.dispatch(clearPins());
+      store.dispatch(getByCategory(data));
+    }
+    
   }
 
   componentDidMount(){
     store.dispatch(getPins());
+    document.title = "CrapMap | Home"
   }
 
   componentDidUpdate(prevProps){
@@ -61,7 +75,7 @@ class HomePage extends Component {
     return (
       <div className="App">
         <AddPinModal />
-        <SortButtons handleClick={this.handleClick}/>
+        <SortButtons categoryChange={this.handleClick}/>
         <Navigation />
         <GoogleMap  />
       </div>
@@ -76,7 +90,7 @@ class HomePage extends Component {
       return (
         <div className="App">
           <AddPinModal />
-          <SortButtons handleClick={this.handleClick}/>
+          <SortButtons categoryChange={this.handleClick}/>
           <Navigation />
           <GoogleMap  />
         </div>

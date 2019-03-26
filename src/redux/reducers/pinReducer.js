@@ -1,4 +1,4 @@
- import {NEW_PIN, UPDATE_PIN, DELETE_PIN, GET_PINS_FULFILLED} from "../actions/pinActions";
+ import {NEW_PIN, UPDATE_PIN, DELETE_PIN, GET_PINS_FULFILLED, CLEAR_PINS, GET_BY_CATEGORY_FULFILLED} from "../actions/pinActions";
 
  const initPin = [];
  
@@ -7,24 +7,29 @@
     let payload = action.payload;
      switch (action.type) {
         case NEW_PIN: {
-                // let pinState = state;
-                console.log('new pin reducer')
                 break;
             }
         case UPDATE_PIN: {
-                console.log('update pin reducer ')
                 break;
             }
+        case GET_BY_CATEGORY_FULFILLED: {
+                return {
+                    pins: payload
+                };
+        }
         case GET_PINS_FULFILLED: {
-                console.log(payload);
                 return {
                     pins: payload
                 }
             }
         case DELETE_PIN: {
-                console.log('inside delete reducer')
                 break;
              }
+        case CLEAR_PINS: {
+                return {
+                    pins: []
+                }
+        }
         default: return state;
      }
  }

@@ -29,7 +29,7 @@ class MyAccountModal extends Component{
         this.state = {
             open: false,
             scroll: 'paper',
-            displayName: '',
+            displayName: false,
             email: ''
         }
     }
@@ -39,25 +39,38 @@ class MyAccountModal extends Component{
 
         let currentUser = await getFirebaseUser();
 
-        this.setState({
-            displayName: currentUser.displayName,
-            email: currentUser.email
-        })
+            this.setState({
+                displayName: currentUser.email.match(/^([^@]*)@/)[1],
+                email: currentUser.email
+            })
+        // } else if (currentUser.displayName) {
+        //     this.setState({
+        //         displayName: currentUser.displayName,
+        //         email: currentUser.email
+        //     })
+        // }
+       
     };
 
     handleClose = () => {
         this.setState({ open: false });
     };
 
-    handleDelete() {
-        deleteUser();
-        store.dispatch(logOutUser());
+    handleDelete = () => {
+        let deleteConfirmation = window.confirm(`click 'OK' to confirm`)
+        if (deleteConfirmation) {
+            deleteUser();
+            store.dispatch(logOutUser());
+        } else {
+            return false;
+        }
     }
 
     handleLogOut = () => store.dispatch(logOutUser());
 
-    render(){
+    render(){        
         const { classes } = this.props;
+        const { displayName, email, open, scroll } = this.state;
 
         return (
             <div>
@@ -67,35 +80,39 @@ class MyAccountModal extends Component{
                     </li>
                 </Tooltip>
                 <Dialog
-                    open={this.state.open}
+                    open={open}
                     onClose={this.handleClose}
-                    scroll={this.state.scroll}
+                    scroll={scroll}
                     aria-labelledby="scroll-dialog-title"
                     style={{ 'z-index': 30, 'background-color': 'primary' }}
                 >
                     <DialogTitle>
                         MY ACCOUNT
                         <Tooltip title="I'm Done Viewing Crap">
-                            <Button onClick={this.handleLogOut}>
-                                Log Out
+                            <Button 
+                                onClick={this.handleLogOut}
+                                style={{ "float": "right" }}
+                            >Log Out
                             </Button>
                         </Tooltip>
                     </DialogTitle>
                     <LineDivider />
                     <DialogContent>
                         <Typography>
-                            Username: {this.state.displayName}
+                            Username: { displayName }
                         </Typography>
                         <Typography>
-                            Email: {this.state.email}
+                            Email: { email }
                         </Typography>
                     </DialogContent>
                     <DialogActions>
                         <Tooltip title="Flush My Crap Away">
-                        <Button onClick={this.handleDelete} classes={{ root: classes.root }}
-                          id="deleteAccount"
-                        >Delete Account
-                        </Button>
+                            <Button 
+                                onClick={this.handleDelete} 
+                                classes={{ root: classes.root }}
+                                id="deleteAccount"
+                            >Delete Account
+                            </Button>
                         </Tooltip>
                         <ChangePasswordForm />
                         <Button onClick={this.handleClose}>Close</Button>
