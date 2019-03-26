@@ -37,8 +37,8 @@ class ViewPinModal extends Component {
   }
 
 
-  handleItemSize(data){
-    switch (data) {
+  handleItemSize(sizeData){
+    switch (sizeData) {
       case "1" :
         return  (
         <Typography component="p">
