@@ -58,6 +58,7 @@ export default class LoginComponent extends Component {
   }
 
   render() {
+    const { providerName } = this.props
     return(
       <div>
         <Fab 
@@ -68,7 +69,7 @@ export default class LoginComponent extends Component {
             opacity: 1,
           }}
           onClick={ this.login }
-        >Login with { this.props.providerName } 
+        >Login with { providerName } 
         </Fab>              
       </div>
     )

@@ -35,7 +35,6 @@ class EmailForm extends Component {
 
   handleClickOpen = scroll => () => this.setState({ open: true, scroll });
 
-
   handleClose = () => this.setState({ open: false })
 
   doSignInWithEmailAndPassword = (email, password) => auth.signInWithEmailAndPassword(email, password);
@@ -57,6 +56,7 @@ class EmailForm extends Component {
       this.setState({ ...INITIAL_STATE });
     })
     .catch(error => this.setState({ error }));
+    
     e.preventDefault();
   }
 
