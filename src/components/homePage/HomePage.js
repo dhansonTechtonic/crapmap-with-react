@@ -57,6 +57,7 @@ class HomePage extends Component {
 
   componentDidMount(){
     store.dispatch(getPins());
+    document.title = "CrapMap | Home"
   }
 
   componentDidUpdate(prevProps){

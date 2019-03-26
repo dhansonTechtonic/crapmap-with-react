@@ -118,6 +118,29 @@ router.post('/update/:pinID', (request,response) =>{
     return false
 });
 
+    router.delete('/delete/userpins/:userID', (req, res) => {
+        let pinsRef = db.collection('pins')
+        pinsRef.where("userID", "==", req.params.userID).get()
+        .then(querySnapshot => {
+            querySnapshot.forEach((doc) => {
+                doc.ref.delete().then((res) => {
+                    console.log("Doc Deleted");
+                    res.send("Successfully Deleted")
+                    return res;
+                }).catch(function(error) {
+                    console.error('error deleting');
+                    return error
+                });
+            });
+            res.send("Finding User Data Successful")
+            return true;
+        })
+        .catch(function(error) {
+            console.log('error getting documents')
+        })
+        return false;
+    })
+
     router.delete('/delete/:pinID', (request,response) =>{
         let pinID = request.params.pinID;
         let pinsRef = db.collection('pins').doc(pinID);
