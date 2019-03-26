@@ -45,7 +45,7 @@ class SortButtons extends React.Component {
                             fontSize: '1.5em', color: 'rgb(227, 68, 255)' }} icon={<FontAwesomeIcon icon='baseball-ball' />}/>
                     <BottomNavigationAction onClick={() => {
                         this.props.categoryChange("Gadgets")
-                    }} id="bnGadgets" label="Gadgets" value="Gadgets" style={{ fontSize: '1.5em', color: 'rgb(115, 40, 255)' }} icon={<FontAwesomeIcon icon='tv' />}/>
+                    }} id="bnGadgets" label="Gadgets" value="Gadgets" style={{ fontSize: '1.5em', color: 'rgb(135, 71, 255)' }} icon={<FontAwesomeIcon icon='tv' />}/>
                     <BottomNavigationAction onClick={() => {
                         this.props.categoryChange("Misc")
                     }} id="bnMisc" label="Misc" value="Misc" style={{ fontSize: '1.5em', color: 'rgb(71, 141, 255)' }} icon={<FontAwesomeIcon icon='question-circle' />}/>
