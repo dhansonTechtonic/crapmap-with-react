@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker, In } from 'google-maps-react';
 import { isAbsolute } from 'path';
-import store from '../../redux/store'
 import {connect} from 'react-redux';
 import styles from './GoogleMapsJSON.json';
 import ViewPinModal from './ViewPinModal';
@@ -20,19 +19,16 @@ export class MapContainer extends Component {
       viewCardIsOpen: false,
       pins: [],
       pinData: {}, 
-      // dibState: true,
       }
       this.toggleViewPinModal = this.toggleViewPinModal.bind(this)
     };
 
   toggleViewPinModal(e) {
     let targetPin = e;
-    // console.log(targetPin)
     this.setState({
-      viewCardIsOpen: !this.state.show,
+      viewCardIsOpen: !this.state.viewCardIsOpen,
       pinData: targetPin
     });
-    console.log(this.state.pinData)
   }
 
   componentDidUpdate(prevProps) { 
@@ -48,29 +44,30 @@ export class MapContainer extends Component {
     // }
       switch (category) {
         case "Furniture":
-          return  icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#ff4700' }
+          icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#ff4700' }
           break;
 
         case "Auto Parts" :
-          return  icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#e344ff' }
+          icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#e344ff' }
           break;
 
         case "Sports": 
-          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#fd589d' }
+          icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#fd589d' }
           break;
 
         case "Gadgets": 
-          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#7328ff' }
+          icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#7328ff' }
           break;
 
         case "Miscellaneous":
-          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#478dff' }
+        icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#478dff' }
           break;
 
         default: 
-         return icon = {path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#478dff' }
+         icon = {path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#478dff' }
          break;
       }
+      return icon;
   }
   
   findZip(zipCode) {
@@ -123,7 +120,7 @@ export class MapContainer extends Component {
 
 </Map>
 
-<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} /> 
+<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} onClick={this.toggleViewPinModal} /> 
 
 </div> 
     );
