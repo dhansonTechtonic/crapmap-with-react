@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import styles from './GoogleMapsJSON.json';
 import ViewPinModal from './ViewPinModal';
 
+
 const mapStylesDefaults = {
   position: isAbsolute,  
   width: '100%',
