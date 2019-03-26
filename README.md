@@ -2,11 +2,11 @@
 
 Stack: React (create-react-app), Redux, Firebase, Node.js
 
-### Who
+## Who
 
     We are team Deep C Fivers! We wrote this React Application as our capstone project for the Techtonic Academy.
 
-### What
+## What
 
     Crapmap is a web application that streamlines the process of listing and getting rid of unwanted items. 
     All users have to do is sign in with their facebook/google account (or an email address) snap a pic of their stuff on the side of their street, and hope somebody comes and picks it up.
