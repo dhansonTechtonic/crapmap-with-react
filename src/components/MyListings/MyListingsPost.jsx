@@ -11,75 +11,102 @@ import Typography from '@material-ui/core/Typography';
 import EditPinModal from '../addEditPin/EditPinModal'
 import Button from '@material-ui/core/Button'
 import store from '../../redux/store';
+import firebase from './../../firebase.js';
 
 import {deletePin} from '../../redux/actions/pinActions'
 
 const styles = {
-  card: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 140,
-  },
+  // card: {
+  //   maxWidth: 345,
+  // },
+  // media: {
+  //   height: 140,
+  // },
 };
 
-//let posts = this.state.pins.map((pin) => {
-    //   return <div className='pin-card'>
-    //     <span className='my-pin-image'></span>
-    //     <p className='my-pin-title'>{pin._fieldsProto.title.stringValue}</p>
-    //     <p className='my-pin-category'>{pin._fieldsProto.category.stringValue}</p>
-    //     <p className='my-pin-category'>{pin._ref._path.segments[1]}</p>
-    //     <button className='my-pin-delete' onClick={() => {
-    //       this.handleDeletePin(pin._ref._path.segments[1])
-    //     }}></button>
-    //   </div>
-    // })
+class MyListingsPost extends Component{
+
+  constructor(props){
+    super(props)
+    this.state={
+      imageLoaded : false
+    }
+  }
+
+  async _getPinsByUser(userID) {
+    var userPins = await fetch(' https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/get/' + String(userID), {
+    method: 'GET',
+  })
+    .then((res) => { return res.json()})
+    .then((val) => { 
+      return val})
+    .catch((err) => err)
+    return userPins;
+  }
+
+ async _getImgURL(){
+    let imgUrls = {};
+    for(let i = 0; i < this.state.userPins.length; i++){
+        let storage = firebase.storage();
+        let pinImgRef= this.state.userPins[i]._fieldsProto.img.stringValue;
+        let storageRef = storage.ref(pinImgRef);
+        let stateProp = `${pinImgRef}`
+        imgUrls[stateProp] = await storageRef.getDownloadURL().then(function(url) {
+          return url
+        }).catch(function() {
+          return './../assets/crapmapLogoWhite.png'
+        });
+    };
+
+    this.setState({imgUrls});
+    this.setState({imageLoaded : true});
+
+    return false
+  }
 
 
-function MyListingsPost(props){
+  async componentDidMount(){
+    let userID = JSON.parse(localStorage.getItem('userID'));
+    this.setState({userPins : await this._getPinsByUser(userID)});
+    this._getImgURL();
+   }
 
-    const { classes } = props;
-       
+  render(){ 
 
-  // let pinArray = store.dispatch(()) 
-  // or
-  // let pinArray = fetchMyPins();
-
-
-  // function handleDeletePin(input){
-  //   store.dispatch(deletePin(input));
-  // }
-
-
-  return (
-   (props.userPins ? props.userPins.map((pin) => 
-
-      <Card className={classes.card}>
-        <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image={image}
-            title={'nothing'}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {pin._fieldsProto.title.stringValue}
-        </Typography>
-            <Typography component="p">
-              {pin._fieldsProto.location.mapValue.fields.address.stringValue}
-        </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <EditPinModal fireUpdatePins={props.fireUpdatePins} incomeVal={pin} />
-          <Button color="error" style={{ left: 150, display: 'block' }} onClick={() => {
-          store.dispatch(deletePin(pin._ref._path.segments[1]))
-        }}>Delete</Button>
-        </CardActions>
-      </Card>
-    ) : "No Pins Found" )
-
-  )
+    const { classes } = this.props;
+   
+    return (
+    ( !this.state.imageLoaded ? <div> Loading </div> :
+      this.props.userPins.map((pin) =>{ 
+        let stateUrl = this.state.imgUrls[`${pin._fieldsProto.img.stringValue}`];
+        return( <Card className={classes.card}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              title={'nothing'}
+              height="140"
+            />
+            <CardContent>
+              <img src={stateUrl} height="140" width="345"></img>
+              <Typography gutterBottom variant="h5" component="h2">
+                {pin._fieldsProto.title.stringValue}
+            </Typography>
+              <Typography component="p">
+                {pin._fieldsProto.location.mapValue.fields.address.stringValue}
+          </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <EditPinModal fireUpdatePins={this.props.fireUpdatePins} incomeVal={pin} />
+            <Button color="error" style={{ left: 150, display: 'block' }} onClick={() => {
+            store.dispatch(deletePin(pin._ref._path.segments[1]))
+          }}>Delete</Button>
+          </CardActions>
+        </Card> 
+     )
+      }
+    )))
+  }
 }
 
 MyListingsPost.propTypes = {

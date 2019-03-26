@@ -112,7 +112,7 @@ export class MapContainer extends Component {
 
     category={pin._fieldsProto.category.stringValue}
     itemSize={pin._fieldsProto.size.stringValue}
-    // img={pin._fieldsProto.img.stringValue}
+    img={pin._fieldsProto.img.stringValue}
     position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
                 lng:pin._fieldsProto.location.mapValue.fields.lng.doubleValue }}
     onClick={this.toggleViewPinModal}
