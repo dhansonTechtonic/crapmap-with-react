@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase, { auth } from './../../firebase.js';
+
 import Fab from '@material-ui/core/Fab'
 
 import store from '../../redux/store';
