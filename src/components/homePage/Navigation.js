@@ -22,7 +22,7 @@ export default class Navigation extends Component {
         this.setState({ category: 'Auto-Parts', color: '#80334f !important' }, () => { console.log(this.state.category, this.state.color) });
         break;
       case "baseball-ball":
-        this.setState({ category: "Sporting", color: '#5200e8 !important' }, () => { console.log(this.state.category, this.state.color) });
+        this.setState({ category: "Sports", color: '#5200e8 !important' }, () => { console.log(this.state.category, this.state.color) });
         break;
       case "tv":
         this.setState({ category: "Electronics", color: '#467290 !important' }, () => { console.log(this.state.category, this.state.color) });

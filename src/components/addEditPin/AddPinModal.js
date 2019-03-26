@@ -100,7 +100,7 @@ class AddPinModal extends Component {
             case "Gadgets":
                 this.setState({ category: "Gadgets" }, () => { console.log(this.state.category) });
                 break;
-            case "question-circle":
+            case "Misc":
                 this.setState({ category: "Misc" }, () => { console.log(this.state.category) });
                 break; 
             default:

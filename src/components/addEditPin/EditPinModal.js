@@ -77,7 +77,7 @@ class EditPinModal extends Component {
                 this.setState({ category: 'Auto Parts' }, () => { console.log(this.state.category) });
                 break;
             case "Sports":
-                this.setState({ category: "Sporting" }, () => { console.log(this.state.category) });
+                this.setState({ category: "Sports" }, () => { console.log(this.state.category) });
                 break;
             case "Gadgets":
                 this.setState({ category: "Electronics" }, () => { console.log(this.state.category) });
