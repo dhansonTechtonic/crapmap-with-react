@@ -36,7 +36,6 @@ class ViewPinModal extends Component {
     }
   }
 
-
   handleItemSize(sizeData){
     switch (sizeData) {
       case "1" :
@@ -70,7 +69,6 @@ class ViewPinModal extends Component {
     }
 
     return (
-            // console.log(this.props.data.itemSize, "name props from modal")
 
       <div >
           <Dialog
