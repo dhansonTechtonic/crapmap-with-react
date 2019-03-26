@@ -98,7 +98,7 @@ class MyListingsPost extends Component{
           </CardActionArea>
           <CardActions>
             <EditPinModal fireUpdatePins={this.props.fireUpdatePins} incomeVal={pin} />
-            <Button color="error" style={{ left: 150, display: 'block' }} onClick={() => {
+            <Button color="error" style={{ left: 230, display: 'block' }} onClick={() => {
             store.dispatch(deletePin(pin._ref._path.segments[1]))
           }}>Delete</Button>
           </CardActions>
