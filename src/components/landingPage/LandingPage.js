@@ -19,16 +19,14 @@ class LandingPage extends Component {
   constructor(props) {
     super(props);
 
-
     this.state = { user: null };
-
-  componentDidMount(){
-    document.title = "CrapMap | Log-In"
-  }
 
     this.logOut = this.logOut.bind(this);
   }
 
+  componentDidMount() {
+    document.title = "CrapMap | Log-In"
+  }
 
   userLogin = userData => this.setState({ user: userData })
 
