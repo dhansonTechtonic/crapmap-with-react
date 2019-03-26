@@ -38,18 +38,18 @@ class MyAccountModal extends Component{
         this.setState({ open: true, scroll });
 
         let currentUser = await getFirebaseUser();
-
+        
+        if (!currentUser.displayName) {
             this.setState({
                 displayName: currentUser.email.match(/^([^@]*)@/)[1],
                 email: currentUser.email
             })
-        // } else if (currentUser.displayName) {
-        //     this.setState({
-        //         displayName: currentUser.displayName,
-        //         email: currentUser.email
-        //     })
-        // }
-       
+        } else {
+            this.setState({
+                displayName: currentUser.displayName,
+                email: currentUser.email
+            })
+        }
     };
 
     handleClose = () => {
