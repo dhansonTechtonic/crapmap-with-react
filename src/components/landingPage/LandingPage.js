@@ -26,6 +26,9 @@ class LandingPage extends Component {
   this.logOut = this.logOut.bind(this);
   }
 
+  componentDidMount(){
+    document.title = "CrapMap | Log-In"
+  }
 
   userLogin = (userData) =>{
     this.setState({
