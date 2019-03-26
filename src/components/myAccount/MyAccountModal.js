@@ -84,7 +84,8 @@ class MyAccountModal extends Component{
                     onClose={this.handleClose}
                     scroll={scroll}
                     aria-labelledby="scroll-dialog-title"
-                    style={{ 'z-index': 30, 'background-color': 'primary' }}>
+                    style={{ 'z-index': 30, 'background-color': 'primary' }}
+                >
                     <DialogTitle>
                         MY ACCOUNT
                         <Tooltip title="I'm Done Viewing Crap">

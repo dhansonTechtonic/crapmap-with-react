@@ -1,83 +1,73 @@
 import React, { Component } from 'react';
-import firebase, {auth} from './../../firebase.js';
-// import {FireBase} from './firebaseEmail.js';
+import { Redirect } from 'react-router-dom'
+import firebase, { auth } from './../../firebase.js';
 import BackgroundComponent from './BackgroundComponent';
 import LogoComponent from './LogoComponent';
 import LoginComponent from './LoginComponent';
 import '../App.css'
 
-import {NavLink, Redirect} from 'react-router-dom'
-import Fab from '@material-ui/core/Fab'
-import SignUpForm from './SignUp'
-import ForgetPasswordForm from './ForgetPassword'
 import EmailLoginForm from './EmailSignIn'
+import ForgetPasswordForm from './ForgetPassword'
 
+import { connect } from 'react-redux';
 import store from '../../redux/store'
 
-import {connect} from 'react-redux';
+
 
 
 class LandingPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    user: null
-    };
-  this.logOut = this.logOut.bind(this);
-  }
+
+
+    this.state = { user: null };
 
   componentDidMount(){
     document.title = "CrapMap | Log-In"
   }
 
-  userLogin = (userData) =>{
-    this.setState({
-      user: userData,
-    })
+    this.logOut = this.logOut.bind(this);
   }
 
-  logOut() {
+
+  userLogin = userData => this.setState({ user: userData })
+
+  logOut = () => {
     auth.signOut()
-      .then(() => {
-        this.setState({
-          user: null,
-          displayName: '',
-          email: '',
-          uid: 0
-        });
+    .then(() => {
+      this.setState({
+        user: null,
+        displayName: '',
+        email: '',
+        uid: 0
       });
+    });
   }
 
-  componentDidUpdate(){
-    return <Redirect to='/' />
-  }
+  componentDidUpdate = () => <Redirect to='/' />
 
   render() {
-    console.log(this.props.user);
     const { user } = store.getState();
-    console.log(user);
-
     const auth = store.getState();
+
     if (auth.user.userID) return <Redirect to = "/home" />
 
     if (!user.userID && !user.auth) {
     return (
-      <div>
         <div className="landingPage">
           <div className="landingPageGradient">
             <BackgroundComponent />
             <div className="landingPageLogoContainer" > 
               <LogoComponent />
             </div>
-              <div className="loginContainer">
-                <LoginComponent sendData={this.userLogin} provider={new firebase.auth.GoogleAuthProvider()} providerName={`Google`}/>
-                <LoginComponent sendData={this.userLogin} provider={new firebase.auth.FacebookAuthProvider()} providerName={`FaceBook`}/>
-                <EmailLoginForm />
-                <ForgetPasswordForm/>
-              </div>
+            <div className="loginContainer">
+              <LoginComponent sendData={ this.userLogin } provider={ new firebase.auth.GoogleAuthProvider() } providerName={ `Google` }/>
+              <LoginComponent sendData={ this.userLogin } provider={ new firebase.auth.FacebookAuthProvider() } providerName={ `FaceBook` }/>
+              <EmailLoginForm />
+              <ForgetPasswordForm/>
+            </div>
           </div>
         </div>
-      </div> 
       )
     } else if (user.userID && user.auth) {
       return <Redirect to='/home' />;
@@ -85,13 +75,11 @@ class LandingPage extends Component {
   }
 }
 
-function mapStateToProps(reduxState){
-  console.log(reduxState);
+function mapStateToProps(reduxState) {
   return {
     user: reduxState.user,
     auth: reduxState.auth
   }
 }
   
-
 export default connect(mapStateToProps)(LandingPage);
