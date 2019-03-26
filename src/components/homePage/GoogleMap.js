@@ -44,27 +44,27 @@ export class MapContainer extends Component {
     // }
       switch (category) {
         case "Furniture":
-          icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#ff4700' }
+          icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 5, strokeColor: '#ff4700' }
           break;
 
         case "Auto Parts" :
-          icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#fd589d' }
+          icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 5, strokeColor: '#fd589d' }
           break;
 
         case "Sports": 
-          icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor:'#e344ff'  }
+          icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 5, strokeColor:'#e344ff'  }
           break;
 
         case "Gadgets": 
-          icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#7328ff' }
+          icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 5, strokeColor: '#7328ff' }
           break;
 
         case "Miscellaneous":
-        icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#478dff' }
+        icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 5, strokeColor: '#478dff' }
           break;
 
         default: 
-         icon = {path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#478dff' }
+         icon = {path: window.google.maps.SymbolPath.CIRCLE, scale: 5, strokeColor: '#478dff' }
          break;
       }
       return icon;
