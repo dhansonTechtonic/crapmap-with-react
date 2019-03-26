@@ -82,6 +82,7 @@ class AddPinModal extends Component {
                 let storage = firebase.storage();
                 let firebaseImageUrl = storage.ref(`pinsImages/${new Date().getTime()}`).put(this.state.dataURL).then((snapshot) => {
                     this.setState({fireBaseStorageFullUrl: snapshot.metadata.fullPath });
+                    console.log(snapshot.metadata);
                     return(snapshot.metadata.fullPath);
                 })
                 firebaseImageUrl ? resolve(firebaseImageUrl) : reject(false)
