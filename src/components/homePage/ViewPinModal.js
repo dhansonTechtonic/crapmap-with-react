@@ -6,10 +6,8 @@ import PropTypes from 'prop-types'
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import LineDivider from '../addEditPin/LineDivider'
-
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -29,13 +27,8 @@ const styles = {
 class ViewPinModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      show: false,
-    }
-    this.handleClose = this.handleClose.bind(this)
-    this.handleDibs = this.handleDibs.bind(this)
   }
-    
+
   componentDidUpdate(prevProps) { 
     // reduces pins promise to just pin array on update
     if (this.props.pins !== prevProps.pins) {
@@ -43,21 +36,8 @@ class ViewPinModal extends Component {
     }
   }
 
-  componentDidMount(){
-    this.setState({show: this.props.show})
-    console.log(this.props)
-  }
-
-
-  handleClose(e) {
-    e.preventDefault();
-    this.setState({ 
-        show: !this.props.show 
-    });
-  };
 
   handleItemSize(data){
-    console.log("item", data)
     switch (data) {
       case "1" :
         return  (
@@ -81,17 +61,9 @@ class ViewPinModal extends Component {
         )
         break;
     }
-
-  }
-
-  handleDibs(e) {
-      e.preventDefault();
-      console.log(e.target)
-
   }
 
   render() {
-    //   const pin = this.props;
 
     if (!this.props.show) {
         return null;
@@ -103,15 +75,12 @@ class ViewPinModal extends Component {
       <div >
           <Dialog
           open={this.props.show}
-          onClose={!this.state.show}
           aria-labelledby="scroll-dialog-title"
           style={{ 'z-index': 30, 'background-color': 'primary' }}>
 
             <DialogContent>               
             <Card className={styles.card}>
-        
-            <CardActionArea >
-            <CardMedia 
+              <CardMedia 
               component="img"
               alt="Item"
               className={styles.media}
@@ -131,23 +100,20 @@ class ViewPinModal extends Component {
               </Typography>
 
               {this.handleItemSize(this.props.data.itemSize)}
-
             </CardContent>
-          </CardActionArea>
           <LineDivider />
           <CardActions>
             <Button size="medium" color="primary" onClick={this.handleDibs}>
               DIBS
             </Button>
-            <Button size="medium" color="primary" onClose={this.handleClose}>
+            <Button size="medium" color="primary" onClick={this.props.onClick}>
               CLOSE
             </Button>
-          </CardActions>
-        </Card>
+            </CardActions>
+           </Card>
 
             </DialogContent>
-
-          </Dialog>
+            </Dialog>
         </div>
       )
   }
