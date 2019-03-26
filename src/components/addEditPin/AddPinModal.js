@@ -95,7 +95,7 @@ class AddPinModal extends Component {
                 this.setState({ category: 'Auto Parts' }, () => { console.log(this.state.category) });
                 break;
             case "Sports":
-                this.setState({ category: "Sporting" }, () => { console.log(this.state.category) });
+                this.setState({ category: "Sports" }, () => { console.log(this.state.category) });
                 break;
             case "Gadgets":
                 this.setState({ category: "Gadgets" }, () => { console.log(this.state.category) });
