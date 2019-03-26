@@ -36,9 +36,8 @@ class ViewPinModal extends Component {
     }
   }
 
-
-  handleItemSize(data){
-    switch (data) {
+  handleItemSize(sizeData){
+    switch (sizeData) {
       case "1" :
         return  (
         <Typography component="p">
@@ -70,7 +69,6 @@ class ViewPinModal extends Component {
     }
 
     return (
-            // console.log(this.props.data.itemSize, "name props from modal")
 
       <div >
           <Dialog

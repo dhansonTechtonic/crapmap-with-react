@@ -12,7 +12,6 @@ const mapStylesDefaults = {
   width: '100%',
   height: '100%',
 };
-let iconsArr;
 export class MapContainer extends Component {
 
   constructor(props) {
@@ -55,11 +54,12 @@ export class MapContainer extends Component {
           break;
 
         case "Auto Parts" :
-          return  icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor:'#fd589d'  }
+
+        return  icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#fd589d' }
           break;
 
         case "Sports": 
-          return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor: '#e344ff' }
+         return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 4, strokeColor:'#e344ff'  }
           break;
 
         case "Gadgets": 
@@ -79,10 +79,10 @@ export class MapContainer extends Component {
   findZip(zipCode) {
   }
 
-  changeIcon (e) {
-    console.log(e)
-    return e.icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 6, strokeColor: '#6f6d75' }
-  }
+  // changeIcon (e) {
+  //   console.log(e)
+  //   return e.icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 6, strokeColor: '#6f6d75' }
+  // }
 
  render() { 
   if (!this.props.loaded) {
@@ -124,7 +124,10 @@ export class MapContainer extends Component {
 )}
 
 </Map>
-<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} /> 
+
+
+<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} onClick={this.toggleViewPinModal} /> 
+
 
 </div> 
     );
