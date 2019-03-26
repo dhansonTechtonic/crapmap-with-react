@@ -71,7 +71,8 @@ class MyAccountModal extends Component{
                     onClose={this.handleClose}
                     scroll={this.state.scroll}
                     aria-labelledby="scroll-dialog-title"
-                    style={{ 'z-index': 30, 'background-color': 'primary' }}>
+                    style={{ 'z-index': 30, 'background-color': 'primary' }}
+                >
                     <DialogTitle>
                         MY ACCOUNT
                         <Tooltip title="I'm Done Viewing Crap">
@@ -91,10 +92,10 @@ class MyAccountModal extends Component{
                     </DialogContent>
                     <DialogActions>
                         <Tooltip title="Flush My Crap Away">
-                        <Button onClick={this.handleDelete} style={{ marginRight: 140 }} classes={{ root: classes.root }}
-                            id="deleteAccount">
-                                Delete Account
-                            </Button>
+                        <Button onClick={this.handleDelete} classes={{ root: classes.root }}
+                          id="deleteAccount"
+                        >Delete Account
+                        </Button>
                         </Tooltip>
                         <ChangePasswordForm />
                         <Button onClick={this.handleClose}>Close</Button>

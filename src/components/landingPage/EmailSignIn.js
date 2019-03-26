@@ -76,26 +76,26 @@ class EmailForm extends Component {
             margin: 10,
             opacity: 1
           }}
-          onClick={this.handleClickOpen('paper')}
+          onClick={ this.handleClickOpen('paper') }
           >Login with Email
         </Fab>
         <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          scroll={this.state.scroll}
+          open={ this.state.open }
+          onClose={ this.handleClose }
+          scroll={ this.state.scroll }
           aria-labelledby="scroll-dialog-title"
           style={{ 'z-index': 30, 'background-color': 'primary' }}>
           <DialogTitle>SIGN IN</DialogTitle>
           <LineDivider />
           <DialogContent>
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={ this.onSubmit }>
               <TextField
                 id="outlined-name"
                 label="Email"
                 margin="normal"
                 variant="outlined"
-                value={email}
-                onChange={this.onChange}
+                value={ email }
+                onChange={ this.onChange }
                 placeholder="Email Address"
                 name="email"
               />
@@ -105,16 +105,16 @@ class EmailForm extends Component {
                 label="Password"
                 margin="normal"
                 variant="outlined"
-                value={password}
-                onChange={this.onChange}
+                value={ password }
+                onChange={ this.onChange }
                 placeholder="Enter Password"
                 name="password"
               />
-                {error && <p>{error.message}</p>}
+              { error && <p>{ error.message }</p> }
               <DialogActions >
                 <SignUpForm/>
-                <Button onClick={this.onSubmit} disabled={isInvalid} type="submit" color="primary">Sign In</Button>
-                <Button onClick={this.handleClose} color="error">Cancel</Button>
+                <Button onClick={ this.onSubmit } disabled={ isInvalid } type="submit" color="primary">Sign In</Button>
+                <Button onClick={ this.handleClose } color="error">Cancel</Button>
               </DialogActions>
             </form>
           </DialogContent>
