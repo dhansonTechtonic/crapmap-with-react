@@ -36,6 +36,7 @@ class CategoryButtons extends React.Component {
     const { classes } = this.props;
 
     return (
+      <div>
       <Paper square className={classes.root}>
         <Tabs
           value={this.state.value}
@@ -43,14 +44,27 @@ class CategoryButtons extends React.Component {
           variant="wrapper"
           indicatorColor="primary"
           textColor="primary"
+          style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}
         >
           <Tab id="catFurniture" className="cat-unselected" value="Furniture"icon={<FontAwesomeIcon icon='couch' />} label="Furniture"/>
           <Tab id="catAuto" value="Auto Parts" icon={<FontAwesomeIcon icon='car' />} label="Auto Parts" className="cat-unselected"/>
           <Tab id="catSports" value="Sports" icon={<FontAwesomeIcon icon='baseball-ball' />} label="Sports" className="cat-unselected"/>
-          <Tab id="catGadgets" value="Gadgets" icon={<FontAwesomeIcon icon='tv' />} label="Gadgets" className="cat-unselected"/>
-          <Tab id="catMisc" value="Misc" icon={<FontAwesomeIcon icon='question-circle' />} label="Misc" className="cat-unselected"/>
         </Tabs>
       </Paper>
+      <Paper square className={classes.root}>
+        <Tabs
+          value={this.state.value}
+          onChange={this.handleChange}
+          variant="wrapper"
+          indicatorColor="primary"
+          textColor="primary"
+          style={{display: "flex", flexDirection: "row", justifyContent: "center"}}
+        >
+          <Tab id="catGadgets" value="Gadgets" icon={<FontAwesomeIcon icon='tv' />} label="Gadgets" className="cat-unselected" />
+          <Tab id="catMisc" value="Misc" icon={<FontAwesomeIcon icon='question-circle' />} label="Misc" className="cat-unselected" />
+        </Tabs>
+      </Paper>
+      </div>
     );
   }
 }

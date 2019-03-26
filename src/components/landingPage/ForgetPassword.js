@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import { auth } from './../../firebase.js'
+
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -8,12 +8,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab'
 import LineDivider from '../addEditPin/LineDivider.js';
-
-// import store from '../../redux/store'
-// import { resetUserPassword } from '../../redux/actions/userActions'
 
 const INITIAL_STATE = {
   email: '',
@@ -49,14 +45,10 @@ export default class PasswordForgetForm extends Component {
     this.setState({ open: true, scroll });
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
-
-  };
+  handleClose = () => this.setState({ open: false });
 
   render() {
     const { email, error } = this.state;
-
     const isInvalid = email === '';
 
     return (
@@ -69,13 +61,13 @@ export default class PasswordForgetForm extends Component {
           opacity: 1,
           height: 1
         }}
-        onClick={this.handleClickOpen('paper')}>
-        Forgot Password?
+        onClick={ this.handleClickOpen('paper') }
+      >Forgot Password?
       </Fab>
       <Dialog
-        open={this.state.open}
-        onClose={this.handleClose}
-        scroll={this.state.scroll}
+        open={ this.state.open }
+        onClose={ this.handleClose }
+        scroll={ this.state.scroll }
         aria-labelledby="scroll-dialog-title"
         style={{ 
           'z-index': 30, 
@@ -85,35 +77,32 @@ export default class PasswordForgetForm extends Component {
         <DialogTitle>RESET PASSWORD</DialogTitle>
         <LineDivider />
         <DialogContent>
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit={ this.onSubmit }>
             <TextField
               id="outlined-name"
               label="Email"
               margin="normal"
               variant="outlined"
-              value={email}
-              onChange={this.onChange}
-              // type="text"
+              value={ email }
+              onChange={ this.onChange }
               placeholder="Email Address"
               name="email"
             />
-            {error && <p>{error.message}</p>}
+            { error && <p>{ error.message }</p> }
           </form>
         </DialogContent>
         <DialogActions>
           <Button 
-            onClick={this.onSubmit} 
-            disabled={isInvalid} 
+            onClick={ this.onSubmit } 
+            disabled={ isInvalid } 
             type="submit" 
             color="primary"
-          >
-            Send Reset Email
+          >Send Reset Email
           </Button>
           <Button 
-            onClick={this.handleClose} 
+            onClick={ this.handleClose } 
             color="error"
-          >
-            Cancel
+          >Cancel
           </Button>
         </DialogActions>
       </Dialog>

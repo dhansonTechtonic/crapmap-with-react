@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { FirebaseContext } from '../../firebase';
-import {auth} from './../../firebase.js'
+import { auth } from './../../firebase.js'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -14,7 +14,6 @@ import LineDivider from '../addEditPin/LineDivider.js';
 import '../App.css'
 import store from '../../redux/store'
 import { registerUser } from '../../redux/actions/userActions'
-import { pink } from '@material-ui/core/colors';
 
 
 
@@ -36,6 +35,7 @@ const style = {
     float: "left",
     boxShadow: "none", 
   },
+
   "root:hover": {
     color: "red"
   }
@@ -57,37 +57,30 @@ class SignUpForm extends Component {
     this.setState({ open: true, scroll });
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
+  handleClose = () => this.setState({ open: false });
 
-  };
-
-  doCreateUserWithEmailAndPassword = (email, password) =>
-    auth.createUserWithEmailAndPassword(email, password);
+  doCreateUserWithEmailAndPassword = (email, password) => auth.createUserWithEmailAndPassword(email, password);
 
   onSubmit = () => {
     const { email, passwordOne } = this.state;
-      this.doCreateUserWithEmailAndPassword(email, passwordOne)
-      .then(authUser => {
-        var actionObject = {
-          userID: authUser.user.uid,
-          auth: true
-        }
-        store.dispatch(registerUser(actionObject));
-        this.props.sendData(authUser);
 
-        this.setState({ ...INITIAL_STATE });
-      })
-      .catch(error => {
-        this.setState({ error });
-      });
+    this.doCreateUserWithEmailAndPassword(email, passwordOne)
+    .then(authUser => {
+
+      var actionObject = {
+        userID: authUser.user.uid,
+        auth: true
+      }
+
+      store.dispatch(registerUser(actionObject));
+      this.props.sendData(authUser);
+
+      this.setState({ ...INITIAL_STATE });
+    })
+    .catch(error => this.setState({ error }));
   }
 
-  onChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
+  onChange = event => this.setState({ [event.target.name]: event.target.value })
 
 
   render() {
@@ -101,14 +94,14 @@ class SignUpForm extends Component {
       scroll,
     } = this.state;
 
-    const test = () => /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/
+    const invalidEmail = () => /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/
 
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === '' ||
       email === '' ||
       username === '' ||
-      email === test();
+      email === invalidEmail();
     
     const { classes } = this.props;
 
@@ -117,27 +110,27 @@ class SignUpForm extends Component {
         <Fab  
           classes={{ root: classes.root }}
           id="signUp"
-          onClick={this.handleClickOpen('paper')}>
+          onClick={ this.handleClickOpen('paper') }>
           <p>New? Click here to Sign Up</p> 
         </Fab>
         <Dialog
-          open={open}
-          onClose={this.handleClose}
-          scroll={scroll}
+          open={ open }
+          onClose={ this.handleClose }
+          scroll={ scroll }
           aria-labelledby="scroll-dialog-title"
           style={{ 'z-index': 30, 'background-color': 'primary' }}
         >
           <DialogTitle>SIGN UP</DialogTitle>
           <LineDivider />
           <DialogContent>
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={ this.onSubmit }>
               <TextField
                 id="outlined-name"
                 label="Username"
                 margin="normal"
                 variant="outlined"
-                value={username}
-                onChange={this.onChange}
+                value={ username }
+                onChange={ this.onChange }
                 placeholder="Username"
                 name="username"
               />
@@ -146,8 +139,8 @@ class SignUpForm extends Component {
                 label="Email"
                 margin="normal"
                 variant="outlined"
-                value={email}
-                onChange={this.onChange}
+                value={ email }
+                onChange={ this.onChange }
                 placeholder="Email Address"
                 name="email"
               />
@@ -157,8 +150,8 @@ class SignUpForm extends Component {
                 label="Password"
                 margin="normal"
                 variant="outlined"
-                value={passwordOne}
-                onChange={this.onChange}
+                value={ passwordOne }
+                onChange={ this.onChange }
                 placeholder="Enter Password"
                 name="passwordOne"
               />
@@ -168,15 +161,15 @@ class SignUpForm extends Component {
                 label="Confirm Password"
                 margin="normal"
                 variant="outlined"
-                value={passwordTwo}
-                onChange={this.onChange}
+                value={ passwordTwo }
+                onChange={ this.onChange }
                 placeholder="Confirm Password"
                 name="passwordTwo"
               />
-              {error && <p>{error.message}</p>}
+              { error && <p>{ error.message }</p> }
               <DialogActions >
-                <Button onClick={this.onSubmit} disabled={isInvalid} type="submit" color="primary">Sign-Up</Button>
-                <Button onClick={this.handleClose} color="error">Cancel</Button>
+                <Button onClick={ this.onSubmit } disabled={ isInvalid } type="submit" color="primary">Sign-Up</Button>
+                <Button onClick={ this.handleClose } color="error">Cancel</Button>
               </DialogActions>
             </form>
           </DialogContent>

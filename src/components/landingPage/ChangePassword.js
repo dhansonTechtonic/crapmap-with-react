@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { auth } from './../../firebase.js'
+
 import { withStyles } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
