@@ -130,7 +130,7 @@ export class MapContainer extends Component {
 
 
 </div> 
-    );
+    )
   }
 }
 
