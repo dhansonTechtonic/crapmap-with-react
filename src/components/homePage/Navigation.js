@@ -50,7 +50,7 @@ export default class Navigation extends Component {
     
     return (
     <div className='home-page-body' >
-      <img alt='crapmap logo' src={logo} className="home-page-logo"/>
+      <NavLink exact to='/home'><img alt='crapmap logo' src={logo} className="home-page-logo"/></NavLink>
       <nav className="home-page-navbar">
         <ul className="main-nav-list" id="js-menu">
             <MyListingsModal />
