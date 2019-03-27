@@ -64,6 +64,10 @@ class MyListingsPost extends Component{
     return false
   }
 
+  handleDelete(e){
+
+    e.target.parentNode.parentNode.parentNode.innerHTML = '';
+  }
 
   async componentDidMount(){
     let userID = JSON.parse(localStorage.getItem('userID'));
@@ -98,8 +102,9 @@ class MyListingsPost extends Component{
           </CardActionArea>
           <CardActions>
             <EditPinModal fireUpdatePins={this.props.fireUpdatePins} incomeVal={pin} />
-            <Button color="error" style={{ left: 230, display: 'block' }} onClick={() => {
+            <Button color="error" style={{ left: 230, display: 'block' }} onClick={(e) => {
             store.dispatch(deletePin(pin._ref._path.segments[1]))
+            this.handleDelete(e);
           }}>Delete</Button>
           </CardActions>
         </Card> 

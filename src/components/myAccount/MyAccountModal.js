@@ -74,7 +74,7 @@ class MyAccountModal extends Component{
 
         return (
             <div>
-                <Tooltip title="View Your Account">
+                <Tooltip title="View My Account">
                     <li className="nav-links" onClick={this.handleClickOpen('paper')}>
                         MY ACCOUNT
                     </li>
