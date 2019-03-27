@@ -105,9 +105,6 @@ class ViewPinModal extends Component {
           <LineDivider />
           
           <CardActions>
-            <Button size="medium" color="primary" onClick={this.props.handleDibsClick} >
-              DIBS
-            </Button>
             <Button size="medium" color="primary" onClick={this.props.onClick}>
               CLOSE
             </Button>
