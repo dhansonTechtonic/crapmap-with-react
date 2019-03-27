@@ -82,7 +82,6 @@ export class MapContainer extends Component {
   }
 
   async handleImageURL(imgurl) {
-    
     let storage = firebase.storage();
     let storageRef = storage.ref(imgurl);
     let url = await storageRef.getDownloadURL().then(function(url) {
@@ -118,7 +117,7 @@ export class MapContainer extends Component {
 
   <Marker
     key={pin._ref._path.segments[1]}
-    active={this.state.dibState}
+    // active={this.state.dibState}
     name={pin._fieldsProto.title.stringValue}
     icon={this.findColor(pin._fieldsProto.category.stringValue)}
     category={pin._fieldsProto.category.stringValue}
