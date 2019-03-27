@@ -133,7 +133,7 @@ export class MapContainer extends Component {
 
 </Map>
 
-<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} img={this.state.img} onClick={this.toggleViewPinModalClose} handleDibsClick={this.handleDibState} /> 
+<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} img={this.state.img} onClick={this.toggleViewPinModalClose} /> 
 
 </div> 
     )
