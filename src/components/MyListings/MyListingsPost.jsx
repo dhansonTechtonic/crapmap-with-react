@@ -87,7 +87,7 @@ class MyListingsPost extends Component{
               height="140"
             />
             <CardContent>
-              <img src={stateUrl} height="140" width="345"></img>
+              <img src={stateUrl} width="345"></img>
               <Typography gutterBottom variant="h5" component="h2">
                 {pin._fieldsProto.title.stringValue}
             </Typography>
