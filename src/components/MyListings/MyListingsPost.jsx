@@ -84,10 +84,10 @@ class MyListingsPost extends Component{
             <CardMedia
               className={classes.media}
               title={'nothing'}
-              height="140"
+              // height="14em"
             />
             <CardContent>
-              <img src={stateUrl} height="140" width="345"></img>
+              <img src={stateUrl} height="100%" width="100%"></img>
               <Typography gutterBottom variant="h5" component="h2">
                 {pin._fieldsProto.title.stringValue}
             </Typography>

@@ -21,7 +21,15 @@ export default class LoginComponent extends Component {
     this.login = this.login.bind(this); 
   }
 
-  
+  sendDisclaimerEmail = () => {
+    const user = auth.currentUser();
+    user.sendEmailVerification()
+      .then(res => {
+        console.log(res);
+        return res
+      })
+      .catch(err => console.log('you done goofed' + err))
+  };
 
   login = () => {
     auth.signInWithPopup(this.props.provider) 
@@ -54,6 +62,7 @@ export default class LoginComponent extends Component {
           email: user.email,
           uid: user.uid 
         });
+        this.sendDisclaimerEmail();
       } 
     });
   }

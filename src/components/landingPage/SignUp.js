@@ -53,6 +53,17 @@ class SignUpForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  sendDisclaimerEmail = () => {
+    const user = auth.currentUser();
+    user.sendEmailVerification()
+      .then(res => {
+        console.log(res);
+        return res
+      })
+      .catch(err => console.log('you done goofed' + err))
+  };
+
+
   handleClickOpen = scroll => () => {
     this.setState({ open: true, scroll });
   };
@@ -77,6 +88,7 @@ class SignUpForm extends Component {
 
       this.setState({ ...INITIAL_STATE });
     })
+    .then(() => this.sendDisclaimerEmail())
     .catch(error => this.setState({ error }));
   }
 
