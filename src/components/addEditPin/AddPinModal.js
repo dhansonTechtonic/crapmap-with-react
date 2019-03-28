@@ -31,7 +31,7 @@ class AddPinModal extends Component {
             lng:"-105.21724804969578",
             size:"1",
             title:"",
-            userID:"M8S8oXSgSdWzOBlSKM09xnUzsRH2",
+            userID:"",
             locationPlaceHolder: "Where that crap at?",
             titlePlaceHolder:"Name your crap",
             titleLabel:"Title",
@@ -57,7 +57,7 @@ class AddPinModal extends Component {
             lng:"-105.21724804969578",
             size:"1",
             title:"",
-            userID:"M8S8oXSgSdWzOBlSKM09xnUzsRH2",
+            userID:"",
             locationPlaceHolder: "Where that crap at?",
             titlePlaceHolder:"Name your crap",
             titleLabel:"Title",
@@ -82,7 +82,6 @@ class AddPinModal extends Component {
                 let storage = firebase.storage();
                 let firebaseImageUrl = storage.ref(`pinsImages/${new Date().getTime()}`).put(this.state.dataURL).then((snapshot) => {
                     this.setState({fireBaseStorageFullUrl: snapshot.metadata.fullPath });
-                    console.log(snapshot.metadata);
                     return(snapshot.metadata.fullPath);
                 })
                 firebaseImageUrl ? resolve(firebaseImageUrl) : reject(false)
@@ -90,7 +89,7 @@ class AddPinModal extends Component {
         }
      }
 
-    _changeCategory(category) {
+    _changeCategory(category){
         switch (category) {
             case "Auto Parts":
                 this.setState({ category: 'Auto Parts' }, () => { console.log(this.state.category) });
@@ -128,9 +127,7 @@ class AddPinModal extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
         if(this._formValid()){
-
             let userID;
-
             if (store.getState().user.userID){
                 userID = store.getState().user.userID;
             } else {
@@ -159,12 +156,10 @@ class AddPinModal extends Component {
     _getCurrentLocation = async() =>{
         if(navigator.geolocation){
          navigator.geolocation.getCurrentPosition((position) => {
-
             let coordObject = {
                 lat:  position.coords.latitude.toString(),
                 lng: position.coords.longitude.toString()
             }
-
             fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/map/reverse-geo-code',{
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
@@ -172,11 +167,8 @@ class AddPinModal extends Component {
             })
             .then(response => response.json())
             .then( data =>{
-                console.log(data);
                 if(data.status === "OK"){
                     let address = data.results[0].formatted_address;
-                    console.log(address);
-
                     this.setState({
                         location: address,
                         lat:  position.coords.latitude,
@@ -291,7 +283,6 @@ class AddPinModal extends Component {
                         </Tooltip>
                     </DialogActions>
                 </Dialog>
-
             </div>
         )
     }
