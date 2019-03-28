@@ -54,6 +54,10 @@ export default class CommentBoard extends Component {
                 userID: JSON.parse(localStorage.getItem('userID'))
             } 
             postComment(commentObject);
+
+            this.setState({
+                comment: ''
+            });
         } else {
             console.log('in else')
             this.setState({
