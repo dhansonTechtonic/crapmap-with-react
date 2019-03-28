@@ -25,7 +25,7 @@ class EditPinModal extends Component {
 
             category: this.props.incomeVal._fieldsProto.category.stringValue,
             img: this.props.incomeVal._fieldsProto.img.stringValue,
-            address: this.props.incomeVal._fieldsProto.location.mapValue.fields.address.stringValue,
+            location: this.props.incomeVal._fieldsProto.location.mapValue.fields.address.stringValue,
             lat: this.props.incomeVal._fieldsProto.location.mapValue.fields.lat.doubleValue,
             lng: this.props.incomeVal._fieldsProto.location.mapValue.fields.lng.doubleValue,
             size: this.props.incomeVal._fieldsProto.size.stringValue,
