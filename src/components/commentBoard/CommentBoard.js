@@ -25,6 +25,9 @@ function postComment(input) {
 }
 
 export default class CommentBoard extends Component {
+    constructor(props){
+        super(props)
+    }
     state = {
         comment: '',
         comments: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
@@ -67,10 +70,14 @@ export default class CommentBoard extends Component {
     <Card>
         <CardContent style={{ padding: 10, height: 392 }}>
             <Paper style={{'overflow-y': 'scroll', height: 390}}>
-                {this.state.comments.map((comment) => {
+                {this.props.comments.map((comment) => {
                     return (
-                        <Typography gutterBottom variant="h5" component="p">
-                            COMMENT
+                        // <Typography gutterBottom variant="h5" component="p">
+                        //     {this.props.comment.author}
+                        // </Typography>
+                        <Typography component="p">
+                        Comment here. 
+                         {/* {this.props.comment} */}
                         </Typography>
                     )})}
              </Paper>

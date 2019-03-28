@@ -20,7 +20,7 @@ export class MapContainer extends Component {
       pins: [],
       pinData: {}, 
       img: null,
-
+      pinCommentsState: null
       }
       this.toggleViewPinModal = this.toggleViewPinModal.bind(this)
       this.toggleViewPinModalClose = this.toggleViewPinModalClose.bind(this)
@@ -28,12 +28,15 @@ export class MapContainer extends Component {
 
   async toggleViewPinModal(e) {
     let targetPin = e;
-    console.log(e)
+    let pinID = e.pinID
     let imgURL = await this.handleImageURL(targetPin.img)
+    let pinComments = await this.getComments(pinID)
+
     this.setState({
       viewCardIsOpen: !this.state.viewCardIsOpen,
       pinData: targetPin,
       img: imgURL,
+      pinCommentsState: pinComments
     });
   }
 
@@ -94,6 +97,17 @@ export class MapContainer extends Component {
     return url
   }
 
+  async getComments(pinID){
+  let commentsData = fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/comments/get/' + pinID)
+  .then((response) => response.json())
+  .then(function(response) {
+    return response
+  }).catch(function(error){
+    console.log(error)
+  })
+  return commentsData
+  }
+
  render() { 
   if (!this.props.loaded) {
     return (<div><h1>Loading...</h1></div>)
@@ -118,6 +132,7 @@ export class MapContainer extends Component {
 
   <Marker
     key={pin._ref._path.segments[1]}
+    pinID={pin._ref._path.segments[1]}
     // active={this.state.dibState}
     pinID = {
       pin._ref._path.segments[1]
@@ -137,7 +152,7 @@ export class MapContainer extends Component {
 
 </Map>
 
-<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} img={this.state.img} onClick={this.toggleViewPinModalClose} /> 
+<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} img={this.state.img} onClick={this.toggleViewPinModalClose} comments={this.state.pinCommentsState}  /> 
 
 </div> 
     )
