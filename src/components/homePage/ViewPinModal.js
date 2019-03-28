@@ -66,6 +66,11 @@ class ViewPinModal extends Component {
   }
 
   render() {
+    // console.log("inside comments modal", this.props.comments._fieldsProto)
+    console.log(this.props.comments, "inside constructor")
+
+
+
     if (!this.props.show) {
       return null;
     }
@@ -81,7 +86,7 @@ class ViewPinModal extends Component {
 
             <DialogContent>
             <Card style={{float: 'right', backgroundColor: 'grey', marginLeft: 20}}>
-              <CommentBoard />
+              <CommentBoard comments={this.props.comments}/>
             </Card>        
             <Card className={styles.card}>
               <CardMedia 
