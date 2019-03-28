@@ -6,6 +6,7 @@ const cors = require("cors")({origin: true});
 const express = require('express');
 //const cookieParser = require('cookie-parser');
 
+const CommentController = require("./controllers/CommentController")
 const PinController = require('./controllers/PinController');
 const UserController = require('./controllers/UserController');
 const MapController = require('./controllers/MapController')
@@ -63,6 +64,7 @@ app.use(cors);
 app.use('/pins', PinController);
 app.use('/user', UserController);
 app.use('/map', MapController);
+app.use('/comments', CommentController)
 
  const api = functions.https.onRequest((request, response) => {
     if (!request.path) {

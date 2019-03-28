@@ -12,16 +12,6 @@
         case UPDATE_PIN: {
                 break;
             }
-        case GET_BY_CATEGORY_FULFILLED: {
-                return {
-                    pins: payload
-                };
-        }
-        case GET_PINS_FULFILLED: {
-                return {
-                    pins: payload
-                }
-            }
         case DELETE_PIN: {
                 break;
              }
@@ -29,6 +19,16 @@
                 return {
                     pins: []
                 }
+        }
+        case GET_BY_CATEGORY_FULFILLED: {
+            return {
+                pins: payload
+            };
+        }
+        case GET_PINS_FULFILLED: {
+            return {
+                pins: payload
+            }
         }
         default: return state;
      }
