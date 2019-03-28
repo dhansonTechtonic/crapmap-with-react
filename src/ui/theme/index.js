@@ -6,7 +6,7 @@ const theme =
 {
     "breakpoints": {
         "keys": ["xs", "sm", "md", "lg", "xl"],
-        "values": { "xs": 0, "lg": 1280, "sm": 600, "xl": 1920, "md": 960 }
+        "values": { "xs": 0, "lg": 1280, "sm": 1000, "xl": 1920, "md": 960 }
     },
     "mixins": {
         "toolbar": {

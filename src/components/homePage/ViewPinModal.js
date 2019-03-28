@@ -12,8 +12,12 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import CommentBoard from '../commentBoard/CommentBoard';
 
 const styles = {
+    paper: {
+      maxWidth: '1000px'
+    },
     card: {
       maxWidth: 375,
     },
@@ -72,9 +76,13 @@ class ViewPinModal extends Component {
           <Dialog
           open={this.props.show}
           aria-labelledby="scroll-dialog-title"
-          style={{ 'z-index': 30, 'background-color': 'primary' }}>
+          style={{ 'z-index': 30, 'background-color': 'primary'}}
+          className={styles.paper}>
 
-            <DialogContent>               
+            <DialogContent>
+            <Card style={{float: 'right', backgroundColor: 'grey', marginLeft: 20}}>
+              <CommentBoard />
+            </Card>        
             <Card className={styles.card}>
               <CardMedia 
               component="img"
@@ -82,12 +90,11 @@ class ViewPinModal extends Component {
               className={styles.media}
               style={{ 'z-index': 30, 'background-color': 'primary' }}
               height="300"
+              width="100%"
               image={this.props.img}
               title={this.props.data.name}
             />
-
             <CardContent>
-
               <Typography gutterBottom variant="h5" component="h1">
                 {this.props.data.name}
               </Typography>
