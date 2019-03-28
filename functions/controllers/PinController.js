@@ -79,11 +79,9 @@ router.post('/new',jsonParser, (request,response) =>{
     .then(() => response.send('success'))
     .catch(()=> console.log('error'))
     return false
-    });
+}); 
 
-    
 router.post('/update/:pinID', (request,response) =>{
-
     let pinObject ={
         category: request.body.category,
         location: {
