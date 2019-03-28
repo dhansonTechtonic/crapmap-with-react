@@ -28,11 +28,12 @@ export class MapContainer extends Component {
 
   async toggleViewPinModal(e) {
     let targetPin = e;
+    console.log(e)
     let imgURL = await this.handleImageURL(targetPin.img)
     this.setState({
       viewCardIsOpen: !this.state.viewCardIsOpen,
       pinData: targetPin,
-      img: imgURL
+      img: imgURL,
     });
   }
 
@@ -118,6 +119,9 @@ export class MapContainer extends Component {
   <Marker
     key={pin._ref._path.segments[1]}
     // active={this.state.dibState}
+    pinID = {
+      pin._ref._path.segments[1]
+    }
     name={pin._fieldsProto.title.stringValue}
     icon={this.findColor(pin._fieldsProto.category.stringValue)}
     category={pin._fieldsProto.category.stringValue}
@@ -125,7 +129,7 @@ export class MapContainer extends Component {
     img={pin._fieldsProto.img.stringValue}
     position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
                 lng:pin._fieldsProto.location.mapValue.fields.lng.doubleValue }}
-    onClick={this.toggleViewPinModal}
+    onClick={ this.toggleViewPinModal }
   />
   )}
 )
