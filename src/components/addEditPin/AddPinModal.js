@@ -23,7 +23,6 @@ class AddPinModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
             category: "Funiture",
             img:"pinsImages/1553121301840",
             address:"",
