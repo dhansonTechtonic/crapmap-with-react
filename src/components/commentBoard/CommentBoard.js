@@ -6,6 +6,24 @@ import classNames from 'classnames';
 import Typography from '@material-ui/core/Typography'
 import { Card, CardContent, CardActions, Paper, CardHeader } from '@material-ui/core';
 
+import Sentiment from 'sentiment';
+
+import store from '../../redux/store'
+
+function postComment(input) {
+
+    console.log(JSON.stringify(input));
+    fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/comments/comment', {
+        method: 'POST',
+        body: JSON.stringify(input),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(console.log('then'))
+    .catch(console.log('catch'))
+}
+
 export default class CommentBoard extends Component {
     state = {
         comment: '',
@@ -17,6 +35,32 @@ export default class CommentBoard extends Component {
             [name]: event.target.value,
         });
     };
+
+    handleSubmit = () => {
+        let commentString = this.state.comment;
+        let commentSentiment = new Sentiment();
+        let commentRating = commentSentiment.analyze(commentString)
+
+        if(commentRating.score >= -5) {
+            console.log('in here')
+            console.log(commentRating)
+            let commentObject = {
+                author: 'PLACEHOLDER',
+                body: commentString,
+                pinID: this.props.pinData.data.pinID,
+                userID: JSON.parse(localStorage.getItem('userID'))
+            } 
+            postComment(commentObject);
+        } else {
+            console.log('in else')
+            this.setState({
+                comment: 'comment too negative :('
+            })
+        }
+
+        console.dir(commentRating);
+    }
+
   render() {
     const { classes } = this.props;
     return (
@@ -42,7 +86,7 @@ export default class CommentBoard extends Component {
                 margin="normal"
                 variant="outlined"
                 placeholder="Add a comment"/>
-            <Button style={{margin: 6, top: '28px', color: 'primary'}}>SUBMIT</Button>
+            <Button onClick={this.handleSubmit} style={{margin: 6, top: '28px', color: 'primary'}}>SUBMIT</Button>
             </form>
         </CardActions>
     </Card>
