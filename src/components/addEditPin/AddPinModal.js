@@ -91,19 +91,19 @@ class AddPinModal extends Component {
     _changeCategory(category){
         switch (category) {
             case "Auto Parts":
-                this.setState({ category: 'Auto Parts' }, () => { console.log(this.state.category) });
+                this.setState({ category: 'Auto Parts' });
                 break;
             case "Sports":
-                this.setState({ category: "Sports" }, () => { console.log(this.state.category) });
+                this.setState({ category: "Sports" });
                 break;
             case "Gadgets":
-                this.setState({ category: "Gadgets" }, () => { console.log(this.state.category) });
+                this.setState({ category: "Gadgets" });
                 break;
             case "Misc":
-                this.setState({ category: "Misc" }, () => { console.log(this.state.category) });
+                this.setState({ category: "Misc" });
                 break; 
             default:
-                this.setState({ category: "Furniture" }, () => { console.log(this.state.category) });
+                this.setState({ category: "Furniture" });
         }
     }
 

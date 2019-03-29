@@ -1,21 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
 import MyListingsPost from './MyListingsPost'
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions'
 import LineDivider from '../addEditPin/LineDivider'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Button from '@material-ui/core/Button'
-import ListItemText from '@material-ui/core/ListItemText'
-import {connect} from 'react-redux';
-import store from '../../redux/store';
-
 import { IconButton, Tooltip } from '@material-ui/core';
 
-import {deletePin} from '../../redux/actions/pinActions'
+
 
 async function getPinsByUser(userID) {
   var userPins = await fetch(' https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/pins/get/' + String(userID), {
@@ -27,41 +21,41 @@ async function getPinsByUser(userID) {
     .catch((err) => err)
     return userPins;
 }
-
-
-
 class MyListingsModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
       scroll: 'paper',
-      userPins: []
+      userPins: [],
+      imageLoaded: false
     }
   }
-
-   
 
   componentDidUpdate(prevProps) { 
     // reduces pins promise to just pin array on update
     if (this.props.pins !== prevProps.pins) {
       this.props.pins.then((val) => { this.setState({ pins: val.pins }) })
     }
-  
   }
 
    handleClickOpen = scroll => async () => {
     this.setState({ open: true, scroll });
 
      let userID = JSON.parse(localStorage.getItem('userID'))
-     this.setState({ userPins: await getPinsByUser(userID) })
-
-    console.log(this.state);    
+     this.setState({ 
+       userPins: await getPinsByUser(userID), 
+       imageLoaded: true
+      })   
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ 
+      open: false,
+      imageLoaded: false
+     });
   };
+  
 
   render() {
     return (
@@ -82,7 +76,7 @@ class MyListingsModal extends Component {
             </DialogTitle>
             <LineDivider />
             <DialogContent>
-              <MyListingsPost fireUpdatePins={this.handleClickOpen().bind(this)} {...this.state}/>
+              <MyListingsPost imageLoaded={this.state.imageLoaded} fireUpdatePins={this.handleClickOpen().bind(this)} {...this.state}/>
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="error">CLOSE</Button>
@@ -98,14 +92,6 @@ MyListingsModal.propTypes = {
   show: PropTypes.bool,
   children: PropTypes.node,
 }
-        
-// function mapStateToProps(reduxState) {
-//   return {
-//     user: reduxState.user,
-//     pins: reduxState.pins
-//   }
-// }
 
-// export default connect(mapStateToProps)(MyListingsModal);
 export default MyListingsModal
 
