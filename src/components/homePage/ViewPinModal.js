@@ -36,28 +36,28 @@ class ViewPinModal extends Component {
       case "1" :
        itemSizeRender =   (
         <Typography component="p">
-          SIZE : SMALL <FontAwesomeIcon icon='box' />
+          Size : Small
         </Typography>
         )
         break;
       case "2" : 
       itemSizeRender =   (
         <Typography component="p">
-          SIZE : MEDIUM <FontAwesomeIcon icon='box' />
+          Size : Medium
         </Typography>
         )
         break;
       case "3" :
       itemSizeRender =   (
         <Typography component="p">
-          SIZE : LARGE <FontAwesomeIcon icon='box' />
+          Size : Large
         </Typography>
         )
         break;
       default :
       itemSizeRender = (
         <Typography component="p">
-          SIZE : MEDIUM <FontAwesomeIcon icon='box' />
+          Size : Medium
         </Typography>
         )
         break;
@@ -102,11 +102,15 @@ class ViewPinModal extends Component {
               </Typography>
     
               <Typography component="p">
-                CATEGORY : {this.props.data.category}
+                Category: {this.props.data.category}
               </Typography>
 
               <Typography component="p">
                 {this.handleItemSize(this.props.data.itemSize)}
+              </Typography>
+
+              <Typography component="p">
+                Address: {this.props.address}
               </Typography>
 
             </CardContent>

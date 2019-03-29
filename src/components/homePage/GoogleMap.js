@@ -20,24 +20,27 @@ export class MapContainer extends Component {
       pins: [],
       pinData: {}, 
       img: null,
-      pinCommentsState: null
+      pinCommentsState: null,
+      pinAddress: null
       }
       this.toggleViewPinModal = this.toggleViewPinModal.bind(this)
       this.toggleViewPinModalClose = this.toggleViewPinModalClose.bind(this)
     };
 
   async toggleViewPinModal(e) {
-    console.log(e)
+    console.log(e.position)
     let targetPin = e;
     let pinID = e.pinID
     let imgURL = await this.handleImageURL(targetPin.img)
     let pinComments = await this.getComments(pinID)
+    let pinAddress = await this.getAddress(e.position)
 
     this.setState({
       viewCardIsOpen: !this.state.viewCardIsOpen,
       pinData: targetPin,
       img: imgURL,
-      pinCommentsState: pinComments
+      pinCommentsState: pinComments,
+      pinAddress: pinAddress
     });
   }
 
@@ -109,6 +112,25 @@ export class MapContainer extends Component {
   return commentsData
   }
 
+  async getAddress(pinLocation){
+    console.log("inside get", pinLocation)
+    let addressObj = {lat: pinLocation.lat, lng: pinLocation.lng}
+    let pinAddress = await fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/map/reverse-geo-code', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(addressObj),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === "OK") {
+          let address = data.results[0].formatted_address;
+          return address
+        }
+      }).catch(console.log('An Error has occured'));
+
+      return pinAddress
+  }
+
  render() { 
   if (!this.props.loaded) {
     return (<div><h1>Loading...</h1></div>)
@@ -150,7 +172,7 @@ export class MapContainer extends Component {
 
 </Map>
 
-<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} img={this.state.img} onClick={this.toggleViewPinModalClose} comments={this.state.pinCommentsState}  /> 
+<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} img={this.state.img} onClick={this.toggleViewPinModalClose} comments={this.state.pinCommentsState} address={this.state.pinAddress} /> 
 
 </div> 
     )
