@@ -40,28 +40,27 @@ export default class CommentBoard extends Component {
     };
 
     handleSubmit = () => {
+        
         let commentString = this.state.comment;
         let commentSentiment = new Sentiment();
         let commentRating = commentSentiment.analyze(commentString)
 
+        
         if(commentRating.score >= -5) {
-            console.log('in here')
-            console.log(commentRating)
             let commentObject = {
                 author: 'PLACEHOLDER',
                 body: commentString,
-                pinID: this.props.pinData.data.pinID,
+                pinID: this.props.pinID,
                 userID: JSON.parse(localStorage.getItem('userID'))
             } 
             postComment(commentObject);
-
             this.setState({
                 comment: ''
             });
         } else {
             console.log('in else')
             this.setState({
-                comment: 'comment too negative :('
+                comment: 'too negative :('
             })
         }
 
@@ -75,14 +74,18 @@ export default class CommentBoard extends Component {
         <CardContent style={{ padding: 10, height: 392 }}>
             <Paper style={{'overflow-y': 'scroll', height: 390}}>
                 {this.props.comments.map((comment) => {
+                    let commentData = comment._fieldsProto;
+
                     return (
-                        // <Typography gutterBottom variant="h5" component="p">
-                        //     {this.props.comment.author}
-                        // </Typography>
-                        <Typography component="p">
-                        Comment here. 
-                         {/* {this.props.comment} */}
+                        <div>
+                        <Typography gutterBottom variant="h5" component="p">
+                            {commentData.author.stringValue}
                         </Typography>
+                        <Typography component="p">
+                            {commentData.body.stringValue}
+                        </Typography>
+                        <hr />
+                        </div>
                     )})}
              </Paper>
         </CardContent>

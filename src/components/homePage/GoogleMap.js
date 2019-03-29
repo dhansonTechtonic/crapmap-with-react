@@ -27,6 +27,7 @@ export class MapContainer extends Component {
     };
 
   async toggleViewPinModal(e) {
+    console.log(e)
     let targetPin = e;
     let pinID = e.pinID
     let imgURL = await this.handleImageURL(targetPin.img)
@@ -132,6 +133,7 @@ export class MapContainer extends Component {
 
   <Marker
     key={pin._ref._path.segments[1]}
+
     pinID={pin._ref._path.segments[1]}
     name={pin._fieldsProto.title.stringValue}
     icon={this.findColor(pin._fieldsProto.category.stringValue)}
