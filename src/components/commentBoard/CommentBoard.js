@@ -34,7 +34,9 @@ export default class CommentBoard extends Component {
     state = {
         commentAuthor: '',
         comment: '',
-        comments: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        comments: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        commentLabel: 'Add Comment',
+        error: false
     }
 
     componentDidMount = async () => {
@@ -52,6 +54,7 @@ export default class CommentBoard extends Component {
     handleChange = name => event => {
         this.setState({
             [name]: event.target.value,
+            error: false
         });
     };
 
@@ -61,29 +64,35 @@ export default class CommentBoard extends Component {
         let commentSentiment = new Sentiment();
         let commentRating = commentSentiment.analyze(commentString)
 
-        
-
-        if(commentRating.score >= -5) {
-            let commentObject = {
-                author: this.state.commentAuthor,
-                body: commentString,
-                pinID: this.props.pinID,
-                userID: JSON.parse(localStorage.getItem('userID'))
-            } 
-            postComment(commentObject);
+        if(commentString == ''){
             this.setState({
-                comment: ''
-            });
-
-            this.props.comments.push(commentObject);
-        } else {
-            console.log('in else')
-            this.setState({
-                comment: 'too negative :('
+                commentLabel: 'Enter Comment',
+                error: true
             })
+        }else{
+            if(commentRating.score >= -5) {
+                let commentObject = {
+                    author: this.state.commentAuthor,
+                    body: commentString,
+                    pinID: this.props.pinID,
+                    userID: JSON.parse(localStorage.getItem('userID'))
+                } 
+                postComment(commentObject);
+                this.setState({
+                    comment: ''
+                });
+    
+                this.props.comments.push(commentObject);
+            } else {
+                console.log('in else')
+                this.setState({
+                    comment: 'too negative :('
+                })
+            }
+    
+            console.dir(commentRating);
         }
 
-        console.dir(commentRating);
     }
 
   render() {
@@ -125,13 +134,14 @@ export default class CommentBoard extends Component {
             <form>
             <TextField 
                 id="outlined-name"
-                label="Comment"
+                label={this.state.commentLabel}
                 // className={classes.textField}
                 value={this.state.comment}
                 onChange={this.handleChange('comment')}
                 margin="normal"
                 variant="outlined"
-                placeholder="Add a comment"/>
+                placeholder="Add a comment"
+                error={this.state.error}/>
             <Button onClick={this.handleSubmit} style={{margin: 6, top: '28px', color: 'primary'}}>SUBMIT</Button>
             </form>
         </CardActions>
