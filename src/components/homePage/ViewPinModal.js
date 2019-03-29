@@ -81,10 +81,11 @@ class ViewPinModal extends Component {
           className={styles.paper}>
 
             <DialogContent>
+           
             <Card style={{float: 'right', backgroundColor: 'grey', marginLeft: 20}}>
               <CommentBoard pinID={this.props.data.pinID} comments={this.props.comments}/>
+            </Card>  
 
-            </Card>        
             <Card className={styles.card}>
               <CardMedia 
               component="img"
