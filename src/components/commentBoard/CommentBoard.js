@@ -6,6 +6,8 @@ import classNames from 'classnames';
 import Typography from '@material-ui/core/Typography'
 import { Card, CardContent, CardActions, Paper, CardHeader, Avatar } from '@material-ui/core';
 
+import {getFirebaseUser} from '../../firebase.js'
+
 import Sentiment from 'sentiment';
 
 import store from '../../redux/store'
@@ -30,8 +32,21 @@ export default class CommentBoard extends Component {
         super(props)
     }
     state = {
+        commentAuthor: '',
         comment: '',
         comments: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    }
+
+    componentDidMount = async () => {
+        let currentUser = await getFirebaseUser();
+
+        if (!currentUser.displayName) {
+            this.setState({commentAuthor: currentUser.email.match(/^([^@]*)@/)[1]})
+        } else {
+            this.setState({commentAuthor: currentUser.displayName})
+        }
+
+        console.log(this.state)
     }
 
     handleChange = name => event => {
@@ -40,16 +55,17 @@ export default class CommentBoard extends Component {
         });
     };
 
-    handleSubmit = () => {
+    handleSubmit = async () => {
         
         let commentString = this.state.comment;
         let commentSentiment = new Sentiment();
         let commentRating = commentSentiment.analyze(commentString)
 
         
+
         if(commentRating.score >= -5) {
             let commentObject = {
-                author: 'PLACEHOLDER',
+                author: this.state.commentAuthor,
                 body: commentString,
                 pinID: this.props.pinID,
                 userID: JSON.parse(localStorage.getItem('userID'))
@@ -58,6 +74,8 @@ export default class CommentBoard extends Component {
             this.setState({
                 comment: ''
             });
+
+            this.props.comments.push(commentObject);
         } else {
             console.log('in else')
             this.setState({
@@ -73,24 +91,34 @@ export default class CommentBoard extends Component {
     return (
     <Card>
         <CardContent style={{ padding: 10, height: 392 }}>
+
                 <Paper style={{ 'overflow-y': 'scroll', height: 390, backgroundColor: 'rgb(51, 50, 54)', padding: 10}}>
                 {this.props.comments.map((comment) => {
-                    let commentData = comment._fieldsProto;
+                    let commentData;
 
+                    if (comment._fieldsProto) {
+                        commentData =  comment._fieldsProto;
+                    } else {
+                        commentData = comment;
+                    };
+
+                 
                     return (
                         <div style={{
                             borderColor: 'rgba(46, 45, 49, 0.5)', borderStyle: 'solid', borderWidth: 2, borderRadius: 4, margin: '4px 0px', padding: 4, boxShadow: "0px 1px 3px 0px rgba(0, 0, 0, 0.2)"}}>
                             <div>
                                 <Typography gutterBottom variant="h5" component="p" style={{fontSize: 15, fontWeight: 'bold', }}>
-                                    {commentData.author.stringValue}
+                                    {commentData.author.stringValue || commentData.author}
                                 </Typography>
                             </div>
                         <Typography component="p" style={{marginLeft: 4}}>
-                            {commentData.body.stringValue}
+                            {commentData.body.stringValue || commentData.body}
+
                         </Typography>
                         <LineDivider />
                         </div>
-                    )})}
+                    )}
+                )}
              </Paper>
         </CardContent>
         <CardActions>
