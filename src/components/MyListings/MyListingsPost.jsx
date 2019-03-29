@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import image from '../assets/oldcouch.jpg'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -16,12 +15,7 @@ import firebase from './../../firebase.js';
 import {deletePin} from '../../redux/actions/pinActions'
 
 const styles = {
-  // card: {
-  //   maxWidth: 345,
-  // },
-  // media: {
-  //   height: 140,
-  // },
+
 };
 
 class MyListingsPost extends Component{
@@ -65,7 +59,6 @@ class MyListingsPost extends Component{
   }
 
   handleDelete(e){
-
     e.target.parentNode.parentNode.parentNode.innerHTML = '';
   }
 
@@ -75,10 +68,24 @@ class MyListingsPost extends Component{
     this._getImgURL();
    }
 
-  render(){ 
+  async componentDidUpdate(prevProps,prevState){
+    if (this.state.imageLoaded !== prevState.imageLoaded) {
+      let userID = JSON.parse(localStorage.getItem('userID'));
+      this.setState({
+        userPins : await this._getPinsByUser(userID),
+      });
+      this._getImgURL();
+    }
+  }
 
+  resetImageLoaded(){
+    this.setState({
+      imageLoaded: false
+    })
+  }
+
+  render(){ 
     const { classes } = this.props;
-   
     return (
     ( !this.state.imageLoaded ? <div> Loading </div> :
       this.props.userPins.map((pin) =>{ 
@@ -101,7 +108,7 @@ class MyListingsPost extends Component{
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <EditPinModal fireUpdatePins={this.props.fireUpdatePins} incomeVal={pin} />
+            <EditPinModal onClick = {this.resetImageLoaded.bind(this)} fireUpdatePins={this.props.fireUpdatePins} incomeVal={pin} />
             <Button color="error" style={{ left: 230, display: 'block' }} onClick={(e) => {
             store.dispatch(deletePin(pin._ref._path.segments[1]))
             this.handleDelete(e);
