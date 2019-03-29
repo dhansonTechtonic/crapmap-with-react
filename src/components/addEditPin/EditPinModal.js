@@ -47,9 +47,7 @@ class EditPinModal extends Component {
     };
 
     handleClose = () => {
-        this.setState({ 
-            open: false, 
-        });
+       this.props.onClick();
     };
 
     _handleImg(img){
@@ -74,19 +72,19 @@ class EditPinModal extends Component {
     _changeCategory(category) {
         switch (category) {
             case "Auto Parts":
-                this.setState({ category: 'Auto Parts' }, () => { console.log(this.state.category) });
+                this.setState({ category: 'Auto Parts' });
                 break;
             case "Sports":
-                this.setState({ category: "Sports" }, () => { console.log(this.state.category) });
+                this.setState({ category: "Sports" });
                 break;
             case "Gadgets":
-                this.setState({ category: "Electronics" }, () => { console.log(this.state.category) });
+                this.setState({ category: "Electronics" });
                 break;
             case "question-circle":
-                this.setState({ category: "Misc" }, () => { console.log(this.state.category) });
+                this.setState({ category: "Misc" });
                 break;
             default:
-                this.setState({ category: "Furniture" }, () => { console.log(this.state.category) });
+                this.setState({ category: "Furniture" });
         }
     }
 
@@ -119,17 +117,16 @@ class EditPinModal extends Component {
             }
             this._uploadImg().then( () => {
                     let pin = {
-                        "title": this.state.title,
-                        "lat": this.state.lat,
-                        "lng": this.state.lng,
-                        "address": this.state.location,
-                        "category": this.state.category,
-                        "img": this.state.fireBaseStorageFullUrl,
-                        "size": this.state.size,
-                        "userID": userID
+                        title: this.state.title,
+                        lat: this.state.lat,
+                        lng: this.state.lng,
+                        address: this.state.location,
+                        category: this.state.category,
+                        img: this.state.fireBaseStorageFullUrl,
+                        size: this.state.size,
+                        userID: userID
                     }
                     let pinID = this.props.incomeVal._ref._path.segments[1];
-                    console.log(pinID);
                     store.dispatch(updatePin(pin, pinID));
                     this.props.fireUpdatePins();
                     this.handleClose();
@@ -246,7 +243,7 @@ class EditPinModal extends Component {
                                 error={this.state.locationError}
                                 label={this.state.locationLabel}
                                 className="pinLocation"
-                                value={this.state.address}
+                                value={this.state.location}
                                 ref="locationInput"
                                 onChange={this.handleLocationChange}
                                 margin="normal"
@@ -271,7 +268,7 @@ class EditPinModal extends Component {
                     <DialogActions>
 
                         <Tooltip title="Save This Crap">
-                            <Button onClick={this.handleClose} onClick={this.handleSubmit} color="primary">POST</Button>
+                            <Button onClick={this.handleSubmit} color="primary">POST</Button>
                         </Tooltip>
                         <Tooltip title="Nevermind">
                             <Button onClick={this.handleClose} color="error">CANCEL</Button>

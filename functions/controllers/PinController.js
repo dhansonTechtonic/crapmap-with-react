@@ -91,6 +91,7 @@ router.post('/update/:pinID', (request,response) =>{
         },
         size: request.body.size,
         title: request.body.title,
+        img: request.body.img
     };
 
     for(key in pinObject){
