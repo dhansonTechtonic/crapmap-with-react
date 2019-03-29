@@ -11,7 +11,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CommentBoard from '../commentBoard/CommentBoard';
 
 const styles = {
@@ -26,9 +25,6 @@ const styles = {
     }
   };
 class ViewPinModal extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   handleItemSize(sizeData){
     let itemSizeRender;
@@ -81,10 +77,11 @@ class ViewPinModal extends Component {
           className={styles.paper}>
 
             <DialogContent>
+           
             <Card style={{float: 'right', backgroundColor: 'grey', marginLeft: 20}}>
               <CommentBoard pinID={this.props.data.pinID} comments={this.props.comments}/>
+            </Card>  
 
-            </Card>        
             <Card className={styles.card}>
               <CardMedia 
               component="img"
