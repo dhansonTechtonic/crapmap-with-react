@@ -4,11 +4,12 @@ import Button from '@material-ui/core/Button'
 import PropTypes from 'prop-types'
 import classNames from 'classnames';
 import Typography from '@material-ui/core/Typography'
-import { Card, CardContent, CardActions, Paper, CardHeader } from '@material-ui/core';
+import { Card, CardContent, CardActions, Paper, CardHeader, Avatar } from '@material-ui/core';
 
 import Sentiment from 'sentiment';
 
 import store from '../../redux/store'
+import LineDivider from '../addEditPin/LineDivider';
 
 function postComment(input) {
 
@@ -72,19 +73,22 @@ export default class CommentBoard extends Component {
     return (
     <Card>
         <CardContent style={{ padding: 10, height: 392 }}>
-            <Paper style={{'overflow-y': 'scroll', height: 390}}>
+                <Paper style={{ 'overflow-y': 'scroll', height: 390, backgroundColor: 'rgb(51, 50, 54)', padding: 10}}>
                 {this.props.comments.map((comment) => {
                     let commentData = comment._fieldsProto;
 
                     return (
-                        <div>
-                        <Typography gutterBottom variant="h5" component="p">
-                            {commentData.author.stringValue}
-                        </Typography>
-                        <Typography component="p">
+                        <div style={{
+                            borderColor: 'rgba(46, 45, 49, 0.5)', borderStyle: 'solid', borderWidth: 2, borderRadius: 4, margin: '4px 0px', padding: 4, boxShadow: "0px 1px 3px 0px rgba(0, 0, 0, 0.2)"}}>
+                            <div>
+                                <Typography gutterBottom variant="h5" component="p" style={{fontSize: 15, fontWeight: 'bold', }}>
+                                    {commentData.author.stringValue}
+                                </Typography>
+                            </div>
+                        <Typography component="p" style={{marginLeft: 4}}>
                             {commentData.body.stringValue}
                         </Typography>
-                        <hr />
+                        <LineDivider />
                         </div>
                     )})}
              </Paper>
