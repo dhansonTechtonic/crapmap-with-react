@@ -12,7 +12,6 @@ const mapStylesDefaults = {
   height: '100%',
 };
 export class MapContainer extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -20,30 +19,35 @@ export class MapContainer extends Component {
       pins: [],
       pinData: {}, 
       img: null,
-      pinCommentsState: null
+      pinCommentsState: null,
+      pinAddress: null
       }
       this.toggleViewPinModal = this.toggleViewPinModal.bind(this)
       this.toggleViewPinModalClose = this.toggleViewPinModalClose.bind(this)
     };
 
   async toggleViewPinModal(e) {
-    console.log(e)
     let targetPin = e;
     let pinID = e.pinID
     let imgURL = await this.handleImageURL(targetPin.img)
     let pinComments = await this.getComments(pinID)
-
+    let pinAddress = await this.getAddress(e.position)
     this.setState({
       viewCardIsOpen: !this.state.viewCardIsOpen,
       pinData: targetPin,
       img: imgURL,
-      pinCommentsState: pinComments
+      pinCommentsState: pinComments,
+      pinAddress: pinAddress
     });
   }
 
-  toggleViewPinModalClose() {
+  toggleViewPinModalClose = () => {
     this.setState({
       viewCardIsOpen: false,
+      pinData: {}, 
+      img: null,
+      pinCommentsState: null,
+      pinAddress: null
     });
   }
 
@@ -53,11 +57,8 @@ export class MapContainer extends Component {
     }
   }
 
-  findColor (category) {
+  findColor = (category) => {
     let icon;
-    if (category === false) {
-      return icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 6, strokeColor: '#6f6d75' }
-    }
       switch (category) {
         case "Furniture":
           icon = { path: window.google.maps.SymbolPath.CIRCLE, scale: 5, strokeColor: '#ff4700' }
@@ -89,68 +90,76 @@ export class MapContainer extends Component {
   async handleImageURL(imgurl) {
     let storage = firebase.storage();
     let storageRef = storage.ref(imgurl);
-    let url = await storageRef.getDownloadURL().then(function(url) {
-      return url
-    }).catch(function(error) {
-      console.log(error);
-      return 'https://firebasestorage.googleapis.com/v0/b/crapmap-c5c7f.appspot.com/o/assets%2FcrapmapLogoWhite.png?alt=media&token=8fcd6ae0-460f-4fb7-9504-866dab987042'
-    });
+    let url = await storageRef.getDownloadURL()
+    .then((url) => url)
+    .catch( () =>
+      'https://firebasestorage.googleapis.com/v0/b/crapmap-c5c7f.appspot.com/o/assets%2FcrapmapLogoWhite.png?alt=media&token=8fcd6ae0-460f-4fb7-9504-866dab987042'
+    );
     return url
   }
 
   async getComments(pinID){
-  let commentsData = fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/comments/get/' + pinID)
-  .then((response) => response.json())
-  .then(function(response) {
-    return response
-  }).catch(function(error){
-    console.log(error)
-  })
-  return commentsData
+    let commentsData = fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/comments/get/' + pinID)
+    .then((response) => response.json() )
+    .then((response) =>  response )
+    .catch( (error) =>  console.log(error) )
+    return commentsData
+  }
+
+  async getAddress(pinLocation){
+    let addressObj = {lat: pinLocation.lat, lng: pinLocation.lng}
+    let pinAddress = await fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/map/reverse-geo-code', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(addressObj),
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === "OK") {
+          let address = data.results[0].formatted_address;
+          return address
+        }
+      }).catch(console.log('An Error has occured'));
+      return pinAddress
   }
 
  render() { 
   if (!this.props.loaded) {
     return (<div><h1>Loading...</h1></div>)
   }
-    return (
-      <div className='map-container'>
+  
+  return (
+    <div className='map-container'>
 
-<Map 
+  <Map 
     google={this.props.google}
     style={mapStylesDefaults}
     className={'map'}
     zoom={14}
     centerAroundCurrentLocation={true}
     draggable={true} 
-    // minZoom={13} 
     maxZoom={25}
-    styles = {styles}
->
+    styles = {styles}>
 
  {this.state.pins.map((pin) => {
   return (
-
-  <Marker
-    key={pin._ref._path.segments[1]}
-
-    pinID={pin._ref._path.segments[1]}
-    name={pin._fieldsProto.title.stringValue}
-    icon={this.findColor(pin._fieldsProto.category.stringValue)}
-    category={pin._fieldsProto.category.stringValue}
-    itemSize={pin._fieldsProto.size.stringValue}
-    img={pin._fieldsProto.img.stringValue}
-    position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
+    <Marker
+      key={pin._ref._path.segments[1]}
+      pinID={pin._ref._path.segments[1]}
+      name={pin._fieldsProto.title.stringValue}
+      icon={this.findColor(pin._fieldsProto.category.stringValue)}
+      category={pin._fieldsProto.category.stringValue}
+      itemSize={pin._fieldsProto.size.stringValue}
+      img={pin._fieldsProto.img.stringValue}
+      position={{ lat:pin._fieldsProto.location.mapValue.fields.lat.doubleValue,
                 lng:pin._fieldsProto.location.mapValue.fields.lng.doubleValue }}
-    onClick={ this.toggleViewPinModal }
+      onClick={ this.toggleViewPinModal }
   />
   )}
-)
-}
-
+  )}
 </Map>
 
-<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} img={this.state.img} onClick={this.toggleViewPinModalClose} comments={this.state.pinCommentsState}  /> 
+<ViewPinModal show={this.state.viewCardIsOpen} data={this.state.pinData} img={this.state.img} onClick={this.toggleViewPinModalClose} comments={this.state.pinCommentsState} address={this.state.pinAddress} /> 
 
 </div> 
     )

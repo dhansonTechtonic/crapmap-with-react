@@ -48,7 +48,6 @@ export default class CommentBoard extends Component {
             this.setState({commentAuthor: currentUser.displayName})
         }
 
-        console.log(this.state)
     }
 
     handleChange = name => event => {

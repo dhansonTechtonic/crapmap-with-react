@@ -11,7 +11,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CommentBoard from '../commentBoard/CommentBoard';
 
 const styles = {
@@ -26,9 +25,6 @@ const styles = {
     }
   };
 class ViewPinModal extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   handleItemSize(sizeData){
     let itemSizeRender;
@@ -36,28 +32,28 @@ class ViewPinModal extends Component {
       case "1" :
        itemSizeRender =   (
         <Typography component="p">
-          SIZE : SMALL <FontAwesomeIcon icon='box' />
+          Size : Small
         </Typography>
         )
         break;
       case "2" : 
       itemSizeRender =   (
         <Typography component="p">
-          SIZE : MEDIUM <FontAwesomeIcon icon='box' />
+          Size : Medium
         </Typography>
         )
         break;
       case "3" :
       itemSizeRender =   (
         <Typography component="p">
-          SIZE : LARGE <FontAwesomeIcon icon='box' />
+          Size : Large
         </Typography>
         )
         break;
       default :
       itemSizeRender = (
         <Typography component="p">
-          SIZE : MEDIUM <FontAwesomeIcon icon='box' />
+          Size : Medium
         </Typography>
         )
         break;
@@ -81,10 +77,11 @@ class ViewPinModal extends Component {
           className={styles.paper}>
 
             <DialogContent>
+           
             <Card style={{float: 'right', backgroundColor: 'grey', marginLeft: 20}}>
               <CommentBoard pinID={this.props.data.pinID} comments={this.props.comments}/>
+            </Card>  
 
-            </Card>        
             <Card className={styles.card}>
               <CardMedia 
               component="img"
@@ -102,11 +99,15 @@ class ViewPinModal extends Component {
               </Typography>
     
               <Typography component="p">
-                CATEGORY : {this.props.data.category}
+                Category: {this.props.data.category}
               </Typography>
 
               <Typography component="p">
                 {this.handleItemSize(this.props.data.itemSize)}
+              </Typography>
+
+              <Typography component="p">
+                Address: {this.props.address}
               </Typography>
 
             </CardContent>
