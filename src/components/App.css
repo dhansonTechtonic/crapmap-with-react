@@ -281,7 +281,7 @@ button.home-page-new-pin-button{
   width:225px;
 }
 
-/* .hamburger-menu {
+.hamburger-menu {
   color: white;
   display: block;
   float: right;
@@ -289,7 +289,17 @@ button.home-page-new-pin-button{
 
 .nav-links {
   display: none;
-} */
+}
+
+.sm-nav-links {
+  color: white !important;
+  cursor: pointer;
+  text-transform: capitalize !important;
+  transition-duration: 0.3s !important;
+  -webkit-transition-duration: 0.3s !important;
+  margin: 30px 0px;
+  margin-left: -20px;
+}
 }
 /*Landing Page Styles-----------------------------------------------------------------*/
 
