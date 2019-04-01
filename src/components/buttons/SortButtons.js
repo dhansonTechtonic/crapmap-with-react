@@ -31,7 +31,7 @@ class SortButtons extends React.Component {
 
         return (
             <div className="sort-buttons">
-                <BottomNavigation value={this.state.value} onChange={this.handleChange} className={classes.root}>
+                <BottomNavigation value={this.state.value} onChange={this.handleChange} className={classes.root} id="bn-tabs">
 
                     <BottomNavigationAction onClick={() => {
                         this.props.categoryChange("Furniture")
