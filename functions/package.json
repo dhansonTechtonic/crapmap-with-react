@@ -16,8 +16,12 @@
     "firebase-admin": "~7.0.0",
     "firebase-functions": "^2.2.0",
     "firebase-functions-helper": "^0.6.4",
+    "nodemailer": "^6.0.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
+  },
+  "engines": {
+    "node": "8"
   },
   "devDependencies": {
     "eslint": "^5.12.0",

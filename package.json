@@ -17,6 +17,7 @@
     "firebaseui": "^3.5.2",
     "google-maps-react": "^2.0.2",
     "i": "^0.3.6",
+    "nodemailer": "^6.0.0",
     "npm": "^6.8.0",
     "react": "^16.8.3",
     "react-compound-slider": "^1.1.0",
