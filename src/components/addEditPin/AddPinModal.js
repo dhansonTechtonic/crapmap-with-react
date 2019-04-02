@@ -17,7 +17,8 @@ import store from '../../redux/store/index';
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Arrow from '../assets/crapmap-locator.png';
 import {newPin} from '../../redux/actions/pinActions';
-import Tooltip from '@material-ui/core/Tooltip'
+import Tooltip from '@material-ui/core/Tooltip';
+import {getFirebaseUser } from '../../firebase.js';
 
 class AddPinModal extends Component {
     constructor(props) {
@@ -125,6 +126,7 @@ class AddPinModal extends Component {
 
     handleSubmit = async (e) => {
         e.preventDefault();
+        let currentUser = await getFirebaseUser();
         if(this._formValid()){
             let userID;
             if (store.getState().user.userID){
@@ -141,7 +143,8 @@ class AddPinModal extends Component {
                         "category": this.state.category,
                         "img": this.state.fireBaseStorageFullUrl,
                         "size": this.state.size,
-                        "userID": userID
+                        "userID": userID,
+                        "email": currentUser.email
                     }
                     store.dispatch(newPin(pin));
                     this.handleClose();
