@@ -323,6 +323,14 @@ button.home-page-new-pin-button{
 }
 
 @media only screen and (max-width: 500px){
+.add-pin-mdl {
+  transform: scale(0.9999)
+}
+
+.edit-pin-mdl {
+  transform: scale(0.9999)
+}
+
   #bn-tabs{
   bottom: -12px;
   position: absolute;

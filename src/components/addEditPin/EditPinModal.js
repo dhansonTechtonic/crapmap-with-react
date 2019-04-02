@@ -217,6 +217,7 @@ class EditPinModal extends Component {
                     scroll={this.state.scroll}
                     aria-labelledby="scroll-dialog-title"
                     style={{'z-index': 30, 'background-color': 'primary'}}
+                    className="edit-pin-mdl"
                 >
                     <DialogTitle >
                         EDIT YOUR CRAP
