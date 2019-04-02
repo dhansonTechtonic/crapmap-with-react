@@ -53,7 +53,7 @@ export default class PasswordForgetForm extends Component {
 
     return (
     <div>
-      <Fab color="error"
+      <Fab 
         style={{
           width: 100,
           borderRadius: 4,

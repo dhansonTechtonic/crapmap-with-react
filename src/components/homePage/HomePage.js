@@ -61,9 +61,9 @@ class HomePage extends Component {
   }
 
   componentDidUpdate(prevProps){
-    if (this.props.pins !== prevProps.pins) {
-      this.props.pins.then((val) => { this.setState({ pins: val.pins }) })
-    }
+    // if (this.props.pins !== prevProps.pins) {
+    //   this.props.pins.then((val) => { this.setState({ pins: val.pins }) })
+    // }
 
     // console.log(store.getState());
   }
@@ -71,20 +71,22 @@ class HomePage extends Component {
   render() {
 
   // USER AUTH LOGIC  
-  if (localStorage.getItem('userID')){
-    return (
-      <div className="App">
-        <AddPinModal />
-        <SortButtons categoryChange={this.handleClick}/>
-        <Navigation />
-        <GoogleMap  />
-      </div>
-    );
+  //TODO use store.getState for the if condition below 
+  // if (localStorage.getItem('userID')){
+  //   return (
+  //     <div className="App">
+  //       <AddPinModal />
+  //       <SortButtons categoryChange={this.handleClick}/>
+  //       <Navigation />
+  //       <GoogleMap  />
+  //     </div>
+  //   );
 
-  } else if (store.getState().user.auth) {
-
+  // } 
+    if (store.getState().user.emailVerified) {
+    // console.log(store.getState().user)
       var storeObject = store.getState().user;
-
+      console.log(storeObject)
       localStorage.setItem('userID', JSON.stringify(storeObject.userID));
 
       return (

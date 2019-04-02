@@ -11,6 +11,7 @@ import ForgetPasswordForm from './ForgetPassword'
 
 import { connect } from 'react-redux';
 import store from '../../redux/store'
+import { loginUser, logOutUser} from '../../redux/actions/userActions'
 
 
 
@@ -26,57 +27,108 @@ class LandingPage extends Component {
 
   componentDidMount() {
     document.title = "CrapMap | Log-In"
-  }
-
-  userLogin = userData => this.setState({ user: userData })
-
-  logOut = () => {
-    auth.signOut()
-    .then(() => {
-      this.setState({
-        user: null,
-        displayName: '',
-        email: '',
-        uid: 0
-      });
+    console.log('mountin')
+    auth.onAuthStateChanged(user => {
+      console.log("auth state changed");
+      //TODO-1
+      if (user) {
+        console.log(user);
+        console.log('in auth if')
+        // this.setState({ 
+        //   userSignedIn: !!user,
+        //   displayName: user.displayName,
+        //   email: user.email,
+        //   uid: user.uid,
+        //   emailVerified: user.emailVerified
+        // });
+        // var userStoreObject = {
+        //   emailVerified: user.emailVerified
+        // }
+        store.dispatch(loginUser(user));
+      } else {
+        console.log('in auth else')
+        store.dispatch(logOutUser(user));
+      }
     });
   }
 
-  componentDidUpdate = () => <Redirect to='/' />
+  userLogin = userData => {
+    console.log(userData)
+  }
+
+  logOut = () => {
+    auth.signOut()
+  }
 
   render() {
     const { user } = store.getState();
-    const auth = store.getState();
+    console.log(user);
 
-    if (auth.user.userID) return <Redirect to = "/home" />
+    //TODO LIST:
+    // 1. grab useful values off the user object coming from onAuthStateChanged method "see TODO-1"
+    // 2. once redux store is organized and all data is available handle conditional renders and routing
+    // 3. deal with indexedDB firebase auth entry so that you wont automatically reroute to homepage for last logged in individual
 
-    if (!user.userID && !user.auth) {
-    return (
+    if (user.auth && !user.emailVerified) {
+      // console.log('in !emailauth conditional')
+      console.log(`auth is ${user.auth}, email verify is ${user.emailVerified}`)
+      return (
         <div className="landingPage">
           <div className="landingPageGradient">
             <BackgroundComponent />
-            <div className="landingPageLogoContainer" > 
+            <div className="landingPageLogoContainer" >
               <LogoComponent />
             </div>
+            <div className="verifyMsgContainer" >
+              <div className="verifyMsg">Please check your email and click the link to verify your account</div>
+            </div>
             <div className="loginContainer">
-              <LoginComponent sendData={ this.userLogin } provider={ new firebase.auth.GoogleAuthProvider() } providerName={ `Google` }/>
-              <LoginComponent sendData={ this.userLogin } provider={ new firebase.auth.FacebookAuthProvider() } providerName={ `FaceBook` }/>
+              <LoginComponent sendData={this.userLogin} provider={new firebase.auth.GoogleAuthProvider()} providerName={`Google`} />
+              <LoginComponent sendData={this.userLogin} provider={new firebase.auth.FacebookAuthProvider()} providerName={`FaceBook`} />
               <EmailLoginForm />
-              <ForgetPasswordForm/>
+              <ForgetPasswordForm />
             </div>
           </div>
         </div>
       )
-    } else if (user.userID && user.auth) {
-      return <Redirect to='/home' />;
-    }
+    } 
+    else if (!user.emailVerified && !user.auth) {
+        console.log(`auth is ${user.auth}, email verify is ${user.emailVerified}`)
+        // console.log('email is not verified and user is not authed')
+        return (
+          <div className="landingPage">
+            <div className="landingPageGradient">
+              <BackgroundComponent />
+              <div className="landingPageLogoContainer" >
+                <LogoComponent />
+              </div>
+              {/* <div className="verifyMsgContainer" >
+                <div className="verifyMsg">Please check your email and click the link to verify your account</div>
+              </div> */}
+              <div className="loginContainer">
+                <LoginComponent sendData={this.userLogin} provider={new firebase.auth.GoogleAuthProvider()} providerName={`Google`} />
+                <LoginComponent sendData={this.userLogin} provider={new firebase.auth.FacebookAuthProvider()} providerName={`FaceBook`} />
+                <EmailLoginForm />
+                <ForgetPasswordForm />
+              </div>
+            </div>
+          </div>
+        )
+      } 
+      else {
+        console.log(`auth is ${user.auth}, email verify is ${user.emailVerified}`)
+        // console.log('redirect to home w/emailVeri and userAuth')
+        return <Redirect to='/home' />;
+      }
+    } 
   }
-}
+
 
 function mapStateToProps(reduxState) {
   return {
     user: reduxState.user,
-    auth: reduxState.auth
+    auth: reduxState.auth,
+    verify: reduxState.user.emailVerified
   }
 }
   

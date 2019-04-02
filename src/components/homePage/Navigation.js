@@ -55,7 +55,7 @@ export default class Navigation extends Component {
         <ul className="main-nav-list" id="js-menu">
             <MyListingsModal />
             <MyAccountModal />
-            <li onClick={this.toggleHamburger} class="hamburger-menu"><SideMenu /></li>
+            <li onClick={this.toggleHamburger} className="hamburger-menu"><SideMenu /></li>
         </ul>
       </nav>
     </div>

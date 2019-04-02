@@ -7,6 +7,7 @@ const initUser = {
     userID: '',
     posts: [],
     auth: false,
+    emailVerified: false
 };
 
 export default function userReducer(state = initUser, action) {
@@ -14,9 +15,12 @@ export default function userReducer(state = initUser, action) {
 
     switch (action.type) {
         case LOGIN_USER: {
+            console.log('payload  below')
+            console.log(payload)
             return {
-                userID: payload.userID,
-                auth: payload.auth
+                userID: payload.uid,
+                auth: true,
+                emailVerified: payload.emailVerified 
             }
              
         }
@@ -25,18 +29,17 @@ export default function userReducer(state = initUser, action) {
 
             console.log(payload);
             return {
-                userID: payload.userID,
-                auth: payload.auth
+                userID: payload.uid,
+                auth: true,
+                emailVerified: payload.emailVerified 
             }
         }
         case LOGOUT_USER: {
-            localStorage.removeItem('userID');
-
-            auth.signOut()
-                return {
-                    ...initUser
-                }
-                
+            return {
+                auth: false,
+                emailVerified: false,
+                userID: ''
+            }
          }
         case "NEW_USER":
             {

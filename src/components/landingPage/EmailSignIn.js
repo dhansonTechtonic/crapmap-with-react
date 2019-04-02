@@ -37,25 +37,25 @@ class EmailForm extends Component {
 
   handleClose = () => this.setState({ open: false })
 
-  doSignInWithEmailAndPassword = (email, password) => auth.signInWithEmailAndPassword(email, password);
-
   onSubmit = (e) => {
+    console.log('submit button pressed');
     const { email, password } = this.state;
 
-    this.doSignInWithEmailAndPassword(email, password)
-    .then(authUser => {
-      
+    auth.signInWithEmailAndPassword(email, password)
+    .then(userData => {
+      console.log(userData);
       var actionObject = {
-        userID: authUser.user.uid,
-        auth: true
+        uid: userData.user.uid,
+        auth: true,
+        emailVerified: userData.user.emailVerified
       }
-
+      console.log('auth signin function fired');
       store.dispatch(loginUser(actionObject));
-      this.props.sendData(authUser);
-
-      this.setState({ ...INITIAL_STATE });
     })
-    .catch(error => this.setState({ error }));
+    .catch(error => {
+      console.log('error')
+      return this.setState({ error })
+    });
     
     e.preventDefault();
   }
@@ -69,7 +69,7 @@ class EmailForm extends Component {
 
     return (
       <div>
-        <Fab color="error"
+        <Fab 
           style={{
             width: 210,
             borderRadius: 4,
@@ -124,11 +124,11 @@ class EmailForm extends Component {
   }
 }
 
-EmailForm.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired,
-  show: PropTypes.bool,
-  children: PropTypes.node
-};
+// EmailForm.propTypes = {
+//   onClose: PropTypes.func.isRequired,
+//   classes: PropTypes.object.isRequired,
+//   show: PropTypes.bool,
+//   children: PropTypes.node
+// };
 
 export default EmailForm;

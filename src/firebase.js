@@ -29,6 +29,7 @@ export const getFirebaseUser = () => {
 }
 
 
+
 export const auth = firebase.auth();
 export default firebase
 

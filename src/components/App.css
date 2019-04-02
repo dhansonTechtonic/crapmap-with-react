@@ -329,7 +329,23 @@ button.home-page-new-pin-button{
   color:rgb(255, 255, 255);
   font-weight: bolder;
   padding: 2em;
+}
 
+.verifyMsg {
+  text-align: center;
+  background: #2E2D31;
+  border: 2px solid black;
+  border-radius: 4px;
+  color: white;
+  font-weight: bolder;
+  width: 13em;
+  height: 100%;
+}
+
+.verifyMsgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Action Buttons  */

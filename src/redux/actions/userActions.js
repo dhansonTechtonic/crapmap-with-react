@@ -19,11 +19,9 @@ export const resetUserPassword = (userObject) => ({
     payload: userObject
 });
 
-export const logOutUser = () => ({
+export const logOutUser = (userObject) => ({
     type: LOGOUT_USER,
-    payload: {
-        type: "LOGOUT_USER",
-    }
+    payload: userObject
 });
 
 function getUser(userObject) {

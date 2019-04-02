@@ -16,6 +16,7 @@ import { logOutUser } from '../../redux/actions/userActions';
 import { deleteUser, getFirebaseUser } from '../../firebase.js'
 import ChangePasswordForm from './../landingPage/ChangePassword'
 import { Tooltip } from '@material-ui/core';
+import { auth } from '../../firebase'
 
 const styles = {
     card: { maxWidth: 345 },
@@ -43,7 +44,7 @@ class MyAccountModal extends Component{
             this.setState({
                 displayName: currentUser.email.match(/^([^@]*)@/)[1],
                 email: currentUser.email
-            })
+            }) //TODO - add else if for accounts without display names
         } else {
             this.setState({
                 displayName: currentUser.displayName,
@@ -66,7 +67,9 @@ class MyAccountModal extends Component{
         }
     }
 
-    handleLogOut = () => store.dispatch(logOutUser());
+    handleLogOut = () => {
+        auth.signOut();
+    }
 
     render(){        
         const { classes } = this.props;

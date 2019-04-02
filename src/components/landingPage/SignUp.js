@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { FirebaseContext } from '../../firebase';
-import { auth } from './../../firebase.js'
+import { auth, getFirebaseUser } from './../../firebase.js'
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -53,6 +53,11 @@ class SignUpForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  doSendEmailVerification = () => {
+    const user = getFirebaseUser();
+    user.sendEmailVerification()
+  }
+
   handleClickOpen = scroll => () => {
     this.setState({ open: true, scroll });
   };
@@ -66,15 +71,18 @@ class SignUpForm extends Component {
 
     this.doCreateUserWithEmailAndPassword(email, passwordOne)
     .then(authUser => {
+      console.log(authUser.user.emailVerified);
+      this.doSendEmailVerification(email)
 
       var actionObject = {
         userID: authUser.user.uid,
-        auth: true
+        auth: true,
+        emailVerified: authUser.user.emailVerified
       }
 
       store.dispatch(registerUser(actionObject));
       this.props.sendData(authUser);
-
+      
       this.setState({ ...INITIAL_STATE });
     })
     .catch(error => this.setState({ error }));
@@ -179,13 +187,13 @@ class SignUpForm extends Component {
   }
 }
 
-SignUpForm.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired,
-  show: PropTypes.bool,
-  children: PropTypes.node,
-  className: PropTypes.string,
+// SignUpForm.propTypes = {
+//   // onClose: PropTypes.func.isRequired,
+//   classes: PropTypes.object.isRequired,
+//   show: PropTypes.bool,
+//   children: PropTypes.node,
+//   className: PropTypes.string,
 
-};
+// };
 
 export default withStyles(style)(SignUpForm);

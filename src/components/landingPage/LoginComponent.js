@@ -4,7 +4,7 @@ import firebase, { auth } from './../../firebase.js';
 import Fab from '@material-ui/core/Fab'
 
 import store from '../../redux/store';
-import { registerUser } from '../../redux/actions/userActions'
+import { registerUser, loginUser } from '../../redux/actions/userActions'
 
 export default class LoginComponent extends Component {
   constructor(props) {
@@ -17,44 +17,23 @@ export default class LoginComponent extends Component {
       uid: 0
     }
 
-    this.provider = new firebase.auth.GoogleAuthProvider() || new firebase.auth.FacebookAuthProvider();
+    // this.provider = new firebase.auth.GoogleAuthProvider() || new firebase.auth.FacebookAuthProvider();
     this.login = this.login.bind(this); 
   }
 
-  
-
   login = () => {
     auth.signInWithPopup(this.props.provider) 
-    .then((result) => {
-      const user = result.user;
-
-      this.setState({
-        userSignedIn: !!user,
-        displayName: user.displayName,
-        email: user.email,
-        uid: user.uid
-      });
+    .then((userData) => {
+      // const user = result.user;
 
       var actionObject = {
-        userID: user.uid,
-        auth: true
+        uid: userData.user.uid,
+        auth: true,
+        emailVerified: userData.user.emailVerified
       }
 
-      store.dispatch(registerUser(actionObject));
-      this.props.sendData(user);
-    });
-  }
-  
-  componentDidMount = () => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.setState({ 
-          userSignedIn: !!user,
-          displayName: user.displayName,
-          email: user.email,
-          uid: user.uid 
-        });
-      } 
+      store.dispatch(loginUser(actionObject));
+      this.props.sendData(userData);
     });
   }
 
