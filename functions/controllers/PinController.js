@@ -82,6 +82,7 @@ router.post('/new',jsonParser, (request,response) =>{
 }); 
 
 router.post('/update/:pinID', (request,response) =>{
+    console.log(request.body);
     let pinObject ={
         category: request.body.category,
         location: {
@@ -91,8 +92,12 @@ router.post('/update/:pinID', (request,response) =>{
         },
         size: request.body.size,
         title: request.body.title,
-        img: request.body.img
+        
     };
+
+    if(request.body.img){
+        pingObject[img] = request.body.img;
+    }
 
     for(key in pinObject){
         if(!key){

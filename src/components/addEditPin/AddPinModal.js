@@ -23,7 +23,7 @@ class AddPinModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: "Funiture",
+            category: "Furniture",
             img:"pinsImages/1553121301840",
             address:"",
             lat:"40.02091167969599",
@@ -50,7 +50,7 @@ class AddPinModal extends Component {
         this.setState({ 
             open: false, 
             category: "Furniture",
-            img:"pinsImages/1553121301840",
+            img:"assets/crapmapLogoWhite.png",
             address:"",
             lat:"40.02091167969599",
             lng:"-105.21724804969578",

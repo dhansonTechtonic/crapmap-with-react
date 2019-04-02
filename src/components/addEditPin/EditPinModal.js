@@ -37,7 +37,8 @@ class EditPinModal extends Component {
             locationLabel:"Location:",
             titleError: false,
             locationError: false,
-            locationInputValid: "required"
+            locationInputValid: "required",
+            newImage: false
         }
         this._changeCategory = this._changeCategory.bind(this);
     }
@@ -62,6 +63,7 @@ class EditPinModal extends Component {
                 let storage = firebase.storage();
                 let firebaseImageUrl = storage.ref(`pinsImages/${new Date().getTime()}`).put(this.state.dataURL).then((snapshot) => {
                     this.setState({fireBaseStorageFullUrl: snapshot.metadata.fullPath });
+                    this.setState({ newImage: true})
                     return(snapshot.metadata.fullPath);
                 })
                 firebaseImageUrl ? resolve(firebaseImageUrl) : reject(false)
@@ -115,23 +117,39 @@ class EditPinModal extends Component {
             } else {
                 userID = JSON.parse(localStorage.getItem('userID'));
             }
-            this._uploadImg().then( () => {
-                    let pin = {
-                        title: this.state.title,
-                        lat: this.state.lat,
-                        lng: this.state.lng,
-                        address: this.state.location,
-                        category: this.state.category,
-                        img: this.state.fireBaseStorageFullUrl,
-                        size: this.state.size,
-                        userID: userID
+            if(this.state.newImage){
+                this._uploadImg().then( () => {
+                        let pin = {
+                            title: this.state.title,
+                            lat: this.state.lat,
+                            lng: this.state.lng,
+                            address: this.state.location,
+                            category: this.state.category,
+                            img: this.state.fireBaseStorageFullUrl,
+                            size: this.state.size,
+                            userID: userID
+                        }
+                        let pinID = this.props.incomeVal._ref._path.segments[1];
+                        store.dispatch(updatePin(pin, pinID));
+                        this.props.fireUpdatePins();
+                        this.handleClose();
                     }
-                    let pinID = this.props.incomeVal._ref._path.segments[1];
-                    store.dispatch(updatePin(pin, pinID));
-                    this.props.fireUpdatePins();
-                    this.handleClose();
+                ).catch( err => console.log(err));
+            }else{
+                let pin = {
+                    title: this.state.title,
+                    lat: this.state.lat,
+                    lng: this.state.lng,
+                    address: this.state.location,
+                    category: this.state.category,
+                    size: this.state.size,
+                    userID: userID
                 }
-            ).catch( err => console.log(err));
+                let pinID = this.props.incomeVal._ref._path.segments[1];
+                store.dispatch(updatePin(pin, pinID));
+                this.props.fireUpdatePins();
+                this.handleClose();
+            }
         }else{
             return false
         }
