@@ -44,24 +44,15 @@ router.post('/comment/', (req, res) => {
         }
     )
 
-    router.post('/email/:pinID', (req, res) => {
+    router.post('/email/:email', (req, res) => {
             console.log('comments/post/email')
-            let pinID = req.params.pinID;
-            let commentsDB = db.collection('comments');
-            let targetComment = commentsDB.where("pinID", "==", req.params.pinID).get().then(function (querySnapshot) {
-                if (querySnapshot) {
-                    return querySnapshot.docs
-                }
-            return false;
-            }).catch(err => console.log(err))
-
-            console.log(targetComment);
+            let targetEmail = req.params.email;
 
             let mailOptions = {
                 from: 'crapmap.alerts@gmail.com',
-                to: 'joshua.archer@techtonic.com',
+                to: targetEmail,
                 subject: 'CrapMap - New Comment!',
-                text: 'New Comment on your post: ' + String(pinID)
+                text: 'New Comment on your post!!'
             };
 
             transporter.sendMail(mailOptions, (error, info) => {
