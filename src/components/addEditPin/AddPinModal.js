@@ -226,6 +226,7 @@ class AddPinModal extends Component {
                     scroll={this.state.scroll}
                     aria-labelledby="scroll-dialog-title"
                     style={{'z-index': 30, 'background-color': 'primary'}}
+                    className="add-pin-mdl"
                 >
                     <DialogTitle >
                         ADD NEW CRAP
