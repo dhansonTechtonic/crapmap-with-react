@@ -88,7 +88,7 @@ router.post('/comment/', (req, res) => {
                 // var postUser = pin.docs[0].userID;
 
                 let mailOptions = {
-                    from: 'joshua.archer@techtonic.com',
+                    from: 'crapmapsupport@crapmap-c5c7f.firebaseapp.com',
                     to: res.body.author,
                     subject: 'Sending Email using Node.js',
                     text: 'That was easy!'
