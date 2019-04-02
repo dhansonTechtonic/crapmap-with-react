@@ -9,7 +9,7 @@ const router = express.Router();
 jsonParser = bodyParser.json();
 
 router.get("/get/:userID", (request, response) =>{
-    console.log("user/get/userid');
+    console.log("user/get/userid");
     let userID = request.params.userID;
     console.log("userID, " , userID);
     let userRef = db.collection('users').doc(userID);
