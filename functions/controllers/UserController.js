@@ -9,7 +9,7 @@ const router = express.Router();
 jsonParser = bodyParser.json();
 
 router.get("/get/:userID", (request, response) =>{
-    console.log("request Info , ", request.body);
+    console.log("user/get/userid');
     let userID = request.params.userID;
     console.log("userID, " , userID);
     let userRef = db.collection('users').doc(userID);
@@ -41,7 +41,7 @@ router.post('/new', jsonParser, (request,response) =>{
 });
 
 router.patch('/update/:userID', jsonParser, (request,response) =>{
-    console.log(request);
+    console.log('user/update/userid');
     let userID = request.params.userID;
     let userObject ={
         email: request.body.email,

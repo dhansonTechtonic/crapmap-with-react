@@ -9,7 +9,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get("/get/category/:category", (req, res) => {
-    console.log(req);
+    console.log('pin/get/category');
     let pinsRef = db.collection('pins');
     var query = pinsRef.where("category", "==", req.params.category).get()
     .then(function(querySnapshot){
@@ -23,7 +23,7 @@ router.get("/get/category/:category", (req, res) => {
 })
 
 router.get("/get/:userID", (req, res) => {
-    console.log(req);
+    console.log('pin/get/user');
     let pinsRef = db.collection('pins');
     var query = pinsRef.where("userID", '==', req.params.userID).get()
     .then(function(querySnapshot){
@@ -38,7 +38,7 @@ router.get("/get/:userID", (req, res) => {
 
 
 router.get("/get", (request, response) =>{
-    console.log(request);
+    console.log('pin/get');
     let pinsRef = db.collection('pins');
     let query = pinsRef.get().then(function(querySnapshot){
         if(querySnapshot){
@@ -52,7 +52,7 @@ router.get("/get", (request, response) =>{
 
 
 router.post('/new',jsonParser, (request,response) =>{
-    console.log(request);
+    console.log('pin/new');
     let pinObject ={
         category: request.body.category,
         location: {
@@ -86,7 +86,7 @@ router.post('/new',jsonParser, (request,response) =>{
 }); 
 
 router.post('/update/:pinID', (request,response) =>{
-    console.log(request);
+    console.log('pin/update/pin');
     let pinObject ={
         category: request.body.category,
         location: {
@@ -126,7 +126,7 @@ router.post('/update/:pinID', (request,response) =>{
 });
 
     router.delete('/delete/userpins/:userID', (req, res) => {
-        console.log(req);
+        console.log('pin/del/userpins');
         let pinsRef = db.collection('pins')
         pinsRef.where("userID", "==", req.params.userID).get()
         .then(querySnapshot => {
@@ -150,7 +150,7 @@ router.post('/update/:pinID', (request,response) =>{
     })
 
     router.delete('/delete/:pinID', (request,response) =>{
-        console.log(req);
+        console.log('pin/del/pinid');
         let pinID = request.params.pinID;
         let pinsRef = db.collection('pins').doc(pinID);
         pinsRef.delete().then(() => response.send('success')).catch(()=> console.log('error'));
