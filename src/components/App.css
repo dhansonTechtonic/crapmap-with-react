@@ -144,6 +144,7 @@ hr{
 
 .fa-gradient {
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   background: -webkit-gradient(linear, left top, left bottom, from(#FF4700), to(#00FFDE));
   font-size: 7em;
