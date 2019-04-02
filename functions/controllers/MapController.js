@@ -11,6 +11,8 @@ const router = express.Router();
 jsonParser = bodyParser.json();
 
 router.post("/reverse-geo-code", jsonParser, (req, res) =>{
+
+    console.log('line 15 map post reverse-geo-code')
     
     console.log(req.body);
     let latlng = `${req.body.lat},${req.body.lng}`
@@ -34,7 +36,9 @@ router.post("/reverse-geo-code", jsonParser, (req, res) =>{
 
 router.post("/geo-code", jsonParser, (req, res) =>{
     
-    
+    console.log('line 39 map post geo-code')
+
+
     let reqAdd = req.body.address;   
     let urlAdd = reqAdd.replace(/\s/,"+");
     let apiKey = functions.config().googlemapgeokey.key  
