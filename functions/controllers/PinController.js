@@ -62,7 +62,8 @@ router.post('/new',jsonParser, (request,response) =>{
         },
         size: request.body.size,
         title: request.body.title,
-        userID: request.body.userID
+        userID: request.body.userID,
+        email: request.body.email
     };
 
     for(key in pinObject){
