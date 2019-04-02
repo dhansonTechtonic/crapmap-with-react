@@ -214,7 +214,7 @@ class AddPinModal extends Component {
     
     render() {
         return (
-            <div>
+            <div className="add-pin-btn-mdl">
                 <Tooltip title="Add New Crap">
                 <IconButton className="new-pin-button" onClick={this.handleClickOpen('paper')}>
                     <FontAwesomeIcon icon="plus-circle" />
