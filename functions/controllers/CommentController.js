@@ -2,11 +2,24 @@ const admin = require('firebase-admin');
 const functions = require("firebase-functions");
 admin.initializeApp(functions.config().firebase, "commentsRouter");
 const bodyParser = require("body-parser");
-jsonParser = bodyParser.json();
-
+// let jsonParser = bodyParser.json();
 let db = admin.firestore();
 const express = require('express');
 const router = express.Router();
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    secure: false,
+    port: 25,
+    auth: {
+        user: 'crapmap.alerts@gmail.com',
+        pass: 'crapmapSupport5!'
+    },
+    tls: {
+        rejectUnauthorized: false
+    }
+});
 
 router.post('/comment/', (req, res) => {
 
@@ -31,21 +44,40 @@ router.post('/comment/', (req, res) => {
         }
     )
 
-router.get('/comment/:commentID', (req, res) => {
-        console.log('comments/comment/commentID')
-        let commentsDB = db.collection('comments');
-        let targetID = req.params.pinID
-
-        commentsDB.doc(targetID).get()
-            .then(function (querySnapshot){
-                if(querySnapshot.exists){
-                    res.send(querySnapshot.data())
-                } else {
-                    res.send('error getting comments')
+    router.post('/email/:pinID', (req, res) => {
+            console.log('comments/post/email')
+            let pinID = req.params.pinID;
+            let commentsDB = db.collection('comments');
+            let targetComment = commentsDB.where("pinID", "==", req.params.pinID).get().then(function (querySnapshot) {
+                if (querySnapshot) {
+                    return querySnapshot.docs
                 }
-                return false;
+            return false;
             }).catch(err => console.log(err))
-})
+
+            console.log(targetComment);
+
+            let mailOptions = {
+                from: 'crapmap.alerts@gmail.com',
+                to: 'joshua.archer@techtonic.com',
+                subject: 'CrapMap - New Comment!',
+                text: 'New Comment on your post: ' + String(pinID)
+            };
+
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.log(error);
+                    res.send("Error sending email")
+                } else {
+                    console.log('Email sent: ' + info.response);
+                    res.send("Email Sent");
+                }
+            });
+     
+         return res;
+        }
+    )
+
 
 router.get('/get/:pinID', (req, res) => {
     console.log('comments/get/pinID')
