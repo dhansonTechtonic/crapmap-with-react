@@ -82,7 +82,7 @@ router.post('/new',jsonParser, (request,response) =>{
 }); 
 
 router.post('/update/:pinID', (request,response) =>{
-    console.log(request.body);
+    console.log(request);
     let pinObject ={
         category: request.body.category,
         location: {
@@ -109,7 +109,6 @@ router.post('/update/:pinID', (request,response) =>{
     let pinsRef = db.collection('pins').doc(request.params.pinID);
     let getRef = pinsRef.get().then( doc => {
             if(doc.exists){
-                console.log('Document Exists');
                 pinsRef.set(pinObject, { merge: true })
                 .then(() => response.send('success'))
                 .catch(()=> console.log('error'));
