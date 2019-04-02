@@ -48,7 +48,7 @@ class EditPinModal extends Component {
 
     handleClose = () => {
        this.props.onClick();
-       this.setState({ open: false});
+       this.props.reRenderModal();
     };
 
     _handleImg(img){
