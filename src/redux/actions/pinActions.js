@@ -105,6 +105,7 @@ function updatePinFetch(input, pinID){
     fetch(url, {
         method: 'POST',
         body: JSON.stringify(input),
+        mode: 'cors',
         headers: {
             'Content-Type': 'application/json'
         }

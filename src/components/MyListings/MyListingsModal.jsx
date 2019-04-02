@@ -32,11 +32,15 @@ class MyListingsModal extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) { 
+  componentDidUpdate(prevProps,prevState) { 
     // reduces pins promise to just pin array on update
     if (this.props.pins !== prevProps.pins) {
       this.props.pins.then((val) => { this.setState({ pins: val.pins }) })
     }
+    if(prevState !== this.state){
+          this.handleClickOpen();
+     }
+  
   }
 
    handleClickOpen = scroll => async () => {
