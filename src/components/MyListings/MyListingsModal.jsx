@@ -59,6 +59,13 @@ class MyListingsModal extends Component {
       imageLoaded: false
      });
   };
+
+  handleRender = async () =>{
+    let userID = JSON.parse(localStorage.getItem('userID'))
+    this.setState({ 
+      userPins: await getPinsByUser(userID)
+     })   
+  }
   
 
   render() {
@@ -80,7 +87,7 @@ class MyListingsModal extends Component {
             </DialogTitle>
             <LineDivider />
             <DialogContent>
-              <MyListingsPost imageLoaded={this.state.imageLoaded} fireUpdatePins={this.handleClickOpen().bind(this)} {...this.state}/>
+              <MyListingsPost imageLoaded={this.state.imageLoaded} _fireRenderModal={this.handleRender()} fireUpdatePins={this.handleClickOpen().bind(this)} {...this.state}/>
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="error">CLOSE</Button>
