@@ -10,7 +10,7 @@ const router = express.Router();
 
 router.post('/comment/', (req, res) => {
 
-            console.log('line 13 comment post')
+            console.log('comments/post/comment')
 
             let commentObj = {
                 author: req.body.author,
@@ -32,7 +32,7 @@ router.post('/comment/', (req, res) => {
     )
 
 router.get('/comment/:commentID', (req, res) => {
-        console.log('commentGet line 35')
+        console.log('comments/comment/commentID')
         let commentsDB = db.collection('comments');
         let targetID = req.params.pinID
 
@@ -48,7 +48,7 @@ router.get('/comment/:commentID', (req, res) => {
 })
 
 router.get('/get/:pinID', (req, res) => {
-    console.log('get comment by pin id line 51')
+    console.log('comments/get/pinID')
     let commentsDB = db.collection('comments');
 
     commentsDB.where("pinID", "==", req.params.pinID).get()
@@ -63,7 +63,7 @@ router.get('/get/:pinID', (req, res) => {
 })
 
 router.delete('/delete/:commentID', (req, res) => {
-    console.log('delete comment by comment id line 66')
+    console.log('comments/delete/commentID')
     let commentID = req.params.commentID;
     let commentsRef = db.collection('comments').doc(commentID);
 
