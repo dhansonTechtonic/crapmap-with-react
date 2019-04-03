@@ -15,6 +15,8 @@ import LineDivider from '../addEditPin/LineDivider';
 
 function postComment(input) {
 
+    console.log(input)
+
     console.log(JSON.stringify(input));
     fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/comments/comment', {
         method: 'POST',
@@ -23,8 +25,17 @@ function postComment(input) {
             'Content-Type': 'application/json'
         }
     })
-    .then(console.log('then'))
-    .catch(console.log('catch'))
+    .then()
+    .catch()
+}
+
+function fireEmailAlert(email) {
+    console.log(email);
+    fetch('https://us-central1-crapmap-c5c7f.cloudfunctions.net/api/comments/email/' + String(email), {
+            method: 'POST',
+        })
+        .then()
+        .catch()
 }
 
 export default class CommentBoard extends Component {
@@ -58,7 +69,7 @@ export default class CommentBoard extends Component {
     };
 
     handleSubmit = async () => {
-        
+        let targetEmail = this.props.email
         let commentString = this.state.comment;
         let commentSentiment = new Sentiment();
         let commentRating = commentSentiment.analyze(commentString)
@@ -80,6 +91,7 @@ export default class CommentBoard extends Component {
                 this.setState({
                     comment: ''
                 });
+                fireEmailAlert(targetEmail)
     
                 this.props.comments.push(commentObject);
             } else {

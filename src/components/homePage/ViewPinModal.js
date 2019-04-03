@@ -25,6 +25,10 @@ const styles = {
     }
   };
 class ViewPinModal extends Component {
+  
+  componentDidMount(){
+    console.log(this.props)
+  }
 
   handleItemSize(sizeData){
     let itemSizeRender;
@@ -79,7 +83,7 @@ class ViewPinModal extends Component {
             <DialogContent>
            
             <Card style={{float: 'right', backgroundColor: 'grey', marginLeft: 20}}>
-              <CommentBoard pinID={this.props.data.pinID} comments={this.props.comments}/>
+              <CommentBoard email={this.props.data.email} pinID={this.props.data.pinID} comments={this.props.comments}/>
             </Card>  
 
             <Card className={styles.card}>

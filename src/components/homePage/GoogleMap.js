@@ -148,6 +148,7 @@ export class MapContainer extends Component {
       pinID={pin._ref._path.segments[1]}
       name={pin._fieldsProto.title.stringValue}
       icon={this.findColor(pin._fieldsProto.category.stringValue)}
+      email={pin._fieldsProto.email.stringValue}
       category={pin._fieldsProto.category.stringValue}
       itemSize={pin._fieldsProto.size.stringValue}
       img={pin._fieldsProto.img.stringValue}
