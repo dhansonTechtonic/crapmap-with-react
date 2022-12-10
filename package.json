@@ -11,7 +11,7 @@
     "@material-ui/lab": "^3.0.0-alpha.30",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "firebase": "^5.8.4",
     "firebase-tools": "^6.5.0",
     "firebaseui": "^3.5.2",
